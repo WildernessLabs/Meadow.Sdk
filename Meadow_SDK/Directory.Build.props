@@ -1,0 +1,9 @@
+﻿<Project>
+  <PropertyGroup>
+    <Version>0.1</Version><!-- TODO: figure out how to get this from the property settings $Version or whatever -->
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <TargetFramework>net472</TargetFramework>
+    <Author>Wilderness Labs</Author>
+    <Copyright>2019</Copyright>
+  </PropertyGroup>
+</Project>

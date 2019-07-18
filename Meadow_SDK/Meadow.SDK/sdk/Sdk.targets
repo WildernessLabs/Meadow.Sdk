@@ -1,0 +1,16 @@
+﻿<Project>
+  <!-- anything in here will get imported into a new Meadow project at the bottom of the file -->
+  <PropertyGroup>
+    <!-- don't think we can wildcard the major ver-->
+    <!-- define a default value if the project doesn't specify a version -->
+    <MeadowCoreVersion Condition="'$(MeadowCoreVersion)'==''">0.*</MeadowCoreVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow" Version="$(MeadowCoreVersion)"/>
+    <!-- We get all the basic capabilities from Microsoft.Net.Sdk -->
+    <ProjectCapability Include="Meadow"/>
+  </ItemGroup>
+
+  <!-- by default, we need these standard MSBuild targets -->
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+</Project>

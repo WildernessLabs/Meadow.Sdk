@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageId>Meadow.Sdk.Templates</PackageId>
+    <Title>Wilderness Labs Meadow Project Templates</Title>
+    <Description>Templates to use when creating an application for Meadow.</Description>
+    <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
+    
+    <TargetFramework>net472</TargetFramework><!-- Bug in VS windows, have to put this in here -->
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="templates\" />
+    <Folder Include="templates\MeadowApp\" />
+    <Folder Include="templates\MeadowApp\.template.config\" />
+  </ItemGroup>
+</Project>
