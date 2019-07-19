@@ -1,10 +1,9 @@
 ﻿{
     "$schema": "http://json.schemastore.org/template",
     "author": "Wilderness Labs",
-    "classifications": [ "Stuff", "More Stuff" ],
+    "classifications": [ "Meadow", "Console" ],
     "name": "Basic Meadow App",
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
-    "groupIdentity": "WildernessLabs.Meadow.Templates",
     "shortName": "Meadow",
     "tags": {
         "language": "C#",
