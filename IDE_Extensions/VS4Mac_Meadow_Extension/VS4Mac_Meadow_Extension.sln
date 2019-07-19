@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS4Mac_Meadow_Extension", "VS4Mac_Meadow_Extension\VS4Mac_Meadow_Extension.csproj", "{4FBEB36B-5F1F-440D-B801-F67EF9B9F846}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meadow.Sdks.IdeExtensions.Vs4Mac", "VS4Mac_Meadow_Extension\Meadow.Sdks.IdeExtensions.Vs4Mac.csproj", "{4FBEB36B-5F1F-440D-B801-F67EF9B9F846}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
