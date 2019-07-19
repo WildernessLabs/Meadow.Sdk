@@ -23,4 +23,7 @@
     <Folder Include="templates\MeadowApp\" />
     <Folder Include="templates\MeadowApp\.template.config\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="templates\MeadowApp\Template.json Notes" />
+  </ItemGroup>
 </Project>

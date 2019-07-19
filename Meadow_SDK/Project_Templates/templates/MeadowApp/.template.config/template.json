@@ -4,7 +4,7 @@
     "classifications": [ "Stuff", "More Stuff" ],
     "name": "Basic Meadow App",
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
-    "groupIdentity": "Wilderness Labs",
+    "groupIdentity": "WildernessLabs.Meadow.Templates",
     "shortName": "Meadow",
     "tags": {
         "language": "C#",

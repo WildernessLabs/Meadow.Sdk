@@ -7,7 +7,7 @@ using Meadow.Hardware;
 
 namespace BasicMeadowApp
 {
-    public class MeadowApp : App<F7Micro, MeadowApp>
+    public class MeadowApp : AppBase<F7Micro, MeadowApp>
     {
         IDigitalOutputPort redLED;
         IDigitalOutputPort blueLED;
