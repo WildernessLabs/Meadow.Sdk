@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
+    <Extension path = "/MonoDevelop/Core/ExecutionHandlers">
+        <ExecutionHandler id="Meadow" class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowExecutionHandler"/>
+    </Extension>
     <Runtime>
     </Runtime>
 </ExtensionModel>

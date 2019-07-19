@@ -8,4 +8,7 @@
   <ItemGroup>
     <None Remove=".DS_Store" />
   </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.Debugger" />
+  </ItemGroup>
 </Project>

@@ -3,7 +3,11 @@ using MonoDevelop.Core.Execution;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
-    public class MeadowDevice : ExecutionTarget
+    /// <summary>
+    /// Represents a Meadow Device execution target; which is the actual
+    /// device that gets deployed to when executing.
+    /// </summary>
+    public class MeadowDeviceExecutionTarget : ExecutionTarget
     {
         public string Model { get; set; }
 
@@ -15,7 +19,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             get { return _name; }
         } protected string _name;
 
-        public MeadowDevice(string name, string id)
+        public MeadowDeviceExecutionTarget(string name, string id)
         {
             _name = name;
             _id = id;
