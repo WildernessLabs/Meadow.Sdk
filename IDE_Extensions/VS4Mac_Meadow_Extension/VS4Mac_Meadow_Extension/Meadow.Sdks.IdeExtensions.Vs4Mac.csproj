@@ -7,8 +7,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove=".DS_Store" />
+    <None Remove="Templates\MeadowConsoleProject.xpt.xml" />
+    <None Remove="icons\project-microframework-console-32.png" />
+    <None Remove="icons\project-microframework-console-32%402x.png" />
+    <None Remove="icons\project-microframework-library-32.png" />
+    <None Remove="icons\project-microframework-library-32%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.Debugger" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\MeadowConsoleProject.xpt.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\" />
   </ItemGroup>
 </Project>

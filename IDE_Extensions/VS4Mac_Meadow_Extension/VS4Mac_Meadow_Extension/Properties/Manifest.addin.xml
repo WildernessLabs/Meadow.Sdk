@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
+    <Runtime>
+        <Import file = "Templates/MeadowConsoleProject.xpt.xml" />    
+    </Runtime>
+    
+    <Extension path = "/MonoDevelop/ProjectModel/ProjectModelExtensions">
+        <ProjectFlavor
+            guid="{8899359e-94ec-4446-90d3-aab4be805b4b}"
+            type="Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject"
+            alias="Meadow"
+            />
+    </Extension>
+        <Extension path="/MonoDevelop/Ide/ProjectTemplates">
+        <ProjectTemplate id="MeadowConsoleProject" file="Templates/MeadowConsoleProject.xpt.xml" />
+    </Extension>
+    <Extension path = "/MonoDevelop/ProjectModel/SerializableClasses">
+        <DataType class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject" />
+    </Extension>
     <Extension path = "/MonoDevelop/Core/ExecutionHandlers">
         <ExecutionHandler id="Meadow" class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowExecutionHandler"/>
     </Extension>
-    <Runtime>
-    </Runtime>
 </ExtensionModel>

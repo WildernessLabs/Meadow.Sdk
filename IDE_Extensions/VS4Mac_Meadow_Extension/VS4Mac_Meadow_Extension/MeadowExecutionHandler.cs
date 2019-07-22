@@ -1,5 +1,4 @@
-﻿using System;
-using MonoDevelop.Debugger;
+﻿using MonoDevelop.Debugger;
 using MonoDevelop.Core.Execution;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
