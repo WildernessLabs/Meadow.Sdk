@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meadow.Sdk", "Meadow.SDK\Meadow.SDK.csproj", "{77399E61-B720-4931-8E10-8B0F765CABC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meadow.SDK", "Meadow.SDK\Meadow.SDK.csproj", "{77399E61-B720-4931-8E10-8B0F765CABC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMeadowApp_Sample", "BasicMeadowApp\BasicMeadowApp_Sample.csproj", "{9070AE55-A6CD-464D-84AA-4032DDDCD12F}"
 EndProject

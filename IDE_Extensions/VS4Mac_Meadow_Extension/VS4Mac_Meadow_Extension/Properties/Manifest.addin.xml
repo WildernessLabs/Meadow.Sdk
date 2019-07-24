@@ -4,6 +4,21 @@
         <Import file = "Templates/MeadowConsoleProject.xpt.xml" />    
     </Runtime>
     
+    <Extension path="/MonoDevelop/Ide/ProjectTemplateCategories">
+        <Category id="meadow" _name="Meadow" insertbefore="other">
+            <Category id="app" _name="App">
+                <Category id="general" _name="General" />
+            </Category>
+            <Category id="library" _name="Library">
+                <Category id="general" _name="General" />
+            </Category>
+            <Category id="test" _name="Tests">
+                <Category id="general" _name="General" />
+            </Category>
+        </Category>
+    </Extension>
+    
+    
     <Extension path = "/MonoDevelop/ProjectModel/ProjectModelExtensions">
         <ProjectFlavor
             guid="{8899359e-94ec-4446-90d3-aab4be805b4b}"
@@ -11,8 +26,18 @@
             alias="Meadow"
             />
     </Extension>
-        <Extension path="/MonoDevelop/Ide/ProjectTemplates">
+    <Extension path="/MonoDevelop/Ide/ProjectTemplates">
         <ProjectTemplate id="MeadowConsoleProject" file="Templates/MeadowConsoleProject.xpt.xml" />
+    </Extension>
+    <Extension path="/MonoDevelop/Ide/Templates">
+        <Template
+            id="WildernessLabs.Meadow.Templates.BasicApp"
+            templateId="WildernessLabs.Meadow.Templates.BasicApp"
+            _overrideName="Meadow Console Application"
+            _overrideDescription="Creates a new Meadow console project."
+            path="Templates/Meadow.Sdk.Templates.0.1.0.nupkg"
+            category="meadow/app/general"
+            />
     </Extension>
     <Extension path = "/MonoDevelop/ProjectModel/SerializableClasses">
         <DataType class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject" />
