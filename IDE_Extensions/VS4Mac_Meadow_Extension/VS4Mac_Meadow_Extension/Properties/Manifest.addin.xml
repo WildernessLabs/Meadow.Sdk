@@ -18,20 +18,14 @@
         </Category>
     </Extension>
     
-    <!-- old way using the xpt.xml file -->
     <Extension path = "/MonoDevelop/ProjectModel/ProjectModelExtensions">
         <ProjectFlavor
-            guid="{8899359e-94ec-4446-90d3-aab4be805b4b}"
+            id="Meadow.Sdk"
             type="Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject"
             alias="Meadow"
             />
     </Extension>
     
-     <Extension path="/MonoDevelop/Ide/ProjectTemplates">
-        <ProjectTemplate id="MeadowConsoleProject" file="Templates/MeadowConsoleProject.xpt.xml" />
-    </Extension>
-    
-    <!-- new way using a nupkg, we can replace the local copy with a url -->
     <Extension path="/MonoDevelop/Ide/Templates">
         <Template
             id="WildernessLabs.Meadow.Templates.BasicApp"
@@ -41,13 +35,13 @@
             path="Templates/Meadow.Sdk.Templates.0.1.0.nupkg"
             category="meadow/app/general"
             />
+        <!-- eventually add a lib project template -->
     </Extension>
     
     <Extension path = "/MonoDevelop/ProjectModel/SerializableClasses">
         <DataType class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject" />
     </Extension>
     
-    <!-- This connects to the old project type via the id - not sure how to connect it with the new style -->
     <Extension path = "/MonoDevelop/Core/ExecutionHandlers">
         <ExecutionHandler id="Meadow" class = "Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowExecutionHandler"/>
     </Extension>

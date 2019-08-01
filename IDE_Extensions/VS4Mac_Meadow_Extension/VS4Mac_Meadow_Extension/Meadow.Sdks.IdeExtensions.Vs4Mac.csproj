@@ -17,9 +17,6 @@
     <AddinReference Include="MonoDevelop.Debugger" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Templates\MeadowConsoleProject.xpt.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\Meadow_DotNet_SDK\Project_Templates\bin\Debug\Meadow.Sdk.Templates.0.1.0.nupkg">
       <Link>Templates\Meadow.Sdk.Templates.0.1.0.nupkg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
