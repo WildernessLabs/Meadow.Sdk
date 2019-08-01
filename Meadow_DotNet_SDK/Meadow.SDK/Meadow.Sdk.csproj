@@ -5,6 +5,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageTags>Wilderness Labs;Meadow Sdk</PackageTags>
     <TargetFramework>net472</TargetFramework><!-- Bug in VS windows, have to put this in here -->
+    <AssemblyName>Meadow.Sdk</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <None Update="sdk\Sdk.props" PackagePath="sdk\Sdk.props" Pack="true" />
