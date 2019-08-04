@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meadow.Sdk", "..\..\Meadow_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_Templates", "..\..\Meadow_DotNet_SDK\Project_Templates\Project_Templates.csproj", "{304690A8-E1EC-4986-9801-AF57CDE0D464}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C33F0F2D-7C89-4E21-B399-29097966FF19}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Meadow_DotNet_SDK\Directory.Build.props = ..\..\Meadow_DotNet_SDK\Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,7 +1,6 @@
 ﻿<Project>
   <!-- don't put any project with 'Sample' in its name in the output -->
   <PropertyGroup Condition="!$(MSBuildProjectName.Contains('Sample'))">
-    <Version>0.1</Version><!-- TODO: figure out how to get this from the property settings $Version or whatever -->
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetFramework>net472</TargetFramework>
     <Author>Wilderness Labs</Author>
