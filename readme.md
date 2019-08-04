@@ -1,4 +1,4 @@
-# Meadow_SDK Repo
+# Meadow.Sdk Repo
 
 This repo contains all the user facing SDK tools to build Meadow applications, including:
 
