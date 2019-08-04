@@ -1,7 +1,13 @@
 # Meadow_SDK Repo
 
-This repo contains the Meadow CLI (not yet), Meadow IDE extensions (just the VS4Mac one right now), and the Meadow project templates (DotNet SDK). 
+This repo contains all the user facing SDK tools to build Meadow applications, including:
 
-* [Meadow.CLI](Meadow.CLI/readme.md)
-* [Meadow DotNet SDK (Project Templates) Documentation](Meadow_DotNet_SDK/readme.md)
-* [Visual Studio for Mac Extension Documentation](VS4Mac_MEadow_Extension/readme.md)
+## Utilities and SDK
+
+* [Meadow.CLI](Meadow.CLI/readme.md) - This is the Meadow _Command Line Interface_ (CLI) and enables you to enumerate attached Meadow devices, perform file management tasks, and deploy apps to an attached device.
+* [Meadow DotNet SDK](Meadow_DotNet_SDK/readme.md) - This is the DotNet SDK for Meadow which includes project templates and the Meadow project definitions.
+
+## IDE Extensions
+
+* [Visual Studio for Mac Extension](VS4Mac_MEadow_Extension/readme.md) - This is the Meadow IDE extension for Visual Studio for Mac.
+* Visual Studio for Windows Extension - To be moved in.
