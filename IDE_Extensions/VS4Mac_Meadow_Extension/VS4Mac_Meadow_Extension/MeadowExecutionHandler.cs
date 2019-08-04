@@ -12,6 +12,8 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
         public ProcessAsyncOperation Execute(ExecutionCommand command, OperationConsole console)
         {
+            System.Console.WriteLine("Executing");
+
             return DebuggingService.GetExecutionHandler().Execute(command, console);
         }
     }
