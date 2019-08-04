@@ -25,4 +25,7 @@
   <ItemGroup>
     <Folder Include="Templates\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Meadow.CLI\MeadowCLI\Meadow.CLI.csproj" />
+  </ItemGroup>
 </Project>
