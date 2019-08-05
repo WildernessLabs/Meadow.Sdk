@@ -9,5 +9,5 @@ This repo contains all the user facing SDK tools to build Meadow applications, i
 
 ## IDE Extensions
 
-* [Visual Studio for Mac Extension](VS4Mac_MEadow_Extension) - This is the Meadow IDE extension for Visual Studio for Mac.
+* [Visual Studio for Mac Extension](IDE_Extensions/VS4Mac_Meadow_Extension) - This is the Meadow IDE extension for Visual Studio for Mac.
 * Visual Studio for Windows Extension - To be moved in.
