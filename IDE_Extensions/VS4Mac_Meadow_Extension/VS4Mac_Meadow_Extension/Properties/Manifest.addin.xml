@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
-    <Runtime>
-        <Import file = "Templates/MeadowConsoleProject.xpt.xml" />    
-    </Runtime>
     
     <Extension path="/MonoDevelop/Ide/ProjectTemplateCategories">
         <Category id="meadow" _name="Meadow" insertbefore="other">
