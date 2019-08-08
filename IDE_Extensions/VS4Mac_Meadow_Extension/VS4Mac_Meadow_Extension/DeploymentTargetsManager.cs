@@ -25,7 +25,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             get
             {
                 if (!_listening)
-                    updateTargetsList(null);
+                    UpdateTargetsList(null);
                 return _deployTargets;
             }
         }
@@ -72,9 +72,9 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         // is this blocking?! (yes, but does it matter?)
         private static void StartListening()
         {
-            updateTargetsList(null);
+            UpdateTargetsList(null);
             _listening = true;
-            _timer = new System.Threading.Timer(new System.Threading.TimerCallback(updateTargetsList), null, 1000, 1000);
+            _timer = new System.Threading.Timer(new System.Threading.TimerCallback(UpdateTargetsList), null, 1000, 1000);
         }
 
         static object locker = new object();
@@ -94,7 +94,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         }
 
         // TODO: this is _monstrously terrible code_; rewrite.
-        private static void updateTargetsList(object state)
+        private static void UpdateTargetsList(object state)
         {
             Console.WriteLine("WLABS: Updating Targets List");
             // copy target state

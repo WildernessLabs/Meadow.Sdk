@@ -10,13 +10,10 @@ using MonoDevelop.Projects.MSBuild;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
-    // TODO: uncomment when we have the SDK stuff up and running
-    //[ExportProjectModelExtension, AppliesTo("Meadow")]
     [ExportProjectModelExtension, AppliesTo("Meadow.Sdk")]
     public class MeadowProject : DotNetProjectExtension
     {
         // Note: see https://github.com/mhutch/MonoDevelop.AddinMaker/blob/eff386bfcce05918dbcfe190e9c2ed8513fe92ff/MonoDevelop.AddinMaker/AddinProjectFlavor.cs#L16 for better implementation 
-
 
         // Called after the project finishes loading
         protected override void OnEndLoad()
@@ -52,10 +49,8 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         // targets changed event handler.
         private void OnExecutionTargetsChanged(object dummy)
         {
-            // update UI on UI thread. 
-            Runtime.RunInMainThread(delegate {
-                base.OnExecutionTargetsChanged();
-            });
+            // update UI on UI thread.
+            Runtime.RunInMainThread(() => base.OnExecutionTargetsChanged());
         }
 
         // probably called when the configuration changes
@@ -87,12 +82,13 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             SolutionItemRunConfiguration runConfiguration)
         {
             // find the selected solution's startup project
-            if (IdeApp.Workspace.GetAllSolutions().Any((s) => s.StartupItem == this.Project)) {
+            if (IdeApp.Workspace.GetAllSolutions().Any((s) => s.StartupItem == this.Project))
+            {
                 // if the selection execution target is a meadow device, and the project is an executable.
                 return context.ExecutionTarget is MeadowDeviceExecutionTarget && base.OnGetCanExecute(context, configuration, runConfiguration);
-            } else {
-                return base.OnGetCanExecute(context, configuration, runConfiguration);
             }
+
+            return base.OnGetCanExecute(context, configuration, runConfiguration);
         }
 
         //protected override TargetFrameworkMoniker OnGetDefaultTargetFrameworkId()
@@ -119,7 +115,8 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                     return Project.GetAbsoluteChildPath(r.FilePath).FullPath;
                 }).ToList();
             });
-            return new MeadowExecutionCommand() {
+            return new MeadowExecutionCommand()
+            {
                 OutputDirectory = configuration.OutputDirectory,
                 ReferencedAssemblies = references
             };

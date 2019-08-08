@@ -8,11 +8,17 @@ namespace MeadowCLI.DeviceManagement
     public class MeadowDevice
     {
         public SerialPort SerialPort { get; set; }
+
+        public string Name { get; private set; } = "Meadow Mirco F7";
+        
         
         public int Id { get; set; } //guessing we'll need this
 
-        public MeadowDevice(string serialPortName)
+        public MeadowDevice(string serialPortName, string deviceName = null)
         {
+            if(string.IsNullOrWhiteSpace(deviceName) == false)
+                Name = deviceName;
+
             OpenSerialPort(serialPortName);
         }
 
@@ -22,17 +28,19 @@ namespace MeadowCLI.DeviceManagement
             try
             {
                 // Create a new SerialPort object with default settings.
-                SerialPort = new SerialPort();
-                SerialPort.PortName = portName;
-                SerialPort.BaudRate = 115200;       // This value is ignored when using ACM
-                SerialPort.Parity = Parity.None;
-                SerialPort.DataBits = 8;
-                SerialPort.StopBits = StopBits.One;
-                SerialPort.Handshake = Handshake.None;
+                SerialPort = new SerialPort
+                {
+                    PortName = portName,
+                    BaudRate = 115200,       // This value is ignored when using ACM
+                    Parity = Parity.None,
+                    DataBits = 8,
+                    StopBits = StopBits.One,
+                    Handshake = Handshake.None,
 
-                // Set the read/write timeouts
-                SerialPort.ReadTimeout = 500;
-                SerialPort.WriteTimeout = 500;
+                    // Set the read/write timeouts
+                    ReadTimeout = 500,
+                    WriteTimeout = 500
+                };
 
                 SerialPort.Open();
                 Console.WriteLine("Port: {0} opened", portName);

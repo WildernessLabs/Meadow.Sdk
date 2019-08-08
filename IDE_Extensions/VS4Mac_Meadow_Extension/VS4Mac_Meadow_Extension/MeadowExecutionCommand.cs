@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MonoDevelop.Core.Execution;
 using MonoDevelop.Core;
@@ -14,6 +13,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         }
 
         // TODO: why the eff is this `Task<>`'d?
+        // Adrian: it's been assigned in a non-async method - i.e. it's a task to avoid awaiting the assignment (lazy)
         public Task<List<string>> ReferencedAssemblies {
             get;
             set;

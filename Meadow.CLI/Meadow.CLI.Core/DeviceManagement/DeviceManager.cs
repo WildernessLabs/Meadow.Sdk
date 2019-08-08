@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
 
@@ -9,10 +11,9 @@ namespace MeadowCLI.DeviceManagement
     /// </summary>
     public static class DeviceManager
     {
-        // TODO: should probably be an ObservableList<>
-        public static List<MeadowDevice> AttachedDevices = new List<MeadowDevice>();
+        public static ObservableCollection<MeadowDevice> AttachedDevices = new ObservableCollection<MeadowDevice>();
 
-        public static MeadowDevice CurrentDevice {get; set; } //short cut for now but may be useful
+        public static MeadowDevice CurrentDevice { get; set; } //short cut for now but may be useful
 
         static HcomMeadowRequestType _meadowRequestType;
 
@@ -21,7 +22,6 @@ namespace MeadowCLI.DeviceManagement
             // TODO: populate the list of attached devices
 
             // TODO: wire up listeners for device plug and unplug
-
         }
 
         private static void Handle_DeviceAdded()
@@ -34,11 +34,19 @@ namespace MeadowCLI.DeviceManagement
             // remove device from AttachedDevices using lib usb
         }
 
+        private static async Task FindConnectedDevices ()
+        {
+            var device = new MeadowDevice("/dev/tty.usbserial01", "Meadow Micro F7");
+            AttachedDevices.Add(device);
+
+            CurrentDevice = device;
+        }
+
         //providing a numeric (0 = none, 1 = info and 2 = debug)
         public static void SetTraceLevel(MeadowDevice meadow, int level)
         {
             if (level < 1 || level > 4)
-                throw new System.ArgumentOutOfRangeException("Trace level must be between 0 & 3 inclusive");
+                throw new System.ArgumentOutOfRangeException(nameof(level), "Trace level must be between 0 & 3 inclusive");
 
 
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_CHANGE_TRACE_LEVEL;
@@ -67,13 +75,11 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-
-
         //ToDo - look these up - I assume their developer modes? Should be SetDev1, etc. ?
         public static void SetDeveloperLevel(MeadowDevice meadow, int level)
         {
             if (level < 1 || level > 4)
-                throw new System.ArgumentOutOfRangeException("Developer level must be between 1 & 4 inclusive");
+                throw new System.ArgumentOutOfRangeException(nameof(level), "Developer level must be between 1 & 4 inclusive");
 
             if(level == 1)
                 _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;

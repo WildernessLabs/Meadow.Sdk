@@ -1,5 +1,4 @@
-﻿using System;
-using MonoDevelop.Core.Execution;
+﻿using MonoDevelop.Core.Execution;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
@@ -11,12 +10,12 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
     {
         public string Model { get; set; }
 
-        public override string Id {
-            get { return _id; }
+        public override string Id { 
+            get => _id; 
         } protected string _id;
 
         public override string Name {
-            get { return _name; }
+            get => _name; 
         } protected string _name;
 
         public MeadowDeviceExecutionTarget(string name, string id)
