@@ -6,6 +6,13 @@
     <PackageTags>Wilderness Labs;Meadow Sdk</PackageTags>
     <TargetFramework>net472</TargetFramework><!-- Bug in VS windows, have to put this in here -->
     <AssemblyName>Meadow.Sdk</AssemblyName>
+    <PackageProjectUrl>https://github.com/WildernessLabs/NugetTest</PackageProjectUrl>
+    <PackageId>MeadowSdk</PackageId>
+    <Authors>Bryan Costanich, Adrian Stevens</Authors>
+    <Copyright>Wilderness Labs</Copyright>
+    <Owners>Wilderness Labs</Owners>
+    <Summary>Meadow Sdk for F7 Micro board</Summary>
+    <Title>Meadow Sdk</Title>
   </PropertyGroup>
   <ItemGroup>
     <None Update="sdk\Sdk.props" PackagePath="sdk\Sdk.props" Pack="true" />

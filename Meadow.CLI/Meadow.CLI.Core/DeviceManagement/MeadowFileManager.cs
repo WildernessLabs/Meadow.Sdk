@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using MeadowCLI.DeviceManagement;
 using MeadowCLI.Hcom;
 
-namespace Meadow.CLI.DeviceManagement
+namespace MeadowCLI.DeviceManagement
 {
     public static class MeadowFileManager
     {
@@ -32,14 +31,14 @@ namespace Meadow.CLI.DeviceManagement
 
         }
 
-        public static void Erase(MeadowDevice meadow)
+        public static void EraseFlash(MeadowDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_BULK_FLASH_ERASE;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void EraseAndVerify(MeadowDevice meadow)
+        public static void EraseFlashAndVerify(MeadowDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_VERIFY_ERASED_FLASH;
 

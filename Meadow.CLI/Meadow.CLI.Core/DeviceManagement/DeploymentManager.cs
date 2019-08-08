@@ -1,7 +1,7 @@
 ﻿using System;
 using MeadowCLI.DeviceManagement;
 
-namespace Meadow.CLI.DeviceManagement
+namespace MeadowCLI.DeviceManagement
 {
     /// <summary>
     /// TODO: put deployment stuff here

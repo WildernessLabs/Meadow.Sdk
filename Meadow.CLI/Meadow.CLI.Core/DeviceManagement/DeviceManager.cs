@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using MeadowCLI.DeviceManagement;
 using MeadowCLI.Hcom;
-using static Meadow.CLI.DeviceManagement.MeadowFileManager;
+using static MeadowCLI.DeviceManagement.MeadowFileManager;
 
-namespace Meadow.CLI.DeviceManagement
+namespace MeadowCLI.DeviceManagement
 {
     /// <summary>
     /// TODO: put device enumeration and such stuff here.
@@ -27,20 +26,24 @@ namespace Meadow.CLI.DeviceManagement
 
         private static void Handle_DeviceAdded()
         {
-            // add device to AttachedDevices
+            // add device to AttachedDevices using lib usb
         }
 
         private static void Handle_DeviceRemoved()
         {
-            // remove device from AttachedDevices
+            // remove device from AttachedDevices using lib usb
         }
 
         //providing a numeric (0 = none, 1 = info and 2 = debug)
-        public static void ChangeTraceLevel(MeadowDevice meadow, uint level)
+        public static void SetTraceLevel(MeadowDevice meadow, int level)
         {
+            if (level < 1 || level > 4)
+                throw new System.ArgumentOutOfRangeException("Trace level must be between 0 & 3 inclusive");
+
+
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_CHANGE_TRACE_LEVEL;
 
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, level);
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)level);
         }
 
         public static void ResetTargetMcu(MeadowDevice meadow)
@@ -67,29 +70,19 @@ namespace Meadow.CLI.DeviceManagement
 
 
         //ToDo - look these up - I assume their developer modes? Should be SetDev1, etc. ?
-        public static void Developer1(MeadowDevice meadow)
+        public static void SetDeveloperLevel(MeadowDevice meadow, int level)
         {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
-        }
+            if (level < 1 || level > 4)
+                throw new System.ArgumentOutOfRangeException("Developer level must be between 1 & 4 inclusive");
 
-        public static void Developer2(MeadowDevice meadow)
-        {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
-
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
-        }
-
-        public static void Developer3(MeadowDevice meadow)
-        {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_3;
-
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
-        }
-
-        public static void Developer4(MeadowDevice meadow)
-        {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
+            if(level == 1)
+                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;
+            else if (level == 2)
+                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
+            else if (level == 3)
+                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_3;
+            else
+                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }

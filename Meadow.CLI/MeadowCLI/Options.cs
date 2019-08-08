@@ -30,8 +30,10 @@ namespace MeadowCLI
         [Option(longName: "FormatFileSystem", Required = false, HelpText = "Format file system in Meadow's internal flash")]
         public bool FormatFileSystem { get; set; }
 
-        [Option(longName: "ChangeTraceLevel", Required = false, HelpText = "Change the debug trace level")]
-        public bool ChangeTraceLevel { get; set; }
+        [Option(longName: "SetDeveloperLevel", Required = false, HelpText = "Set the developer level (1 - 4)")]
+        public bool SetDeveloperLevel { get; set; }
+        [Option(longName: "SetTraceLevel", Required = false, HelpText = "Change the debug trace level (0 - 3)")]
+        public bool SetTraceLevel { get; set; }
         [Option(longName: "ResetTargetMcu", Required = false, HelpText = "Reset the MCU on Meadow")]
         public bool ResetTargetMcu { get; set; }
         [Option(longName: "EnterDfuMode", Required = false, HelpText = "Set Meadow in DFU mode")]
@@ -42,7 +44,6 @@ namespace MeadowCLI
         public bool ListFiles { get; set; }
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
         public bool ListFilesAndCrcs { get; set; }
-        //Developer 1,2,3,4
 
         [Option(longName: "SerialPort", Default = "/dev/tty.usbmodem01", Required = false, HelpText = "Specify the serial port used by Meadow")]
         public string SerialPort { get; set; }
@@ -56,5 +57,7 @@ namespace MeadowCLI
         public int NumberOfPartitions { get; set; }
         [Option('t', "TraceLevel", Default = 1, Required = false, HelpText = "Change the amount of debug information provided by the OS")]
         public int TraceLevel { get; set; }
+        [Option('t', "DeveloperLevel", Default = 1, Required = false, HelpText = "Change the developer level")]
+        public int DeveloperLevel { get; set; }
     }
 }
