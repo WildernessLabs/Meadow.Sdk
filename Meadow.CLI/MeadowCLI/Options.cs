@@ -49,7 +49,7 @@ namespace MeadowCLI
         public string SerialPort { get; set; }
         [Option('f', longName: "File", Default = null, Required = false, HelpText = "Local file to send to Meadow")]
         public string FileName { get; set; }
-        [Option('n', longName: "TargetFileName", Default = null, Required = false, HelpText = "Filename to be written to Meadow (can be different from source name")]
+        [Option(longName: "TargetFileName", Default = null, Required = false, HelpText = "Filename to be written to Meadow (can be different from source name")]
         public string TargetFileName { get; set; }
         [Option('p', "Parition", Default = 0, Required = false, HelpText = "Destination partition on Meadow")]
         public int Partition { get; set; }
