@@ -23,8 +23,6 @@ namespace MeadowCLI
                 else
 				{
                     ProcessHcom(options);
-
-			
 				}
 			});
 
@@ -50,9 +48,9 @@ namespace MeadowCLI
             {
                 MeadowFileManager.EraseFlash(DeviceManager.CurrentDevice);
             }
-            else if (options.EraseFlashAndVerify)
+            else if (options.VerifyErasedFlash)
             {
-                MeadowFileManager.EraseFlashAndVerify(DeviceManager.CurrentDevice);
+                MeadowFileManager.VerifyErasedFlash(DeviceManager.CurrentDevice);
             }
             else if (options.PartitionFileSystem)
             {

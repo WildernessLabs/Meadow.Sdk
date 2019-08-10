@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using MeadowCLI.DeviceManagement;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
@@ -105,11 +106,22 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             {
                 //var devices = ImportDefinition.Enumerate(PortFilter.Usb);
                 Console.WriteLine("Devices");
+
+                DeviceManager.FindConnectedDevices();
+
+                var devices = new List<MeadowDeviceExecutionTarget>();
+                foreach (var d in DeviceManager.AttachedDevices)
+                {
+                    devices.Add(new MeadowDeviceExecutionTarget(d.Name, d.Id));
+                }
+
+                /*
                 // fake up some devices
                 List<MeadowDeviceExecutionTarget> devices = new List<MeadowDeviceExecutionTarget>() {
                     new MeadowDeviceExecutionTarget("F7 Micro 1", "1"),
                     new MeadowDeviceExecutionTarget("F7 Micro 2", "2")
                 };
+                */
 
                 // TODO: Devices
                 foreach (var device in devices)

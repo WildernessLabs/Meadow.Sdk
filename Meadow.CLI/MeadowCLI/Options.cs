@@ -17,8 +17,8 @@ namespace MeadowCLI
         public bool DeleteFile { get; set; }
         [Option(longName: "EraseFlash", Required = false, HelpText = "Delete all content in Meadow flash")]
         public bool EraseFlash { get; set; }
-        [Option(longName: "DeleteFlash", Required = false, HelpText = "Delete all content in Meadow flash and verify")]
-        public bool EraseFlashAndVerify { get; set; }
+        [Option(longName: "VerifyErasedFlash", Required = false, HelpText = "Verify the contents of the flash were deleted")]
+        public bool VerifyErasedFlash { get; set; }
         [Option(longName: "PartitionFileSystem", Required = false, HelpText = "Partition Meadow's internal flash")]
         public bool PartitionFileSystem { get; set; }
         [Option(longName: "MountFileSystem", Required = false, HelpText = "Mount file system in Meadow's internal flash")]
@@ -47,9 +47,9 @@ namespace MeadowCLI
 
         [Option(longName: "SerialPort", Default = "/dev/tty.usbmodem01", Required = false, HelpText = "Specify the serial port used by Meadow")]
         public string SerialPort { get; set; }
-        [Option(longName: "localFile", Default = null, Required = false, HelpText = "Local file to send to Meadow")]
+        [Option(longName: "File", Default = null, Required = false, HelpText = "Local file to send to Meadow")]
         public string ExtFileName { get; set; }
-        [Option(longName: "targetFileName", Default = null, Required = false, HelpText = "Filename to be written to Meadow (can be different from source name")]
+        [Option(longName: "TargetFileName", Default = null, Required = false, HelpText = "Filename to be written to Meadow (can be different from source name")]
         public string TargetFileName { get; set; }
         [Option('p', "Parition", Default = 0, Required = false, HelpText = "Destination partition on Meadow")]
         public int Partition { get; set; }

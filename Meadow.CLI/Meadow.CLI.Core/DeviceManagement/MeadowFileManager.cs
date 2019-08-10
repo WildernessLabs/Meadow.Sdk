@@ -16,9 +16,12 @@ namespace MeadowCLI.DeviceManagement
         {
         }
 
-        public static void WriteFileToFlash(MeadowDevice meadow, string fileName, string targetFileName, int partition)
+        public static void WriteFileToFlash(MeadowDevice meadow, string fileName, string targetFileName, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_START_FILE_TRANSFER;
+
+            if (string.IsNullOrWhiteSpace(targetFileName))
+                targetFileName = fileName;
 
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, targetFileName, partition, false);
         }
@@ -38,7 +41,7 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void EraseFlashAndVerify(MeadowDevice meadow)
+        public static void VerifyErasedFlash(MeadowDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_VERIFY_ERASED_FLASH;
 
@@ -124,7 +127,7 @@ namespace MeadowCLI.DeviceManagement
             try
             {
                 //----------------------------------------------
-                if (!deleteFile)
+                if (deleteFile == true)
                 {
                     // No data packets and no end-of-file message
                     sendTargetData.BuildAndSendFileRelatedCommand(requestType,

@@ -10,9 +10,11 @@ namespace MeadowCLI.DeviceManagement
         public SerialPort SerialPort { get; set; }
 
         public string Name { get; private set; } = "Meadow Mirco F7";
+
+        public string Model { get; private set; }
         
         
-        public int Id { get; set; } //guessing we'll need this
+        public string Id { get; set; } //guessing we'll need this
 
         public MeadowDevice(string serialPortName, string deviceName = null)
         {

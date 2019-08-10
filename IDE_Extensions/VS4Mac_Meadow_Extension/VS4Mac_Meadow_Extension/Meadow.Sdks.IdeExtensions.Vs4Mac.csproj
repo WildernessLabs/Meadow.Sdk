@@ -20,6 +20,6 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Meadow.CLI\MeadowCLI\Meadow.CLI.csproj" />
+    <ProjectReference Include="..\..\..\Meadow.CLI\Meadow.CLI.Core\Meadow.CLI.Core.csproj" />
   </ItemGroup>
 </Project>
