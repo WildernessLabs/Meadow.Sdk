@@ -37,7 +37,7 @@ namespace MeadowCLI
             if (options.WriteFile)
             {
                 MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
-                    options.ExtFileName, options.TargetFileName, options.Partition);
+                    options.FileName, options.TargetFileName, options.Partition);
             }
             else if (options.DeleteFile)
             {

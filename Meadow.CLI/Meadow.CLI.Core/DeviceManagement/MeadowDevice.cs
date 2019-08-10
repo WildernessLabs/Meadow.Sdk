@@ -11,8 +11,7 @@ namespace MeadowCLI.DeviceManagement
 
         public string Name { get; private set; } = "Meadow Mirco F7";
 
-        public string Model { get; private set; }
-        
+        public string Model { get; private set; } = "Micro F7";
         
         public string Id { get; set; } //guessing we'll need this
 
@@ -45,18 +44,17 @@ namespace MeadowCLI.DeviceManagement
                 };
 
                 SerialPort.Open();
-                Console.WriteLine("Port: {0} opened", portName);
+                Console.WriteLine($"Port {portName} opened");
                 return true;
             }
-            catch (IOException ioe)
+            catch (IOException ioEx)
             {
-                Console.WriteLine("The specified port '{0}' could not be found or opened. {1}Exception:'{2}'",
-                    portName, Environment.NewLine, ioe);
+                Console.WriteLine($"The specified port '{portName}' could not be found or opened. Exception:'{ioEx}'");
                 throw;
             }
-            catch (Exception except)
+            catch (Exception ex)
             {
-                Console.WriteLine("Unknown exception:{0}", except);
+                Console.WriteLine($"Unknown exception: {ex}");
                 throw;
             }
         }

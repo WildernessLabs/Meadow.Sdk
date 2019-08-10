@@ -26,11 +26,11 @@ namespace MeadowCLI.DeviceManagement
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, targetFileName, partition, false);
         }
 
-        public static void DeleteFile(MeadowDevice meadow, string targetFileName, int partition)
+        public static void DeleteFile(MeadowDevice meadow, string fileName, int partition)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DELETE_FILE_BY_NAME;
 
-            TransmitFileInfoToExtFlash(meadow, _meadowRequestType, string.Empty, targetFileName, partition, true);
+            TransmitFileInfoToExtFlash(meadow, _meadowRequestType, string.Empty, fileName, partition, true);
 
         }
 
@@ -131,7 +131,7 @@ namespace MeadowCLI.DeviceManagement
                 {
                     // No data packets and no end-of-file message
                     sendTargetData.BuildAndSendFileRelatedCommand(requestType,
-                        (UInt32)partition, 0, 0, targetFileName);
+                        (UInt32)partition, 0, 0, sourceFileName);
                     return;
                 }
 
