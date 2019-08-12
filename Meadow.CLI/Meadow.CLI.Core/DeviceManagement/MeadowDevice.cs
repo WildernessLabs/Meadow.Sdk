@@ -4,7 +4,7 @@ using System.IO.Ports;
 
 namespace MeadowCLI.DeviceManagement
 {
-    //a simple model object that represents meadow
+    //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
         public SerialPort SerialPort { get; set; }
@@ -18,18 +18,17 @@ namespace MeadowCLI.DeviceManagement
         public MeadowDevice(string serialPortName, string deviceName = null)
         {
             if(string.IsNullOrWhiteSpace(deviceName) == false)
-                Name = deviceName;
+                Name = deviceName; //otherwise use the default
 
-            OpenSerialPort(serialPortName);
+            SerialPort = OpenSerialPort(serialPortName);
         }
 
-        //putting this here for now .....
-        public bool OpenSerialPort(string portName)
+        //putting this here for now ..... 
+        private SerialPort OpenSerialPort(string portName)
         {
             try
-            {
-                // Create a new SerialPort object with default settings.
-                SerialPort = new SerialPort
+            {   // Create a new SerialPort object with default settings
+                var port = new SerialPort
                 {
                     PortName = portName,
                     BaudRate = 115200,       // This value is ignored when using ACM
@@ -43,9 +42,10 @@ namespace MeadowCLI.DeviceManagement
                     WriteTimeout = 500
                 };
 
-                SerialPort.Open();
+                port.Open();
                 Console.WriteLine($"Port {portName} opened");
-                return true;
+
+                return port;
             }
             catch (IOException ioEx)
             {

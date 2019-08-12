@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
@@ -33,12 +34,15 @@ namespace MeadowCLI.DeviceManagement
             // remove device from AttachedDevices using lib usb
         }
 
-        public static async Task FindConnectedDevices ()
+        //we'll async this later 
+        public static ObservableCollection<MeadowDevice> FindConnectedDevices ()
         {
             var device = new MeadowDevice("/dev/tty.usbserial01", "Meadow Micro F7");
             AttachedDevices.Add(device);
 
             CurrentDevice = device;
+
+            return AttachedDevices;
         }
 
         //providing a numeric (0 = none, 1 = info and 2 = debug)

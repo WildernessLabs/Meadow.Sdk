@@ -4,11 +4,11 @@ namespace MeadowCLI
 {
     public class Options
     {
-        [Option('d', "dfu", Required = false, HelpText = "DFU copy os and user files. Looks for files in execution direction. To override, user 'osFile' and 'userFile'.")]
+        [Option('d', "Dfu", Required = false, HelpText = "DFU copy os and user files. Looks for files in execution direction. To override, user 'OsFile' and 'UserFile'.")]
         public bool Dfu { get; set; }
-        [Option(longName: "osFile", Default = null, Required = false, HelpText = "File path to os file. Usage: --osFile mypath")]
+        [Option(longName: "OsFile", Default = null, Required = false, HelpText = "File path to os file. Usage: --osFile mypath")]
         public string DfuOsPath { get; set; }
-        [Option(longName: "userFile", Default = null, Required = false, HelpText = "File path to user file. Usage: --userFile mypath")]
+        [Option(longName: "UserFile", Default = null, Required = false, HelpText = "File path to user file. Usage: --userFile mypath")]
         public string DfuUserPath { get; set; }
 
         [Option(longName: "WriteFile", Required = false, HelpText = "Write an external file to Meadow's internal flash")]
