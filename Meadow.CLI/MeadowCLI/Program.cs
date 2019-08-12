@@ -93,6 +93,14 @@ namespace MeadowCLI
             {
                 DeviceManager.ToggleNsh(DeviceManager.CurrentDevice);
             }
+            else if (options.MonoPause)
+            {
+                DeviceManager.MonoPause(DeviceManager.CurrentDevice);
+            }
+            else if (options.MonoEndPause)
+            {
+                DeviceManager.MonoEndPause(DeviceManager.CurrentDevice);
+            }
             else if (options.ResetTargetMcu)
             {
                 DeviceManager.ResetTargetMcu(DeviceManager.CurrentDevice);
