@@ -40,6 +40,10 @@ namespace MeadowCLI
         public bool EnterDfuMode { get; set; }
         [Option(longName: "ToggleNsh", Required = false, HelpText = "Turn NSH mode on or off")]
         public bool ToggleNsh { get; set; }
+        [Option(longName: "MonoPause", Required = false, HelpText = "Turn NSH mode on or off")]
+        public bool MonoPause { get; set; }
+        [Option(longName: "MonoEndPause", Required = false, HelpText = "Turn NSH mode on or off")]
+        public bool MonoEndPause { get; set; }
         [Option(longName: "ListFiles", Required = false, HelpText = "List all files in a Meadow partition")]
         public bool ListFiles { get; set; }
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
@@ -51,7 +55,7 @@ namespace MeadowCLI
         public string FileName { get; set; }
         [Option(longName: "TargetFileName", Default = null, Required = false, HelpText = "Filename to be written to Meadow (can be different from source name")]
         public string TargetFileName { get; set; }
-        [Option('p', "Parition", Default = 0, Required = false, HelpText = "Destination partition on Meadow")]
+        [Option('p', "Partition", Default = 0, Required = false, HelpText = "Destination partition on Meadow")]
         public int Partition { get; set; }
         [Option('n', "NumberOfPartitions", Default = 1, Required = false, HelpText = "The number of partitions to create on Meadow")]
         public int NumberOfPartitions { get; set; }

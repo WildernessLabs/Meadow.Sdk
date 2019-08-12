@@ -78,6 +78,20 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
+        public static void MonoPause(MeadowDevice meadow)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_PAUSE;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+        }
+
+        public static void MonoEndPause(MeadowDevice meadow)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_ENDPAUSE;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+        }
+
         //ToDo - look these up - I assume their developer modes? Should be SetDev1, etc. ?
         public static void SetDeveloperLevel(MeadowDevice meadow, int level)
         {
