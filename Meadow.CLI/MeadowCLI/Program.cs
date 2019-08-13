@@ -128,7 +128,18 @@ namespace MeadowCLI
         //temp code until we get the device manager logic in place 
         static void ConnectToMeadowDevice (string commPort)
 		{
-			DeviceManager.CurrentDevice = new MeadowDevice(commPort);
-		}
+            var device = new MeadowDevice(commPort);
+            try
+            {
+                device.OpenSerialPort();
+                Console.WriteLine($"Port {commPort} opened");
+            }
+            catch (MeadowDeviceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            DeviceManager.CurrentDevice = device;
+        }
     }
 }

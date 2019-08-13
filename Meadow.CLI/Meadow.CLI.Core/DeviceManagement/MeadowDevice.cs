@@ -5,6 +5,14 @@ using MeadowCLI.Hcom;
 
 namespace MeadowCLI.DeviceManagement
 {
+    public class MeadowDeviceException : Exception
+    {
+        public MeadowDeviceException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+    }
+
     //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
@@ -19,31 +27,24 @@ namespace MeadowCLI.DeviceManagement
         private ReceiveTargetData receiveData;
         private HcomBufferReturn hcomBuffer;
 
+        private string serialPortName;
+
         public MeadowDevice(string serialPortName, string deviceName = null)
         {
             if(string.IsNullOrWhiteSpace(deviceName) == false)
                 Name = deviceName; //otherwise use the default
 
-            SerialPort = OpenSerialPort(serialPortName);
-
-            //wire up ReceiveTargetData
-            //consider refactoring later
-            if (SerialPort != null)
-            {
-                HostCommBuffer hostCommBuffer = new HostCommBuffer();
-
-                receiveData = new ReceiveTargetData(SerialPort, hostCommBuffer);
-            }
+            this.serialPortName = serialPortName;
         }
 
         //putting this here for now ..... 
-        private SerialPort OpenSerialPort(string portName)
+        public void OpenSerialPort()
         {
             try
             {   // Create a new SerialPort object with default settings
                 var port = new SerialPort
                 {
-                    PortName = portName,
+                    PortName = serialPortName,
                     BaudRate = 115200,       // This value is ignored when using ACM
                     Parity = Parity.None,
                     DataBits = 8,
@@ -56,19 +57,25 @@ namespace MeadowCLI.DeviceManagement
                 };
 
                 port.Open();
-                Console.WriteLine($"Port {portName} opened");
 
-                return port;
+                SerialPort = port;
+
+                //wire up ReceiveTargetData
+                //consider refactoring later
+                if (SerialPort != null)
+                {
+                    HostCommBuffer hostCommBuffer = new HostCommBuffer();
+
+                    receiveData = new ReceiveTargetData(SerialPort, hostCommBuffer);
+                }
             }
             catch (IOException ioEx)
             {
-                Console.WriteLine($"The specified port '{portName}' could not be found or opened. Exception:'{ioEx}'");
-                throw;
+                throw new MeadowDeviceException($"The specified port '{serialPortName}' could not be found or opened.", ioEx);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unknown exception: {ex}");
-                throw;
+                throw new MeadowDeviceException($"Unknown exception", ex);
             }
         }
     }
