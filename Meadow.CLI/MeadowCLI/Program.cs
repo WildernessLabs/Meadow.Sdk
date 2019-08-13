@@ -25,9 +25,6 @@ namespace MeadowCLI
                     ProcessHcom(options);
 				}
 			});
-
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
         }
 
         //Probably rename
