@@ -78,16 +78,16 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void MonoPause(MeadowDevice meadow)
+        public static void MonoDisable(MeadowDevice meadow)
         {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_PAUSE;
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_DISABLE;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void MonoEndPause(MeadowDevice meadow)
+        public static void MonoEnable(MeadowDevice meadow)
         {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_ENDPAUSE;
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_ENABLE;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }

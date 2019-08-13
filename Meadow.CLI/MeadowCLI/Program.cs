@@ -108,13 +108,13 @@ namespace MeadowCLI
                 Console.WriteLine($"Toggling Nsh");
                 DeviceManager.ToggleNsh(DeviceManager.CurrentDevice);
             }
-            else if (options.MonoPause)
+            else if (options.MonoDisable)
             {
-                DeviceManager.MonoPause(DeviceManager.CurrentDevice);
+                DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
             }
-            else if (options.MonoEndPause)
+            else if (options.MonoEnable)
             {
-                DeviceManager.MonoEndPause(DeviceManager.CurrentDevice);
+                DeviceManager.MonoEnable(DeviceManager.CurrentDevice);
             }
             else if (options.ResetTargetMcu)
             {

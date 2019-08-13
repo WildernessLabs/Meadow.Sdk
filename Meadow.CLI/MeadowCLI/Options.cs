@@ -40,10 +40,10 @@ namespace MeadowCLI
         public bool EnterDfuMode { get; set; }
         [Option(longName: "ToggleNsh", Required = false, HelpText = "Turn NSH mode on or off")]
         public bool ToggleNsh { get; set; }
-        [Option(longName: "MonoPause", Required = false, HelpText = "Turn NSH mode on or off")]
-        public bool MonoPause { get; set; }
-        [Option(longName: "MonoEndPause", Required = false, HelpText = "Turn NSH mode on or off")]
-        public bool MonoEndPause { get; set; }
+        [Option(longName: "MonoDisable", Required = false, HelpText = "Disable mono from running")]
+        public bool MonoDisable { get; set; }
+        [Option(longName: "MonoEnable", Required = false, HelpText = "Enable mono so it can run")]
+        public bool MonoEnable { get; set; }
         [Option(longName: "ListFiles", Required = false, HelpText = "List all files in a Meadow partition")]
         public bool ListFiles { get; set; }
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
