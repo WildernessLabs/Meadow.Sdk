@@ -35,7 +35,7 @@ namespace MeadowCLI.DeviceManagement
         }
 
         //we'll async this later 
-        public static ObservableCollection<MeadowDevice> FindConnectedDevices ()
+        public static ObservableCollection<MeadowDevice> FindConnectedDevices()
         {
             var device = new MeadowDevice("/dev/tty.usbserial01", "Meadow Micro F7");
             AttachedDevices.Add(device);
@@ -98,7 +98,7 @@ namespace MeadowCLI.DeviceManagement
             if (level < 1 || level > 4)
                 throw new System.ArgumentOutOfRangeException(nameof(level), "Developer level must be between 1 & 4 inclusive");
 
-            if(level == 1)
+            if (level == 1)
                 _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;
             else if (level == 2)
                 _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
