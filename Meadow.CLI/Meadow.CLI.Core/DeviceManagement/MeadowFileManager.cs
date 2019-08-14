@@ -52,7 +52,7 @@ namespace MeadowCLI.DeviceManagement
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_START_FILE_TRANSFER;
 
             if (string.IsNullOrWhiteSpace(targetFileName))
-                targetFileName = fileName;
+                targetFileName = Path.GetFileName(fileName);
 
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, targetFileName, partition, false);
         }
