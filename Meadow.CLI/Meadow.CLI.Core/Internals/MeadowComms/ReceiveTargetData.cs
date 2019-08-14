@@ -31,7 +31,7 @@ namespace MeadowCLI.Hcom
             _hostCommBuffer = hostCommBuffer;
 
             // Setup circular buffer
-            if (_hostCommBuffer.Init(256) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
+            if (_hostCommBuffer.Init(maxRecvSize * 4) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
             {
                 Console.WriteLine("Error setting up Circular Buffer");
                 return;
