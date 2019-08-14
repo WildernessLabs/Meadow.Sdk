@@ -92,22 +92,30 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        //ToDo - look these up - I assume their developer modes? Should be SetDev1, etc. ?
-        public static void SetDeveloperLevel(MeadowDevice meadow, int level)
+        public static void SetDeveloper1(MeadowDevice meadow, int userData)
         {
-            if (level < 1 || level > 4)
-                throw new System.ArgumentOutOfRangeException(nameof(level), "Developer level must be between 1 & 4 inclusive");
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;
 
-            if (level == 1)
-                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_1;
-            else if (level == 2)
-                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
-            else if (level == 3)
-                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_3;
-            else
-                _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
+        }
+        public static void SetDeveloper2(MeadowDevice meadow, uint userData)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
 
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
+        }
+        public static void SetDeveloper3(MeadowDevice meadow, uint userData)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_3;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
+        }
+
+        public static void SetDeveloper4(MeadowDevice meadow, uint userData)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
         }
     }
 }

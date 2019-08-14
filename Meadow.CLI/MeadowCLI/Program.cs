@@ -25,6 +25,10 @@ namespace MeadowCLI
                     ProcessHcom(options);
 				}
 			});
+
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         //Probably rename
@@ -95,11 +99,27 @@ namespace MeadowCLI
                 Console.WriteLine($"Setting trace level to {options.TraceLevel}");
                 DeviceManager.SetTraceLevel(DeviceManager.CurrentDevice, options.TraceLevel);
             }
-            else if(options.SetDeveloperLevel)
+            else if(options.SetDeveloper1)
             {
-                Console.WriteLine($"Setting developer level to {options.DeveloperLevel}");
-                DeviceManager.SetDeveloperLevel(DeviceManager.CurrentDevice, options.DeveloperLevel);
+                Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
+                DeviceManager.SetDeveloper1(DeviceManager.CurrentDevice, options.DeveloperValue);
             }
+            else if (options.SetDeveloper2)
+            {
+                Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
+                DeviceManager.SetDeveloper2(DeviceManager.CurrentDevice, options.DeveloperValue);
+            }
+            else if (options.SetDeveloper3)
+            {
+                Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
+                DeviceManager.SetDeveloper3(DeviceManager.CurrentDevice, options.DeveloperValue);
+            }
+            else if (options.SetDeveloper4)
+            {
+                Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
+                DeviceManager.SetDeveloper4(DeviceManager.CurrentDevice, options.DeveloperValue);
+            }
+
             else if (options.ToggleNsh)
             {
                 Console.WriteLine($"Toggling Nsh");

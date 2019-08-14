@@ -8,9 +8,12 @@ namespace MeadowCLI.Hcom
     {
         SerialPort _serialPort;
         HostCommBuffer _hostCommBuffer;
+        const int maxRecvSize = 2048;
+        string F7ReadFileListPrefix { get { return "FileList: "; } }
+        string F7MonoMessagePrefix { get { return "MonoMsg: "; } }
 
         //Timer _readTimer;
-        readonly byte[] _prevRecvUnusedBytes = new byte[512];
+        readonly byte[] _prevRecvUnusedBytes = new byte[maxRecvSize * 2];
 
         // It seems that the .Net SerialPort class is not all it could be.
         // To acheive reliable operation some SerialPort class methods must
@@ -46,8 +49,7 @@ namespace MeadowCLI.Hcom
         // All received data handled here
         void SerialReceiveData(object sender, SerialDataReceivedEventArgs e)
         {
-            const int maximumSize = 256;
-            byte[] buffer = new byte[maximumSize];
+            byte[] buffer = new byte[maxRecvSize];
             Action initiateRead = null;
 
             try
@@ -116,9 +118,9 @@ namespace MeadowCLI.Hcom
         {
             while (true)
             {
-                byte[] packetBuffer = new byte[512];
+                byte[] packetBuffer = new byte[maxRecvSize * 2];
                 int packetLength;
-                var result = _hostCommBuffer.GetNextPacket(packetBuffer, 512, out packetLength);
+                var result = _hostCommBuffer.GetNextPacket(packetBuffer, maxRecvSize * 2, out packetLength);
                 switch (result)
                 {
                     case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
@@ -140,27 +142,33 @@ namespace MeadowCLI.Hcom
         {
             // - 1 strips of the terminating null
             string rcvdString = Encoding.ASCII.GetString(newData, 0, dataLength - 1);
-            if (rcvdString.StartsWith("FileList: "))
+            if (rcvdString.StartsWith(F7ReadFileListPrefix))
             {
-                DisplayFileList(rcvdString.Substring(10));
+                // This is a comma separated list
+                string baseMessage = rcvdString.Substring(F7ReadFileListPrefix.Length);
+                DisplayFileList(baseMessage);
+            }
+            else if (rcvdString.StartsWith(F7MonoMessagePrefix))
+            {
+                string baseMessage = rcvdString.Substring(F7MonoMessagePrefix.Length);
+                Console.WriteLine($"mono runtime message: {baseMessage}");
             }
             else
             {
-                DisplayReceivedData(rcvdString);
+                Console.WriteLine($"Received: '{rcvdString}'");
             }
-        }
-
-        //-------------------------------------------------------------
-        void DisplayReceivedData(string receivedTextMsg)
-        {
-            Console.WriteLine($"Received: '{receivedTextMsg}'");
         }
 
         //-------------------------------------------------------------
         void DisplayFileList(string receivedTextMsg)
         {
-            string dataAsList = receivedTextMsg.Replace(",", $"{Environment.NewLine}");
-            Console.WriteLine($"Received File List:{Environment.NewLine}{dataAsList}");
+            Console.WriteLine($"Received File List:");
+
+            string[] fileList = receivedTextMsg.Split(',');
+            for (int i = 0; i < fileList.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}) {fileList[i]}");
+            }
         }
     }
 }

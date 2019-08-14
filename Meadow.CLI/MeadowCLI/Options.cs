@@ -30,8 +30,14 @@ namespace MeadowCLI
         [Option(longName: "FormatFileSystem", Required = false, HelpText = "Format file system in Meadow's internal flash")]
         public bool FormatFileSystem { get; set; }
 
-        [Option(longName: "SetDeveloperLevel", Required = false, HelpText = "Set the developer level (1 - 4)")]
-        public bool SetDeveloperLevel { get; set; }
+        [Option(longName: "SetDeveloper1", Required = false, HelpText = "Set developer1 (0 to 4,294,967,295)")]
+        public bool SetDeveloper1 { get; set; }
+        [Option(longName: "SetDeveloper2", Required = false, HelpText = "Set developer2 (0 to 4,294,967,295)")]
+        public bool SetDeveloper2 { get; set; }
+        [Option(longName: "SetDeveloper3", Required = false, HelpText = "Set developer3 (0 to 4,294,967,295)")]
+        public bool SetDeveloper3 { get; set; }
+        [Option(longName: "SetDeveloper4", Required = false, HelpText = "Set developer4 (0 to 4,294,967,295)")]
+        public bool SetDeveloper4 { get; set; }
         [Option(longName: "SetTraceLevel", Required = false, HelpText = "Change the debug trace level (0 - 3)")]
         public bool SetTraceLevel { get; set; }
         [Option('r', longName: "ResetTargetMcu", Required = false, HelpText = "Reset the MCU on Meadow")]
@@ -44,7 +50,7 @@ namespace MeadowCLI
         public bool MonoDisable { get; set; }
         [Option(longName: "MonoEnable", Required = false, HelpText = "Enable mono so it can run")]
         public bool MonoEnable { get; set; }
-        [Option(longName: "ListFiles", Required = false, HelpText = "List all files in a Meadow partition")]
+        [Option(longName: "ListFiles", Required = false, HelpText = "List all files in Meadow partition")]
         public bool ListFiles { get; set; }
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
         public bool ListFilesAndCrcs { get; set; }
@@ -61,7 +67,7 @@ namespace MeadowCLI
         public int NumberOfPartitions { get; set; }
         [Option('t', "TraceLevel", Default = 1, Required = false, HelpText = "Change the amount of debug information provided by the OS")]
         public int TraceLevel { get; set; }
-        [Option('d', "DeveloperLevel", Default = 1, Required = false, HelpText = "Change the developer level")]
-        public int DeveloperLevel { get; set; }
+        [Option('d', "DeveloperValue", Default = 0, Required = false, HelpText = "Change the developer numeric user data value")]
+        public int DeveloperValue { get; set; }
     }
 }
