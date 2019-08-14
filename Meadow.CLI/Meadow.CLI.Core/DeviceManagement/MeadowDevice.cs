@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Ports;
+using MeadowCLI.Hcom;
 
 namespace MeadowCLI.DeviceManagement
 {
@@ -15,12 +16,24 @@ namespace MeadowCLI.DeviceManagement
         
         public string Id { get; set; } //guessing we'll need this
 
+        private ReceiveTargetData receiveData;
+        private HcomBufferReturn hcomBuffer;
+
         public MeadowDevice(string serialPortName, string deviceName = null)
         {
             if(string.IsNullOrWhiteSpace(deviceName) == false)
                 Name = deviceName; //otherwise use the default
 
             SerialPort = OpenSerialPort(serialPortName);
+
+            //wire up ReceiveTargetData
+            //consider refactoring later
+            if (SerialPort != null)
+            {
+                HostCommBuffer hostCommBuffer = new HostCommBuffer();
+
+                receiveData = new ReceiveTargetData(SerialPort, hostCommBuffer);
+            }
         }
 
         //putting this here for now ..... 
