@@ -98,20 +98,20 @@ namespace MeadowCLI.DeviceManagement
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
         }
-        public static void SetDeveloper2(MeadowDevice meadow, uint userData)
+        public static void SetDeveloper2(MeadowDevice meadow, int userData)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_2;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
         }
-        public static void SetDeveloper3(MeadowDevice meadow, uint userData)
+        public static void SetDeveloper3(MeadowDevice meadow, int userData)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_3;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
         }
 
-        public static void SetDeveloper4(MeadowDevice meadow, uint userData)
+        public static void SetDeveloper4(MeadowDevice meadow, int userData)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
 
