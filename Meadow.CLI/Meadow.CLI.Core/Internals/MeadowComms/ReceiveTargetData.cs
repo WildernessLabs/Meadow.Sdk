@@ -6,14 +6,16 @@ namespace MeadowCLI.Hcom
 {
     public class ReceiveTargetData
     {
+        const int MAX_RECEIVED_BYTES = 2048;
+
         SerialPort _serialPort;
         HostCommBuffer _hostCommBuffer;
-        const int maxRecvSize = 2048;
+        
         string F7ReadFileListPrefix { get { return "FileList: "; } }
         string F7MonoMessagePrefix { get { return "MonoMsg: "; } }
 
         //Timer _readTimer;
-        readonly byte[] _prevRecvUnusedBytes = new byte[maxRecvSize * 2];
+        //readonly byte[] _prevRecvUnusedBytes = new byte[MAX_RECEIVED_BYTES * 2];
 
         // It seems that the .Net SerialPort class is not all it could be.
         // To acheive reliable operation some SerialPort class methods must
@@ -31,7 +33,7 @@ namespace MeadowCLI.Hcom
             _hostCommBuffer = hostCommBuffer;
 
             // Setup circular buffer
-            if (_hostCommBuffer.Init(maxRecvSize * 4) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
+            if (_hostCommBuffer.Init(MAX_RECEIVED_BYTES * 4) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
             {
                 Console.WriteLine("Error setting up Circular Buffer");
                 return;
@@ -49,7 +51,7 @@ namespace MeadowCLI.Hcom
         // All received data handled here
         void SerialReceiveData(object sender, SerialDataReceivedEventArgs e)
         {
-            byte[] buffer = new byte[maxRecvSize];
+            byte[] buffer = new byte[MAX_RECEIVED_BYTES];
             Action initiateRead = null;
 
             try
@@ -118,9 +120,9 @@ namespace MeadowCLI.Hcom
         {
             while (true)
             {
-                byte[] packetBuffer = new byte[maxRecvSize * 2];
+                byte[] packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
                 int packetLength;
-                var result = _hostCommBuffer.GetNextPacket(packetBuffer, maxRecvSize * 2, out packetLength);
+                var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out packetLength);
                 switch (result)
                 {
                     case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
