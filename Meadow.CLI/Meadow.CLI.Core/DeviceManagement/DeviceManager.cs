@@ -37,7 +37,7 @@ namespace MeadowCLI.DeviceManagement
         //we'll async this later 
         public static ObservableCollection<MeadowDevice> FindConnectedDevices()
         {
-            var device = new MeadowDevice("/dev/tty.usbserial01", "Meadow Micro F7");
+            var device = new MeadowDevice("/dev/tty.usbmodem01", "Meadow Micro F7");
             AttachedDevices.Add(device);
 
             CurrentDevice = device;

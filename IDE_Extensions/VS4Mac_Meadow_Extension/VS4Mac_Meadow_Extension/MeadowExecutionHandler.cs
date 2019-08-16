@@ -1,5 +1,7 @@
 ﻿using MonoDevelop.Debugger;
 using MonoDevelop.Core.Execution;
+using MeadowCLI.DeviceManagement;
+using System.IO;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
@@ -14,7 +16,38 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         {
             System.Console.WriteLine("Executing");
 
-            return DebuggingService.GetExecutionHandler().Execute(command, console);
+            var handler = DebuggingService.GetExecutionHandler();
+
+            var ret = DebuggingService.GetExecutionHandler().Execute(command, console);
+
+            var cmd = command as MeadowExecutionCommand;
+
+            DeployApp(cmd.OutputDirectory);
+
+
+            return ret;
+        }
+
+        void DeployApp(string folder)
+        {
+
+            //hack in the app deployment
+
+            if (DeviceManager.CurrentDevice.SerialPort == null)
+                DeviceManager.CurrentDevice.OpenSerialPort();
+
+            DeviceManager.SetTraceLevel(DeviceManager.CurrentDevice, 2);
+
+          //  DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
+            MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
+                Path.Combine(folder, "Meadow.Core.dll"),
+                "Meadow.Core.dll");
+
+            MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
+                Path.Combine(folder, "App.exe"),
+                "App.exe");
+
+            DeviceManager.MonoEnable(DeviceManager.CurrentDevice);
         }
     }
 }

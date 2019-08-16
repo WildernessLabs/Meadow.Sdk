@@ -34,6 +34,8 @@ namespace MeadowCLI.DeviceManagement
             if(string.IsNullOrWhiteSpace(deviceName) == false)
                 Name = deviceName; //otherwise use the default
 
+            Id = new Guid().ToString();
+
             this.serialPortName = serialPortName;
         }
 

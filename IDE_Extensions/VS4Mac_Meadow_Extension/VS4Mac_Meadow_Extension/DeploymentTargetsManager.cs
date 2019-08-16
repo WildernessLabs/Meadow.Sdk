@@ -26,14 +26,14 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             get
             {
                 if (!_listening)
-                    UpdateTargetsList(null);
+                    UpdateTargetsList();
                 return _deployTargets;
             }
         }
         private static List<MeadowDeviceExecutionTarget> _deployTargets = new List<MeadowDeviceExecutionTarget>();
 
         private static Timer _timer;
-        private static bool _listening = false;
+        private static bool _listening;
         private static object _lock = new object();
 
         private static event Action<object> deviceListChanged;
@@ -73,9 +73,9 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         // is this blocking?! (yes, but does it matter?)
         private static void StartListening()
         {
-            UpdateTargetsList(null);
+            UpdateTargetsList();
             _listening = true;
-            _timer = new System.Threading.Timer(new System.Threading.TimerCallback(UpdateTargetsList), null, 1000, 1000);
+            _timer = new Timer(new TimerCallback(UpdateTargetsList), null, 1000, 1000);
         }
 
         static object locker = new object();
@@ -94,10 +94,29 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             }
         }
 
-        // TODO: this is _monstrously terrible code_; rewrite.
-        private static void UpdateTargetsList(object state)
+        private static void UpdateTargetsList(object state = null)
         {
-            Console.WriteLine("WLABS: Updating Targets List");
+           // Console.WriteLine("WLABS: Updating Targets List");
+
+            //quick hack for now - only load the device once
+            if (DeviceManager.CurrentDevice == null)
+            {
+                DeviceManager.FindConnectedDevices();
+
+                var currentDevice = DeviceManager.CurrentDevice;
+
+                if (currentDevice != null)
+                {
+                    _deployTargets.Add(new MeadowDeviceExecutionTarget(currentDevice.Name, currentDevice.Id));
+                    deviceListChanged?.Invoke(null);
+                }
+            }
+        }
+
+        // TODO: this is _monstrously terrible code_; rewrite.
+        private static void UpdateTargetsListOld()
+        {
+           // Console.WriteLine("WLABS: Updating Targets List");
             // copy target state
             var targetsToKeep = new List<MeadowDeviceExecutionTarget>();
             // stop [what?]
@@ -106,22 +125,11 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             {
                 //var devices = ImportDefinition.Enumerate(PortFilter.Usb);
                 Console.WriteLine("Devices");
-
-                DeviceManager.FindConnectedDevices();
-
-                var devices = new List<MeadowDeviceExecutionTarget>();
-                foreach (var d in DeviceManager.AttachedDevices)
-                {
-                    devices.Add(new MeadowDeviceExecutionTarget(d.Name, d.Id));
-                }
-
-                /*
                 // fake up some devices
                 List<MeadowDeviceExecutionTarget> devices = new List<MeadowDeviceExecutionTarget>() {
                     new MeadowDeviceExecutionTarget("F7 Micro 1", "1"),
                     new MeadowDeviceExecutionTarget("F7 Micro 2", "2")
                 };
-                */
 
                 // TODO: Devices
                 foreach (var device in devices)

@@ -29,7 +29,7 @@
             templateId="WildernessLabs.Meadow.Templates.BasicApp"
             _overrideName="Meadow Application"
             _overrideDescription="Creates a new Meadow project."
-            path="${Meadow.Sdk.Templates.0.1.0.nupkg}"
+            path="Templates/Meadow.Sdk.Templates.0.1.0.nupkg"
             category="meadow/app/general"
             />
         <!-- eventually add a lib project template -->

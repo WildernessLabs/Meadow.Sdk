@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using MeadowCLI.DeviceManagement;
 using MonoDevelop.Core;
 using MonoDevelop.Core.Assemblies;
 using MonoDevelop.Core.Execution;
@@ -25,7 +27,8 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             // if the project is not a library
             // shouldn't this test if it's an executable?
             // TODO: if(AppliesTo("Meadow")) // i think we need to check the project SDK type
-            if (Project.CompileTarget != CompileTarget.Library) {
+            if (Project.CompileTarget != CompileTarget.Library)
+            {
                 Console.WriteLine("WLABS: Not a lib.");
                 // wire up execution targets, which actually starts listening (maybe fix)
                 // TODO: call StartListening() here and get rid of the event subscriber hack.
@@ -115,11 +118,14 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                     return Project.GetAbsoluteChildPath(r.FilePath).FullPath;
                 }).ToList();
             });
+
             return new MeadowExecutionCommand()
             {
                 OutputDirectory = configuration.OutputDirectory,
                 ReferencedAssemblies = references
             };
         }
+
+        
     }
 }
