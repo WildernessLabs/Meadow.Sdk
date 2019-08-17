@@ -36,16 +36,13 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             if (DeviceManager.CurrentDevice.SerialPort == null)
                 DeviceManager.CurrentDevice.OpenSerialPort();
 
+            //  DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
+
             DeviceManager.SetTraceLevel(DeviceManager.CurrentDevice, 2);
 
-          //  DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
-            MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
-                Path.Combine(folder, "Meadow.Core.dll"),
-                "Meadow.Core.dll");
-
-            MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
-                Path.Combine(folder, "App.exe"),
-                "App.exe");
+            MeadowFileManager.DeployRequiredBinaries(DeviceManager.CurrentDevice);
+            
+            MeadowFileManager.DeployAppInFolder(DeviceManager.CurrentDevice, folder);
 
             DeviceManager.MonoEnable(DeviceManager.CurrentDevice);
         }

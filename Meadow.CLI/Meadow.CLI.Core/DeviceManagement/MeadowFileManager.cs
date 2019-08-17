@@ -41,10 +41,24 @@ namespace MeadowCLI.DeviceManagement
                 WriteFileToFlash(meadow, SYSTEM_CORE);
         }
 
-        public static void DeployApp(MeadowDevice meadow)
+        public static void DeployAppInFolder(MeadowDevice meadow, string appFolder)
         {
             //ToDo - crawl current directory and look for dependencies to deploy 
             WriteFileToFlash(meadow, APP);
+
+            var files = Directory.GetFiles(appFolder, "*.exe");
+
+            foreach(var f in files)
+            {
+                if (f.ToLower().EndsWith(".exe"))
+                {
+                    WriteFileToFlash(meadow, f, "App.exe");
+                }
+                if (f.ToLower().EndsWith(".dll"))
+                {
+                    WriteFileToFlash(meadow, f, Path.GetFileName(f));
+                }
+            }
         }
 
         public static void WriteFileToFlash(MeadowDevice meadow, string fileName, string targetFileName = null, int partition = 0)

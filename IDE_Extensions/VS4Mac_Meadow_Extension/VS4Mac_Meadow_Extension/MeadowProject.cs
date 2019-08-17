@@ -29,7 +29,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             // TODO: if(AppliesTo("Meadow")) // i think we need to check the project SDK type
             if (Project.CompileTarget != CompileTarget.Library)
             {
-                Console.WriteLine("WLABS: Not a lib.");
+                Console.WriteLine("WLABS: Not a lib");
                 // wire up execution targets, which actually starts listening (maybe fix)
                 // TODO: call StartListening() here and get rid of the event subscriber hack.
                 DeploymentTargetsManager.DeviceListChanged += OnExecutionTargetsChanged;
