@@ -32,13 +32,13 @@ namespace MeadowCLI.DeviceManagement
             //ToDo - should these be deployed via nuget?
             //Do we need any other dlls?
             if (forceDeploy || DoesFileExist(meadow, MSCORLIB, 0) == false)
-                WriteFileToFlash(meadow, MSCORLIB);
+                WriteFileToFlash(meadow, Path.Combine(@"./libs", MSCORLIB), MSCORLIB);
 
             if (forceDeploy || DoesFileExist(meadow, SYSTEM, 0) == false)
-                WriteFileToFlash(meadow, SYSTEM);
+                WriteFileToFlash(meadow, Path.Combine(@"./libs", SYSTEM), SYSTEM);
 
             if (forceDeploy || DoesFileExist(meadow, MSCORLIB, 0) == false)
-                WriteFileToFlash(meadow, SYSTEM_CORE);
+                WriteFileToFlash(meadow, Path.Combine(@"./libs", SYSTEM_CORE), SYSTEM_CORE);
         }
 
         public static void DeployAppInFolder(MeadowDevice meadow, string appFolder)
@@ -128,14 +128,14 @@ namespace MeadowCLI.DeviceManagement
         }
 
         //ToDo - find the output 
-        public static void ListFiles(MeadowDevice meadow, int partition)
+        public static void ListFiles(MeadowDevice meadow, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_LIST_PARTITION_FILES;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
         }
 
         //ToDo - find the output 
-        public static void ListFilesAndCrcs(MeadowDevice meadow, int partition)
+        public static void ListFilesAndCrcs(MeadowDevice meadow, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_LIST_PART_FILES_AND_CRC;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
