@@ -43,16 +43,13 @@ namespace MeadowCLI.DeviceManagement
 
         public static void DeployAppInFolder(MeadowDevice meadow, string appFolder)
         {
-            //ToDo - crawl current directory and look for dependencies to deploy 
-            WriteFileToFlash(meadow, APP);
-
             var files = Directory.GetFiles(appFolder, "*.exe");
 
             foreach(var f in files)
             {
                 if (f.ToLower().EndsWith(".exe"))
                 {
-                    WriteFileToFlash(meadow, f, "App.exe");
+                    WriteFileToFlash(meadow, f, APP);
                 }
                 if (f.ToLower().EndsWith(".dll"))
                 {
@@ -71,12 +68,11 @@ namespace MeadowCLI.DeviceManagement
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, targetFileName, partition, false);
         }
 
-        public static void DeleteFile(MeadowDevice meadow, string fileName, int partition)
+        public static void DeleteFile(MeadowDevice meadow, string fileName, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DELETE_FILE_BY_NAME;
 
-            TransmitFileInfoToExtFlash(meadow, _meadowRequestType, string.Empty, fileName, partition, true);
-
+            TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, fileName, partition, true);
         }
 
         public static void EraseFlash(MeadowDevice meadow)
@@ -93,9 +89,9 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void PartitionFileSystem(MeadowDevice meadow, int numberOfPartitions)
+        public static void PartitionFileSystem(MeadowDevice meadow, int numberOfPartitions = 2)
         {
-            if (numberOfPartitions > 1 || numberOfPartitions > 8)
+            if (numberOfPartitions < 1 || numberOfPartitions > 8)
                 throw new IndexOutOfRangeException("Number of partitions must be between 1 & 8 inclusive");
 
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_PARTITION_FLASH_FS;

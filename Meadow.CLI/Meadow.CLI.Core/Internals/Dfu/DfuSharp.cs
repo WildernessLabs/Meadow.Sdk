@@ -200,15 +200,15 @@ namespace DfuSharp
     {
         public byte bLength;
         public byte bDescriptorType;
-        public ushort wTotalLength;
+        //public ushort wTotalLength;
         public byte bNumInterfaces;
-        public byte bConfigurationValue;
-        public byte iConfiguration;
-        public byte bmAttributes;
-        public byte MaxPower;
+        //public byte bConfigurationValue;
+        //public byte iConfiguration;
+        //public byte bmAttributes;
+        //public byte MaxPower;
         public IntPtr interfaces;
-        public IntPtr extra;
-        public int extra_length;
+        //public IntPtr extra;
+        //public int extra_length;
     }
 
     struct @Interface

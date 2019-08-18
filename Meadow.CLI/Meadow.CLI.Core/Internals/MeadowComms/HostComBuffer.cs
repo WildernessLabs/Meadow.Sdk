@@ -27,10 +27,12 @@ namespace MeadowCLI.Hcom
     public class HostCommBuffer
     {
         byte[] hcomCircularBuffer;
+
         int bottom;  // bottom of buffer
         int top;     // top end of buffer
         int head;
         int tail;
+
         readonly object bufferLock = new object();
 
         //------------------------------------------------------------------------------
@@ -74,6 +76,7 @@ namespace MeadowCLI.Hcom
                     return HcomBufferReturn.HCOM_CIR_BUF_ADD_WONT_FIT;
 
                 int newHead = head + bytesToAdd;
+
                 if (newHead < top)
                 {
                     // Simple case (no wrap around)
@@ -112,6 +115,7 @@ namespace MeadowCLI.Hcom
                 {
                     // Simple case (no wrap around)
                     foundOffset = Array.IndexOf(hcomCircularBuffer, (byte)0x00, tail, head - tail);
+
                     if (foundOffset == -1)
                         return HcomBufferReturn.HCOM_CIR_BUF_GET_NONE_FOUND;
                 }
@@ -124,6 +128,7 @@ namespace MeadowCLI.Hcom
                 {
                     // Found the delimiter, message in one contiguous block
                     sizeFoundTop = foundOffset - tail + 1;
+
                     if (sizeFoundTop > packetBufferSize)
                         return HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM;
 
@@ -156,4 +161,3 @@ namespace MeadowCLI.Hcom
         }
     }
 }
-

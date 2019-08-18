@@ -25,12 +25,12 @@ namespace MeadowCLI.Hcom
 
         //-------------------------------------------------------------
         // Constructor
-        public ReceiveTargetData(SerialPort serialPort, HostCommBuffer hostCommBuffer)
+        public ReceiveTargetData(SerialPort serialPort)
         {
             _serialPort = serialPort;
             //_readTimer = new Timer(CheckForMessage, null, 1000, 1000);
 
-            _hostCommBuffer = hostCommBuffer;
+            _hostCommBuffer = new HostCommBuffer();
 
             // Setup circular buffer
             if (_hostCommBuffer.Init(MAX_RECEIVED_BYTES * 4) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
@@ -39,7 +39,7 @@ namespace MeadowCLI.Hcom
                 return;
             }
 
-            _serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialReceiveData);
+            _serialPort.DataReceived += SerialReceiveData;
         }
 
         //-------------------------------------------------------------
@@ -85,15 +85,15 @@ namespace MeadowCLI.Hcom
                         }, null);
 
                     }
-                    catch (Exception except)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Exception: {0} usually means the Target dropped the connection", except);
+                        Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
                     }
                 };
             }
-            catch (Exception except)
+            catch (Exception ex)
             {
-                Console.WriteLine("Exception: {0} usually means the Target dropped the connection", except);
+                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
             }
             initiateRead();
         }
@@ -107,27 +107,28 @@ namespace MeadowCLI.Hcom
                 var result = _hostCommBuffer.AddBytes(buffer, 0, actualLength);
                 if (result == HcomBufferReturn.HCOM_CIR_BUF_ADD_WONT_FIT)
                 {
-                    CheckForMessage(null);
+                    CheckForMessage();
                     continue;
                 }
-                CheckForMessage(null);
+                CheckForMessage();
                 break;
             }
         }
 
         //-------------------------------------------------------------
-        void CheckForMessage(object state)
+        void CheckForMessage()
         {
             while (true)
             {
-                byte[] packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
-                int packetLength;
-                var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out packetLength);
+                var packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
+
+                var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out int packetLength);
+
                 switch (result)
                 {
                     case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
                         ParseReceivedPacket(packetBuffer, packetLength);
-                        continue;
+                        break;
                     case HcomBufferReturn.HCOM_CIR_BUF_GET_NONE_FOUND:
                         break;
                     case HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM:// The packetBuffer is too small, we're in trouble
@@ -143,7 +144,8 @@ namespace MeadowCLI.Hcom
         void ParseReceivedPacket(byte[] newData, int dataLength)
         {
             // - 1 strips of the terminating null
-            string rcvdString = Encoding.ASCII.GetString(newData, 0, dataLength - 1);
+            var rcvdString = Encoding.ASCII.GetString(newData, 0, dataLength - 1);
+
             if (rcvdString.StartsWith(F7ReadFileListPrefix))
             {
                 // This is a comma separated list
@@ -164,9 +166,10 @@ namespace MeadowCLI.Hcom
         //-------------------------------------------------------------
         void DisplayFileList(string receivedTextMsg)
         {
-            Console.WriteLine($"Received File List:");
+            Console.WriteLine($"File List:");
 
-            string[] fileList = receivedTextMsg.Split(',');
+            var fileList = receivedTextMsg.Split(',');
+
             for (int i = 0; i < fileList.Length; i++)
             {
                 Console.WriteLine($"{i + 1}) {fileList[i]}");

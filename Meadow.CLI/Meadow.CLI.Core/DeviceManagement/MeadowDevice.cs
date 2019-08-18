@@ -25,7 +25,6 @@ namespace MeadowCLI.DeviceManagement
         public string Id { get; set; } //guessing we'll need this
 
         private ReceiveTargetData receiveData;
-        private HcomBufferReturn hcomBuffer;
 
         private string serialPortName;
 
@@ -65,10 +64,8 @@ namespace MeadowCLI.DeviceManagement
                 //wire up ReceiveTargetData
                 //consider refactoring later
                 if (SerialPort != null)
-                {
-                    HostCommBuffer hostCommBuffer = new HostCommBuffer();
-
-                    receiveData = new ReceiveTargetData(SerialPort, hostCommBuffer);
+                { 
+                    receiveData = new ReceiveTargetData(SerialPort);
                 }
             }
             catch (IOException ioEx)
