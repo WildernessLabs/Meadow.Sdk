@@ -118,24 +118,21 @@ namespace MeadowCLI.Hcom
         //-------------------------------------------------------------
         void CheckForMessage()
         {
-            while (true)
+            var packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
+
+            var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out int packetLength);
+
+            switch (result)
             {
-                var packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
-
-                var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out int packetLength);
-
-                switch (result)
-                {
-                    case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
-                        ParseReceivedPacket(packetBuffer, packetLength);
-                        break;
-                    case HcomBufferReturn.HCOM_CIR_BUF_GET_NONE_FOUND:
-                        break;
-                    case HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM:// The packetBuffer is too small, we're in trouble
-                        throw new InsufficientMemoryException("Received a message too big for our buffer");
-                    default:
-                        throw new NotSupportedException("Circular buffer retuned unknown result.");
-                }
+                case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
+                    ParseReceivedPacket(packetBuffer, packetLength);
+                    break;
+                case HcomBufferReturn.HCOM_CIR_BUF_GET_NONE_FOUND:
+                    break;
+                case HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM:// The packetBuffer is too small, we're in trouble
+                    throw new InsufficientMemoryException("Received a message too big for our buffer");
+                default:
+                    throw new NotSupportedException("Circular buffer retuned unknown result.");
             }
         }
 
@@ -155,7 +152,7 @@ namespace MeadowCLI.Hcom
             else if (rcvdString.StartsWith(F7MonoMessagePrefix))
             {
                 string baseMessage = rcvdString.Substring(F7MonoMessagePrefix.Length);
-                Console.WriteLine($"mono runtime message: {baseMessage}");
+                Console.WriteLine($"runtime message: {baseMessage}");
             }
             else
             {
