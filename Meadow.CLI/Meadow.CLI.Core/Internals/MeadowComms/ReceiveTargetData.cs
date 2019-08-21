@@ -102,25 +102,28 @@ namespace MeadowCLI.Hcom
         // Includes trailing zero
         void AddMessageToBuffer(byte[] buffer, int actualLength)
         {
-            while (true)
+            //Console.WriteLine($"Adding {actualLength} bytes to buffer");
+            //Console.WriteLine(BitConverter.ToString(buffer, 0, actualLength));
+
+            var hcomBufferReturn = _hostCommBuffer.AddBytes(buffer, 0, actualLength);
+            if(hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_ADD_SUCCESS ||
+                hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_ADD_WONT_FIT)
             {
-                var result = _hostCommBuffer.AddBytes(buffer, 0, actualLength);
-                if (result == HcomBufferReturn.HCOM_CIR_BUF_ADD_WONT_FIT)
+                do
                 {
-                    CheckForMessage();
-                    continue;
-                }
-                CheckForMessage();
-                break;
+                    hcomBufferReturn = CheckForMessage();
+                } while (hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG);
             }
         }
 
         //-------------------------------------------------------------
-        void CheckForMessage()
+        HcomBufferReturn CheckForMessage()
         {
             var packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
-
             var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out int packetLength);
+
+            //Console.WriteLine($"{packetLength} bytes were found in buffer");
+            //Console.WriteLine(BitConverter.ToString(packetBuffer, 0, packetLength));
 
             switch (result)
             {
@@ -134,6 +137,7 @@ namespace MeadowCLI.Hcom
                 default:
                     throw new NotSupportedException("Circular buffer retuned unknown result.");
             }
+            return result;
         }
 
         //-------------------------------------------------------------
@@ -141,7 +145,7 @@ namespace MeadowCLI.Hcom
         void ParseReceivedPacket(byte[] newData, int dataLength)
         {
             // - 1 strips of the terminating null
-            var rcvdString = Encoding.ASCII.GetString(newData, 0, dataLength - 1);
+            var rcvdString = Encoding.UTF8.GetString(newData, 0, dataLength - 1);
 
             if (rcvdString.StartsWith(F7ReadFileListPrefix))
             {
