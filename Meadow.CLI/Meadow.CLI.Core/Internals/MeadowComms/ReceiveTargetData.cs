@@ -135,7 +135,7 @@ namespace MeadowCLI.Hcom
                 case HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM:// The packetBuffer is too small, we're in trouble
                     throw new InsufficientMemoryException("Received a message too big for our buffer");
                 default:
-                    throw new NotSupportedException("Circular buffer retuned unknown result.");
+                    throw new NotSupportedException("Circular buffer returned unknown result.");
             }
             return result;
         }
