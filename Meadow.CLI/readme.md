@@ -31,12 +31,16 @@ You can set the debug trace level to values 1, 2, 3, or 4. 2 in the most useful.
 
 ### Reformat the flash
 `MeadowCLI.exe --EraseFlash`
+
 `MeadowCLI.exe --PartitionFileSystem -n 2`
+
 `MeadowCLI.exe --MountFileSystem`
+
 `MeadowCLI.exe --InitializeFileSystem`
 
 ### Stop/start the installed application from running automatically
 `MeadowCLI.exe --MonoDisable`
+
 `MeadowCLI.exe --MonoEnable`
 
 ## Running applications 
