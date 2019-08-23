@@ -53,8 +53,8 @@ namespace MeadowCLI.DeviceManagement
                     Handshake = Handshake.None,
 
                     // Set the read/write timeouts
-                    ReadTimeout = 500,
-                    WriteTimeout = 500
+                    ReadTimeout = 50000,
+                    WriteTimeout = 50000
                 };
 
                 port.Open();

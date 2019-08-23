@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using System;
 using MeadowCLI.DeviceManagement;
+using System.Threading;
 
 namespace MeadowCLI
 {
@@ -26,8 +27,11 @@ namespace MeadowCLI
 				}
 			});
 
-        //    Console.WriteLine("Press any key to exit");
-        //    Console.ReadKey();
+            for (int i = 0; i < 50; i++)
+                Thread.Sleep(50);
+
+         //   Console.WriteLine("Press any key to exit");
+         //   Console.ReadKey();
         }
 
         //Probably rename

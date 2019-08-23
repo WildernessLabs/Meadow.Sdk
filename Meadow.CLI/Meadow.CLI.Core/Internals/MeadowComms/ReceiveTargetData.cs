@@ -36,25 +36,34 @@ namespace MeadowCLI.Hcom
         // All received data handled here
         private async Task ReadPortAsync()
         {
+            Console.WriteLine("ReadPortAsync");
+
             int receivedLength = 0;
             int unusedOffset = 0;
             byte[] buffer = new byte[MAX_RECEIVED_BYTES * 2];
             _serialPort.BaseStream.ReadTimeout = 0;     // Improves behavior?
 
-            while(true)
+            try
             {
-                try
+                while (true)
                 {
-                    receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, MAX_RECEIVED_BYTES);
+                    var bytesToRead = _serialPort?.BytesToRead;
+
+                    if (bytesToRead == 0)
+                        break;
+
+                    receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, bytesToRead.Value);
                     unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
                     Debug.Assert(unusedOffset > -1);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
-                    break;
+
+                    await Task.Delay(100); //the serial port likes a pause between read attempts
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
+            }
+            
         }
 
         int AddDataToBuffer(byte[] buffer, int availableBytes)
