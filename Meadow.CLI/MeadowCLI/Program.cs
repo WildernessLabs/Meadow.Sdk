@@ -3,6 +3,7 @@ using System;
 using MeadowCLI.DeviceManagement;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MeadowCLI
 {
@@ -73,12 +74,32 @@ namespace MeadowCLI
                 {
                     if (options.WriteFile)
                     {
+                        if (string.IsNullOrEmpty(options.FileName))
+                        {
+                            Console.WriteLine($"A source file name (--File flag) is required");
+                            return;
+                        }
+
+                        var fi = new FileInfo(options.FileName);
+                        if (!fi.Exists)
+                        {
+                            Console.WriteLine($"Source file '{options.FileName}' not found");
+                            return;
+                        }
+
                         Console.WriteLine($"Writing {options.FileName} to partition {options.Partition}");
+
                         MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
                             options.FileName, options.TargetFileName, options.Partition);
                     }
                     else if (options.DeleteFile)
                     {
+                        if (string.IsNullOrEmpty(options.FileName))
+                        {
+                            Console.WriteLine($"A file name to delete (--File flag) is required");
+                            return;
+                        }
+
                         Console.WriteLine($"Deleting {options.FileName} from partion {options.Partition}");
                         MeadowFileManager.DeleteFile(DeviceManager.CurrentDevice,
                             options.TargetFileName, options.Partition);
