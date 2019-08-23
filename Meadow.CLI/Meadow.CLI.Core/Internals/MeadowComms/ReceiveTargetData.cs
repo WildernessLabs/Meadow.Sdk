@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MeadowCLI.Hcom
 {
@@ -9,7 +11,6 @@ namespace MeadowCLI.Hcom
         const int MAX_RECEIVED_BYTES = 2048;
 
         SerialPort _serialPort;
-        HostCommBuffer _hostCommBuffer;
         
         string F7ReadFileListPrefix { get { return "FileList: "; } }
         string F7MonoMessagePrefix { get { return "MonoMsg: "; } }
@@ -28,140 +29,88 @@ namespace MeadowCLI.Hcom
         public ReceiveTargetData(SerialPort serialPort)
         {
             _serialPort = serialPort;
-            //_readTimer = new Timer(CheckForMessage, null, 1000, 1000);
-
-            _hostCommBuffer = new HostCommBuffer();
-
-            // Setup circular buffer
-            if (_hostCommBuffer.Init(MAX_RECEIVED_BYTES * 4) != HcomBufferReturn.HCOM_CIR_BUF_INIT_OK)
-            {
-                Console.WriteLine("Error setting up Circular Buffer");
-                return;
-            }
-
-            _serialPort.DataReceived += SerialReceiveData;
-        }
-
-        //-------------------------------------------------------------
-        public void Shutdown()
-        {
+            Task.Run(() => ReadPortAsync());
         }
 
         //-------------------------------------------------------------
         // All received data handled here
-        void SerialReceiveData(object sender, SerialDataReceivedEventArgs e)
+        private async Task ReadPortAsync()
         {
-            byte[] buffer = new byte[MAX_RECEIVED_BYTES];
-            Action initiateRead = null;
+            int receivedLength = 0;
+            int unusedOffset = 0;
+            byte[] buffer = new byte[MAX_RECEIVED_BYTES * 2];
+            _serialPort.BaseStream.ReadTimeout = 0;     // Improves behavior?
 
-            try
+            while(true)
             {
-                initiateRead = delegate
+                try
                 {
-                    try
-                    {
-                        _serialPort.BaseStream.BeginRead(buffer, 0, buffer.Length, delegate (IAsyncResult ar)
-                        {
-                            try
-                            {
-                                int actualLength = _serialPort.BaseStream.EndRead(ar);
-                                // Copy not needed but helpful in testing
-                                byte[] received = new byte[actualLength];
-                                Buffer.BlockCopy(buffer, 0, received, 0, actualLength);
-                                AddMessageToBuffer(received, actualLength);
-                            }
-                            catch (System.IO.IOException ioe)
-                            {
-                                // Todo Handle exception
-                                Console.WriteLine("IOException: {0}", ioe);
-                            }
-                            catch (Exception except)
-                            {
-                                // Todo Handle exception
-                                Console.WriteLine("Exception: {0}", except);
-                                //Console.ReadKey();
-                            }
-                            initiateRead();
-                        }, null);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
-                    }
-                };
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
-            }
-            initiateRead();
-        }
-
-        //-------------------------------------------------------------
-        // Includes trailing zero
-        void AddMessageToBuffer(byte[] buffer, int actualLength)
-        {
-            //Console.WriteLine($"Adding {actualLength} bytes to buffer");
-            //Console.WriteLine(BitConverter.ToString(buffer, 0, actualLength));
-
-            var hcomBufferReturn = _hostCommBuffer.AddBytes(buffer, 0, actualLength);
-            if(hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_ADD_SUCCESS ||
-                hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_ADD_WONT_FIT)
-            {
-                do
+                    receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, MAX_RECEIVED_BYTES);
+                    unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
+                    Debug.Assert(unusedOffset > -1);
+                }
+                catch (Exception ex)
                 {
-                    hcomBufferReturn = CheckForMessage();
-                } while (hcomBufferReturn == HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG);
+                    Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
+                    break;
+                }
             }
         }
 
-        //-------------------------------------------------------------
-        HcomBufferReturn CheckForMessage()
+        int AddDataToBuffer(byte[] buffer, int availableBytes)
         {
-            var packetBuffer = new byte[MAX_RECEIVED_BYTES * 2];
-            var result = _hostCommBuffer.GetNextPacket(packetBuffer, MAX_RECEIVED_BYTES * 2, out int packetLength);
-
-            //Console.WriteLine($"{packetLength} bytes were found in buffer");
-            //Console.WriteLine(BitConverter.ToString(packetBuffer, 0, packetLength));
-
-            switch (result)
+            // Because of the way characters are received we must buffer until the terminating cr/lf
+            // is detected. This implememtation is a quick and dirty way.
+            byte[] foundData  = new byte [MAX_RECEIVED_BYTES];
+            int bytesUsed = 0;
+            int recvOffset = 0;
+            int foundOffset;
+            do
             {
-                case HcomBufferReturn.HCOM_CIR_BUF_GET_FOUND_MSG:
-                    ParseReceivedPacket(packetBuffer, packetLength);
-                    break;
-                case HcomBufferReturn.HCOM_CIR_BUF_GET_NONE_FOUND:
-                    break;
-                case HcomBufferReturn.HCOM_CIR_BUF_GET_BUF_NO_ROOM:// The packetBuffer is too small, we're in trouble
-                    throw new InsufficientMemoryException("Received a message too big for our buffer");
-                default:
-                    throw new NotSupportedException("Circular buffer returned unknown result.");
-            }
-            return result;
-        }
+                Array.Clear(foundData, 0, MAX_RECEIVED_BYTES);      // FOR DEBUGGING
 
-        //-------------------------------------------------------------
-        // This is a quick hack until true messages can be received
-        void ParseReceivedPacket(byte[] newData, int dataLength)
-        {
-            // - 1 strips of the terminating null
-            var rcvdString = Encoding.UTF8.GetString(newData, 0, dataLength - 1);
+                for (foundOffset = 0;
+                    recvOffset < availableBytes;
+                    recvOffset++, foundOffset++)
+                {
+                    if (buffer[recvOffset] == '\r' && buffer[recvOffset + 1] == '\n')
+                    {
+                        foundData[foundOffset] = buffer[recvOffset];
+                        foundData[foundOffset + 1] = buffer[recvOffset + 1];
+                        recvOffset += 2;
+                        break;
+                    }
+                    else
+                    {
+                        foundData[foundOffset] = buffer[recvOffset];
+                    }
+                }
 
-            if (rcvdString.StartsWith(F7ReadFileListPrefix))
-            {
-                // This is a comma separated list
-                string baseMessage = rcvdString.Substring(F7ReadFileListPrefix.Length);
-                DisplayFileList(baseMessage);
-            }
-            else if (rcvdString.StartsWith(F7MonoMessagePrefix))
-            {
-                string baseMessage = rcvdString.Substring(F7MonoMessagePrefix.Length);
-                Console.WriteLine($"runtime message: {baseMessage}");
-            }
-            else
-            {
-                Console.WriteLine($"Received: '{rcvdString}'");
-            }
+                if (foundData[foundOffset + 1] == '\n')
+                {
+                    var rcvdString = Encoding.UTF8.GetString(foundData, 0, foundOffset + 2);
+                    bytesUsed += foundOffset + 2;
+
+                    if (rcvdString.StartsWith(F7ReadFileListPrefix))
+                    {
+                        // This is a comma separated list
+                        string baseMessage = rcvdString.Substring(F7ReadFileListPrefix.Length);
+                        DisplayFileList(baseMessage);
+                    }
+                    else if (rcvdString.StartsWith(F7MonoMessagePrefix))
+                    {
+                        string baseMessage = rcvdString.Substring(F7MonoMessagePrefix.Length);
+                        Console.Write($"runtime: {baseMessage}");
+                    }
+                    else
+                    {
+                        Console.Write($"Received: {rcvdString}");
+                    }
+                }
+
+            } while (foundData[foundOffset + 1] == '\n');
+
+            return availableBytes - bytesUsed;        // No full message remains
         }
 
         //-------------------------------------------------------------
