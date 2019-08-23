@@ -58,8 +58,19 @@ namespace MeadowCLI
             for (int i = 0; i < 50; i++)
                 Thread.Sleep(50);
 
-         //   Console.WriteLine("Press any key to exit");
-         //   Console.ReadKey();
+//            Console.WriteLine("Press any key to exit");
+//            Console.ReadKey();
+        }
+
+        private static bool ValidateSerialPort()
+        {
+            if (DeviceManager.CurrentDevice.SerialPort == null)
+            {
+                Console.WriteLine($"A serial port has not been selected (--SerialPort option)");
+                return false;
+            }
+
+            return true;
         }
 
         //Probably rename
@@ -76,7 +87,7 @@ namespace MeadowCLI
                     {
                         if (string.IsNullOrEmpty(options.FileName))
                         {
-                            Console.WriteLine($"A source file name (--File flag) is required");
+                            Console.WriteLine($"A source file name (--File option) is required");
                             return;
                         }
 
@@ -106,8 +117,11 @@ namespace MeadowCLI
                     }
                     else if (options.EraseFlash)
                     {
-                        Console.WriteLine("Erasing flash");
-                        MeadowFileManager.EraseFlash(DeviceManager.CurrentDevice);
+                        if (ValidateSerialPort())
+                        {
+                            Console.WriteLine("Erasing flash");
+                            MeadowFileManager.EraseFlash(DeviceManager.CurrentDevice);
+                        }
                     }
                     else if (options.VerifyErasedFlash)
                     {
