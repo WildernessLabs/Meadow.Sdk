@@ -30,6 +30,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internals\Dfu\NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DeviceManagement\DeploymentManager.cs" />
     <Compile Include="DeviceManagement\DeviceManager.cs" />

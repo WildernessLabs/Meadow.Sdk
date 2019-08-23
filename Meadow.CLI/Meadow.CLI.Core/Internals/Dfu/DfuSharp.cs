@@ -23,66 +23,6 @@ namespace DfuSharp
 
     public delegate void HotplugCallback(IntPtr ctx, IntPtr device, HotplugEventType eventType, IntPtr userData);
 
-
-    class NativeMethods
-    {
-        const string LIBUSB_LIBRARY = "libusb-1.0.dll";
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_init(ref IntPtr ctx);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern void libusb_exit(IntPtr ctx);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern void libusb_set_debug(IntPtr ctx, LogLevel level);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_get_device_list(IntPtr ctx, ref IntPtr list);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_free_device_list(IntPtr list, int free_devices);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_get_device_descriptor(IntPtr dev, ref DeviceDescriptor desc);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_get_config_descriptor(IntPtr dev, ushort config_index, out IntPtr desc);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_open(IntPtr dev, ref IntPtr handle);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_close(IntPtr handle);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_claim_interface(IntPtr dev, int interface_number);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_set_interface_alt_setting(IntPtr dev, int interface_number, int alternate_setting);
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_control_transfer(IntPtr dev, byte bmRequestType, byte bRequest, ushort wValue, ushort wIndex, IntPtr data, ushort wLength, uint timeout);
-
-        /// <summary>
-        /// Whether or not the USB supports a particular feature.
-        /// </summary>
-        /// <returns>nonzero if the running library has the capability, 0 otherwise</returns>
-        /// <param name="capability">Capability.</param>
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern int libusb_has_capability(Capabilities capability);
-
-
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern ErrorCodes libusb_hotplug_register_callback(IntPtr ctx, HotplugEventType eventType, HotplugFlags flags,
-                                                                    int vendorID, int productID, int deviceClass,
-                                                                    HotplugCallback callback, IntPtr userData,
-                                                                    out IntPtr callbackHandle);
-        [DllImport(LIBUSB_LIBRARY)]
-        internal static extern void libusb_hotplug_deregister_callback(IntPtr ctx, IntPtr callbackHandle);
-
-    }
-
     [Flags]
     public enum HotplugEventType : uint
     {
@@ -200,15 +140,15 @@ namespace DfuSharp
     {
         public byte bLength;
         public byte bDescriptorType;
-        //public ushort wTotalLength;
+        public ushort wTotalLength;
         public byte bNumInterfaces;
-        //public byte bConfigurationValue;
-        //public byte iConfiguration;
-        //public byte bmAttributes;
-        //public byte MaxPower;
+        public byte bConfigurationValue;
+        public byte iConfiguration;
+        public byte bmAttributes;
+        public byte MaxPower;
         public IntPtr interfaces;
-        //public IntPtr extra;
-        //public int extra_length;
+        public IntPtr extra;
+        public int extra_length;
     }
 
     struct @Interface
@@ -284,7 +224,7 @@ namespace DfuSharp
         {
             this.interface_descriptor = interface_descriptor;
             this.dfu_descriptor = dfu_descriptor;
-            if (NativeMethods.libusb_open(device, ref handle) < 0)
+            if (LibUsb.libusb_open(device, ref handle) < 0)
                 throw new Exception("Error opening device");
         }
 
@@ -297,12 +237,12 @@ namespace DfuSharp
         }
         public void ClaimInterface()
         {
-            NativeMethods.libusb_claim_interface(handle, interface_descriptor.bInterfaceNumber);
+            LibUsb.libusb_claim_interface(handle, interface_descriptor.bInterfaceNumber);
         }
 
         public void SetInterfaceAltSetting(int alt_setting)
         {
-            NativeMethods.libusb_set_interface_alt_setting(handle, interface_descriptor.bInterfaceNumber, alt_setting);
+            LibUsb.libusb_set_interface_alt_setting(handle, interface_descriptor.bInterfaceNumber, alt_setting);
         }
 
         public void Clear()
@@ -369,7 +309,7 @@ namespace DfuSharp
 
                     Marshal.Copy(data, pos, mem, count);
 
-                    var ret = NativeMethods.libusb_control_transfer(
+                    var ret = LibUsb.libusb_control_transfer(
                                                 handle,
                                                 0x00 /*LIBUSB_ENDPOINT_OUT*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                                                 1 /*DFU_DNLOAD*/,
@@ -410,7 +350,7 @@ namespace DfuSharp
                 {
                     while (count < flash_size)
                     {
-                        int ret = NativeMethods.libusb_control_transfer(
+                        int ret = LibUsb.libusb_control_transfer(
                                                                 handle,
                                                                 0x80 /*LIBUSB_ENDPOINT_IN*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                                                                 2 /*DFU_UPLOAD*/,
@@ -450,7 +390,7 @@ namespace DfuSharp
                 SetAddress(address);
                 Clear();
 
-                int ret = NativeMethods.libusb_control_transfer(
+                int ret = LibUsb.libusb_control_transfer(
                                                         handle,
                                                         0x80 /*LIBUSB_ENDPOINT_IN*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                                                         2 /*DFU_UPLOAD*/,
@@ -484,7 +424,7 @@ namespace DfuSharp
                 Marshal.WriteByte(mem, 4, (byte)((address >> 24) & 0xff));
 
 
-                var ret = NativeMethods.libusb_control_transfer(
+                var ret = LibUsb.libusb_control_transfer(
                                         handle,
                                         0x00 /*LIBUSB_ENDPOINT_OUT*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                                         1 /*DFU_DNLOAD*/,
@@ -524,7 +464,7 @@ namespace DfuSharp
                 Marshal.WriteByte(mem, 4, (byte)((address >> 24) & 0xff));
 
 
-                var ret = NativeMethods.libusb_control_transfer(
+                var ret = LibUsb.libusb_control_transfer(
                                         handle,
                                         0x00 /*LIBUSB_ENDPOINT_OUT*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                                         1 /*DFU_DNLOAD*/,
@@ -557,7 +497,7 @@ namespace DfuSharp
 
             try
             {
-                int ret = NativeMethods.libusb_control_transfer(
+                int ret = LibUsb.libusb_control_transfer(
                     dev,
                     0x80 /*LIBUSB_ENDPOINT_IN*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                     3 /*DFU_GETSTATUS*/,
@@ -580,7 +520,7 @@ namespace DfuSharp
 
         static void Abort(IntPtr dev, ushort interface_number)
         {
-            int ret = NativeMethods.libusb_control_transfer(
+            int ret = LibUsb.libusb_control_transfer(
                 dev,
                 0x00 /*LIBUSB_ENDPOINT_OUT*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                 6 /*DFU_ABORT*/,
@@ -592,7 +532,7 @@ namespace DfuSharp
         }
         static void ClearStatus(IntPtr dev, ushort interface_number)
         {
-            int ret = NativeMethods.libusb_control_transfer(
+            int ret = LibUsb.libusb_control_transfer(
                dev,
                0x00 /*LIBUSB_ENDPOINT_OUT*/ | (0x1 << 5) /*LIBUSB_REQUEST_TYPE_CLASS*/ | 0x01 /*LIBUSB_RECIPIENT_INTERFACE*/,
                4 /*DFU_GETSTATUS*/,
@@ -604,7 +544,7 @@ namespace DfuSharp
         }
         public void Dispose()
         {
-            NativeMethods.libusb_close(handle);
+            LibUsb.libusb_close(handle);
         }
     }
 
@@ -621,9 +561,9 @@ namespace DfuSharp
         IntPtr handle;
         public Context(LogLevel debug_level = LogLevel.None)
         {
-            var ret = NativeMethods.libusb_init(ref handle);
+            var ret = LibUsb.libusb_init(ref handle);
 
-            NativeMethods.libusb_set_debug(handle, debug_level);
+            LibUsb.libusb_set_debug(handle, debug_level);
             if (ret != 0)
                 throw new Exception(string.Format("Error: {0} while trying to initialize libusb", ret));
 
@@ -634,14 +574,14 @@ namespace DfuSharp
         public void Dispose()
         {
             //this.StopListeningForHotplugEvents(); // not needed, they're automatically deregistered in libusb_exit.
-            NativeMethods.libusb_exit(handle);
+            LibUsb.libusb_exit(handle);
         }
 
         public List<DfuDevice> GetDfuDevices(List<ushort> idVendors)
         {
             var list = IntPtr.Zero;
             var dfu_devices = new List<DfuDevice>();
-            var ret = NativeMethods.libusb_get_device_list(handle, ref list);
+            var ret = LibUsb.libusb_get_device_list(handle, ref list);
 
             if (ret < 0)
                 throw new Exception(string.Format("Error: {0} while trying to get the device list", ret));
@@ -655,7 +595,7 @@ namespace DfuSharp
                 var device_descriptor = new DeviceDescriptor();
                 var ptr = IntPtr.Zero;
 
-                if (NativeMethods.libusb_get_device_descriptor(devices[i], ref device_descriptor) != 0)
+                if (LibUsb.libusb_get_device_descriptor(devices[i], ref device_descriptor) != 0)
                     continue;
 
                 //if (!idVendors.Contains(device_descriptor.idVendor))
@@ -663,7 +603,7 @@ namespace DfuSharp
 
                 for (int j = 0; j < device_descriptor.bNumConfigurations; j++)
                 {
-                    var ret2 = NativeMethods.libusb_get_config_descriptor(devices[i], (ushort)j, out ptr);
+                    var ret2 = LibUsb.libusb_get_config_descriptor(devices[i], (ushort)j, out ptr);
 
                     if (ret2 < 0)
                         continue;
@@ -695,7 +635,7 @@ namespace DfuSharp
                 }
             }
 
-            NativeMethods.libusb_free_device_list(list, 1);
+            LibUsb.libusb_free_device_list(list, 1);
             return dfu_devices;
         }
 
@@ -722,7 +662,7 @@ namespace DfuSharp
 
         public bool HasCapability(Capabilities caps)
         {
-            return NativeMethods.libusb_has_capability(caps) == 0 ? false : true;
+            return LibUsb.libusb_has_capability(caps) == 0 ? false : true;
         }
 
         public void BeginListeningForHotplugEvents()
@@ -750,7 +690,7 @@ namespace DfuSharp
             int deviceClass = -1;
             IntPtr userData = IntPtr.Zero;
 
-            ErrorCodes success = NativeMethods.libusb_hotplug_register_callback(this.handle, HotplugEventType.DeviceArrived | HotplugEventType.DeviceLeft, HotplugFlags.DefaultNoFlags,
+            ErrorCodes success = LibUsb.libusb_hotplug_register_callback(this.handle, HotplugEventType.DeviceArrived | HotplugEventType.DeviceLeft, HotplugFlags.DefaultNoFlags,
                                                                     vendorID, productID, deviceClass, this._hotplugCallbackHandler, userData, out _callbackHandle);
 
             if (success == ErrorCodes.Success)
@@ -772,7 +712,7 @@ namespace DfuSharp
                 return;
             }
 
-            NativeMethods.libusb_hotplug_deregister_callback(this.handle, this._callbackHandle);
+            LibUsb.libusb_hotplug_deregister_callback(this.handle, this._callbackHandle);
 
         }
 
