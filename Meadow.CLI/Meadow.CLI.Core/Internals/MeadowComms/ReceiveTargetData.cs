@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO.Ports;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MeadowCLI.Hcom
@@ -29,7 +30,7 @@ namespace MeadowCLI.Hcom
         public ReceiveTargetData(SerialPort serialPort)
         {
             _serialPort = serialPort;
-            Task.Run(() => ReadPortAsync());
+            ReadPortAsync();
         }
 
         //-------------------------------------------------------------
@@ -38,32 +39,36 @@ namespace MeadowCLI.Hcom
         {
             Console.WriteLine("ReadPortAsync");
 
-            int receivedLength = 0;
             int unusedOffset = 0;
             byte[] buffer = new byte[MAX_RECEIVED_BYTES * 2];
-            _serialPort.BaseStream.ReadTimeout = 0;     // Improves behavior?
 
-            try
+            await Task.Run(() =>
             {
-                while (true)
+                try
                 {
-                    var bytesToRead = _serialPort?.BytesToRead;
+                    while (true)
+                    {
+                        var bytesToRead = _serialPort?.BytesToRead;
 
-                    if (bytesToRead == 0)
-                        break;
+                        if (bytesToRead > 0)
+                        {
+                            int receivedLength = _serialPort.BaseStream.Read(buffer, unusedOffset, bytesToRead.Value);
+                            unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
+                            Debug.Assert(unusedOffset > -1);
+                        }
 
-                    receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, bytesToRead.Value);
-                    unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
-                    Debug.Assert(unusedOffset > -1);
-
-                    await Task.Delay(100); //the serial port likes a pause between read attempts
+                        Thread.Sleep(50); //the serial port likes a pause between read attempts
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
-            }
-            
+                catch (ThreadAbortException ex)
+                {
+                    //ignoring for now until I wire up a cancelation token 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
+                }
+            });
         }
 
         int AddDataToBuffer(byte[] buffer, int availableBytes)
