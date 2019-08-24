@@ -58,8 +58,8 @@ namespace MeadowCLI
             for (int i = 0; i < 50; i++)
                 Thread.Sleep(50);
 
-//            Console.WriteLine("Press any key to exit");
-//            Console.ReadKey();
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         private static bool ValidateSerialPort()
@@ -76,8 +76,26 @@ namespace MeadowCLI
         //Probably rename
         static void ProcessHcom(Options options, CancellationToken ct)
         {
+            if (options.ClearCache)
+            {
+                StateCache.Save(null);
+            }
+
+            var state = StateCache.Load();
+
+            if (string.IsNullOrEmpty(options.SerialPort))
+            {
+                options.SerialPort = state.SerialPort;
+            }
+            else
+            {
+                state.SerialPort = options.SerialPort;
+                StateCache.Save(state);
+            }
+
             // TODO: use the cancellation token to allow aborting file actions
             ConnectToMeadowDevice(options.SerialPort);
+
 
             if (options.IsFileOperation())
             {
@@ -103,11 +121,11 @@ namespace MeadowCLI
                         MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
                             options.FileName, options.TargetFileName, options.Partition);
                     }
-                    else if (options.DeleteFile)
+                    else if (options.DeleteFile != null)
                     {
-                        if (string.IsNullOrEmpty(options.FileName))
+                        if (string.IsNullOrEmpty(options.TargetFileName))
                         {
-                            Console.WriteLine($"A file name to delete (--File flag) is required");
+                            Console.WriteLine($"A file name to delete (--TargetFileName flag) is required");
                             return;
                         }
 

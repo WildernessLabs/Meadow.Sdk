@@ -2,24 +2,6 @@
 
 namespace MeadowCLI
 {
-    public static class OptionsExtensions
-    {
-        public static bool IsFileOperation(this Options o)
-        {
-            if (o.WriteFile) return true;
-            if (o.DeleteFile) return true;
-            if (o.EraseFlash) return true;
-            if (o.VerifyErasedFlash) return true;
-            if (o.PartitionFileSystem) return true;
-            if (o.MountFileSystem) return true;
-            if (o.InitFileSystem) return true;
-            if (o.CreateFileSystem) return true;
-            if (o.FormatFileSystem) return true;
-
-            return false;
-        }
-    }
-
     public class Options
     {
         [Option('d', "Dfu", Required = false, HelpText = "DFU copy os and user files. Looks for files in execution direction. To override, user 'OsFile' and 'UserFile'.")]
@@ -47,6 +29,8 @@ namespace MeadowCLI
         public bool CreateFileSystem { get; set; }
         [Option(longName: "FormatFileSystem", Required = false, HelpText = "Format file system in Meadow's internal flash")]
         public bool FormatFileSystem { get; set; }
+        [Option(longName: "ClearCache", Required = false, HelpText = "Clears the CLI's state cache")]
+        public bool ClearCache { get; set; }
 
         [Option(longName: "SetDeveloper1", Required = false, HelpText = "Set developer1 (0 to 4,294,967,295)")]
         public bool SetDeveloper1 { get; set; }
@@ -73,7 +57,7 @@ namespace MeadowCLI
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
         public bool ListFilesAndCrcs { get; set; }
 
-        [Option('s', longName: "SerialPort", Default = "/dev/tty.usbmodem01", Required = false, HelpText = "Specify the serial port used by Meadow")]
+        [Option('s', longName: "SerialPort", Required = false, HelpText = "Specify the serial port used by Meadow")]
         public string SerialPort { get; set; }
         [Option('f', longName: "File", Default = null, Required = false, HelpText = "Local file to send to Meadow")]
         public string FileName { get; set; }
