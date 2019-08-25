@@ -30,52 +30,50 @@ namespace MeadowCLI.Hcom
         public ReceiveTargetData(SerialPort serialPort)
         {
             _serialPort = serialPort;
-            ReadPortAsync();
+
+            ReadPortAsync();  
         }
 
         //-------------------------------------------------------------
         // All received data handled here
         private async Task ReadPortAsync()
         {
-            Console.WriteLine("ReadPortAsync");
+            //Console.WriteLine("ReadPortAsync");
 
             int unusedOffset = 0;
             byte[] buffer = new byte[MAX_RECEIVED_BYTES * 2];
+            _serialPort.BaseStream.ReadTimeout = 0;     // Improves behavior?
 
-            await Task.Run(() =>
+            try
             {
-                try
+                while (true)
                 {
-                    while (true)
+                    var len = _serialPort.BytesToRead;
+
+                    if (len > 0)
                     {
-                        var bytesToRead = _serialPort?.BytesToRead;
-
-                        if (bytesToRead > 0)
-                        {
-                            int receivedLength = _serialPort.BaseStream.Read(buffer, unusedOffset, bytesToRead.Value);
-                            unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
-                            Debug.Assert(unusedOffset > -1);
-                        }
-
-                        Thread.Sleep(50); //the serial port likes a pause between read attempts
+                        var receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, len);
+                        unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
+                        Debug.Assert(unusedOffset > -1);
                     }
+                    await Task.Delay(50);
                 }
-                catch (ThreadAbortException ex)
-                {
-                    //ignoring for now until I wire up a cancelation token 
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
-                }
-            });
+            }
+            catch (ThreadAbortException ex)
+            {
+                //ignoring for now until I wire up a cancelation token 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
+            }
         }
 
         int AddDataToBuffer(byte[] buffer, int availableBytes)
         {
             // Because of the way characters are received we must buffer until the terminating cr/lf
             // is detected. This implememtation is a quick and dirty way.
-            byte[] foundData  = new byte [MAX_RECEIVED_BYTES];
+            var foundData  = new byte [MAX_RECEIVED_BYTES];
             int bytesUsed = 0;
             int recvOffset = 0;
             int foundOffset;
