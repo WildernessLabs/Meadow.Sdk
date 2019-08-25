@@ -7,69 +7,62 @@ using System.Threading.Tasks;
 
 namespace MeadowCLI.Hcom
 {
-    public class ReceiveTargetData
+    public class MeadowSerialDataProcessor
     {
+        readonly SerialPort serialPort;
         const int MAX_RECEIVED_BYTES = 2048;
-
-        SerialPort _serialPort;
         
-        string F7ReadFileListPrefix { get { return "FileList: "; } }
-        string F7MonoMessagePrefix { get { return "MonoMsg: "; } }
-
-        //Timer _readTimer;
-        //readonly byte[] _prevRecvUnusedBytes = new byte[MAX_RECEIVED_BYTES * 2];
+        const string FILE_LIST_PREFIX = "FileList: "; 
+        const string MONO_MSG_PREFIX =  "MonoMsg: "; 
 
         // It seems that the .Net SerialPort class is not all it could be.
         // To acheive reliable operation some SerialPort class methods must
         // not be used. When receiving, the BaseStream must be used.
-        // The following blog post was very helpful.
         // http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
         //-------------------------------------------------------------
         // Constructor
-        public ReceiveTargetData(SerialPort serialPort)
+        public MeadowSerialDataProcessor(SerialPort serialPort)
         {
-            _serialPort = serialPort;
+            this.serialPort = serialPort;
 
-            ReadPortAsync();  
+            ReadPortAsync(); 
         }
 
         //-------------------------------------------------------------
         // All received data handled here
         private async Task ReadPortAsync()
         {
-            //Console.WriteLine("ReadPortAsync");
-
-            int unusedOffset = 0;
-            byte[] buffer = new byte[MAX_RECEIVED_BYTES * 2];
-            _serialPort.BaseStream.ReadTimeout = 0;     // Improves behavior?
+            int offset = 0;
+            byte[] buffer = new byte[MAX_RECEIVED_BYTES];
 
             try
             {
                 while (true)
                 {
-                    var len = _serialPort.BytesToRead;
+                    var byteCount = Math.Min(serialPort.BytesToRead, buffer.Length);
 
-                    if (len > 0)
+                    if (byteCount > 0)
                     {
-                        var receivedLength = await _serialPort.BaseStream.ReadAsync(buffer, unusedOffset, len);
-                        unusedOffset = AddDataToBuffer(buffer, receivedLength + unusedOffset);
-                        Debug.Assert(unusedOffset > -1);
+                        var receivedLength = await serialPort.BaseStream.ReadAsync(buffer, offset, byteCount).ConfigureAwait(false);
+                        offset = AddAndProcessData(buffer, receivedLength + offset);
+                        Debug.Assert(offset > -1);
                     }
-                    await Task.Delay(50);
+                    await Task.Delay(50).ConfigureAwait(false);
                 }
             }
             catch (ThreadAbortException ex)
             {
-                //ignoring for now until I wire up a cancelation token 
+                //ignoring for now until we wire cancelation ...
+                //it blocks the thread abort exception when the console app closes
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex} usually means the Target dropped the connection");
+                Console.WriteLine($"Exception: {ex} may mean the target connection dropped");
             }
         }
 
-        int AddDataToBuffer(byte[] buffer, int availableBytes)
+        int AddAndProcessData(byte[] buffer, int availableBytes)
         {
             // Because of the way characters are received we must buffer until the terminating cr/lf
             // is detected. This implememtation is a quick and dirty way.
@@ -77,12 +70,12 @@ namespace MeadowCLI.Hcom
             int bytesUsed = 0;
             int recvOffset = 0;
             int foundOffset;
+
             do
             {
                 Array.Clear(foundData, 0, MAX_RECEIVED_BYTES);      // FOR DEBUGGING
 
-                for (foundOffset = 0;
-                    recvOffset < availableBytes;
+                for (foundOffset = 0; recvOffset < availableBytes;
                     recvOffset++, foundOffset++)
                 {
                     if (buffer[recvOffset] == '\r' && buffer[recvOffset + 1] == '\n')
@@ -103,15 +96,15 @@ namespace MeadowCLI.Hcom
                     var rcvdString = Encoding.UTF8.GetString(foundData, 0, foundOffset + 2);
                     bytesUsed += foundOffset + 2;
 
-                    if (rcvdString.StartsWith(F7ReadFileListPrefix))
+                    if (rcvdString.StartsWith(FILE_LIST_PREFIX))
                     {
                         // This is a comma separated list
-                        string baseMessage = rcvdString.Substring(F7ReadFileListPrefix.Length);
+                        string baseMessage = rcvdString.Substring(FILE_LIST_PREFIX.Length);
                         DisplayFileList(baseMessage);
                     }
-                    else if (rcvdString.StartsWith(F7MonoMessagePrefix))
+                    else if (rcvdString.StartsWith(MONO_MSG_PREFIX))
                     {
-                        string baseMessage = rcvdString.Substring(F7MonoMessagePrefix.Length);
+                        string baseMessage = rcvdString.Substring(MONO_MSG_PREFIX.Length);
                         Console.Write($"runtime: {baseMessage}");
                     }
                     else

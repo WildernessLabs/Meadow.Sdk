@@ -40,7 +40,7 @@
     <Compile Include="Internals\Dfu\DfuSharp.cs" />
     <Compile Include="Internals\Dfu\DfuUpload.cs" />
     <Compile Include="Internals\MeadowComms\HostComBuffer.cs" />
-    <Compile Include="Internals\MeadowComms\ReceiveTargetData.cs" />
+    <Compile Include="Internals\MeadowComms\MeadowSerialDataProcessor.cs" />
     <Compile Include="Internals\MeadowComms\SendTargetData.cs" />
     <Compile Include="Internals\Tools\CobsTools.cs" />
     <Compile Include="Internals\Tools\CrcTools.cs" />

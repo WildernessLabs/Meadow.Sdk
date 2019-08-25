@@ -16,7 +16,7 @@ namespace MeadowCLI.DeviceManagement
     //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
-        public SerialPort SerialPort { get; set; }
+        public SerialPort SerialPort { get; private set; }
 
         public string Name { get; private set; } = "Meadow Micro F7";
 
@@ -24,7 +24,7 @@ namespace MeadowCLI.DeviceManagement
         
         public string Id { get; set; } //guessing we'll need this
 
-        private ReceiveTargetData receiveData;
+        private MeadowSerialDataProcessor dataProcessor;
 
         private string serialPortName;
 
@@ -53,19 +53,21 @@ namespace MeadowCLI.DeviceManagement
                     Handshake = Handshake.None,
 
                     // Set the read/write timeouts
-                    ReadTimeout = 50000,
-                    WriteTimeout = 50000
+                    ReadTimeout = 5000,
+                    WriteTimeout = 5000
                 };
 
                 port.Open();
 
+                //improves perf on Windows?
+                port.BaseStream.ReadTimeout = 0;
+
                 SerialPort = port;
 
-                //wire up ReceiveTargetData
-                //consider refactoring later
+                //wire up ReceiveTargetData - consider refactoring later
                 if (SerialPort != null)
                 { 
-                    receiveData = new ReceiveTargetData(SerialPort);
+                    dataProcessor = new MeadowSerialDataProcessor(SerialPort);
                 }
             }
             catch (IOException ioEx)
