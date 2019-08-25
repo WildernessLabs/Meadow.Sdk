@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
 using MeadowCLI.Hcom;
@@ -27,6 +28,8 @@ namespace MeadowCLI.DeviceManagement
         private MeadowSerialDataProcessor dataProcessor;
 
         private string serialPortName;
+
+        private List<string> filesOnDevice = new List<string>();
 
         public MeadowDevice(string serialPortName, string deviceName = null)
         {
@@ -63,12 +66,6 @@ namespace MeadowCLI.DeviceManagement
                 port.BaseStream.ReadTimeout = 0;
 
                 SerialPort = port;
-
-                //wire up ReceiveTargetData - consider refactoring later
-                if (SerialPort != null)
-                { 
-                    dataProcessor = new MeadowSerialDataProcessor(SerialPort);
-                }
             }
             catch (IOException ioEx)
             {
@@ -77,6 +74,46 @@ namespace MeadowCLI.DeviceManagement
             catch (Exception ex)
             {
                 throw new MeadowDeviceException($"Unknown exception", ex);
+            }
+
+            ListenForSerialData(); //I don't love this here .... move later
+        }
+
+        private void ListenForSerialData ()
+        {
+            if (SerialPort != null)
+            {
+                dataProcessor = new MeadowSerialDataProcessor(SerialPort);
+
+                dataProcessor.OnReceivedData += DataReceived;
+                dataProcessor.OnReceivedFileList += FileListReceived;
+                dataProcessor.OnReceivedMonoMsg += MonoMsgReceived;
+            }
+        }
+
+        void DataReceived (object sender, MeadowMessageEventArgs args)
+        {
+            //console out until we know we need to do something further
+            Console.WriteLine("Data: " + args.Message);
+        }
+
+        void MonoMsgReceived(object sender, MeadowMessageEventArgs args)
+        {
+            //console out until we know we need to do something further
+            Console.WriteLine("Mono: " + args.Message);
+        }
+
+        void FileListReceived(object sender, MeadowMessageEventArgs args)
+        {
+            var fileList = args.Message.Split(',');
+
+            filesOnDevice.Clear();
+
+            foreach(var path in fileList)
+            {
+                var file = path.Substring(path.LastIndexOf('/') + 1);
+                filesOnDevice.Add(file);
+                Console.WriteLine(file);
             }
         }
     }

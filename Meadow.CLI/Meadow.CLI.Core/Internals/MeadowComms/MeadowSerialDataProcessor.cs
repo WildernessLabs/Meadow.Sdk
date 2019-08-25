@@ -7,8 +7,22 @@ using System.Threading.Tasks;
 
 namespace MeadowCLI.Hcom
 {
+    public class MeadowMessageEventArgs : EventArgs
+    {
+        public string Message { get; private set; }
+
+        public MeadowMessageEventArgs (string message)
+        {
+            Message = message;
+        }
+    }
+
     public class MeadowSerialDataProcessor
     {
+        public EventHandler<MeadowMessageEventArgs> OnReceivedFileList;
+        public EventHandler<MeadowMessageEventArgs> OnReceivedMonoMsg;
+        public EventHandler<MeadowMessageEventArgs> OnReceivedData;
+
         readonly SerialPort serialPort;
         const int MAX_RECEIVED_BYTES = 2048;
         
@@ -93,23 +107,31 @@ namespace MeadowCLI.Hcom
 
                 if (foundData[foundOffset + 1] == '\n')
                 {
-                    var rcvdString = Encoding.UTF8.GetString(foundData, 0, foundOffset + 2);
+                    var meadowMessage = Encoding.UTF8.GetString(foundData, 0, foundOffset + 2);
                     bytesUsed += foundOffset + 2;
 
-                    if (rcvdString.StartsWith(FILE_LIST_PREFIX))
+                    if (meadowMessage.StartsWith(FILE_LIST_PREFIX))
                     {
                         // This is a comma separated list
-                        string baseMessage = rcvdString.Substring(FILE_LIST_PREFIX.Length);
-                        DisplayFileList(baseMessage);
+                        string message = meadowMessage.Substring(FILE_LIST_PREFIX.Length);
+
+                        OnReceivedFileList?.Invoke(this, new MeadowMessageEventArgs(message));
+
+                    //    DisplayFileList(message);
                     }
-                    else if (rcvdString.StartsWith(MONO_MSG_PREFIX))
+                    else if (meadowMessage.StartsWith(MONO_MSG_PREFIX))
                     {
-                        string baseMessage = rcvdString.Substring(MONO_MSG_PREFIX.Length);
-                        Console.Write($"runtime: {baseMessage}");
+                        string message = meadowMessage.Substring(MONO_MSG_PREFIX.Length);
+
+                        OnReceivedMonoMsg?.Invoke(this, new MeadowMessageEventArgs(message));
+
+                     //   Console.Write($"runtime: {message}");
                     }
                     else
                     {
-                        Console.Write($"Received: {rcvdString}");
+                        OnReceivedData?.Invoke(this, new MeadowMessageEventArgs(meadowMessage));
+
+                    //    Console.Write($"Received: {meadowMessage}");
                     }
                 }
 
