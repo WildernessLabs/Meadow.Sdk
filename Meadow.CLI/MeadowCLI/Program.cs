@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using System;
 using MeadowCLI.DeviceManagement;
-using System.Threading;
+using System.IO.Ports;
 
 namespace MeadowCLI
 {
@@ -9,6 +9,12 @@ namespace MeadowCLI
     {
         static void Main(string[] args)
         {
+            Console.CancelKeyPress += (s, e) =>
+            {
+                e.Cancel = true;
+                DeviceManager.CurrentDevice.SerialPort.Close();
+            };
+
             if (args.Length == 0)
             {
                 args = new string[] { "--help" };
@@ -22,19 +28,57 @@ namespace MeadowCLI
                     DfuUpload.FlashNuttx(options.DfuOsPath, options.DfuUserPath);
                 }
                 else
-				{
+                {
+                    SyncArgsCache(options);
                     ProcessHcom(options);
-				}
-			});
+                }
+            });
 
-            Console.WriteLine("Press any key to exit");
             Console.ReadKey();
+        }
+
+        static bool IsSerialPortValid(SerialPort serialPort)
+        {
+            if (serialPort == null)
+            {
+                Console.WriteLine($"A serial port has not been selected or the serial port isn't available (--SerialPort option)");
+                return false;
+            }
+
+            return true;
+        }
+
+        static void SyncArgsCache(Options options)
+        {
+            State state = null;
+
+            if (options.ClearCache)
+            {
+                StateCache.Clear();
+            }
+            else
+            {
+                state = StateCache.Load();
+            }
+
+            if (string.IsNullOrWhiteSpace(options.SerialPort))
+            {
+                options.SerialPort = state.SerialPort;
+            }
+            else
+            {
+                state.SerialPort = options.SerialPort;
+                StateCache.Save(state);
+            }
         }
 
         //Probably rename
         static void ProcessHcom(Options options)
         {
             ConnectToMeadowDevice(options.SerialPort);
+
+            if(IsSerialPortValid(DeviceManager.CurrentDevice.SerialPort) == false)
+                return;
 
             if (options.WriteFile)
             {

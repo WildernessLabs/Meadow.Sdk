@@ -37,13 +37,16 @@ namespace MeadowCLI
             return state;
         }
 
+        public static void Clear()
+        {
+            var state = new State();
+            Save(state);
+        }
+
         public static void Save(State state)
         {
             if (state == null)
-            {
-                //we'll just write out an empty state
-                state = new State();
-            }
+                throw new System.ArgumentException("State cannot be null");
 
             using (var writer = File.CreateText(StateFileName))
             {
