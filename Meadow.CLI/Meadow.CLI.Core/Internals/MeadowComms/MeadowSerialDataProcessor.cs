@@ -68,7 +68,7 @@ namespace MeadowCLI.Hcom
             catch (ThreadAbortException ex)
             {
                 //ignoring for now until we wire cancelation ...
-                //it blocks the thread abort exception when the console app closes
+                //this blocks the thread abort exception when the console app closes
             }
             catch (Exception ex)
             {
@@ -116,41 +116,22 @@ namespace MeadowCLI.Hcom
                         string message = meadowMessage.Substring(FILE_LIST_PREFIX.Length);
 
                         OnReceivedFileList?.Invoke(this, new MeadowMessageEventArgs(message));
-
-                    //    DisplayFileList(message);
                     }
                     else if (meadowMessage.StartsWith(MONO_MSG_PREFIX))
                     {
                         string message = meadowMessage.Substring(MONO_MSG_PREFIX.Length);
 
                         OnReceivedMonoMsg?.Invoke(this, new MeadowMessageEventArgs(message));
-
-                     //   Console.Write($"runtime: {message}");
                     }
                     else
                     {
                         OnReceivedData?.Invoke(this, new MeadowMessageEventArgs(meadowMessage));
-
-                    //    Console.Write($"Received: {meadowMessage}");
                     }
                 }
 
             } while (foundData[foundOffset + 1] == '\n');
 
             return availableBytes - bytesUsed;        // No full message remains
-        }
-
-        //-------------------------------------------------------------
-        void DisplayFileList(string receivedTextMsg)
-        {
-            Console.WriteLine($"File List:");
-
-            var fileList = receivedTextMsg.Split(',');
-
-            for (int i = 0; i < fileList.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}) {fileList[i]}");
-            }
         }
     }
 }

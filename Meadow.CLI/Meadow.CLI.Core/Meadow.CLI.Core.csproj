@@ -33,7 +33,7 @@
     <Compile Include="Internals\Dfu\NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DeviceManagement\DeploymentManager.cs" />
-    <Compile Include="DeviceManagement\DeviceManager.cs" />
+    <Compile Include="DeviceManagement\MeadowDeviceManager.cs" />
     <Compile Include="DeviceManagement\MeadowDevice.cs" />
     <Compile Include="DeviceManagement\MeadowFileManager.cs" />
     <Compile Include="Internals\Dfu\DfuContext.cs" />

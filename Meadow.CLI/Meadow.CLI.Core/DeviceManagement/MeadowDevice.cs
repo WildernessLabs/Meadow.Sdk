@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
+using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 
 namespace MeadowCLI.DeviceManagement
@@ -17,6 +18,10 @@ namespace MeadowCLI.DeviceManagement
     //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
+        const string MSCORLIB = "mscorlib.dll";
+        const string SYSTEM = "System.dll";
+        const string SYSTEM_CORE = "System.Core.dll";
+
         public SerialPort SerialPort { get; private set; }
 
         public string Name { get; private set; } = "Meadow Micro F7";
@@ -41,8 +46,107 @@ namespace MeadowCLI.DeviceManagement
             this.serialPortName = serialPortName;
         }
 
+        public void Initialize ()
+        {
+            if(SerialPort != null)
+            {
+                SerialPort.Close();
+                SerialPort = null;
+            }
+
+            OpenSerialPort();
+            ListenForSerialData();
+        }
+
+        public async Task DeployRequiredLibs(string path, bool forceUpdate = false)
+        {
+            if(forceUpdate || await IsFileOnDevice(SYSTEM).ConfigureAwait(false))
+            {
+                await WriteFile(SYSTEM, path).ConfigureAwait(false);
+            }
+
+            if (forceUpdate || await IsFileOnDevice(SYSTEM_CORE).ConfigureAwait(false))
+            {
+                await WriteFile(SYSTEM_CORE, path).ConfigureAwait(false);
+            }
+
+            if (forceUpdate || await IsFileOnDevice(MSCORLIB).ConfigureAwait(false))
+            {
+                await WriteFile(MSCORLIB, path).ConfigureAwait(false);
+            }
+        }
+
+
+        public async Task<bool> WriteFile(string filename, string path, int timeoutInMs = 200000) //200s 
+        {
+            if (SerialPort == null)
+                throw new Exception("SerialPort not intialized");
+
+            bool result = false;
+
+            var timeOutTask = Task.Delay(timeoutInMs);
+
+            EventHandler<MeadowMessageEventArgs> handler = null;
+
+            var tcs = new TaskCompletionSource<bool>();
+
+            handler = (s, e) =>
+            {
+                if (e.Message.Contains("File Sent Successfully"))
+                {
+                    result = true;
+                    tcs.SetResult(true);
+                }
+            };
+            dataProcessor.OnReceivedData += handler;
+
+            MeadowFileManager.WriteFileToFlash(this, Path.Combine(path, filename), filename);
+
+            await Task.WhenAny(new Task[] { timeOutTask, tcs.Task });
+            dataProcessor.OnReceivedData -= handler;
+
+            return result;
+        }
+
+        public async Task<List<string>> GetFilesOnDevice(bool refresh = false, int timeoutInMs = 10000)
+        {
+            if (SerialPort == null)
+                throw new Exception("SerialPort not intialized");
+
+            if(filesOnDevice.Count == 0 || refresh == true)
+            {
+                var timeOutTask = Task.Delay(timeoutInMs);
+
+                EventHandler<MeadowMessageEventArgs> handler = null;
+
+                var tcs = new TaskCompletionSource<bool>();
+
+                handler = (s, e) =>
+                {
+                    SetFilesOnDeviceFromMessage(e.Message);
+                    tcs.SetResult(true);
+                };
+                dataProcessor.OnReceivedFileList += handler;
+
+                MeadowFileManager.ListFiles(this);
+
+                await Task.WhenAny(new Task[] { timeOutTask, tcs.Task});
+                dataProcessor.OnReceivedFileList -= handler;
+            }
+
+            return filesOnDevice;
+        }
+
+        public async Task<bool> IsFileOnDevice (string filename)
+        {
+            if (filesOnDevice.Count == 0)
+                await GetFilesOnDevice();
+
+            return filesOnDevice.Contains(filename);
+        }
+
         //putting this here for now ..... 
-        public void OpenSerialPort()
+        void OpenSerialPort()
         {
             try
             {   // Create a new SerialPort object with default settings
@@ -75,8 +179,6 @@ namespace MeadowCLI.DeviceManagement
             {
                 throw new MeadowDeviceException($"Unknown exception", ex);
             }
-
-            ListenForSerialData(); //I don't love this here .... move later
         }
 
         private void ListenForSerialData ()
@@ -105,15 +207,22 @@ namespace MeadowCLI.DeviceManagement
 
         void FileListReceived(object sender, MeadowMessageEventArgs args)
         {
-            var fileList = args.Message.Split(',');
+            SetFilesOnDeviceFromMessage(args.Message);
+
+            foreach (var f in filesOnDevice)
+                Console.WriteLine(f);
+        }
+
+        void SetFilesOnDeviceFromMessage(string message)
+        {
+            var fileList = message.Split(',');
 
             filesOnDevice.Clear();
 
-            foreach(var path in fileList)
+            foreach (var path in fileList)
             {
                 var file = path.Substring(path.LastIndexOf('/') + 1);
                 filesOnDevice.Add(file);
-                Console.WriteLine(file);
             }
         }
     }

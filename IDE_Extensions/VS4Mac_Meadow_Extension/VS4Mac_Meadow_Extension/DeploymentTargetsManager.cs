@@ -96,14 +96,14 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
         private static void UpdateTargetsList(object state = null)
         {
-           // Console.WriteLine("WLABS: Updating Targets List");
+            // Console.WriteLine("WLABS: Updating Targets List");
 
             //quick hack for now - only load the device once
-            if (DeviceManager.CurrentDevice == null)
+            if (MeadowDeviceManager.CurrentDevice == null)
             {
-                DeviceManager.FindConnectedDevices();
+                MeadowDeviceManager.FindConnectedDevices();
 
-                var currentDevice = DeviceManager.CurrentDevice;
+                var currentDevice = MeadowDeviceManager.CurrentDevice;
 
                 if (currentDevice != null)
                 {
@@ -116,7 +116,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         // TODO: this is _monstrously terrible code_; rewrite.
         private static void UpdateTargetsListOld()
         {
-           // Console.WriteLine("WLABS: Updating Targets List");
+            // Console.WriteLine("WLABS: Updating Targets List");
             // copy target state
             var targetsToKeep = new List<MeadowDeviceExecutionTarget>();
             // stop [what?]

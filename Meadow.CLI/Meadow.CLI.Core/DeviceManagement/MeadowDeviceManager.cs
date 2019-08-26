@@ -9,7 +9,7 @@ namespace MeadowCLI.DeviceManagement
     /// <summary>
     /// TODO: put device enumeration and such stuff here.
     /// </summary>
-    public static class DeviceManager
+    public static class MeadowDeviceManager
     {
         public static ObservableCollection<MeadowDevice> AttachedDevices = new ObservableCollection<MeadowDevice>();
 
@@ -17,7 +17,7 @@ namespace MeadowCLI.DeviceManagement
 
         static HcomMeadowRequestType _meadowRequestType;
 
-        static DeviceManager()
+        static MeadowDeviceManager()
         {
             // TODO: populate the list of attached devices
 

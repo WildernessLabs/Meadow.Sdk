@@ -12,33 +12,11 @@ namespace MeadowCLI.DeviceManagement
         const UInt16 REQUEST_HEADER_MASK = 0xff00;
         const UInt32 UNKNOWN_USER_DATA = 0xffffffff;
 
-        const string MSCORLIB = "mscorlib.dll";
-        const string SYSTEM = "System.dll";
-        const string SYSTEM_CORE = "System.Core.dll";
+
         const string APP = "App.exe";
 
         static MeadowFileManager()
         {
-        }
-
-        public static bool DoesFileExist(MeadowDevice meadow, string fileName, int partition = 0)
-        {
-            //ToDo - need way to programmatically check for files
-            return false;
-        }
-
-        public static void DeployRequiredBinaries(MeadowDevice meadow, bool forceDeploy = false)
-        {
-            //ToDo - should these be deployed via nuget?
-            //Do we need any other dlls?
-            if (forceDeploy || DoesFileExist(meadow, MSCORLIB, 0) == false)
-                WriteFileToFlash(meadow, Path.Combine(@"./libs", MSCORLIB), MSCORLIB);
-
-            if (forceDeploy || DoesFileExist(meadow, SYSTEM, 0) == false)
-                WriteFileToFlash(meadow, Path.Combine(@"./libs", SYSTEM), SYSTEM);
-
-            if (forceDeploy || DoesFileExist(meadow, MSCORLIB, 0) == false)
-                WriteFileToFlash(meadow, Path.Combine(@"./libs", SYSTEM_CORE), SYSTEM_CORE);
         }
 
         public static void DeployAppInFolder(MeadowDevice meadow, string appFolder)

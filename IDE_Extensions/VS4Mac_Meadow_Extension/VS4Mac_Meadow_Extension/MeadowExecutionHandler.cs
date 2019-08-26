@@ -2,6 +2,7 @@
 using MonoDevelop.Core.Execution;
 using MeadowCLI.DeviceManagement;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
@@ -18,35 +19,39 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             var handler = DebuggingService.GetExecutionHandler();
 
-            var ret = DebuggingService.GetExecutionHandler().Execute(command, console);
+          //  var ret = handler.Execute(command, console);
 
             var cmd = command as MeadowExecutionCommand;
 
             DeployApp(cmd.OutputDirectory);
+            
 
-
-            return ret;
+            return null;
         }
 
-        void DeployApp(string folder)
+        async Task DeployApp(string folder)
         {
-
             //hack in the app deployment
+            var meadow = MeadowDeviceManager.CurrentDevice;
 
-            if (DeviceManager.CurrentDevice.SerialPort == null)
-                DeviceManager.CurrentDevice.OpenSerialPort();
+            if (meadow.SerialPort == null)
+                meadow.Initialize();
+
+            var files = await meadow.GetFilesOnDevice();
+
+            MeadowFileManager.DeployRequiredBinaries(meadow);
 
        //     DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
 
-            DeviceManager.SetTraceLevel(DeviceManager.CurrentDevice, 2);
+            MeadowDeviceManager.SetTraceLevel(MeadowDeviceManager.CurrentDevice, 2);
 
-            MeadowFileManager.ListFilesAndCrcs(DeviceManager.CurrentDevice);
+         //   MeadowFileManager.ListFilesAndCrcs(MeadowDeviceManager.CurrentDevice);
 
          //   MeadowFileManager.DeployRequiredBinaries(DeviceManager.CurrentDevice);
             
-            MeadowFileManager.DeployAppInFolder(DeviceManager.CurrentDevice, folder);
+         //   MeadowFileManager.DeployAppInFolder(MeadowDeviceManager.CurrentDevice, folder);
 
-            DeviceManager.MonoEnable(DeviceManager.CurrentDevice);
+         //   MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
         }
     }
 }

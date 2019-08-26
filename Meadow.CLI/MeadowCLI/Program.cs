@@ -12,7 +12,7 @@ namespace MeadowCLI
             Console.CancelKeyPress += (s, e) =>
             {
                 e.Cancel = true;
-                DeviceManager.CurrentDevice.SerialPort.Close();
+                MeadowDeviceManager.CurrentDevice.SerialPort.Close();
             };
 
             if (args.Length == 0)
@@ -77,115 +77,115 @@ namespace MeadowCLI
         {
             ConnectToMeadowDevice(options.SerialPort);
 
-            if(IsSerialPortValid(DeviceManager.CurrentDevice.SerialPort) == false)
+            if(IsSerialPortValid(MeadowDeviceManager.CurrentDevice.SerialPort) == false)
                 return;
 
             if (options.WriteFile)
             {
                 Console.WriteLine($"Writing {options.FileName} to partition {options.Partition}");
-                MeadowFileManager.WriteFileToFlash(DeviceManager.CurrentDevice,
+                MeadowFileManager.WriteFileToFlash(MeadowDeviceManager.CurrentDevice,
                     options.FileName, options.TargetFileName, options.Partition);
             }
             else if (options.DeleteFile)
             {
                 Console.WriteLine($"Deleting {options.FileName} from partion {options.Partition}");
-                MeadowFileManager.DeleteFile(DeviceManager.CurrentDevice,
+                MeadowFileManager.DeleteFile(MeadowDeviceManager.CurrentDevice,
                     options.TargetFileName, options.Partition);
             }
             else if (options.EraseFlash)
             {
                 Console.WriteLine("Erasing flash");
-                MeadowFileManager.EraseFlash(DeviceManager.CurrentDevice);
+                MeadowFileManager.EraseFlash(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.VerifyErasedFlash)
             {
                 Console.WriteLine("Verifying flash is erased");
-                MeadowFileManager.VerifyErasedFlash(DeviceManager.CurrentDevice);
+                MeadowFileManager.VerifyErasedFlash(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.PartitionFileSystem)
             {
                 Console.WriteLine($"Partioning file system into {options.NumberOfPartitions} partion(s)");
-                MeadowFileManager.PartitionFileSystem(DeviceManager.CurrentDevice, options.NumberOfPartitions);
+                MeadowFileManager.PartitionFileSystem(MeadowDeviceManager.CurrentDevice, options.NumberOfPartitions);
             }
             else if (options.MountFileSystem)
             {
                 Console.WriteLine($"Mounting partition {options.Partition}");
-                MeadowFileManager.MountFileSystem(DeviceManager.CurrentDevice, options.Partition);
+                MeadowFileManager.MountFileSystem(MeadowDeviceManager.CurrentDevice, options.Partition);
             }
             else if (options.InitFileSystem)
             {
                 Console.WriteLine($"Intializing filesystem in partition {options.Partition}");
-                MeadowFileManager.InitializeFileSystem(DeviceManager.CurrentDevice, options.Partition);
+                MeadowFileManager.InitializeFileSystem(MeadowDeviceManager.CurrentDevice, options.Partition);
             }
             else if(options.CreateFileSystem) //should this have a partition???
             {
                 Console.WriteLine($"Creating file system");
-                MeadowFileManager.CreateFileSystem(DeviceManager.CurrentDevice);
+                MeadowFileManager.CreateFileSystem(MeadowDeviceManager.CurrentDevice);
             }
             else if(options.FormatFileSystem)
             {
                 Console.WriteLine($"Format file system on partition {options.Partition}");
-                MeadowFileManager.FormatFileSystem(DeviceManager.CurrentDevice, options.Partition);
+                MeadowFileManager.FormatFileSystem(MeadowDeviceManager.CurrentDevice, options.Partition);
             }
             else if (options.ListFiles)
             {
                 Console.WriteLine($"Getting list of a files on partition {options.Partition}");
-                MeadowFileManager.ListFiles(DeviceManager.CurrentDevice, options.Partition);
+                MeadowFileManager.ListFiles(MeadowDeviceManager.CurrentDevice, options.Partition);
             }
             else if (options.ListFilesAndCrcs)
             {
                 Console.WriteLine($"Getting list of a files and Crcs on partition {options.Partition}");
-                MeadowFileManager.ListFilesAndCrcs(DeviceManager.CurrentDevice, options.Partition);
+                MeadowFileManager.ListFilesAndCrcs(MeadowDeviceManager.CurrentDevice, options.Partition);
             }
             //Device manager
             else if(options.SetTraceLevel)
             {
                 Console.WriteLine($"Setting trace level to {options.TraceLevel}");
-                DeviceManager.SetTraceLevel(DeviceManager.CurrentDevice, options.TraceLevel);
+                MeadowDeviceManager.SetTraceLevel(MeadowDeviceManager.CurrentDevice, options.TraceLevel);
             }
             else if(options.SetDeveloper1)
             {
                 Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
-                DeviceManager.SetDeveloper1(DeviceManager.CurrentDevice, options.DeveloperValue);
+                MeadowDeviceManager.SetDeveloper1(MeadowDeviceManager.CurrentDevice, options.DeveloperValue);
             }
             else if (options.SetDeveloper2)
             {
                 Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
-                DeviceManager.SetDeveloper2(DeviceManager.CurrentDevice, options.DeveloperValue);
+                MeadowDeviceManager.SetDeveloper2(MeadowDeviceManager.CurrentDevice, options.DeveloperValue);
             }
             else if (options.SetDeveloper3)
             {
                 Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
-                DeviceManager.SetDeveloper3(DeviceManager.CurrentDevice, options.DeveloperValue);
+                MeadowDeviceManager.SetDeveloper3(MeadowDeviceManager.CurrentDevice, options.DeveloperValue);
             }
             else if (options.SetDeveloper4)
             {
                 Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
-                DeviceManager.SetDeveloper4(DeviceManager.CurrentDevice, options.DeveloperValue);
+                MeadowDeviceManager.SetDeveloper4(MeadowDeviceManager.CurrentDevice, options.DeveloperValue);
             }
 
             else if (options.ToggleNsh)
             {
                 Console.WriteLine($"Toggling Nsh");
-                DeviceManager.ToggleNsh(DeviceManager.CurrentDevice);
+                MeadowDeviceManager.ToggleNsh(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.MonoDisable)
             {
-                DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
+                MeadowDeviceManager.MonoDisable(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.MonoEnable)
             {
-                DeviceManager.MonoEnable(DeviceManager.CurrentDevice);
+                MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.ResetTargetMcu)
             {
                 Console.WriteLine("Resetting Mcu");
-                DeviceManager.ResetTargetMcu(DeviceManager.CurrentDevice);
+                MeadowDeviceManager.ResetTargetMcu(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.EnterDfuMode)
             {
                 Console.WriteLine("Entering Dfu mode");
-                DeviceManager.EnterDfuMode(DeviceManager.CurrentDevice);
+                MeadowDeviceManager.EnterDfuMode(MeadowDeviceManager.CurrentDevice);
             }
         }
 
@@ -195,7 +195,7 @@ namespace MeadowCLI
             var device = new MeadowDevice(commPort);
             try
             {
-                device.OpenSerialPort();
+                device.Initialize();
                 Console.WriteLine($"Port {commPort} opened");
             }
             catch (MeadowDeviceException ex)
@@ -203,7 +203,7 @@ namespace MeadowCLI
                 Console.WriteLine(ex.Message);
             }
 
-            DeviceManager.CurrentDevice = device;
+            MeadowDeviceManager.CurrentDevice = device;
         }
     }
 }
