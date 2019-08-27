@@ -177,6 +177,14 @@ namespace MeadowCLI
             {
                 MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
             }
+            else if (options.MonoRunState)
+            {
+                MeadowDeviceManager.MonoRunState(MeadowDeviceManager.CurrentDevice);
+            }
+            else if (options.GetDeviceId)
+            {
+                MeadowDeviceManager.DeviceId(MeadowDeviceManager.CurrentDevice);
+            }
             else if (options.ResetTargetMcu)
             {
                 Console.WriteLine("Resetting Mcu");

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
@@ -104,6 +105,20 @@ namespace MeadowCLI.DeviceManagement
         public static void MonoEnable(MeadowDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_ENABLE;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+        }
+
+        public static void MonoRunState(MeadowDevice meadow)
+        {
+             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_RUN_STATE;
+
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+       }
+
+        public static void DeviceId(MeadowDevice meadow)
+        {
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_GET_CHIP_INFORMATION;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }

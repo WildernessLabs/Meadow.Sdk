@@ -52,6 +52,11 @@ namespace MeadowCLI
         public bool MonoDisable { get; set; }
         [Option(longName: "MonoEnable", Required = false, HelpText = "Enable mono so it can run")]
         public bool MonoEnable { get; set; }
+        [Option(longName: "MonoRunState", Required = false, HelpText = "Reads mono startup state")]
+        public bool MonoRunState { get; set; }
+        [Option(longName: "GetDeviceId", Required = false, HelpText = "Enable mono so it can run")]
+        public bool GetDeviceId { get; set; }
+
         [Option(longName: "ListFiles", Required = false, HelpText = "List all files in Meadow partition")]
         public bool ListFiles { get; set; }
         [Option(longName: "ListFilesAndCrcs", Required = false, HelpText = "List all files and CRCs in a Meadow partition")]
