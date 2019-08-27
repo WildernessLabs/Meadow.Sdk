@@ -114,7 +114,7 @@ namespace MeadowCLI.DeviceManagement
              _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MONO_RUN_STATE;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
-       }
+        }
 
         public static void DeviceId(MeadowDevice meadow)
         {
