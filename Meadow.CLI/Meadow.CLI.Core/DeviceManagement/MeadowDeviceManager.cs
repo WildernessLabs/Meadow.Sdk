@@ -116,9 +116,9 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void DeviceId(MeadowDevice meadow)
+        public static void GetDeviceInfo(MeadowDevice meadow)
         {
-            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_GET_CHIP_INFORMATION;
+            _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_GET_DEVICE_INFORMATION;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }

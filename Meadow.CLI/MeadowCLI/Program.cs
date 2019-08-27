@@ -181,9 +181,9 @@ namespace MeadowCLI
             {
                 MeadowDeviceManager.MonoRunState(MeadowDeviceManager.CurrentDevice);
             }
-            else if (options.GetDeviceId)
+            else if (options.GetDeviceInfo)
             {
-                MeadowDeviceManager.DeviceId(MeadowDeviceManager.CurrentDevice);
+                MeadowDeviceManager.GetDeviceInfo(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.ResetTargetMcu)
             {

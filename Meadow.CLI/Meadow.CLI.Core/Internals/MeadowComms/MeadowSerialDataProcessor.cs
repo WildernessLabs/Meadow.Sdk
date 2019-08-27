@@ -34,7 +34,8 @@ namespace MeadowCLI.Hcom
         const int MAX_RECEIVED_BYTES = 2048;
         
         const string FILE_LIST_PREFIX = "FileList: "; 
-        const string MONO_MSG_PREFIX =  "MonoMsg: "; 
+        const string MONO_MSG_PREFIX =  "MonoMsg: ";
+        const string DEVICE_INFO_PREFIX = "DevInfo: ";
 
         // It seems that the .Net SerialPort class is not all it could be.
         // To acheive reliable operation some SerialPort class methods must
@@ -129,6 +130,12 @@ namespace MeadowCLI.Hcom
                         string message = meadowMessage.Substring(MONO_MSG_PREFIX.Length);
 
                         OnReceivedMonoMsg?.Invoke(this, new MeadowMessageEventArgs(message));
+                    }
+                    else if (meadowMessage.StartsWith(DEVICE_INFO_PREFIX))
+                    {
+                        string message = meadowMessage.Substring(DEVICE_INFO_PREFIX.Length);
+
+                        OnReceivedFileList?.Invoke(this, new MeadowMessageEventArgs(message));
                     }
                     else
                     {
