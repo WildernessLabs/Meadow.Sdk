@@ -22,6 +22,7 @@ namespace MeadowCLI.DeviceManagement
         const string SYSTEM = "System.dll";
         const string SYSTEM_CORE = "System.Core.dll";
         const string MEADOW_CORE = "Meadow.Core.dll";
+        const string APP_EXE = "App.exe";
 
         public SerialPort SerialPort { get; private set; }
 
@@ -86,13 +87,15 @@ namespace MeadowCLI.DeviceManagement
 
         public Task<bool> DeployApp(string path)
         {
-            return WriteFile("App.exe", path);
+            return WriteFile(APP_EXE, path);
         }
 
         public async Task<bool> WriteFile(string filename, string path, int timeoutInMs = 200000) //200s 
         {
             if (SerialPort == null)
+            {
                 throw new Exception("SerialPort not intialized");
+            }
 
             bool result = false;
 
@@ -123,7 +126,9 @@ namespace MeadowCLI.DeviceManagement
         public async Task<List<string>> GetFilesOnDevice(bool refresh = false, int timeoutInMs = 10000)
         {
             if (SerialPort == null)
+            {
                 throw new Exception("SerialPort not intialized");
+            }
 
             if(filesOnDevice.Count == 0 || refresh == true)
             {
@@ -149,9 +154,9 @@ namespace MeadowCLI.DeviceManagement
             return filesOnDevice;
         }
 
-        public async Task<bool> IsFileOnDevice (string filename)
+        public Task<bool> IsFileOnDevice (string filename)
         {
-            return filesOnDevice.Contains(filename);
+            return Task.FromResult(filesOnDevice.Contains(filename));
         }
 
         //putting this here for now ..... 
