@@ -11,6 +11,13 @@ namespace MeadowCLI.Hcom
     {
         public string Message { get; private set; }
 
+        public enum MeadowMessageType
+        {
+            AppOutput,
+            FileList,
+            Data, //reanem
+        }
+
         public MeadowMessageEventArgs (string message)
         {
             Message = message;
@@ -18,7 +25,7 @@ namespace MeadowCLI.Hcom
     }
 
     public class MeadowSerialDataProcessor
-    {
+    {   //collapse to one and use enum
         public EventHandler<MeadowMessageEventArgs> OnReceivedFileList;
         public EventHandler<MeadowMessageEventArgs> OnReceivedMonoMsg;
         public EventHandler<MeadowMessageEventArgs> OnReceivedData;

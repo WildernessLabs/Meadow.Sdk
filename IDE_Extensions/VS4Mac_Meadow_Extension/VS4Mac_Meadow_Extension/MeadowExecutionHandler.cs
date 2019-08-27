@@ -33,7 +33,9 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             var meadow = MeadowDeviceManager.CurrentDevice;
 
             if (meadow.SerialPort != null)
+            {
                 meadow.SerialPort.Close();
+            }
             
             meadow.Initialize(false);
             MeadowDeviceManager.MonoDisable(meadow);
@@ -43,8 +45,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             var files = await meadow.GetFilesOnDevice();
 
-            if (token.IsCancellationRequested)
-                return;
+            if (token.IsCancellationRequested) { return; }
 
             Debug.WriteLine("Checking for installed binaries");
             foreach (var f in files)
@@ -52,14 +53,12 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                 Debug.WriteLine($"Found {f} on Meadow");
             }
 
-            if (token.IsCancellationRequested)
-                return;
+            if (token.IsCancellationRequested) { return; }
 
             Debug.WriteLine("Deploying required libraries (this may take several minutes)");
             await meadow.DeployRequiredLibs(folder);
 
-            if (token.IsCancellationRequested)
-                return;
+            if (token.IsCancellationRequested) { return; }
 
             Debug.WriteLine("Deploying application");
             await meadow.DeployApp(folder);
