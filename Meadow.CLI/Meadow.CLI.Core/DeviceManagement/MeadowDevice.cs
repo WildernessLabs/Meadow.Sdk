@@ -21,6 +21,7 @@ namespace MeadowCLI.DeviceManagement
         const string MSCORLIB = "mscorlib.dll";
         const string SYSTEM = "System.dll";
         const string SYSTEM_CORE = "System.Core.dll";
+        const string MEADOW_CORE = "Meadow.Core.dll";
 
         public SerialPort SerialPort { get; private set; }
 
@@ -46,7 +47,7 @@ namespace MeadowCLI.DeviceManagement
             this.serialPortName = serialPortName;
         }
 
-        public void Initialize ()
+        public void Initialize (bool listen = true)
         {
             if(SerialPort != null)
             {
@@ -55,27 +56,38 @@ namespace MeadowCLI.DeviceManagement
             }
 
             OpenSerialPort();
-            ListenForSerialData();
+
+            if(listen == true)
+                ListenForSerialData();
         }
 
         public async Task DeployRequiredLibs(string path, bool forceUpdate = false)
         {
-            if(forceUpdate || await IsFileOnDevice(SYSTEM).ConfigureAwait(false))
+            if(forceUpdate || await IsFileOnDevice(SYSTEM).ConfigureAwait(false) == false)
             {
                 await WriteFile(SYSTEM, path).ConfigureAwait(false);
             }
 
-            if (forceUpdate || await IsFileOnDevice(SYSTEM_CORE).ConfigureAwait(false))
+            if (forceUpdate || await IsFileOnDevice(SYSTEM_CORE).ConfigureAwait(false) == false)
             {
                 await WriteFile(SYSTEM_CORE, path).ConfigureAwait(false);
             }
 
-            if (forceUpdate || await IsFileOnDevice(MSCORLIB).ConfigureAwait(false))
+            if (forceUpdate || await IsFileOnDevice(MSCORLIB).ConfigureAwait(false) == false)
             {
                 await WriteFile(MSCORLIB, path).ConfigureAwait(false);
             }
+
+            if (forceUpdate || await IsFileOnDevice(MEADOW_CORE).ConfigureAwait(false) == false)
+            {
+                await WriteFile(MEADOW_CORE, path).ConfigureAwait(false);
+            }
         }
 
+        public Task<bool> DeployApp(string path)
+        {
+            return WriteFile("App.exe", path);
+        }
 
         public async Task<bool> WriteFile(string filename, string path, int timeoutInMs = 200000) //200s 
         {
@@ -139,9 +151,6 @@ namespace MeadowCLI.DeviceManagement
 
         public async Task<bool> IsFileOnDevice (string filename)
         {
-            if (filesOnDevice.Count == 0)
-                await GetFilesOnDevice();
-
             return filesOnDevice.Contains(filename);
         }
 

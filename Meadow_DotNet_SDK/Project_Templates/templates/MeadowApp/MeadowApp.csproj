@@ -4,4 +4,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>App</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WildernessLabs.Meadow.Assemblies" Version="0.1.0" />
+  </ItemGroup>
 </Project>

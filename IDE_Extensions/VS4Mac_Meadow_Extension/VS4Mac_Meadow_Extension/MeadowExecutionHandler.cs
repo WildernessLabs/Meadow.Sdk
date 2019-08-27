@@ -3,55 +3,71 @@ using MonoDevelop.Core.Execution;
 using MeadowCLI.DeviceManagement;
 using System.IO;
 using System.Threading.Tasks;
+using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
     class MeadowExecutionHandler : IExecutionHandler
     {
         public bool CanExecute(ExecutionCommand command)
-        {
+        {   //returning false here swaps the play button with a build button 
             return (command is MeadowExecutionCommand);
         }
 
         public ProcessAsyncOperation Execute(ExecutionCommand command, OperationConsole console)
         {
-            System.Console.WriteLine("Executing");
-
-            var handler = DebuggingService.GetExecutionHandler();
-
-          //  var ret = handler.Execute(command, console);
-
             var cmd = command as MeadowExecutionCommand;
 
-            DeployApp(cmd.OutputDirectory);
-            
+            var cts = new CancellationTokenSource();
+            var deployTask = DeployApp(cmd.OutputDirectory, cts.Token);
 
-            return null;
+            return new ProcessAsyncOperation(deployTask, cts);
         }
-
-        async Task DeployApp(string folder)
+        
+        //lazy job with the cancellation token but more or less good enough
+        async Task DeployApp(string folder, CancellationToken token)
         {
             //hack in the app deployment
             var meadow = MeadowDeviceManager.CurrentDevice;
 
-            if (meadow.SerialPort == null)
-                meadow.Initialize();
+            if (meadow.SerialPort != null)
+                meadow.SerialPort.Close();
+            
+            meadow.Initialize(false);
+            MeadowDeviceManager.MonoDisable(meadow);
+            await Task.Delay(5000); //hack for testing
+            meadow.SerialPort.Close();
+            meadow.Initialize();
 
             var files = await meadow.GetFilesOnDevice();
 
-            MeadowFileManager.DeployRequiredBinaries(meadow);
+            if (token.IsCancellationRequested)
+                return;
 
-       //     DeviceManager.MonoDisable(DeviceManager.CurrentDevice);
+            Debug.WriteLine("Checking for installed binaries");
+            foreach (var f in files)
+            {
+                Debug.WriteLine($"Found {f} on Meadow");
+            }
 
-            MeadowDeviceManager.SetTraceLevel(MeadowDeviceManager.CurrentDevice, 2);
+            if (token.IsCancellationRequested)
+                return;
 
-         //   MeadowFileManager.ListFilesAndCrcs(MeadowDeviceManager.CurrentDevice);
+            Debug.WriteLine("Deploying required libraries (this may take several minutes)");
+            await meadow.DeployRequiredLibs(folder);
 
-         //   MeadowFileManager.DeployRequiredBinaries(DeviceManager.CurrentDevice);
-            
-         //   MeadowFileManager.DeployAppInFolder(MeadowDeviceManager.CurrentDevice, folder);
+            if (token.IsCancellationRequested)
+                return;
 
-         //   MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
+            Debug.WriteLine("Deploying application");
+            await meadow.DeployApp(folder);
+
+            Debug.WriteLine("Resetting Meadow to start application");
+
+            MeadowDeviceManager.MonoEnable(meadow);
+            MeadowDeviceManager.ResetTargetMcu(meadow);
         }
     }
 }

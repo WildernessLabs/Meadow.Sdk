@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
@@ -32,6 +33,21 @@ namespace MeadowCLI.DeviceManagement
         private static void Handle_DeviceRemoved()
         {
             // remove device from AttachedDevices using lib usb
+        }
+
+        public static void FindAttachedMeadowDevices()
+        {
+            foreach (var d in AttachedDevices)
+            {
+                d.SerialPort.Close();
+            }
+            AttachedDevices.Clear();
+
+            foreach (var s in SerialPort.GetPortNames())
+            {
+                var meadow = new MeadowDevice(s);
+                AttachedDevices.Add(meadow);
+            }
         }
 
         //we'll async this later 
