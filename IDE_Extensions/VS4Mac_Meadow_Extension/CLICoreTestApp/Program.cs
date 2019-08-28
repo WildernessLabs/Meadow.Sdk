@@ -10,6 +10,8 @@ namespace CLICoreTestApp
         {
             Console.WriteLine("Hello World!");
 
+            MeadowDeviceManager.FindAttachedMeadowDevices();
+
             var meadow = new MeadowDevice("//dev//tty.usbmodem01");
             MeadowDeviceManager.CurrentDevice = meadow;
             meadow.Initialize();

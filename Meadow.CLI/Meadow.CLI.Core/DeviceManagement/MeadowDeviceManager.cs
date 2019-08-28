@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
+using Microsoft.CodeAnalysis;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
 
 namespace MeadowCLI.DeviceManagement
@@ -40,24 +41,26 @@ namespace MeadowCLI.DeviceManagement
         {
             foreach (var d in AttachedDevices)
             {
-                d.SerialPort.Close();
+                d?.SerialPort?.Close();
             }
             AttachedDevices.Clear();
 
             foreach (var s in SerialPort.GetPortNames())
             {
-                var meadow = new MeadowDevice(s);
-                AttachedDevices.Add(meadow);
+                //limit Mac searches to tty.usb*, Windows, try all COM ports
+                if(Environment.OSVersion.Platform != PlatformID.Unix ||
+                    s.Contains("tty.usb"))
+                {
+                    var meadow = new MeadowDevice(s, $"Meadow F7 ({s})");
+                    AttachedDevices.Add(meadow);
+                }
             }
         }
 
-        //we'll async this later 
+        //we'll delete this soon
         public static ObservableCollection<MeadowDevice> FindConnectedDevices()
         {
-            var device = new MeadowDevice("/dev/tty.usbmodem01", "Meadow Micro F7");
-            AttachedDevices.Add(device);
-
-            CurrentDevice = device;
+            FindAttachedMeadowDevices();
 
             return AttachedDevices;
         }

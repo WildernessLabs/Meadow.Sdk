@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
+using System.Linq;
 
 namespace MeadowCLI.DeviceManagement
 {
@@ -43,7 +44,7 @@ namespace MeadowCLI.DeviceManagement
             if(string.IsNullOrWhiteSpace(deviceName) == false)
                 Name = deviceName; //otherwise use the default
 
-            Id = new Guid().ToString();
+            Id = Guid.NewGuid().ToString();
 
             this.serialPortName = serialPortName;
         }
@@ -113,12 +114,12 @@ namespace MeadowCLI.DeviceManagement
                     tcs.SetResult(true);
                 }
             };
-            dataProcessor.OnReceivedData += handler;
+            dataProcessor.OnReceiveData += handler;
 
             MeadowFileManager.WriteFileToFlash(this, Path.Combine(path, filename), filename);
 
             await Task.WhenAny(new Task[] { timeOutTask, tcs.Task });
-            dataProcessor.OnReceivedData -= handler;
+            dataProcessor.OnReceiveData -= handler;
 
             return result;
         }
@@ -140,15 +141,18 @@ namespace MeadowCLI.DeviceManagement
 
                 handler = (s, e) =>
                 {
-                    SetFilesOnDeviceFromMessage(e.Message);
-                    tcs.SetResult(true);
+                    if(e.MessageType == MeadowMessageType.FileList)
+                    {
+                        SetFilesOnDeviceFromMessage(e.Message);
+                        tcs.SetResult(true);
+                    }
                 };
-                dataProcessor.OnReceivedFileList += handler;
+                dataProcessor.OnReceiveData += handler;
 
                 MeadowFileManager.ListFiles(this);
 
                 await Task.WhenAny(new Task[] { timeOutTask, tcs.Task});
-                dataProcessor.OnReceivedFileList -= handler;
+                dataProcessor.OnReceiveData -= handler;
             }
 
             return filesOnDevice;
@@ -201,30 +205,31 @@ namespace MeadowCLI.DeviceManagement
             {
                 dataProcessor = new MeadowSerialDataProcessor(SerialPort);
 
-                dataProcessor.OnReceivedData += DataReceived;
-                dataProcessor.OnReceivedFileList += FileListReceived;
-                dataProcessor.OnReceivedMonoMsg += MonoMsgReceived;
+                dataProcessor.OnReceiveData += DataReceived;
             }
         }
 
         void DataReceived (object sender, MeadowMessageEventArgs args)
         {
-            //console out until we know we need to do something further
-            Console.WriteLine("Data: " + args.Message);
-        }
-
-        void MonoMsgReceived(object sender, MeadowMessageEventArgs args)
-        {
-            //console out until we know we need to do something further
-            Console.WriteLine("Mono: " + args.Message);
-        }
-
-        void FileListReceived(object sender, MeadowMessageEventArgs args)
-        {
-            SetFilesOnDeviceFromMessage(args.Message);
-
-            foreach (var f in filesOnDevice)
-                Console.WriteLine(f);
+            switch(args.MessageType)
+            {
+                case MeadowMessageType.Data:
+                    Console.WriteLine("Data: " + args.Message);
+                    break;
+                case MeadowMessageType.AppOutput:
+                    Console.WriteLine("App: " + args.Message);
+                    break;
+                case MeadowMessageType.FileList:
+                    SetFilesOnDeviceFromMessage(args.Message);
+                    Console.WriteLine();
+                    foreach (var f in filesOnDevice)
+                        Console.WriteLine(f);
+                    break;
+                case MeadowMessageType.DeviceInfo:
+                    SetDeviceIdFromMessage(args.Message);
+                    Console.WriteLine("ID: " + args.Message);
+                    break;
+            }
         }
 
         void SetFilesOnDeviceFromMessage(string message)
@@ -238,6 +243,11 @@ namespace MeadowCLI.DeviceManagement
                 var file = path.Substring(path.LastIndexOf('/') + 1);
                 filesOnDevice.Add(file);
             }
+        }
+
+        void SetDeviceIdFromMessage(string message)
+        {
+
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using MeadowCLI.DeviceManagement;
 using MonoDevelop.Core;
 using MonoDevelop.Core.Assemblies;
 using MonoDevelop.Core.Execution;
@@ -94,16 +92,16 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             return base.OnGetCanExecute(context, configuration, runConfiguration);
         }
 
-        //protected override TargetFrameworkMoniker OnGetDefaultTargetFrameworkId()
-        //{
-        //    return new TargetFrameworkMoniker(".NETMicroFramework", "4.3");
-        //}
+        protected override TargetFrameworkMoniker OnGetDefaultTargetFrameworkId()
+        {
+            return new TargetFrameworkMoniker("Meadow.Sdk", "0.1");
+        }
 
-        //protected override TargetFrameworkMoniker OnGetDefaultTargetFrameworkForFormat(string toolsVersion)
-        //{
-        //    //Keep default version invalid(1.0) or MonoDevelop will omit from serialization
-        //    return new TargetFrameworkMoniker(".NETMicroFramework", "1.0");
-        //}
+        protected override TargetFrameworkMoniker OnGetDefaultTargetFrameworkForFormat(string toolsVersion)
+        {
+            //Keep default version invalid(1.0) or MonoDevelop will omit from serialization
+            return new TargetFrameworkMoniker(".Meadow.Sdk", "1.0");
+        }
 
         protected override ExecutionCommand OnCreateExecutionCommand(
             ConfigurationSelector configSel,
@@ -125,7 +123,5 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                 ReferencedAssemblies = references
             };
         }
-
-        
     }
 }

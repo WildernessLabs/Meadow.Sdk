@@ -10,13 +10,11 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
     {
         public string Model { get; set; }
 
-        public override string Id { 
-            get => _id; 
-        } protected string _id;
+        public override string Id => _id;
+        private string _id;
 
-        public override string Name {
-            get => _name; 
-        } protected string _name;
+        public override string Name => _name;
+        private string _name;
 
         public MeadowDeviceExecutionTarget(string name, string id)
         {

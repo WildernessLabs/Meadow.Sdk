@@ -28,6 +28,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>..\..\..\..\..\..\..\Applications\Visual Studio.app\Contents\Resources\lib\monodevelop\bin\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internals\Dfu\NativeMethods.cs" />

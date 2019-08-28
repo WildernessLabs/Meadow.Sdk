@@ -7,28 +7,34 @@ using System.Threading.Tasks;
 
 namespace MeadowCLI.Hcom
 {
+    public enum MeadowMessageType
+    {
+        AppOutput,
+        FileList,
+        DeviceInfo,
+        Data,
+    }
+
     public class MeadowMessageEventArgs : EventArgs
     {
         public string Message { get; private set; }
+        public MeadowMessageType MessageType { get; private set; }
 
-        public enum MeadowMessageType
-        {
-            AppOutput,
-            FileList,
-            Data, //reanem
-        }
-
-        public MeadowMessageEventArgs (string message)
+        public MeadowMessageEventArgs (MeadowMessageType messageType, string message)
         {
             Message = message;
+            MessageType = messageType;
         }
     }
 
     public class MeadowSerialDataProcessor
     {   //collapse to one and use enum
-        public EventHandler<MeadowMessageEventArgs> OnReceivedFileList;
-        public EventHandler<MeadowMessageEventArgs> OnReceivedMonoMsg;
-        public EventHandler<MeadowMessageEventArgs> OnReceivedData;
+        public EventHandler<MeadowMessageEventArgs> OnReceiveData;
+
+
+    //    public EventHandler<MeadowMessageEventArgs> OnReceivedFileList;
+    //    public EventHandler<MeadowMessageEventArgs> OnReceivedMonoMsg;
+    //    public EventHandler<MeadowMessageEventArgs> OnReceivedData;
 
         readonly SerialPort serialPort;
         const int MAX_RECEIVED_BYTES = 2048;
@@ -123,23 +129,22 @@ namespace MeadowCLI.Hcom
                         // This is a comma separated list
                         string message = meadowMessage.Substring(FILE_LIST_PREFIX.Length);
 
-                        OnReceivedFileList?.Invoke(this, new MeadowMessageEventArgs(message));
+                        OnReceiveData?.Invoke(this, new MeadowMessageEventArgs(MeadowMessageType.FileList, message));
                     }
                     else if (meadowMessage.StartsWith(MONO_MSG_PREFIX))
                     {
                         string message = meadowMessage.Substring(MONO_MSG_PREFIX.Length);
 
-                        OnReceivedMonoMsg?.Invoke(this, new MeadowMessageEventArgs(message));
+                        OnReceiveData?.Invoke(this, new MeadowMessageEventArgs(MeadowMessageType.AppOutput, message));
                     }
                     else if (meadowMessage.StartsWith(DEVICE_INFO_PREFIX))
                     {
                         string message = meadowMessage.Substring(DEVICE_INFO_PREFIX.Length);
-
-                        OnReceivedFileList?.Invoke(this, new MeadowMessageEventArgs(message));
+                        OnReceiveData?.Invoke(this, new MeadowMessageEventArgs(MeadowMessageType.DeviceInfo, message));
                     }
                     else
                     {
-                        OnReceivedData?.Invoke(this, new MeadowMessageEventArgs(meadowMessage));
+                        OnReceiveData?.Invoke(this, new MeadowMessageEventArgs(MeadowMessageType.Data, meadowMessage));
                     }
                 }
 
