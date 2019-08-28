@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
-using Microsoft.CodeAnalysis;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
 
 namespace MeadowCLI.DeviceManagement
