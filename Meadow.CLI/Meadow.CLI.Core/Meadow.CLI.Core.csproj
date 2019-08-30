@@ -47,13 +47,22 @@
     <Compile Include="Internals\Tools\CrcTools.cs" />
     <Compile Include="DeviceManagement\MeadowUsbDevice.cs" />
     <Compile Include="DeviceManagement\UsbDeviceManager.cs" />
+    <Compile Include="Internals\Dfu\DfuContext.cs" />
+    <Compile Include="Internals\Dfu\DfuSharp.cs" />
+    <Compile Include="Internals\Dfu\DfuUpload.cs" />
+    <Compile Include="Internals\Dfu\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DeviceManagement\" />
     <Folder Include="Internals\" />
+    <Folder Include="Internals\Dfu\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="libusb-1.0.dll" />
+    <EmbeddedResource Include="libusb-1.0.dylib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
