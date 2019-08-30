@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{00F05278-9F3F-40B0-B377-64E26B028888}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Meadow.CLI.Core</RootNamespace>
+    <RootNamespace>Meadow.CLI</RootNamespace>
     <AssemblyName>Meadow.CLI.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
   </PropertyGroup>
@@ -28,6 +28,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="LibUsbDotNet.LibUsbDotNet">
+      <HintPath>..\packages\LibUsbDotNet.2.2.29\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -40,20 +45,15 @@
     <Compile Include="Internals\MeadowComms\SendTargetData.cs" />
     <Compile Include="Internals\Tools\CobsTools.cs" />
     <Compile Include="Internals\Tools\CrcTools.cs" />
+    <Compile Include="DeviceManagement\MeadowUsbDevice.cs" />
+    <Compile Include="DeviceManagement\UsbDeviceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DeviceManagement\" />
     <Folder Include="Internals\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libusb-1.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="libusb-1.0.dylib">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
