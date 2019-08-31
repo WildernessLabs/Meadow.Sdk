@@ -199,7 +199,7 @@ namespace MeadowCLI.DeviceManagement
             }
         }
 
-        private void ListenForSerialData ()
+        internal void ListenForSerialData()
         {
             if (SerialPort != null)
             {
@@ -214,10 +214,10 @@ namespace MeadowCLI.DeviceManagement
             switch(args.MessageType)
             {
                 case MeadowMessageType.Data:
-                    Console.WriteLine("Data: " + args.Message);
+                    Console.Write("Data: " + args.Message);
                     break;
                 case MeadowMessageType.AppOutput:
-                    Console.WriteLine("App: " + args.Message);
+                    Console.Write("App: " + args.Message);
                     break;
                 case MeadowMessageType.FileList:
                     SetFilesOnDeviceFromMessage(args.Message);

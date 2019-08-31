@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
+using System.Threading;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
@@ -149,6 +150,23 @@ namespace MeadowCLI.DeviceManagement
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DEVELOPER_4;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)userData);
+        }
+
+        public static void EnterEchoMode(MeadowDevice meadow)
+        {
+            if (meadow == null)
+            {
+                Console.WriteLine("No current device");
+                return;
+            }
+
+            if (meadow.SerialPort == null)
+            {
+                Console.WriteLine("No current serial port");
+                return;
+            }
+
+            meadow.Initialize(true);
         }
     }
 }

@@ -7,12 +7,15 @@ namespace MeadowCLI
 {
     class Program
     {
+        static bool _quit = false;
+
         static void Main(string[] args)
         {
             Console.CancelKeyPress += (s, e) =>
             {
+                _quit = true;
                 e.Cancel = true;
-                MeadowDeviceManager.CurrentDevice.SerialPort.Close();
+                MeadowDeviceManager.CurrentDevice?.SerialPort?.Close();
             };
 
             if (args.Length == 0)
@@ -176,6 +179,12 @@ namespace MeadowCLI
             else if (options.MonoEnable)
             {
                 MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
+
+                // the device is going to reset, so we need to wait for it to reconnect
+                System.Threading.Thread.Sleep(5000);
+
+                // just enter port echo mode until the user cancels
+                MeadowDeviceManager.EnterEchoMode(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.MonoRunState)
             {
