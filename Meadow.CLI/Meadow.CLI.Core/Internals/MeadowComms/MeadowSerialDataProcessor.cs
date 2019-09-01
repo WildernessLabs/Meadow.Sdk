@@ -84,6 +84,10 @@ namespace MeadowCLI.Hcom
                 //ignoring for now until we wire cancelation ...
                 //this blocks the thread abort exception when the console app closes
             }
+            catch (InvalidOperationException)
+            {
+                // common if the port is reset (e.g. mono enable/disable) - don't spew confusing info
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"Exception: {ex} may mean the target connection dropped");

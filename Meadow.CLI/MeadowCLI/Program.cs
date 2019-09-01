@@ -2,11 +2,21 @@
 using System;
 using MeadowCLI.DeviceManagement;
 using System.IO.Ports;
+using System.Threading;
 
 namespace MeadowCLI
 {
     class Program
     {
+        [Flags]
+        enum CompletionBehavior
+        {
+            Success = 0x00,
+            RequestFailed = 1 << 0,
+            ExitConsole = 1 << 2,
+            KeepConsoleOpen = 1 << 3
+        }
+
         static bool _quit = false;
 
         static void Main(string[] args)
@@ -17,6 +27,8 @@ namespace MeadowCLI
                 e.Cancel = true;
                 MeadowDeviceManager.CurrentDevice?.SerialPort?.Close();
             };
+
+            CompletionBehavior behavior = CompletionBehavior.Success;
 
             if (args.Length == 0)
             {
@@ -33,11 +45,18 @@ namespace MeadowCLI
                 else
                 {
                     SyncArgsCache(options);
-                    ProcessHcom(options);
+                    behavior = ProcessHcom(options);
                 }
             });
 
-            Console.ReadKey();
+            if ((behavior & CompletionBehavior.KeepConsoleOpen) == CompletionBehavior.KeepConsoleOpen)
+            {
+                Console.ReadKey();
+            }
+            else
+            {
+                Thread.Sleep(2000);
+            }
         }
 
         static bool IsSerialPortValid(SerialPort serialPort)
@@ -76,12 +95,13 @@ namespace MeadowCLI
         }
 
         //Probably rename
-        static void ProcessHcom(Options options)
+
+        static CompletionBehavior ProcessHcom(Options options)
         {
             ConnectToMeadowDevice(options.SerialPort);
 
             if(IsSerialPortValid(MeadowDeviceManager.CurrentDevice.SerialPort) == false)
-                return;
+                return CompletionBehavior.RequestFailed;
 
             if (options.WriteFile)
             {
@@ -181,10 +201,13 @@ namespace MeadowCLI
                 MeadowDeviceManager.MonoEnable(MeadowDeviceManager.CurrentDevice);
 
                 // the device is going to reset, so we need to wait for it to reconnect
+                Console.WriteLine($"Reconnecting...");
                 System.Threading.Thread.Sleep(5000);
 
                 // just enter port echo mode until the user cancels
                 MeadowDeviceManager.EnterEchoMode(MeadowDeviceManager.CurrentDevice);
+
+                return CompletionBehavior.Success | CompletionBehavior.KeepConsoleOpen;
             }
             else if (options.MonoRunState)
             {
@@ -204,6 +227,8 @@ namespace MeadowCLI
                 Console.WriteLine("Entering Dfu mode");
                 MeadowDeviceManager.EnterDfuMode(MeadowDeviceManager.CurrentDevice);
             }
+
+            return CompletionBehavior.Success | CompletionBehavior.ExitConsole;
         }
 
         //temp code until we get the device manager logic in place 
