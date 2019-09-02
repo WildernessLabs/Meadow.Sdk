@@ -1,52 +1,48 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Meadow;
 using Meadow.Devices;
 using Meadow.Hardware;
 
 namespace BasicMeadowApp
 {
-    public class MeadowApp : AppBase<F7Micro, MeadowApp>
+    public class MeadowApp : App<F7Micro, MeadowApp>
     {
-        IDigitalOutputPort redLED;
-        IDigitalOutputPort blueLED;
-        IDigitalOutputPort greenLED;
+        IDigitalOutputPort redLed;
+        IDigitalOutputPort blueLed;
+        IDigitalOutputPort greenLed;
 
         public MeadowApp()
         {
             ConfigurePorts();
-            BlinkLed();
+            BlinkLeds();
         }
 
-        protected void ConfigurePorts()
+        public void ConfigurePorts()
         {
-            // create ports for the onboard LED
-            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDRed);
-            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDBlue);
-            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDGreen);
+            Console.WriteLine("Creating Outputs...");
+            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
+            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
+            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
         }
 
-        protected Task BlinkLed()
+        public void BlinkLeds()
         {
-            // create a task to walk through some colors on the LED
-            Task blinky = new Task(() => {
-                var state = false;
-                while (true) {
-                    state = !state;
+            var state = false;
 
-                    redLED.State = state;
-                    Task.Delay(200);
+            while (true)
+            {
+                state = !state;
 
-                    greenLED.State = state;
-                    Task.Delay(200);
+                Console.WriteLine($"State: {state}");
 
-                    blueLED.State = state;
-                    Task.Delay(200);
-                }
-            });
-            blinky.Start();
-            return blinky;
+                redLED.State = state;
+                Thread.Sleep(500);
+                blueLED.State = state;
+                Thread.Sleep(500);
+                greenLED.State = state;
+                Thread.Sleep(500);
+            }
         }
     }
 }

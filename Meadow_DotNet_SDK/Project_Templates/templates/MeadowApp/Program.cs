@@ -1,5 +1,4 @@
-﻿using System;
-using Meadow;
+﻿using Meadow;
 
 namespace BasicMeadowApp
 {
