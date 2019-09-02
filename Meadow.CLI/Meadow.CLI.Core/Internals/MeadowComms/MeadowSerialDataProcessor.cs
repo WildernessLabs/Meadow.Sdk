@@ -31,11 +31,6 @@ namespace MeadowCLI.Hcom
     {   //collapse to one and use enum
         public EventHandler<MeadowMessageEventArgs> OnReceiveData;
 
-
-    //    public EventHandler<MeadowMessageEventArgs> OnReceivedFileList;
-    //    public EventHandler<MeadowMessageEventArgs> OnReceivedMonoMsg;
-    //    public EventHandler<MeadowMessageEventArgs> OnReceivedData;
-
         readonly SerialPort serialPort;
         const int MAX_RECEIVED_BYTES = 2048;
         
@@ -117,10 +112,8 @@ namespace MeadowCLI.Hcom
                         recvOffset += 2;
                         break;
                     }
-                    else
-                    {
-                        foundData[foundOffset] = buffer[recvOffset];
-                    }
+
+                    foundData[foundOffset] = buffer[recvOffset];
                 }
 
                 if (foundData[foundOffset + 1] == '\n')
