@@ -15,14 +15,6 @@
         </Category>
     </Extension>
     
-    <Extension path = "/MonoDevelop/ProjectModel/ProjectModelExtensions">
-        <ProjectFlavor
-            id="Meadow.Sdk"
-            type="Meadow.Sdks.IdeExtensions.Vs4Mac.MeadowProject"
-            alias="Meadow"
-            />
-    </Extension>
-    
     <Extension path="/MonoDevelop/Ide/Templates">
         <Template
             id="WildernessLabs.Meadow.Templates.BasicApp"

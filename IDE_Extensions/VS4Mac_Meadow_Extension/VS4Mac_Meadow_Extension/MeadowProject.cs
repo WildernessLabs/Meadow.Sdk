@@ -10,7 +10,7 @@ using MonoDevelop.Projects.MSBuild;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
-    [ExportProjectModelExtension, AppliesTo("Meadow.Sdk")]
+    [ExportProjectModelExtension, AppliesTo("Meadow")]
     public class MeadowProject : DotNetProjectExtension
     {
         // Note: see https://github.com/mhutch/MonoDevelop.AddinMaker/blob/eff386bfcce05918dbcfe190e9c2ed8513fe92ff/MonoDevelop.AddinMaker/AddinProjectFlavor.cs#L16 for better implementation 
