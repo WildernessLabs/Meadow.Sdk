@@ -21,9 +21,9 @@ namespace BasicMeadowApp
         public void ConfigurePorts()
         {
             Console.WriteLine("Creating Outputs...");
-            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
-            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
-            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
+            redLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
+            blueLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
+            greenLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
         }
 
         public void BlinkLeds()
@@ -36,11 +36,11 @@ namespace BasicMeadowApp
 
                 Console.WriteLine($"State: {state}");
 
-                redLED.State = state;
+                redLed.State = state;
                 Thread.Sleep(500);
-                blueLED.State = state;
+                blueLed.State = state;
                 Thread.Sleep(500);
-                greenLED.State = state;
+                greenLed.State = state;
                 Thread.Sleep(500);
             }
         }
