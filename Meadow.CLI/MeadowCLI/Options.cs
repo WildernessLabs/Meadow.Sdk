@@ -46,8 +46,8 @@ namespace MeadowCLI
         public bool ResetTargetMcu { get; set; }
         [Option(longName: "EnterDfuMode", Required = false, HelpText = "Set Meadow in DFU mode")]
         public bool EnterDfuMode { get; set; }
-        [Option(longName: "ToggleNsh", Required = false, HelpText = "Turn NSH mode on or off")]
-        public bool ToggleNsh { get; set; }
+        [Option(longName: "NshEnable", Required = false, HelpText = "Enable NSH")]
+        public bool NshEnable { get; set; }
         [Option(longName: "MonoDisable", Required = false, HelpText = "Disable mono from running")]
         public bool MonoDisable { get; set; }
         [Option(longName: "MonoEnable", Required = false, HelpText = "Enable mono so it can run")]

@@ -186,11 +186,10 @@ namespace MeadowCLI
                 Console.WriteLine($"Setting developer level to {options.DeveloperValue}");
                 MeadowDeviceManager.SetDeveloper4(MeadowDeviceManager.CurrentDevice, options.DeveloperValue);
             }
-
-            else if (options.ToggleNsh)
+            else if (options.NshEnable)
             {
-                Console.WriteLine($"Toggling Nsh");
-                MeadowDeviceManager.ToggleNsh(MeadowDeviceManager.CurrentDevice);
+                Console.WriteLine($"Enable Nsh");
+                MeadowDeviceManager.NshEnable(MeadowDeviceManager.CurrentDevice);
             }
             else if (options.MonoDisable)
             {

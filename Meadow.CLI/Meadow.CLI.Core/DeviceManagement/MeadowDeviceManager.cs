@@ -91,11 +91,11 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void ToggleNsh(MeadowDevice meadow)
+        public static void NshEnable(MeadowDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_ENABLE_DISABLE_NSH;
 
-            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
+            new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint) 1);
         }
 
         public static void MonoDisable(MeadowDevice meadow)
