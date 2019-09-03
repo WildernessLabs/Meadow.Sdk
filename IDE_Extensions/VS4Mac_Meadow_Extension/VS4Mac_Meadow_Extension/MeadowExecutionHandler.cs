@@ -55,7 +55,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             if (cts.IsCancellationRequested) { return; }
 
-            monitor.Log.Write("Checking for installed binaries", 0);
+            monitor.Log.Write("Checking for installed binaries");
             foreach (var f in files)
             {
                 await monitor.Log.WriteLineAsync($"Found {f}").ConfigureAwait(false);
@@ -63,7 +63,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             if (cts.IsCancellationRequested) { return; }
 
-            monitor.Log.Write("Deploying required libraries (this may take several minutes)", 1);
+            monitor.Log.Write("Deploying required libraries (this may take several minutes)");
             await meadow.DeployRequiredLibs(folder);
 
             if (cts.IsCancellationRequested) { return; }

@@ -86,9 +86,25 @@ namespace MeadowCLI.DeviceManagement
             }
         }
 
-        public Task<bool> DeployApp(string path)
+        public async Task<bool> DeployApp(string path)
         {
-            return WriteFile(APP_EXE, path);
+            await WriteFile(APP_EXE, path);
+
+            //get list of files in folder
+            var files = Directory.GetFiles(path, "*.dll");
+
+            //currently deploys all included dlls, update to use CRCs to only deploy new files
+            //will likely need to update to deploy other files types (txt, jpg, etc.)
+            foreach(var f in files)
+            {
+                var file = Path.GetFileName(f);
+                if (file == MSCORLIB || file == SYSTEM || file == SYSTEM_CORE || file == MEADOW_CORE)
+                    continue;
+
+                await WriteFile(file, path);
+            }
+
+            return true; //can probably remove bool return type
         }
 
         public async Task<bool> WriteFile(string filename, string path, int timeoutInMs = 200000) //200s 
