@@ -13,7 +13,7 @@ namespace MeadowCLI.DeviceManagement
     /// </summary>
     public static class MeadowDeviceManager
     {
-        public static ObservableCollection<MeadowDevice> AttachedDevices = new ObservableCollection<MeadowDevice>();
+    //    public static ObservableCollection<MeadowDevice> AttachedDevices = new ObservableCollection<MeadowDevice>();
 
         public static MeadowDevice CurrentDevice { get; set; } //short cut for now but may be useful
 
@@ -24,16 +24,6 @@ namespace MeadowCLI.DeviceManagement
             // TODO: populate the list of attached devices
 
             // TODO: wire up listeners for device plug and unplug
-        }
-
-        private static void Handle_DeviceAdded()
-        {
-            // add device to AttachedDevices using lib usb
-        }
-
-        private static void Handle_DeviceRemoved()
-        {
-            // remove device from AttachedDevices using lib usb
         }
 
         //returns null if we can't detect a Meadow board
@@ -49,14 +39,13 @@ namespace MeadowCLI.DeviceManagement
                 if (string.IsNullOrWhiteSpace(id) == false)
                 {
                     meadow.Id = id;
-                    AttachedDevices.Add(meadow);
                     return meadow;
                 }
    
                 meadow.SerialPort.Close();
                 return null;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 //swallow for now
                 return null;

@@ -97,15 +97,20 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             foreach(var port in serialPorts)
             {
-                if (_deployTargets.Any(t => t.Id == port))
+                if (_deployTargets.Any(t => t.MeadowDevice.SerialPort.PortName == port))
                     continue;
 
-                var meadow = await MeadowDeviceManager.GetMeadowForSerialPort(port);
+                var timeout = Task<MeadowDevice>.Delay(1000);
+                var meadowTask = MeadowDeviceManager.GetMeadowForSerialPort(port);
+
+                await Task.WhenAny(timeout, meadowTask);
+
+                var meadow = meadowTask.Result;
 
                 if (meadow != null)
                 {
                     //we should really just have the execution target own an instance of MeadowDevice 
-                    _deployTargets.Add(new MeadowDeviceExecutionTarget(meadow.Name, meadow.SerialPort.PortName));
+                    _deployTargets.Add(new MeadowDeviceExecutionTarget(meadow));
                     meadow.SerialPort.Close();
                     _deviceListChanged?.Invoke(null);
                 }
@@ -114,7 +119,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             var removeList = new List<MeadowDeviceExecutionTarget>();
             foreach(var t in _deployTargets)
             {
-                if(serialPorts.Any(p => p == t.Id) == false)
+                if(serialPorts.Any(p => p == t.MeadowDevice.SerialPort.PortName) == false)
                 {
                     removeList.Add(t);
                 }

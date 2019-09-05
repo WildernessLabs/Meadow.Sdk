@@ -19,11 +19,11 @@ namespace MeadowCLI.DeviceManagement
     //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
-        const string MSCORLIB = "mscorlib.dll";
-        const string SYSTEM = "System.dll";
-        const string SYSTEM_CORE = "System.Core.dll";
-        const string MEADOW_CORE = "Meadow.Core.dll";
-        const string APP_EXE = "App.exe";
+        public const string MSCORLIB = "mscorlib.dll";
+        public const string SYSTEM = "System.dll";
+        public const string SYSTEM_CORE = "System.Core.dll";
+        public const string MEADOW_CORE = "Meadow.Core.dll";
+        public const string APP_EXE = "App.exe";
 
         public SerialPort SerialPort { get; private set; }
 
@@ -39,17 +39,19 @@ namespace MeadowCLI.DeviceManagement
 
         private List<string> filesOnDevice = new List<string>();
 
-        public MeadowDevice(string serialPortName, string deviceName = null)
+        public MeadowDevice(string serialPortName, string deviceName = null, string Id = null)
         {
-            if(string.IsNullOrWhiteSpace(deviceName) == false)
+            if (string.IsNullOrWhiteSpace(deviceName) == false)
+            {
                 Name = deviceName; //otherwise use the default
-
-            Id = Guid.NewGuid().ToString();
+            }
 
             this.serialPortName = serialPortName;
+
+            this.Id = Id;
         }
 
-        public void Initialize (bool listen = true)
+        public bool Initialize (bool listen = true)
         {
             if(SerialPort != null)
             {
@@ -57,10 +59,14 @@ namespace MeadowCLI.DeviceManagement
                 SerialPort = null;
             }
 
-            OpenSerialPort();
+            if (OpenSerialPort() == false)
+                return false;
 
-            if(listen == true)
+            if (listen == true)
+            {
                 ListenForSerialData();
+            }
+            return true;
         }
 
         public async Task DeployRequiredLibs(string path, bool forceUpdate = false)
@@ -207,7 +213,7 @@ namespace MeadowCLI.DeviceManagement
         }
 
         //putting this here for now ..... 
-        void OpenSerialPort()
+        bool OpenSerialPort()
         {
             try
             {   // Create a new SerialPort object with default settings
@@ -232,14 +238,11 @@ namespace MeadowCLI.DeviceManagement
 
                 SerialPort = port;
             }
-            catch (IOException ioEx)
+            catch
             {
-                throw new MeadowDeviceException($"The specified port '{serialPortName}' could not be found or opened.", ioEx);
+                return false; //serial port couldn't be opened .... that's ok
             }
-            catch (Exception ex)
-            {
-                throw new MeadowDeviceException($"Unknown exception", ex);
-            }
+            return true;
         }
 
         internal void ListenForSerialData()
