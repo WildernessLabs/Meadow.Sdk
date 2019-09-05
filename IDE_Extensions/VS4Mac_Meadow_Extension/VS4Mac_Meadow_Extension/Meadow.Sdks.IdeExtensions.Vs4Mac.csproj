@@ -12,20 +12,22 @@
     <None Remove="icons\project-microframework-console-32%402x.png" />
     <None Remove="icons\project-microframework-library-32.png" />
     <None Remove="icons\project-microframework-library-32%402x.png" />
-    <None Remove="Templates\Meadow.Sdk.Templates.0.1.0.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.Debugger" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Templates\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Meadow.CLI\Meadow.CLI.Core\Meadow.CLI.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Templates\Meadow.Sdk.Templates.0.1.0.nupkg">
+    <None Update="Templates\Meadow.Sdk.Templates.0.1.0.nupkg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
+    <None Update="Meadow.Sdk.Templates.0.1.0.nupkg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
-using System.Threading;
 using System.Threading.Tasks;
 using MeadowCLI.Hcom;
 using static MeadowCLI.DeviceManagement.MeadowFileManager;
@@ -37,7 +35,7 @@ namespace MeadowCLI.DeviceManagement
             // remove device from AttachedDevices using lib usb
         }
 
-        public static void FindAttachedMeadowDevices()
+        public static async Task FindAttachedMeadowDevices()
         {
             foreach (var d in AttachedDevices)
             {
@@ -48,19 +46,39 @@ namespace MeadowCLI.DeviceManagement
             foreach (var s in SerialPort.GetPortNames())
             {
                 //limit Mac searches to tty.usb*, Windows, try all COM ports
+                //on Mac it's pretty quick to test em all so we could remove this check 
                 if(Environment.OSVersion.Platform != PlatformID.Unix ||
                     s.Contains("tty.usb"))
                 {
                     var meadow = new MeadowDevice(s, $"Meadow F7 ({s})");
-                    AttachedDevices.Add(meadow);
+
+                    try
+                    {
+                        meadow.Initialize(true);
+                        var id = await meadow.GetDeviceInfo();
+
+                        if (string.IsNullOrWhiteSpace(id) == false)
+                        {
+                            AttachedDevices.Add(meadow);
+                        }
+                        else
+                        {
+                            meadow.SerialPort.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //swallow for now
+                    }
+                    
                 }
             }
         }
 
         //we'll delete this soon
-        public static ObservableCollection<MeadowDevice> FindConnectedDevices()
+        public static async Task<ObservableCollection<MeadowDevice>> FindConnectedDevices()
         {
-            FindAttachedMeadowDevices();
+            await FindAttachedMeadowDevices();
 
             return AttachedDevices;
         }

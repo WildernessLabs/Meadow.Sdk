@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MeadowCLI.DeviceManagement;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
@@ -15,9 +16,8 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         public static List<MeadowDeviceExecutionTarget> Targets 
         {
             get
-            {   //very blocking still
-                if(_deployTargets.Count == 0)
-                    UpdateTargetsList();
+            {
+                UpdateTargetsList(); //fire and forget ... this will update via an Action 
                 return _deployTargets;
             }
         }
@@ -25,12 +25,12 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
         public static event Action<object> DeviceListChanged;
 
-        private static void UpdateTargetsList(object state = null)
+        private static async Task UpdateTargetsList(object state = null)
         {
             //quick hack for now - only load the device once
             if (_deployTargets.Count == 0)
             {
-                MeadowDeviceManager.FindConnectedDevices();
+                await MeadowDeviceManager.FindConnectedDevices();
 
                 if (MeadowDeviceManager.AttachedDevices.Count < 1)
                     return;

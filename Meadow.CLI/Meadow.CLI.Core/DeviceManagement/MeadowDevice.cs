@@ -179,6 +179,33 @@ namespace MeadowCLI.DeviceManagement
             return Task.FromResult(filesOnDevice.Contains(filename));
         }
 
+        public async Task<string> GetDeviceInfo(int timeoutInMs = 500)
+        {
+            var timeOutTask = Task.Delay(timeoutInMs);
+            var deviceInfo = string.Empty;
+
+            EventHandler<MeadowMessageEventArgs> handler = null;
+
+            var tcs = new TaskCompletionSource<bool>();
+
+            handler = (s, e) =>
+            {
+                if (e.MessageType == MeadowMessageType.DeviceInfo)
+                {
+                    deviceInfo = e.Message;
+                    tcs.SetResult(true);
+                }
+            };
+            dataProcessor.OnReceiveData += handler;
+
+            MeadowDeviceManager.GetDeviceInfo(this);
+
+            await Task.WhenAny(new Task[] { timeOutTask, tcs.Task });
+            dataProcessor.OnReceiveData -= handler;
+
+            return deviceInfo;
+        }
+
         //putting this here for now ..... 
         void OpenSerialPort()
         {
