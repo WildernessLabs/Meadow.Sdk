@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
@@ -35,52 +36,49 @@ namespace MeadowCLI.DeviceManagement
             // remove device from AttachedDevices using lib usb
         }
 
-        public static async Task FindAttachedMeadowDevices()
+        //returns null if we can't detect a Meadow board
+        public static async Task<MeadowDevice> GetMeadowForSerialPort (string serialPort)
         {
-            foreach (var d in AttachedDevices)
+            var meadow = new MeadowDevice(serialPort, $"Meadow F7 ({serialPort})");
+
+            try
             {
-                d?.SerialPort?.Close();
+                meadow.Initialize(true);
+                var id = await meadow.GetDeviceInfo();
+
+                if (string.IsNullOrWhiteSpace(id) == false)
+                {
+                    meadow.Id = id;
+                    AttachedDevices.Add(meadow);
+                    return meadow;
+                }
+   
+                meadow.SerialPort.Close();
+                return null;
             }
-            AttachedDevices.Clear();
+            catch (Exception ex)
+            {
+                //swallow for now
+                return null;
+            }
+        }
+
+        //we'll move this soon
+        public static List<string> FindSerialDevices()
+        {
+            var devices = new List<string>();
 
             foreach (var s in SerialPort.GetPortNames())
             {
                 //limit Mac searches to tty.usb*, Windows, try all COM ports
                 //on Mac it's pretty quick to test em all so we could remove this check 
-                if(Environment.OSVersion.Platform != PlatformID.Unix ||
+                if (Environment.OSVersion.Platform != PlatformID.Unix ||
                     s.Contains("tty.usb"))
                 {
-                    var meadow = new MeadowDevice(s, $"Meadow F7 ({s})");
-
-                    try
-                    {
-                        meadow.Initialize(true);
-                        var id = await meadow.GetDeviceInfo();
-
-                        if (string.IsNullOrWhiteSpace(id) == false)
-                        {
-                            AttachedDevices.Add(meadow);
-                        }
-                        else
-                        {
-                            meadow.SerialPort.Close();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        //swallow for now
-                    }
-                    
+                    devices.Add(s);
                 }
             }
-        }
-
-        //we'll delete this soon
-        public static async Task<ObservableCollection<MeadowDevice>> FindConnectedDevices()
-        {
-            await FindAttachedMeadowDevices();
-
-            return AttachedDevices;
+            return devices;
         }
 
         //providing a numeric (0 = none, 1 = info and 2 = debug)
