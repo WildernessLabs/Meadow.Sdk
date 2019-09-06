@@ -6,19 +6,52 @@ using System.Linq;
 using MonoDevelop.Core;
 using System.Collections.Generic;
 using System;
+using MonoDevelop.Core.ProgressMonitoring;
+using MeadowCLI.Hcom;
 
 namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 {
     class MeadowExecutionHandler : IExecutionHandler
     {
+        private ProgressMonitor outputMonitor;
+        private EventHandler<MeadowMessageEventArgs> messageEventHandler;
+        private MeadowDevice meadowExecutionTarget;
+
+
         public bool CanExecute(ExecutionCommand command)
         {   //returning false here swaps the play button with a build button 
             return (command is MeadowExecutionCommand);
         }
 
+        public MeadowExecutionHandler()
+        {
+            messageEventHandler = OnMeadowMessage;
+        }
+
+        private void OnMeadowMessage(object sender, MeadowMessageEventArgs args)
+        {
+            if (outputMonitor == null)
+            {
+                outputMonitor = MonoDevelop.Ide.IdeApp.Workbench.ProgressMonitors.GetOutputProgressMonitor("Meadow", IconId.Null, true, true, true);
+            }
+
+            outputMonitor.Log.WriteLine(args.Message);
+        }
+
         public ProcessAsyncOperation Execute(ExecutionCommand command, OperationConsole console)
         {
             var cmd = command as MeadowExecutionCommand;
+
+            //unsubscribe from previous device if it exists
+            if(meadowExecutionTarget != null && messageEventHandler != null)
+            {
+                meadowExecutionTarget.OnMeadowMessage -= messageEventHandler;
+            }
+
+            //get a ref to the new execution target
+            meadowExecutionTarget = (cmd.Target as MeadowDeviceExecutionTarget).MeadowDevice;
+
+            meadowExecutionTarget.OnMeadowMessage += messageEventHandler;
 
             var cts = new CancellationTokenSource();
             var deployTask = DeployApp(cmd.Target as MeadowDeviceExecutionTarget, cmd.OutputDirectory, cts);
@@ -30,7 +63,11 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         //https://stackoverflow.com/questions/29798243/how-to-write-to-the-tool-output-pad-from-within-a-monodevelop-add-in
         async Task DeployApp(MeadowDeviceExecutionTarget target, string folder, CancellationTokenSource cts)
         {
-            ProgressMonitor monitor = MonoDevelop.Ide.IdeApp.Workbench.ProgressMonitors.GetToolOutputProgressMonitor(false, cts);
+            ProgressMonitor toolMonitor = MonoDevelop.Ide.IdeApp.Workbench.ProgressMonitors.GetToolOutputProgressMonitor(true, cts);
+            ProgressMonitor outMonitor = MonoDevelop.Ide.IdeApp.Workbench.ProgressMonitors.GetStatusProgressMonitor("Meadow", IconId.Null, true);
+
+            var monitor = new AggregatedProgressMonitor(toolMonitor, new ProgressMonitor[] { outMonitor });
+
             monitor.BeginTask("Deploying to Meadow ...", 1);
 
             try
@@ -48,7 +85,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
                 await DeployMeadowApp(meadow, monitor, cts, folder);
 
-                await Task.Run(() => ResetMeadowAndStartMono(meadow, monitor, cts));
+                await ResetMeadowAndStartMono(meadow, monitor, cts);
             }
             catch (Exception ex)
             {
@@ -135,14 +172,27 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             await meadow.DeployApp(folder);
         }
 
-        void ResetMeadowAndStartMono(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
+        async Task ResetMeadowAndStartMono(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
         {
             if(cts.IsCancellationRequested) { return; }
 
             monitor.ReportSuccess("Resetting Meadow and starting app (30-60s)");
 
             MeadowDeviceManager.MonoEnable(meadow);
-            MeadowDeviceManager.ResetTargetMcu(meadow);
+
+            try
+            {
+                MeadowDeviceManager.ResetTargetMcu(meadow);
+            }
+            catch
+            {
+                //gulp
+            }
+
+            await Task.Delay(1000);//wait for reboot
+
+            //reconnect serial port
+            meadow.Initialize();
         }
     }
 }

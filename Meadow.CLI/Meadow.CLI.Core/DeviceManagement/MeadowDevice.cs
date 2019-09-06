@@ -19,6 +19,8 @@ namespace MeadowCLI.DeviceManagement
     //a simple model object that represents a meadow device including connection
     public class MeadowDevice
     {
+        public EventHandler<MeadowMessageEventArgs> OnMeadowMessage;
+
         public const string MSCORLIB = "mscorlib.dll";
         public const string SYSTEM = "System.dll";
         public const string SYSTEM_CORE = "System.Core.dll";
@@ -257,7 +259,9 @@ namespace MeadowCLI.DeviceManagement
 
         void DataReceived (object sender, MeadowMessageEventArgs args)
         {
-            switch(args.MessageType)
+            OnMeadowMessage?.Invoke(this, args);
+
+            switch (args.MessageType)
             {
                 case MeadowMessageType.Data:
                     Console.Write("Data: " + args.Message);
