@@ -19,7 +19,7 @@ namespace MeadowCLI.DeviceManagement
         {
         }
 
-        public static void DeployAppInFolder(MeadowDevice meadow, string appFolder)
+        public static void DeployAppInFolder(MeadowSerialDevice meadow, string appFolder)
         {
             var files = Directory.GetFiles(appFolder, "*.exe");
 
@@ -36,7 +36,7 @@ namespace MeadowCLI.DeviceManagement
             }
         }
 
-        public static void WriteFileToFlash(MeadowDevice meadow, string fileName, string targetFileName = null, int partition = 0)
+        public static void WriteFileToFlash(MeadowSerialDevice meadow, string fileName, string targetFileName = null, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_START_FILE_TRANSFER;
 
@@ -46,28 +46,28 @@ namespace MeadowCLI.DeviceManagement
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, targetFileName, partition, false);
         }
 
-        public static void DeleteFile(MeadowDevice meadow, string fileName, int partition = 0)
+        public static void DeleteFile(MeadowSerialDevice meadow, string fileName, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_DELETE_FILE_BY_NAME;
 
             TransmitFileInfoToExtFlash(meadow, _meadowRequestType, fileName, fileName, partition, true);
         }
 
-        public static void EraseFlash(MeadowDevice meadow)
+        public static void EraseFlash(MeadowSerialDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_BULK_FLASH_ERASE;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void VerifyErasedFlash(MeadowDevice meadow)
+        public static void VerifyErasedFlash(MeadowSerialDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_VERIFY_ERASED_FLASH;
 
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void PartitionFileSystem(MeadowDevice meadow, int numberOfPartitions = 2)
+        public static void PartitionFileSystem(MeadowSerialDevice meadow, int numberOfPartitions = 2)
         {
             if (numberOfPartitions < 1 || numberOfPartitions > 8)
                 throw new IndexOutOfRangeException("Number of partitions must be between 1 & 8 inclusive");
@@ -77,39 +77,39 @@ namespace MeadowCLI.DeviceManagement
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)numberOfPartitions);
         }
 
-        public static void MountFileSystem(MeadowDevice meadow, int partition)
+        public static void MountFileSystem(MeadowSerialDevice meadow, int partition)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_MOUNT_FLASH_FS;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
         }
 
-        public static void InitializeFileSystem(MeadowDevice meadow, int partition)
+        public static void InitializeFileSystem(MeadowSerialDevice meadow, int partition)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_INITIALIZE_FLASH_FS;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
         }
 
-        public static void CreateFileSystem(MeadowDevice meadow)
+        public static void CreateFileSystem(MeadowSerialDevice meadow)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_CREATE_ENTIRE_FLASH_FS;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType);
         }
 
-        public static void FormatFileSystem(MeadowDevice meadow, int partition)
+        public static void FormatFileSystem(MeadowSerialDevice meadow, int partition)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_FORMAT_FLASH_FILE_SYS;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
         }
 
         //ToDo - find the output 
-        public static void ListFiles(MeadowDevice meadow, int partition = 0)
+        public static void ListFiles(MeadowSerialDevice meadow, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_LIST_PARTITION_FILES;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
         }
 
         //ToDo - find the output 
-        public static void ListFilesAndCrcs(MeadowDevice meadow, int partition = 0)
+        public static void ListFilesAndCrcs(MeadowSerialDevice meadow, int partition = 0)
         {
             _meadowRequestType = HcomMeadowRequestType.HCOM_MDOW_REQUEST_LIST_PART_FILES_AND_CRC;
             new SendTargetData(meadow.SerialPort).SendSimpleCommand(_meadowRequestType, (uint)partition);
@@ -134,7 +134,7 @@ namespace MeadowCLI.DeviceManagement
         }
 
 
-        private static void TransmitFileInfoToExtFlash(MeadowDevice meadow,
+        private static void TransmitFileInfoToExtFlash(MeadowSerialDevice meadow,
                             HcomMeadowRequestType requestType,
                             string sourceFileName, string targetFileName, int partition,
                             bool deleteFile)

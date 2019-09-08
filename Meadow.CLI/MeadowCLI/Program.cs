@@ -233,7 +233,7 @@ namespace MeadowCLI
         //temp code until we get the device manager logic in place 
         static void ConnectToMeadowDevice (string commPort)
 		{
-            var device = new MeadowDevice(commPort);
+            var device = new MeadowSerialDevice(commPort);
             try
             {
                 device.Initialize();

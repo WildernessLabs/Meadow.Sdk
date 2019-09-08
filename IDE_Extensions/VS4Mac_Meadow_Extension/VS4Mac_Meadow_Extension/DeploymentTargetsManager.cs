@@ -29,34 +29,9 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         private static object eventLock = new object();
         private static bool isPolling;
 
-        public static event Action<object> DeviceListChanged
-        {
-            add
-            {
-                lock (eventLock)
-                {
-                    if (_deviceListChanged == null)
-                    {
-                        StartPollingForDevices();
-                    }
-                    _deviceListChanged += value;
-                }
-            }
-            remove
-            {
-                lock (eventLock)
-                {
-                    _deviceListChanged -= value;
-                    if (_deviceListChanged == null)
-                    {
-                        StopPollingForDevices();
-                    }
-                }
-            }
-        }
-        private static event Action<object> _deviceListChanged;
+        public static event Action<object> DeviceListChanged;
 
-        private static void StartPollingForDevices()
+        public static void StartPollingForDevices()
         {
             if (isPolling)
                 return;
@@ -68,7 +43,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
         static object timerLock = new object();
 
-        private static void StopPollingForDevices()
+        public static void StopPollingForDevices()
         {
             isPolling = false;
    
@@ -112,7 +87,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                     //we should really just have the execution target own an instance of MeadowDevice 
                     _deployTargets.Add(new MeadowDeviceExecutionTarget(meadow));
                     meadow.SerialPort.Close();
-                    _deviceListChanged?.Invoke(null);
+                    DeviceListChanged?.Invoke(null);
                 }
             }
 
@@ -128,7 +103,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             foreach(var r in removeList)
             {
                 _deployTargets.Remove(r);
-                _deviceListChanged?.Invoke(null);
+                DeviceListChanged?.Invoke(null);
             }
 
             isUpdating = false;

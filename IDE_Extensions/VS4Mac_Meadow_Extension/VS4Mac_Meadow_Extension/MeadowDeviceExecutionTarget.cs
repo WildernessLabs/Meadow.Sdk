@@ -9,13 +9,13 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
     /// </summary>
     public class MeadowDeviceExecutionTarget : ExecutionTarget
     {
-        public override string Id => MeadowDevice?.Id;
+        public override string Id => MeadowDevice?.DeviceInfo.SerialNumber;
 
-        public override string Name => MeadowDevice?.Name;
+        public override string Name => "Meadow " + MeadowDevice?.DeviceInfo.SerialNumber.Substring("Serial Number: ".Length);
 
-        public MeadowDevice MeadowDevice { get; private set; }
+        public MeadowSerialDevice MeadowDevice { get; private set; }
 
-        public MeadowDeviceExecutionTarget(MeadowDevice device)
+        public MeadowDeviceExecutionTarget(MeadowSerialDevice device)
         {
             MeadowDevice = device;
         }

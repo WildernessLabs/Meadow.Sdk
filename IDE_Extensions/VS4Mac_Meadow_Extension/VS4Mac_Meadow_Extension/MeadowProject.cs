@@ -24,13 +24,12 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
 
             // if the project is not a library
             // shouldn't this test if it's an executable?
-            // TODO: if(AppliesTo("Meadow")) // i think we need to check the project SDK type
             if (Project.CompileTarget != CompileTarget.Library)
             {
                 Console.WriteLine("WLABS: Not a lib");
-                // wire up execution targets, which actually starts listening (maybe fix)
-                // TODO: call StartListening() here and get rid of the event subscriber hack.
+
                 DeploymentTargetsManager.DeviceListChanged += OnExecutionTargetsChanged;
+                DeploymentTargetsManager.StartPollingForDevices();
             }
         }
 
@@ -44,12 +43,14 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             base.Dispose();
             // stop listening
             DeploymentTargetsManager.DeviceListChanged -= OnExecutionTargetsChanged;
-            // TODO: Call StopListening() here.
+            DeploymentTargetsManager.StopPollingForDevices();
         }
 
         // targets changed event handler.
         private void OnExecutionTargetsChanged(object dummy)
         {
+            //here if the target changes, we can look for the correct device based on the Id
+
             // update UI on UI thread.
             Runtime.RunInMainThread(() => base.OnExecutionTargetsChanged());
         }
@@ -57,7 +58,6 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
         // probably called when the configuration changes
         protected override IEnumerable<ExecutionTarget> OnGetExecutionTargets(ConfigurationSelector configuration)
         {
-            // TODO: the implementation of the targets manager is insane, this is a blocking call. no joke.
             return DeploymentTargetsManager.Targets;
         }
 

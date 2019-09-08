@@ -15,8 +15,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
     {
         private ProgressMonitor outputMonitor;
         private EventHandler<MeadowMessageEventArgs> messageEventHandler;
-        private MeadowDevice meadowExecutionTarget;
-
+        private MeadowSerialDevice meadowExecutionTarget;
 
         public bool CanExecute(ExecutionCommand command)
         {   //returning false here swaps the play button with a build button 
@@ -98,7 +97,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             }
         }
 
-        async Task<bool> InitializeMeadowDevice(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
+        async Task<bool> InitializeMeadowDevice(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
         {
             if (cts.IsCancellationRequested) return true;
 
@@ -108,11 +107,6 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             {
                 monitor.ErrorLog.WriteLine("Can't read Meadow device");
                 return false;
-            }
-
-            if (meadow.SerialPort != null)
-            {
-                meadow.SerialPort.Close();
             }
 
             meadow.Initialize(false);
@@ -127,7 +121,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             return true;
         }
 
-        async Task<List<string>> GetFilesOnDevice(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
+        async Task<List<string>> GetFilesOnDevice(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
         {
             if (cts.IsCancellationRequested) { return new List<string>(); }
 
@@ -143,7 +137,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             return files;
         }
 
-        async Task WriteFileToMeadow(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder, string file, bool overwrite = false)
+        async Task WriteFileToMeadow(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder, string file, bool overwrite = false)
         {
             if (cts.IsCancellationRequested) { return; }
 
@@ -154,7 +148,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             }
         }
 
-        async Task DeployRequiredLibraries(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder)
+        async Task DeployRequiredLibraries(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder)
         {
             await monitor.Log.WriteLineAsync("Deploying required libraries (this may take several minutes)");
 
@@ -164,7 +158,7 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             await WriteFileToMeadow(meadow, monitor, cts, folder, MeadowDevice.MSCORLIB);
         }
 
-        async Task DeployMeadowApp(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder)
+        async Task DeployMeadowApp(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts, string folder)
         {
             if (cts.IsCancellationRequested) { return; }
 
@@ -172,9 +166,11 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
             await meadow.DeployApp(folder);
         }
 
-        async Task ResetMeadowAndStartMono(MeadowDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
+        async Task ResetMeadowAndStartMono(MeadowSerialDevice meadow, ProgressMonitor monitor, CancellationTokenSource cts)
         {
             if(cts.IsCancellationRequested) { return; }
+
+            string serial = meadow.DeviceInfo.SerialNumber;
 
             monitor.ReportSuccess("Resetting Meadow and starting app (30-60s)");
 
@@ -189,10 +185,14 @@ namespace Meadow.Sdks.IdeExtensions.Vs4Mac
                 //gulp
             }
 
-            await Task.Delay(1000);//wait for reboot
+            await Task.Delay(2500);//wait for reboot
 
             //reconnect serial port
-            meadow.Initialize();
+            if(meadow.Initialize() == false)
+            {
+                //find device with matching serial
+
+            }
         }
     }
 }
