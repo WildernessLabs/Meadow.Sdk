@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,6 +35,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceManagement\MeadowDeviceInfo.cs" />
+    <Compile Include="DeviceManagement\MeadowSerialDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DeviceManagement\DeploymentManager.cs" />
     <Compile Include="DeviceManagement\MeadowDeviceManager.cs" />
@@ -52,11 +54,7 @@
     <Compile Include="Internals\Dfu\DfuUpload.cs" />
     <Compile Include="Internals\Dfu\NativeMethods.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DeviceManagement\" />
-    <Folder Include="Internals\" />
-    <Folder Include="Internals\Dfu\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
