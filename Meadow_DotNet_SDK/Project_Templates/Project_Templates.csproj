@@ -3,15 +3,19 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>0.1</PackageVersion>
-    <PackageId>Meadow.Sdk.Templates</PackageId>
+    <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <Title>Wilderness Labs Meadow Project Templates</Title>
-    <Description>Templates to use when creating an application for Meadow.</Description>
+    <Description>Meadow application template</Description>
     <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
     
     <TargetFramework>net472</TargetFramework><!-- Bug in VS windows, have to put this in here -->
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>0.1.1</Version>
+    <Authors>Wilderness Labs</Authors>
+    <Company>Wilderness Labs</Company>
+    <Product>Meadow</Product>
   </PropertyGroup>
 
   <ItemGroup>

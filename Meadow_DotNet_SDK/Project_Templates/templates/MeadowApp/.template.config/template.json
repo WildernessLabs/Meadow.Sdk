@@ -2,14 +2,13 @@
     "$schema": "http://json.schemastore.org/template",
     "author": "Wilderness Labs",
     "classifications": [ "Meadow", "Console" ],
-    "name": "Basic Meadow App",
+    "name": "Meadow Application",
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
     "shortName": "Meadow",
     "tags": {
         "language": "C#",
         "type": "project"
     },
-    "sourceName": "MeadowApp",
     "preferNameDirectory": true,
     "primaryOutputs": [
         { "path": "MeadowApp.csproj" }

@@ -5,6 +5,6 @@
     <AssemblyName>App</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WildernessLabs.Meadow.Assemblies" Version="0.1.0" />
+    <PackageReference Include="WildernessLabs.Meadow.Assemblies" Version="0.1.1" />
   </ItemGroup>
 </Project>
