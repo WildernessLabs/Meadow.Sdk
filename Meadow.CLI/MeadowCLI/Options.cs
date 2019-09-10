@@ -6,9 +6,9 @@ namespace MeadowCLI
     {
         [Option('d', "Dfu", Required = false, HelpText = "DFU copy os and user files. Looks for files in execution direction. To override, user 'OsFile' and 'UserFile'.")]
         public bool Dfu { get; set; }
-        [Option(longName: "OsFile", Default = null, Required = false, HelpText = "File path to os file. Usage: --osFile mypath")]
+        [Option(longName: "OsFile", Default = null, Required = false, HelpText = "File path to os file. Usage: --OsFile mypath")]
         public string DfuOsPath { get; set; }
-        [Option(longName: "UserFile", Default = null, Required = false, HelpText = "File path to user file. Usage: --userFile mypath")]
+        [Option(longName: "UserFile", Default = null, Required = false, HelpText = "File path to user file. Usage: --UserFile mypath")]
         public string DfuUserPath { get; set; }
 
         [Option(longName: "WriteFile", Required = false, HelpText = "Write an external file to Meadow's internal flash")]
@@ -74,7 +74,7 @@ namespace MeadowCLI
         public int NumberOfPartitions { get; set; }
         [Option('t', "TraceLevel", Default = 1, Required = false, HelpText = "Change the amount of debug information provided by the OS")]
         public int TraceLevel { get; set; }
-        [Option('d', "DeveloperValue", Default = 0, Required = false, HelpText = "Change the developer numeric user data value")]
+        [Option(longName: "DeveloperValue", Default = 0, Required = false, HelpText = "Change the developer numeric user data value")]
         public int DeveloperValue { get; set; }
     }
 }

@@ -45,8 +45,8 @@ namespace MeadowCLI
 
                 devices[0].Uploading += Program_Uploading;
 
-                Upload(devices[0], $"{dfuOsPath ?? Environment.CurrentDirectory + "\\" + os}", os_address);
-                Upload(devices[0], $"{dfuUserPath ?? Environment.CurrentDirectory + "\\" + user}", user_address);
+                Upload(devices[0], $"{dfuOsPath ?? Path.Combine(Environment.CurrentDirectory, os)}", os_address);
+                Upload(devices[0], $"{dfuUserPath ?? Path.Combine(Environment.CurrentDirectory, user)}", user_address);
             }
         }
 
