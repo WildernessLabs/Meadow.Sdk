@@ -8,7 +8,7 @@ namespace BasicMeadowApp
         public static void Main(string[] args)
         {
             // instantiate and run new meadow app
-            app = new MeadowApp();
+            app = new App();
         }
     }
 }

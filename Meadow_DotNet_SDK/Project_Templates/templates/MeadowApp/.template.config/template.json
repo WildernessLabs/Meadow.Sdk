@@ -6,9 +6,10 @@
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
     "shortName": "Meadow",
     "tags": {
-        "language": "C#",
-        "type": "project"
+      "language": "C#",
+      "type": "project"
     },
+    "sourceName": "MeadowApp",
     "preferNameDirectory": true,
     "primaryOutputs": [
         { "path": "MeadowApp.csproj" }

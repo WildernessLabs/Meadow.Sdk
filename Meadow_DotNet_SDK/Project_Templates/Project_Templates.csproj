@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>0.1</PackageVersion>
+    <PackageVersion>0.2.0</PackageVersion>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
-    <Title>Wilderness Labs Meadow Project Templates</Title>
-    <Description>Meadow application template</Description>
+    <Title>Wilderness Labs Meadow Template</Title>
+    <Description>Wilderness Labs Meadow Template</Description>
     <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
     
     <TargetFramework>net472</TargetFramework><!-- Bug in VS windows, have to put this in here -->
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
@@ -24,8 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="templates\" />
-    <Folder Include="templates\MeadowApp\" />
     <Folder Include="templates\MeadowApp\.template.config\" />
   </ItemGroup>
   <ItemGroup>
