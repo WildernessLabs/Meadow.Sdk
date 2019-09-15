@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- TODO: change this to netstandard2.0 when we fix our mono -->
     <Description>Meadow SDK for .NET Builds.</Description>
@@ -13,7 +13,7 @@
     <Owners>Wilderness Labs</Owners>
     <Summary>Meadow Sdk for F7 Micro board</Summary>
     <Title>Meadow Sdk</Title>
-    <Version>1.0.0</Version>
+    <Version>1.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <None Update="sdk\Sdk.props" PackagePath="sdk\Sdk.props" Pack="true" />
