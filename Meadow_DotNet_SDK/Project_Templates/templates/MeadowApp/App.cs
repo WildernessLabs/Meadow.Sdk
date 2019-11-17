@@ -4,9 +4,9 @@ using Meadow;
 using Meadow.Devices;
 using Meadow.Hardware;
 
-namespace BasicMeadowApp
+namespace MeadowApp
 {
-    public class App : App<F7Micro, App>
+    public class App : MeadowApp<F7Micro, MeadowApp>
     {
         IDigitalOutputPort redLed;
         IDigitalOutputPort blueLed;
@@ -20,7 +20,7 @@ namespace BasicMeadowApp
 
         public void ConfigurePorts()
         {
-            Console.WriteLine("Creating Outputs...");
+            Console.WriteLine("Creating output ports...");
             redLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
             blueLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
             greenLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);

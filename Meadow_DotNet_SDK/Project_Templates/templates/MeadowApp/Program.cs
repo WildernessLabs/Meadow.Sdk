@@ -1,6 +1,6 @@
 ﻿using Meadow;
 
-namespace BasicMeadowApp
+namespace MeadowApp
 {
     class Program
     {
@@ -8,7 +8,7 @@ namespace BasicMeadowApp
         public static void Main(string[] args)
         {
             // instantiate and run new meadow app
-            app = new App();
+            app = new MeadowApp();
         }
     }
 }
