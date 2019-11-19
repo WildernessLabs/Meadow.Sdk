@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Meadow;
 using Meadow.Devices;
 using Meadow.Hardware;
 
 namespace BasicMeadowApp
 {
-    public class MeadowApp : AppBase<F7Micro, MeadowApp>
+    public class MeadowApp : App<F7Micro, MeadowApp>
     {
         IDigitalOutputPort redLED;
         IDigitalOutputPort blueLED;
@@ -22,9 +20,9 @@ namespace BasicMeadowApp
         protected void ConfigurePorts()
         {
             // create ports for the onboard LED
-            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDRed);
-            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDBlue);
-            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLEDGreen);
+            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
+            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
+            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
         }
 
         protected Task BlinkLed()

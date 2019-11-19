@@ -1,4 +1,5 @@
-﻿using Meadow;
+﻿using System.Threading;
+using Meadow;
 
 namespace MeadowApp
 {
@@ -9,6 +10,8 @@ namespace MeadowApp
         {
             // instantiate and run new meadow app
             app = new MeadowApp();
+
+			Thread.Sleep(Timeout.Infinite);
         }
     }
 }

@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>MeadowApp</AssemblyName>
+    <AssemblyName>App</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="0.10.3" />
+    <PackageReference Include="Meadow.Foundation" Version="0.11.0" />
   </ItemGroup>
 </Project>

@@ -6,13 +6,13 @@ using Meadow.Hardware;
 
 namespace MeadowApp
 {
-    public class App : MeadowApp<F7Micro, MeadowApp>
+    public class MeadowApp : App<F7Micro, MeadowApp>
     {
         IDigitalOutputPort redLed;
         IDigitalOutputPort blueLed;
         IDigitalOutputPort greenLed;
 
-        public App()
+        public MeadowApp()
         {
             ConfigurePorts();
             BlinkLeds();
