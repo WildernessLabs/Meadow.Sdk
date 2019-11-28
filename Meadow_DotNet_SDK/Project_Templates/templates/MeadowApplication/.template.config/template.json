@@ -9,9 +9,9 @@
       "language": "C#",
       "type": "project"
     },
-    "sourceName": "MeadowApp",
+    "sourceName": "MeadowApplication",
     "preferNameDirectory": true,
     "primaryOutputs": [
-        { "path": "MeadowApp.csproj" }
+        { "path": "MeadowApplication.csproj" }
     ]
 }
