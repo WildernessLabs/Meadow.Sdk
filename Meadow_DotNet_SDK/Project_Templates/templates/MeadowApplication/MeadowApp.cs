@@ -2,47 +2,42 @@
 using System.Threading;
 using Meadow;
 using Meadow.Devices;
-using Meadow.Hardware;
+using Meadow.Foundation;
+using Meadow.Foundation.Leds;
 
 namespace MeadowApp
 {
     public class MeadowApp : App<F7Micro, MeadowApp>
-    {
-        IDigitalOutputPort redLed;
-        IDigitalOutputPort blueLed;
-        IDigitalOutputPort greenLed;
+{
+	const int pulseDuration = 3000;
+	RgbPwmLed rgbPwmLed;
 
-        public MeadowApp()
-        {
-            ConfigurePorts();
-            BlinkLeds();
-        }
+	public MeadowApp()
+	{
+		rgbPwmLed = new RgbPwmLed(Device,
+				   Device.Pins.OnboardLedRed,
+				   Device.Pins.OnboardLedGreen,
+				   Device.Pins.OnboardLedBlue);
 
-        public void ConfigurePorts()
-        {
-            Console.WriteLine("Creating output ports...");
-            redLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
-            blueLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
-            greenLed = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
-        }
+		PulseRgbPwmLed();
+	}
 
-        public void BlinkLeds()
-        {
-            var state = false;
+	protected void PulseRgbPwmLed()
+	{
+		while (true)
+		{
+			Pulse(Color.Red);
+			Pulse(Color.Green);
+			Pulse(Color.Blue);
+		}
+	}
 
-            while (true)
-            {
-                state = !state;
-
-                Console.WriteLine($"State: {state}");
-
-                redLed.State = state;
-                Thread.Sleep(500);
-                blueLed.State = state;
-                Thread.Sleep(500);
-                greenLed.State = state;
-                Thread.Sleep(500);
-            }
-        }
-    }
+	protected void Pulse(Color color)
+	{
+		rgbPwmLed.StartPulse(color);
+		Console.WriteLine($"Pulsing {color}");
+		Thread.Sleep(pulseDuration);
+		rgbPwmLed.Stop();
+	}
+}
 }
