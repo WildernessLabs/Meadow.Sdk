@@ -14,7 +14,7 @@ namespace MeadowApp
 		public MeadowApp()
 		{
 			Initialize();
-			CycleColors(300);
+			CycleColors(1000);
 		}
 
 		void Initialize()
@@ -35,19 +35,26 @@ namespace MeadowApp
 
 			while (true)
 			{
-				ShowColor(Color.Blue, duration);
-				ShowColor(Color.Cyan, duration);
-				ShowColor(Color.Green, duration);
-				ShowColor(Color.GreenYellow, duration);
-				ShowColor(Color.Yellow, duration);
-				ShowColor(Color.Orange, duration);
-				ShowColor(Color.OrangeRed, duration);
-				ShowColor(Color.Red, duration);
-				ShowColor(Color.MediumVioletRed, duration);
-				ShowColor(Color.Purple, duration);
-				ShowColor(Color.Magenta, duration);
-				ShowColor(Color.Pink, duration);
+				ShowColorPulse(Color.Blue, duration);
+				ShowColorPulse(Color.Cyan, duration);
+				ShowColorPulse(Color.Green, duration);
+				ShowColorPulse(Color.GreenYellow, duration);
+				ShowColorPulse(Color.Yellow, duration);
+				ShowColorPulse(Color.Orange, duration);
+				ShowColorPulse(Color.OrangeRed, duration);
+				ShowColorPulse(Color.Red, duration);
+				ShowColorPulse(Color.MediumVioletRed, duration);
+				ShowColorPulse(Color.Purple, duration);
+				ShowColorPulse(Color.Magenta, duration);
+				ShowColorPulse(Color.Pink, duration);
 			}
+		}
+
+		void ShowColorPulse(Color color, int duration = 1000)
+		{
+			onboardLed.StartPulse(color, (uint)(duration / 2));
+			Thread.Sleep(duration);
+			onboardLed.Stop();
 		}
 
 		void ShowColor(Color color, int duration = 1000)
