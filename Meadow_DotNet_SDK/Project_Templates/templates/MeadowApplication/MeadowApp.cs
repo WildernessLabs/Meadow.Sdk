@@ -14,7 +14,7 @@ namespace MeadowApp
 		public MeadowApp()
 		{
 			Initialize();
-			CycleColors(400);
+			CycleColors(300);
 		}
 
 		void Initialize()
