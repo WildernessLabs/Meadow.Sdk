@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="templates\MeadowApplication\.template.config\" />
+    <Folder Include="templates\MeadowLibrary\.template.config\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="templates\MeadowApp\Template.json Notes" />
