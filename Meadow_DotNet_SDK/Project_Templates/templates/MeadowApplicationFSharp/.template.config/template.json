@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application",
-  "identity": "WildernessLabs.Meadow.Templates.BasicApp",
+  "identity": "WildernessLabs.Meadow.Templates.BasicApp.FSharp",
   "groupIdentity": "WildernessLabs.Meadow.BasicApp",
   "shortName": "Meadow",
   "tags": {
-    "language": "C#",
+    "language": "F#",
     "type": "project"
   },
   "sourceName": "MeadowApplication",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.csproj" }
+    { "path": "MeadowApplication.fsproj" }
   ]
 }
