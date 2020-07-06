@@ -1,0 +1,18 @@
+﻿{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Wilderness Labs",
+    "classifications": [ "Meadow", "Library" ],
+    "name": "Meadow Library",
+    "identity": "WildernessLabs.Meadow.Templates.Library.FSharp",
+    "groupIdentity": "WildernessLabs.Meadow.Library",
+    "shortName": "MeadowDll",
+    "tags": {
+      "language": "F#",
+      "type": "library"
+    },
+    "sourceName": "MeadowLibrary",
+    "preferNameDirectory": true,
+    "primaryOutputs": [
+        { "path": "MeadowLibrary.fsproj" }
+    ]
+}

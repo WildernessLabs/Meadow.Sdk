@@ -1,17 +1,18 @@
 ﻿{
-    "$schema": "http://json.schemastore.org/template",
-    "author": "Wilderness Labs",
-    "classifications": [ "Meadow", "Library" ],
-    "name": "Meadow Library",
-    "identity": "WildernessLabs.Meadow.Templates.Library",
-    "shortName": "MeadowDll",
-    "tags": {
-      "language": "C#",
-      "type": "library"
-    },
-    "sourceName": "MeadowLibrary",
-    "preferNameDirectory": true,
-    "primaryOutputs": [
-        { "path": "MeadowLibrary.csproj" }
-    ]
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Library" ],
+  "name": "Meadow Library",
+  "identity": "WildernessLabs.Meadow.Templates.Library",
+  "groupIdentity": "WildernessLabs.Meadow.Library",
+  "shortName": "MeadowDll",
+  "tags": {
+    "language": "C#",
+    "type": "library"
+  },
+  "sourceName": "MeadowLibrary",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowLibrary.csproj" }
+  ]
 }

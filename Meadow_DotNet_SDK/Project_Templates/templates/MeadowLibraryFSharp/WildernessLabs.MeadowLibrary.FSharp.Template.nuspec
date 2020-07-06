@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WildernessLabs.Meadow.Library.FSharp.Template</id>
+    <version>0.5.0</version>
+    <title>Wilderness Labs Meadow Library Project Template</title>
+    <authors>Wilderness Labs</authors>
+    <owners>Wilderness Labs</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Meadow library template</description>
+    <copyright>2019-2020</copyright>
+    <tags>Wilderness Labs Meadow Library Sdk dotnet-new templates FSharp</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2" />
+    </dependencies>
+  </metadata>
+</package>
