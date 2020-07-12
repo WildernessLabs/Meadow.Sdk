@@ -13,8 +13,8 @@ type MeadowApp() =
                       MeadowApp.Device.Pins.OnboardLedBlue, 3.3f, 3.3f, 3.3f,
                       Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
 
-    let ShowColorPulses colour duration =
-        led.StartPulse(colour, (duration / 2u)) |> ignore
+    let ShowColorPulses color duration =
+        led.StartPulse(color, (duration / 2u)) |> ignore
         Threading.Thread.Sleep(int duration) |> ignore
         led.Stop |> ignore
 
