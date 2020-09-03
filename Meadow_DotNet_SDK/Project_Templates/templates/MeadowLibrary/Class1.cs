@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MeadowLibary
+namespace MeadowLibrary
 {
     public class Class1
     {
