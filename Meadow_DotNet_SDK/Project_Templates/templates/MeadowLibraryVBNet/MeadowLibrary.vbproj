@@ -1,0 +1,11 @@
+<Project Sdk="Meadow.Sdk/1.1.0">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>MeadowLibrary</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow.Foundation" Version="0.20.0" />
+  </ItemGroup>
+</Project>

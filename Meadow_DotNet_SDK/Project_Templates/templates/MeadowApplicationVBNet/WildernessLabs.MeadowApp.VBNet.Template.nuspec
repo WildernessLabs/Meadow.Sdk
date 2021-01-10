@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>WildernessLabs.Meadow.App.FSharp.Template</id>
+    <id>WildernessLabs.Meadow.App.VBNet.Template</id>
     <version>0.5.2</version>
     <title>Wilderness Labs Meadow App Project Template</title>
     <authors>Wilderness Labs</authors>
@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Meadow application template</description>
     <copyright>2019-2021</copyright>
-    <tags>Wilderness Labs Meadow App Sdk dotnet-new templates FSharp</tags>
+    <tags>Wilderness Labs Meadow App Sdk dotnet-new templates VB.Net</tags>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
