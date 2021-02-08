@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>WildernessLabs.Meadow.Library.VBNet.Template</id>
-    <version>0.5.2</version>
+    <version>0.6.0</version>
     <title>Wilderness Labs Meadow Library Project Template</title>
     <authors>Wilderness Labs</authors>
     <owners>Wilderness Labs</owners>
