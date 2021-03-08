@@ -14,7 +14,7 @@ type MeadowApp() =
                       Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
 
     let ShowColorPulses color duration =
-        led.StartPulse(color, (duration / 2u)) |> ignore
+        led.StartPulse(color, int (duration / 2u)) |> ignore
         Threading.Thread.Sleep(int duration) |> ignore
         led.Stop |> ignore
 
