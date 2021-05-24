@@ -32,8 +32,6 @@ Public Class MeadowApp
 			3.3f, 3.3f, 3.3f,
 			Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
 
-		
-
 	End Sub
 
 	Private Sub CycleColors(ByVal duration As Integer)

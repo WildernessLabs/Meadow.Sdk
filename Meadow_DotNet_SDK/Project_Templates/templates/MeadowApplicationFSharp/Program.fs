@@ -34,7 +34,7 @@ type MeadowApp() =
             ShowColorPulses Color.Magenta duration
             ShowColorPulses Color.Pink duration
 
-    do CycleColors 1000u
+    do CycleColors 1000
 
 [<EntryPoint>]
 let main argv =
