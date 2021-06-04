@@ -28,7 +28,7 @@ Additionally, at the top of the solution is a `Directory.Build.props` file which
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetFramework>net472</TargetFramework>
     <Author>Wilderness Labs</Author>
-    <Copyright>2019</Copyright>
+    <Copyright>2019-2021</Copyright>
   </PropertyGroup>
 </Project>
 ```
