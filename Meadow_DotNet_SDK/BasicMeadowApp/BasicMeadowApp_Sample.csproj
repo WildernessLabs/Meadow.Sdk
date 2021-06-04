@@ -4,9 +4,6 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Meadow.Foundation" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Meadow.Foundation" Version="0.*" />
   </ItemGroup>
 </Project>
