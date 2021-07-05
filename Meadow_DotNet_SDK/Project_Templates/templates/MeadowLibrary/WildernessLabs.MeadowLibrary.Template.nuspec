@@ -14,7 +14,7 @@
       <packageType name="Template" />
     </packageTypes>
     <dependencies>
-      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework="netstandard2.1" />
     </dependencies>
   </metadata>
 </package>
