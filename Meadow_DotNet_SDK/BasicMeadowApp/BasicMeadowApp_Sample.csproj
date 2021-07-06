@@ -3,4 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow.Foundation" Version="0.*" />
+  </ItemGroup>
 </Project>

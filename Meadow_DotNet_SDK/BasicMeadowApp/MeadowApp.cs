@@ -1,50 +1,68 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
 using Meadow;
 using Meadow.Devices;
-using Meadow.Hardware;
+using Meadow.Foundation;
+using Meadow.Foundation.Leds;
 
-namespace BasicMeadowApp
+namespace MeadowApp
 {
-    public class MeadowApp : App<F7Micro, MeadowApp>
-    {
-        IDigitalOutputPort redLED;
-        IDigitalOutputPort blueLED;
-        IDigitalOutputPort greenLED;
+	public class MeadowApp : App<F7Micro, MeadowApp>
+	{
+		RgbPwmLed onboardLed;
 
-        public MeadowApp()
-        {
-            ConfigurePorts();
-            BlinkLed();
-        }
+		public MeadowApp()
+		{
+			Initialize();
+			CycleColors(1000);
+		}
 
-        protected void ConfigurePorts()
-        {
-            // create ports for the onboard LED
-            redLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedRed);
-            blueLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedBlue);
-            greenLED = Device.CreateDigitalOutputPort(Device.Pins.OnboardLedGreen);
-        }
+		void Initialize()
+		{
+			Console.WriteLine("Initialize hardware...");
 
-        protected Task BlinkLed()
-        {
-            // create a task to walk through some colors on the LED
-            Task blinky = new Task(() => {
-                var state = false;
-                while (true) {
-                    state = !state;
+			onboardLed = new RgbPwmLed(device: Device,
+				redPwmPin: Device.Pins.OnboardLedRed,
+				greenPwmPin: Device.Pins.OnboardLedGreen,
+				bluePwmPin: Device.Pins.OnboardLedBlue,
+				3.3f, 3.3f, 3.3f,
+				Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode);
+		}
 
-                    redLED.State = state;
-                    Task.Delay(200);
+		void CycleColors(int duration)
+		{
+			Console.WriteLine("Cycle colors...");
 
-                    greenLED.State = state;
-                    Task.Delay(200);
+			while (true)
+			{
+				ShowColorPulse(Color.Blue, duration);
+				ShowColorPulse(Color.Cyan, duration);
+				ShowColorPulse(Color.Green, duration);
+				ShowColorPulse(Color.GreenYellow, duration);
+				ShowColorPulse(Color.Yellow, duration);
+				ShowColorPulse(Color.Orange, duration);
+				ShowColorPulse(Color.OrangeRed, duration);
+				ShowColorPulse(Color.Red, duration);
+				ShowColorPulse(Color.MediumVioletRed, duration);
+				ShowColorPulse(Color.Purple, duration);
+				ShowColorPulse(Color.Magenta, duration);
+				ShowColorPulse(Color.Pink, duration);
+			}
+		}
 
-                    blueLED.State = state;
-                    Task.Delay(200);
-                }
-            });
-            blinky.Start();
-            return blinky;
-        }
-    }
+		void ShowColorPulse(Color color, int duration = 1000)
+		{
+			onboardLed.StartPulse(color, duration / 2);
+			Thread.Sleep(duration);
+			onboardLed.Stop();
+		}
+
+		void ShowColor(Color color, int duration = 1000)
+		{
+			Console.WriteLine($"Color: {color}");
+			onboardLed.SetColor(color);
+			Thread.Sleep(duration);
+			onboardLed.Stop();
+		}
+	}
 }

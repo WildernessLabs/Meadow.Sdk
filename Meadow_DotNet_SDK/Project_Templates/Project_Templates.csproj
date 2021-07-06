@@ -4,6 +4,8 @@
     <PackageType>Template</PackageType>
     <PackageVersion>0.7.0</PackageVersion>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
+    <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <Title>Wilderness Labs Meadow Template</Title>
     <Description>Wilderness Labs Meadow Template</Description>
     <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
@@ -17,6 +19,10 @@
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
