@@ -5,7 +5,8 @@ open Meadow.Foundation.Leds
 open Meadow.Foundation
 
 type MeadowApp() =
-    inherit App<F7Micro, MeadowApp>()
+    // Change F7MicroV2 to F7Micro for V1.x boards
+    inherit App<F7MicroV2, MeadowApp>()
 
     do Console.WriteLine "Init with FSharp!"
     let led =
