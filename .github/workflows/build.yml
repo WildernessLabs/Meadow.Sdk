@@ -1,4 +1,4 @@
-name: Meadow.CLI
+name: Meadow.Sdk
 
 on:
   push:
