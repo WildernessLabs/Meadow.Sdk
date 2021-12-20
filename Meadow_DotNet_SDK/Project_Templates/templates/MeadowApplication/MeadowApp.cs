@@ -7,7 +7,8 @@ using Meadow.Foundation.Leds;
 
 namespace MeadowApp
 {
-	public class MeadowApp : App<F7Micro, MeadowApp>
+	// Change F7MicroV2 to F7Micro for V1.x boards
+	public class MeadowApp : App<F7MicroV2, MeadowApp>
 	{
 		RgbPwmLed onboardLed;
 
