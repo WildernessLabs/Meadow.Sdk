@@ -110,4 +110,4 @@ jobs:
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/Meadow.SDK.csproj /t:Rebuild /p:Configuration=Release
 
     - name: Build Project Templates
-      run: msbuild WL/Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/Project_Templates.csproj /t:Rebuild /p:Configuration=Release
+      run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/Project_Templates.csproj /t:Rebuild /p:Configuration=Release
