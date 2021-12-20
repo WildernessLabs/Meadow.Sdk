@@ -55,7 +55,7 @@ jobs:
     - name: Upload Nuget Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Meadow.Mac.mpack.zip
+        name: Meadow.SDK.nuget.zip
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/bin/Release/*.nupkg'
 
     - name: Build Project Templates
@@ -64,7 +64,7 @@ jobs:
     - name: Upload Nuget Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Meadow.Mac.mpack.zip
+        name: Project_Templates.nuget.zip
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/bin/Release/*.nupkg'
 
   code_build:
