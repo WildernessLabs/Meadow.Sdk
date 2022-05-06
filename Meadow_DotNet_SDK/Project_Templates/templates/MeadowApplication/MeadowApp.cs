@@ -7,7 +7,8 @@ using Meadow.Foundation.Leds;
 
 namespace MeadowApp
 {
-	public class MeadowApp : App<F7Micro, MeadowApp>
+	// Change F7FeatherV2 to F7FeatherV1 for V1.x boards
+	public class MeadowApp : App<F7FeatherV2, MeadowApp>
 	{
 		RgbPwmLed onboardLed;
 
@@ -25,7 +26,6 @@ namespace MeadowApp
 				redPwmPin: Device.Pins.OnboardLedRed,
 				greenPwmPin: Device.Pins.OnboardLedGreen,
 				bluePwmPin: Device.Pins.OnboardLedBlue,
-				3.3f, 3.3f, 3.3f,
 				Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode);
 		}
 

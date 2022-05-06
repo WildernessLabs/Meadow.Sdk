@@ -7,10 +7,10 @@ Imports Meadow.Foundation
 Imports Meadow.Foundation.Leds
 
 Public Class MeadowApp
+	// Change F7FeatherV2 to F7FeatherV1 for V1.x boards
+	Inherits App(Of F7FeatherV2, MeadowApp)
 
-	Inherits App(Of F7Micro, MeadowApp)
-
-	private Dim onboardLed as RgbPwmLed
+	Private Dim onboardLed as RgbPwmLed
 
 	Public Sub New()
 		MyBase.New
@@ -25,11 +25,10 @@ Public Class MeadowApp
 	Private Sub Initialize()
 		Console.WriteLine("Initialize hardware...")
 
-		onboardLed = new RgbPwmLed (Device,
+		onboardLed = New RgbPwmLed(Device,
 			Device.Pins.OnboardLedRed,
 			Device.Pins.OnboardLedGreen,
 			Device.Pins.OnboardLedBlue,
-			3.3f, 3.3f, 3.3f,
 			Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
 
 	End Sub

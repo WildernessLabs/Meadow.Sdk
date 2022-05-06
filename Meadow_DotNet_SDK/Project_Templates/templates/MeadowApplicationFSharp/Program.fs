@@ -4,13 +4,15 @@ open Meadow
 open Meadow.Foundation.Leds
 open Meadow.Foundation
 
+
 type MeadowApp() =
-    inherit App<F7Micro, MeadowApp>()
+    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
+    inherit App<F7FeatherV2, MeadowApp>()
 
     do Console.WriteLine "Init with FSharp!"
     let led =
         new RgbPwmLed(MeadowApp.Device, MeadowApp.Device.Pins.OnboardLedRed, MeadowApp.Device.Pins.OnboardLedGreen,
-                      MeadowApp.Device.Pins.OnboardLedBlue, 3.3f, 3.3f, 3.3f,
+                      MeadowApp.Device.Pins.OnboardLedBlue,
                       Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
 
     let ShowColorPulses color duration =
