@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>WildernessLabs.Meadow.Library.Template</id>
-    <version>0.7.0</version>
+    <version>0.7.1</version>
     <title>Wilderness Labs Meadow Library Project Template</title>
     <authors>Wilderness Labs</authors>
     <owners>Wilderness Labs</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Meadow library template</description>
-    <copyright>2019-2021</copyright>
+    <copyright>2019-2022</copyright>
     <tags>Wilderness Labs Meadow Library Sdk dotnet-new templates</tags>
     <packageTypes>
       <packageType name="Template" />
