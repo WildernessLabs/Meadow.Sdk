@@ -14,27 +14,27 @@ type MeadowApp() =
     let mutable led : RgbPwmLed = 
         null
 
-    let ShowcolorPulse (color : Color) (duration : TimeSpan) = 
+    let ShowColorPulse (color : Color) (duration : TimeSpan) = 
         led.StartPulse(color, duration.Divide(2)) |> ignore
         Threading.Thread.Sleep (duration) |> ignore
         led.Stop |> ignore
     
-    let cyclecolors (duration : TimeSpan)  = 
+    let CycleColors (duration : TimeSpan)  = 
         do Console.WriteLine "Cycle colors..."
 
         while true do
-            ShowcolorPulse Color.Blue duration 
-            ShowcolorPulse Color.Cyan duration
-            ShowcolorPulse Color.Green duration
-            ShowcolorPulse Color.GreenYellow duration
-            ShowcolorPulse Color.Yellow duration
-            ShowcolorPulse Color.Orange duration
-            ShowcolorPulse Color.OrangeRed duration
-            ShowcolorPulse Color.Red duration
-            ShowcolorPulse Color.MediumVioletRed duration
-            ShowcolorPulse Color.Purple duration
-            ShowcolorPulse Color.Magenta duration
-            ShowcolorPulse Color.Pink duration
+            ShowColorPulse Color.Blue duration 
+            ShowColorPulse Color.Cyan duration
+            ShowColorPulse Color.Green duration
+            ShowColorPulse Color.GreenYellow duration
+            ShowColorPulse Color.Yellow duration
+            ShowColorPulse Color.Orange duration
+            ShowColorPulse Color.OrangeRed duration
+            ShowColorPulse Color.Red duration
+            ShowColorPulse Color.MediumVioletRed duration
+            ShowColorPulse Color.Purple duration
+            ShowColorPulse Color.Magenta duration
+            ShowColorPulse Color.Pink duration
 
     override this.Initialize() =
         do Console.WriteLine "Initialize... (F#)"
@@ -50,6 +50,6 @@ type MeadowApp() =
     override this.Run () =
         do Console.WriteLine "Run... (F#)"
 
-        do cyclecolors (TimeSpan.FromSeconds(1))
+        do CycleColors (TimeSpan.FromSeconds(1))
 
         base.Run()
