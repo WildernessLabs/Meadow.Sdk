@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>0.9.0</PackageVersion>
+    <Version>0.9.0</Version>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
@@ -10,11 +11,10 @@
     <Description>Wilderness Labs Meadow Template</Description>
     <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
     
-    <!--<TargetFramework>net472</TargetFramework> Bug in VS windows, have to put this in here -->
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>0.8.2</Version>
+    
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
