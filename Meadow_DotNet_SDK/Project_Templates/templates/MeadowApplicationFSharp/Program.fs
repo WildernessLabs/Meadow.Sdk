@@ -8,7 +8,7 @@ open Meadow.Foundation
 open Meadow.Peripherals.Leds
 
 type MeadowApp() =
-    // Change F7MicroV2 to F7Micro for V1.x boards
+    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
     inherit App<F7FeatherV2>()
 
     let mutable led : RgbPwmLed = 
