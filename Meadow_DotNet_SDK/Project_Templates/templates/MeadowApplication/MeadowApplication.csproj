@@ -9,4 +9,9 @@
     <PackageReference Include="Meadow.Foundation" Version="0.*" />
     <PackageReference Include="Meadow.F7" Version="0.*" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="meadow.config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
