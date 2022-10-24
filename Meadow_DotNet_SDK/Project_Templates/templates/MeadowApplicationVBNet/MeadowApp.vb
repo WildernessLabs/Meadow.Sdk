@@ -1,44 +1,41 @@
-﻿Imports System
-Imports System.Threading
+﻿Imports System.Threading
 Imports Meadow
 Imports Meadow.Devices
-Imports Meadow.Hardware
 Imports Meadow.Foundation
 Imports Meadow.Foundation.Leds
+Imports Meadow.Peripherals.Leds
 
 Public Class MeadowApp
+    'Change F7FeatherV2 to F7FeatherV1 for V1.x boards'
+    Inherits App(Of F7FeatherV2)
 
-	Inherits App(Of F7Micro, MeadowApp)
+    Private onboardLed As RgbPwmLed
 
-	private Dim onboardLed as RgbPwmLed
+    Public Overrides Function Run() As Task
+        Console.WriteLine("Run... (VB.NET)")
 
-	Public Sub New()
-		MyBase.New
+        CycleColors(TimeSpan.FromMilliseconds(1000))
 
-		Console.WriteLine("Hello VB.NET!")
+        Return MyBase.Run()
+    End Function
 
-		Initialize()
-		CycleColors(1000)
+    Public Overrides Function Initialize() As Task
+        Console.WriteLine("Initialize... (VB.NET)")
 
-	End Sub
+        onboardLed = New RgbPwmLed(Device,
+            Device.Pins.OnboardLedRed,
+            Device.Pins.OnboardLedGreen,
+            Device.Pins.OnboardLedBlue,
+            CommonType.CommonAnode)
 
-	Private Sub Initialize()
-		Console.WriteLine("Initialize hardware...")
+        Return MyBase.Run()
+    End Function
 
-		onboardLed = new RgbPwmLed (Device,
-			Device.Pins.OnboardLedRed,
-			Device.Pins.OnboardLedGreen,
-			Device.Pins.OnboardLedBlue,
-			3.3f, 3.3f, 3.3f,
-			Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
+    Private Sub CycleColors(ByVal duration As TimeSpan)
+        Console.WriteLine("Cycle colors...")
 
-	End Sub
-
-	Private Sub CycleColors(ByVal duration As Integer)
-		Console.WriteLine("Cycle colors...")
-
-		While true
-			ShowColorPulse(Color.Blue, duration)
+        While True
+            ShowColorPulse(Color.Blue, duration)
             ShowColorPulse(Color.Cyan, duration)
             ShowColorPulse(Color.Green, duration)
             ShowColorPulse(Color.GreenYellow, duration)
@@ -50,13 +47,13 @@ Public Class MeadowApp
             ShowColorPulse(Color.Purple, duration)
             ShowColorPulse(Color.Magenta, duration)
             ShowColorPulse(Color.Pink, duration)
-		End While
+        End While
 
-	End Sub
+    End Sub
 
-	Private Sub ShowColorPulse(ByVal color As Color, ByVal duration As Integer)
-		onboardLed.StartPulse(color, duration/2)
-		Thread.Sleep(duration)
-	End Sub
+    Private Sub ShowColorPulse(ByVal color As Color, ByVal duration As TimeSpan)
+        onboardLed.StartPulse(color, duration / 2)
+        Thread.Sleep(duration)
+    End Sub
 
 End Class

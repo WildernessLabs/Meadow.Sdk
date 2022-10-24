@@ -1,44 +1,55 @@
-﻿open System
+﻿namespace MeadowApp
+
+open System
 open Meadow.Devices
 open Meadow
 open Meadow.Foundation.Leds
 open Meadow.Foundation
+open Meadow.Peripherals.Leds
 
 type MeadowApp() =
-    inherit App<F7Micro, MeadowApp>()
+    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
+    inherit App<F7FeatherV2>()
 
-    do Console.WriteLine "Init with FSharp!"
-    let led =
-        new RgbPwmLed(MeadowApp.Device, MeadowApp.Device.Pins.OnboardLedRed, MeadowApp.Device.Pins.OnboardLedGreen,
-                      MeadowApp.Device.Pins.OnboardLedBlue, 3.3f, 3.3f, 3.3f,
-                      Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
+    let mutable led : RgbPwmLed = 
+        null
 
-    let ShowColorPulses color duration =
-        led.StartPulse(color, (duration / 2)) |> ignore
-        Threading.Thread.Sleep(int duration) |> ignore
+    let ShowColorPulse (color : Color) (duration : TimeSpan) = 
+        led.StartPulse(color, duration.Divide(2)) |> ignore
+        Threading.Thread.Sleep (duration) |> ignore
         led.Stop |> ignore
+    
+    let CycleColors (duration : TimeSpan)  = 
+        do Console.WriteLine "Cycle colors..."
 
-
-    let CycleColors duration =
         while true do
-            ShowColorPulses Color.Blue duration
-            ShowColorPulses Color.Cyan duration
-            ShowColorPulses Color.Green duration
-            ShowColorPulses Color.GreenYellow duration
-            ShowColorPulses Color.Yellow duration
-            ShowColorPulses Color.Orange duration
-            ShowColorPulses Color.OrangeRed duration
-            ShowColorPulses Color.Red duration
-            ShowColorPulses Color.MediumVioletRed duration
-            ShowColorPulses Color.Purple duration
-            ShowColorPulses Color.Magenta duration
-            ShowColorPulses Color.Pink duration
+            ShowColorPulse Color.Blue duration 
+            ShowColorPulse Color.Cyan duration
+            ShowColorPulse Color.Green duration
+            ShowColorPulse Color.GreenYellow duration
+            ShowColorPulse Color.Yellow duration
+            ShowColorPulse Color.Orange duration
+            ShowColorPulse Color.OrangeRed duration
+            ShowColorPulse Color.Red duration
+            ShowColorPulse Color.MediumVioletRed duration
+            ShowColorPulse Color.Purple duration
+            ShowColorPulse Color.Magenta duration
+            ShowColorPulse Color.Pink duration
 
-    do CycleColors 1000
+    override this.Initialize() =
+        do Console.WriteLine "Initialize... (F#)"
 
-[<EntryPoint>]
-let main argv =
-    Console.WriteLine "Hello World from F#!"
-    let app = new MeadowApp()
-    Threading.Thread.Sleep(System.Threading.Timeout.Infinite)
-    0 // return an integer exit code
+        led <- new RgbPwmLed(MeadowApp.Device, 
+            MeadowApp.Device.Pins.OnboardLedRed,
+            MeadowApp.Device.Pins.OnboardLedGreen, 
+            MeadowApp.Device.Pins.OnboardLedBlue, 
+            CommonType.CommonAnode)
+
+        base.Initialize()
+        
+    override this.Run () =
+        do Console.WriteLine "Run... (F#)"
+
+        do CycleColors (TimeSpan.FromSeconds(1))
+
+        base.Run()

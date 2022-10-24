@@ -1,35 +1,41 @@
-﻿using System;
-using System.Threading;
-using Meadow;
+﻿using Meadow;
 using Meadow.Devices;
 using Meadow.Foundation;
 using Meadow.Foundation.Leds;
+using Meadow.Peripherals.Leds;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MeadowApp
 {
-	public class MeadowApp : App<F7Micro, MeadowApp>
+	// Change F7FeatherV2 to F7FeatherV1 for V1.x boards
+    public class MeadowApp : App<F7FeatherV2>
 	{
 		RgbPwmLed onboardLed;
 
-		public MeadowApp()
+		public override Task Run()
 		{
-			Initialize();
-			CycleColors(1000);
+			Console.WriteLine("Run...");
+
+			CycleColors(TimeSpan.FromMilliseconds(1000));
+			return base.Run();
 		}
 
-		void Initialize()
+		public override Task Initialize()
 		{
-			Console.WriteLine("Initialize hardware...");
+			Console.WriteLine("Initialize...");
 
 			onboardLed = new RgbPwmLed(device: Device,
 				redPwmPin: Device.Pins.OnboardLedRed,
 				greenPwmPin: Device.Pins.OnboardLedGreen,
 				bluePwmPin: Device.Pins.OnboardLedBlue,
-				3.3f, 3.3f, 3.3f,
-				Meadow.Peripherals.Leds.IRgbLed.CommonType.CommonAnode);
+				CommonType.CommonAnode);
+
+			return base.Initialize();
 		}
 
-		void CycleColors(int duration)
+		void CycleColors(TimeSpan duration)
 		{
 			Console.WriteLine("Cycle colors...");
 
@@ -50,16 +56,15 @@ namespace MeadowApp
 			}
 		}
 
-		void ShowColorPulse(Color color, int duration = 1000)
+		void ShowColorPulse(Color color, TimeSpan duration)
 		{
 			onboardLed.StartPulse(color, duration / 2);
 			Thread.Sleep(duration);
 			onboardLed.Stop();
 		}
 
-		void ShowColor(Color color, int duration = 1000)
+		void ShowColor(Color color, TimeSpan duration)
 		{
-			Console.WriteLine($"Color: {color}");
 			onboardLed.SetColor(color);
 			Thread.Sleep(duration);
 			onboardLed.Stop();
