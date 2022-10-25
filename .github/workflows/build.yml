@@ -23,7 +23,7 @@ jobs:
         repository: WildernessLabs/VS_Mac_Meadow_Extension
         path: vs-mac
 
-    - name: Checkout Meadow.Sdk side-by-side
+    - name: Checkout Meadow.CLI side-by-side
       uses: actions/checkout@v2
       with:
         repository: WildernessLabs/Meadow.CLI
@@ -77,9 +77,10 @@ jobs:
       with:
         path: Meadow.Sdk
 
-    - name: Checkout Meadow.CLI.Core side-by-side
+    - name: Checkout Meadow.CLI side-by-side
       uses: actions/checkout@v2
       with:
+        repository: WildernessLabs/Meadow.CLI
         path: Meadow.CLI
         ref: develop
 
