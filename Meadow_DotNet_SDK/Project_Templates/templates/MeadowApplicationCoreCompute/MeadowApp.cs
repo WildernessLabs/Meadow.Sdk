@@ -16,6 +16,8 @@ namespace MeadowApp
 		{
 			Resolver.Log.Info("Run...");
 
+			Resolver.Log.Info("Hello, Meadow Core-Compute!");
+
 			return base.Run();
 		}
 

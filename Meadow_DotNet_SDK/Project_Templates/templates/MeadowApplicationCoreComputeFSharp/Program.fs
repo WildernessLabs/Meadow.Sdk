@@ -1,4 +1,4 @@
-﻿namespace MeadowApp
+namespace MeadowApp
 
 open System
 open Meadow.Devices
@@ -18,5 +18,7 @@ type MeadowApp() =
         
     override this.Run () =
         do Resolver.Log.Info "Run... (F#)"
+
+        do Resolver.Log.Info "Hello, Meadow Core-Compute!"
 
         base.Run()

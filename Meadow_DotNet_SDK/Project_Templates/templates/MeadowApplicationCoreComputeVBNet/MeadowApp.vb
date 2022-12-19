@@ -12,6 +12,8 @@ Public Class MeadowApp
     Public Overrides Function Run() As Task
         Resolver.Log.Info("Run... (VB.NET)")
 
+        Resolver.Log.Info("Hello, Meadow Core-Compute!");
+
         Return MyBase.Run()
     End Function
 
