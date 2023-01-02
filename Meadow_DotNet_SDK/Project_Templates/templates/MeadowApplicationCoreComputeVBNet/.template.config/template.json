@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow Application (Core-Compute module)",
+  "identity": "WildernessLabs.Meadow.Templates.BasicCcmApp.VBNet",
+  "groupIdentity": "WildernessLabs.Meadow.BasicCcmApp",
+  "shortName": "MeadowCcm",
+  "tags": {
+    "language": "VB.NET",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowApplication.csproj" }
+  ]
+}

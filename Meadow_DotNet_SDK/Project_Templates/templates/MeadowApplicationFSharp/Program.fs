@@ -20,7 +20,7 @@ type MeadowApp() =
         led.Stop |> ignore
     
     let CycleColors (duration : TimeSpan)  = 
-        do Console.WriteLine "Cycle colors..."
+        do Resolver.Log.Info "Cycle colors..."
 
         while true do
             ShowColorPulse Color.Blue duration 
@@ -37,7 +37,7 @@ type MeadowApp() =
             ShowColorPulse Color.Pink duration
 
     override this.Initialize() =
-        do Console.WriteLine "Initialize... (F#)"
+        do Resolver.Log.Info "Initialize... (F#)"
 
         led <- new RgbPwmLed(MeadowApp.Device, 
             MeadowApp.Device.Pins.OnboardLedRed,
@@ -48,7 +48,7 @@ type MeadowApp() =
         base.Initialize()
         
     override this.Run () =
-        do Console.WriteLine "Run... (F#)"
+        do Resolver.Log.Info "Run... (F#)"
 
         do CycleColors (TimeSpan.FromSeconds(1))
 

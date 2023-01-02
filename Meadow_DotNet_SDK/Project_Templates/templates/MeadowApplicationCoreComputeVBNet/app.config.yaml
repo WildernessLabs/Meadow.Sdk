@@ -1,0 +1,3 @@
+Lifecycle:
+    RestartOnAppFailure: false
+    AppFailureRestartDelaySeconds: 15

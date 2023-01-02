@@ -16,7 +16,7 @@ namespace MeadowApp
 
 		public override Task Run()
 		{
-			Console.WriteLine("Run...");
+			Resolver.Log.Info("Run...");
 
 			CycleColors(TimeSpan.FromMilliseconds(1000));
 			return base.Run();
@@ -24,7 +24,7 @@ namespace MeadowApp
 
 		public override Task Initialize()
 		{
-			Console.WriteLine("Initialize...");
+			Resolver.Log.Info("Initialize...");
 
 			onboardLed = new RgbPwmLed(device: Device,
 				redPwmPin: Device.Pins.OnboardLedRed,
@@ -37,7 +37,7 @@ namespace MeadowApp
 
 		void CycleColors(TimeSpan duration)
 		{
-			Console.WriteLine("Cycle colors...");
+			Resolver.Log.Info("Cycle colors...");
 
 			while (true)
 			{
