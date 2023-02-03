@@ -105,7 +105,7 @@ Currently, there is only one template in here. The code and csproj file comes di
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Wilderness Labs",
-    "classifications": [ "Meadow", "Console" ],
+    "classifications": [ "Meadow", "IoT", "Console" ],
     "name": "Basic Meadow App",
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
     "shortName": "Meadow",
@@ -123,8 +123,44 @@ Currently, there is only one template in here. The code and csproj file comes di
 
 The template config reference docs can be found [here](https://github.com/dotnet/templating/wiki/Reference-for-template.json).
 
-TODO: note sure what `classifications`, if any, should be set. Same for `groupIdentity`.
+Set `classifications` according to any keywords users might use to find the template.
 
-# Documentation 
+When a template is part of a group of templates, with template options to differentiate (like language), set `groupIdentity` to match the ID of those other templates.
+
+## Documentation
 
 Documentation for this SDK thing doesn't exist, but it's basically sugar for [DotNet templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates), which are fairly well documented.
+
+## Testing in development
+
+If you wish to test these templates locally, you can install and use them via the .NET SDK (`dotnet`) template system. Run the `install` commands for the desired template in the [`Meadow_DotNet_SDK/Project_Templates/templates` folder of the Meadow.Sdk repo](https://github.com/WildernessLabs/Meadow.Sdk/tree/main/Meadow_DotNet_SDK/Project_Templates), or all of them like this.
+
+```console
+dotnet new install MeadowApplication
+dotnet new install MeadowApplicationFSharp
+dotnet new install MeadowApplicationVBNet
+dotnet new install MeadowApplicationCoreCompute
+dotnet new install MeadowApplicationCoreComputeFSharp
+dotnet new install MeadowApplicationCoreComputeVBNet
+dotnet new install MeadowLibrary
+dotnet new install MeadowLibraryFSharp
+dotnet new install MeadowLibraryVBNet
+```
+
+You may need to uninstall the NuGet templates to use the local source versions.
+
+```console
+dotnet new uninstall WildernessLabs.Meadow.Template
+```
+
+If you wish to return to using the NuGet templates, you will need to uninstall the local versions. To see the required `uninstall` command(s) to run for each template, call the uninstall command without any parameters. The exact commands will involve the source file location from where they were installed.
+
+```console
+dotnet new uninstall
+```
+
+After you are done testing and wish to return to the NuGet templates, you can reinstall those.
+
+```console
+dotnet new install WildernessLabs.Meadow.Template
+```
