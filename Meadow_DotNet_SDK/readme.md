@@ -33,7 +33,7 @@ Additionally, at the top of the solution is a `Directory.Build.props` file which
 </Project>
 ```
 
-One important thing to note, there is a bug in Visual Studio (Windows) that requires the `TargetFramework` to be set on all `.props` files, even though it's set here.
+One important thing to note, there is a bug in Visual Studio (Windows) that requires the `TargetFramework` to be set on all `.props` files, even though it's set here.  
 
 ### BasicMeadowApp_Sample
 
@@ -67,11 +67,11 @@ Anything in this file will get inserted into the **top** of the project file for
 <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 ```
 
-This tells the DotNet build system to import any properties from the base [`Microsoft.NET.Sdk`](https://www.nuget.org/packages/Microsoft.NET.Sdk) SDK.
+This tells the DotNet build system to import any properties from the base [`Microsoft.NET.Sdk`](https://www.nuget.org/packages/Microsoft.NET.Sdk) SDK. 
 
 #### Sdk.targets
 
-Anything in this file will get inserted into the **bottom** of the project file for a new Meadow application. Currently, we use it to specify that the `Meadow` NuGet package should be included as a dependency.
+Anything in this file will get inserted into the **bottom** of the project file for a new Meadow application. Currently, we use it to specify that the `Meadow` NuGet package should be included as a dependency. 
 
 We also specify a custom [`ProjectCapability`](https://github.com/microsoft/VSProjectSystem/blob/master/doc/overview/dynamicCapabilities.md) called `Meadow`. Project Capabilities are magic strings that replace the old project type GUIDs that tell the DotNet build system how to build/what features a particular project can have.
 
@@ -88,7 +88,7 @@ We also specify a custom [`ProjectCapability`](https://github.com/microsoft/VSPr
 </Project>
 ```
 
-Project Capabilities can be queried by the build system or the IDE at runtime via an `AppliesTo` attribute to turn features on/off.
+Project Capabilities can be queried by the build system or the IDE at runtime via an `AppliesTo` attribute to turn features on/off. 
 
 [here](https://github.com/dotnet/project-system/search?q=ProjectCapability&unscoped_q=ProjectCapability) is an example of its usage within the DotNet build system, and [here](https://github.com/mhutch/MonoDevelop.AddinMaker/blob/eff386bfcce05918dbcfe190e9c2ed8513fe92ff/MonoDevelop.AddinMaker/AddinProjectFlavor.cs#L16) is an example of its usage in a custom Visual Studio for Mac extension.
 
