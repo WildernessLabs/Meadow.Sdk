@@ -33,7 +33,7 @@ Additionally, at the top of the solution is a `Directory.Build.props` file which
 </Project>
 ```
 
-One important thing to note, there is a bug in Visual Studio (Windows) that requires the `TargetFramework` to be set on all `.props` files, even though it's set here.  
+One important thing to note, there is a bug in Visual Studio (Windows) that requires the `TargetFramework` to be set on all `.props` files, even though it's set here.
 
 ### BasicMeadowApp_Sample
 
@@ -67,11 +67,11 @@ Anything in this file will get inserted into the **top** of the project file for
 <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 ```
 
-This tells the DotNet build system to import any properties from the base [`Microsoft.NET.Sdk`](https://www.nuget.org/packages/Microsoft.NET.Sdk) SDK. 
+This tells the DotNet build system to import any properties from the base [`Microsoft.NET.Sdk`](https://www.nuget.org/packages/Microsoft.NET.Sdk) SDK.
 
 #### Sdk.targets
 
-Anything in this file will get inserted into the **bottom** of the project file for a new Meadow application. Currently, we use it to specify that the `Meadow` NuGet package should be included as a dependency. 
+Anything in this file will get inserted into the **bottom** of the project file for a new Meadow application. Currently, we use it to specify that the `Meadow` NuGet package should be included as a dependency.
 
 We also specify a custom [`ProjectCapability`](https://github.com/microsoft/VSProjectSystem/blob/master/doc/overview/dynamicCapabilities.md) called `Meadow`. Project Capabilities are magic strings that replace the old project type GUIDs that tell the DotNet build system how to build/what features a particular project can have.
 
@@ -88,7 +88,7 @@ We also specify a custom [`ProjectCapability`](https://github.com/microsoft/VSPr
 </Project>
 ```
 
-Project Capabilities can be queried by the build system or the IDE at runtime via an `AppliesTo` attribute to turn features on/off. 
+Project Capabilities can be queried by the build system or the IDE at runtime via an `AppliesTo` attribute to turn features on/off.
 
 [here](https://github.com/dotnet/project-system/search?q=ProjectCapability&unscoped_q=ProjectCapability) is an example of its usage within the DotNet build system, and [here](https://github.com/mhutch/MonoDevelop.AddinMaker/blob/eff386bfcce05918dbcfe190e9c2ed8513fe92ff/MonoDevelop.AddinMaker/AddinProjectFlavor.cs#L16) is an example of its usage in a custom Visual Studio for Mac extension.
 
@@ -105,7 +105,7 @@ Currently, there is only one template in here. The code and csproj file comes di
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Wilderness Labs",
-    "classifications": [ "Meadow", "Console" ],
+    "classifications": [ "Meadow", "IoT", "Console" ],
     "name": "Basic Meadow App",
     "identity": "WildernessLabs.Meadow.Templates.BasicApp",
     "shortName": "Meadow",
@@ -123,8 +123,44 @@ Currently, there is only one template in here. The code and csproj file comes di
 
 The template config reference docs can be found [here](https://github.com/dotnet/templating/wiki/Reference-for-template.json).
 
-TODO: note sure what `classifications`, if any, should be set. Same for `groupIdentity`.
+Set `classifications` according to any keywords users might use to find the template.
 
-# Documentation 
+When a template is part of a group of templates, with template options to differentiate (like language), set `groupIdentity` to match the ID of those other templates.
+
+## Documentation
 
 Documentation for this SDK thing doesn't exist, but it's basically sugar for [DotNet templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates), which are fairly well documented.
+
+## Testing in development
+
+If you wish to test these templates locally, you can install and use them via the .NET SDK (`dotnet`) template system. Run the `install` commands for the desired template in the [`Meadow_DotNet_SDK/Project_Templates/templates` folder of the Meadow.Sdk repo](https://github.com/WildernessLabs/Meadow.Sdk/tree/main/Meadow_DotNet_SDK/Project_Templates), or all of them like this.
+
+```console
+dotnet new install MeadowApplication
+dotnet new install MeadowApplicationFSharp
+dotnet new install MeadowApplicationVBNet
+dotnet new install MeadowApplicationCoreCompute
+dotnet new install MeadowApplicationCoreComputeFSharp
+dotnet new install MeadowApplicationCoreComputeVBNet
+dotnet new install MeadowLibrary
+dotnet new install MeadowLibraryFSharp
+dotnet new install MeadowLibraryVBNet
+```
+
+You may need to uninstall the NuGet templates to use the local source versions.
+
+```console
+dotnet new uninstall WildernessLabs.Meadow.Template
+```
+
+If you wish to return to using the NuGet templates, you will need to uninstall the local versions. To see the required `uninstall` command(s) to run for each template, call the uninstall command without any parameters. The exact commands will involve the source file location from where they were installed.
+
+```console
+dotnet new uninstall
+```
+
+After you are done testing and wish to return to the NuGet templates, you can reinstall those.
+
+```console
+dotnet new install WildernessLabs.Meadow.Template
+```
