@@ -26,7 +26,7 @@ namespace MeadowApp
 		{
 			Resolver.Log.Info("Initialize...");
 
-			onboardLed = new RgbPwmLed(device: Device,
+			onboardLed = new RgbPwmLed(
 				redPwmPin: Device.Pins.OnboardLedRed,
 				greenPwmPin: Device.Pins.OnboardLedGreen,
 				bluePwmPin: Device.Pins.OnboardLedBlue,
@@ -59,13 +59,6 @@ namespace MeadowApp
 		void ShowColorPulse(Color color, TimeSpan duration)
 		{
 			onboardLed.StartPulse(color, duration / 2);
-			Thread.Sleep(duration);
-			onboardLed.Stop();
-		}
-
-		void ShowColor(Color color, TimeSpan duration)
-		{
-			onboardLed.SetColor(color);
 			Thread.Sleep(duration);
 			onboardLed.Stop();
 		}
