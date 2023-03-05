@@ -7,6 +7,7 @@
     <AssemblyName>Meadow.Sdk</AssemblyName>
     <PackageProjectUrl>https://github.com/WildernessLabs/NugetTest</PackageProjectUrl>
     <PackageId>Meadow.Sdk</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
     <Authors>Bryan Costanich, Adrian Stevens</Authors>
     <Copyright>Wilderness Labs</Copyright>
     <Owners>Wilderness Labs</Owners>
@@ -19,5 +20,6 @@
   <ItemGroup>
     <None Update="sdk\Sdk.props" PackagePath="sdk\Sdk.props" Pack="true" />
     <None Update="sdk\Sdk.targets" PackagePath="sdk\Sdk.targets" Pack="true" />
+    <None Include="..\icon.png" PackagePath="icon.png" Pack="true" />
   </ItemGroup>
 </Project>
