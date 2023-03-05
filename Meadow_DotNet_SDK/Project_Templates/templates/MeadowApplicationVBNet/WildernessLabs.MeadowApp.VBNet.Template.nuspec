@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>WildernessLabs.Meadow.App.VBNet.Template</id>
-    <version>0.9.0</version>
-    <title>Wilderness Labs Meadow App Project Template</title>
+    <version>0.9.6</version>
+    <title>Wilderness Labs Meadow App Core-Compute Module Project Template</title>
     <authors>Wilderness Labs</authors>
     <owners>Wilderness Labs</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Meadow application template</description>
-    <copyright>2019-2022</copyright>
+    <description>Meadow Core-Compute module application template</description>
+    <copyright>2019-2023</copyright>
     <tags>Wilderness Labs Meadow App Sdk dotnet-new templates VB.Net</tags>
     <packageTypes>
       <packageType name="Template" />
