@@ -8,9 +8,6 @@
 #
 #     # Uncomment if SD card hardware present on this hardware (e.g., Core-Compute module with SD add-on)? Optional; default value is `false`.
 #     SdStorageSupported: true
-# MonoControl:
-#     # Options allow enabling debug builds or controlling JIT compilation (`--jit` to enable [default], `--interp` to disable).
-#     Options: --interp --debug
 # # Control how the ESP coprocessor will start and operate.
 # Coprocessor:
 #     # Should the ESP32 automatically attempt to connect to an access point at startup?
@@ -43,7 +40,7 @@
 #     GetNetworkTimeAtStartup: true
 #
 #     # Time synchronization period in seconds.
-#     NtpRefreshPeriod: 600
+#     NtpRefreshPeriodSeconds: 600
 #
 #     # Name of the NTP servers.
 #     NtpServers:
