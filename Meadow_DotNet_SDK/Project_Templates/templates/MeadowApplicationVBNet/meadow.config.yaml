@@ -8,9 +8,6 @@
 #
 #     # Uncomment if SD card hardware present on this hardware (e.g., Core-Compute module with SD add-on)? Optional; default value is `false`.
 #     SdStorageSupported: true
-# MonoControl:
-#     # Options allow enabling debug builds or controlling JIT compilation (`--jit` to enable [default], `--interp` to disable).
-#     Options: --interp --debug
 # # Control how the ESP coprocessor will start and operate.
 # Coprocessor:
 #     # Should the ESP32 automatically attempt to connect to an access point at startup?
@@ -24,11 +21,26 @@
 #     MaximumRetryCount: 7
 # # Network configuration.
 # Network:
+#   Interfaces:
+#       - Name: Ethernet
+#         UseDHCP: false
+#         IPAddress: 192.168.1.60
+#         NetMask: 255.255.255.0
+#         Gateway: 192.168.1.254
+#       - Name: WiFi
+#         UseDHCP: true
+#         IPAddress:
+#         NetMask:
+#         Gateway:
+#
+#     # Which interface should be used?
+#     DefaultInterface: WiFi
+#
 #     # Automatically attempt to get the time at startup?
 #     GetNetworkTimeAtStartup: true
 #
 #     # Time synchronization period in seconds.
-#     NtpRefreshPeriod: 600
+#     NtpRefreshPeriodSeconds: 600
 #
 #     # Name of the NTP servers.
 #     NtpServers:
