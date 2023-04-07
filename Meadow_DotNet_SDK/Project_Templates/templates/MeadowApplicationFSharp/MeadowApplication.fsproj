@@ -6,6 +6,9 @@
     <AssemblyName>App</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="meadow.config.yaml" />
+    <None Include="app.config.yaml" />
+    <None Include="wifi.config.yaml" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
@@ -13,13 +16,13 @@
     <PackageReference Include="Meadow.Foundation" Version="0.*" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="meadow.config.yaml">
+    <None Update="meadow.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="app.config.yaml">
+    <None Update="app.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="wifi.config.yaml">
+    <None Update="wifi.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
