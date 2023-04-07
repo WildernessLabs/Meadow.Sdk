@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AssemblyName>MeadowLibrary</AssemblyName>
+    <AssemblyName>$safeprojectname$</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class1.fs" />
