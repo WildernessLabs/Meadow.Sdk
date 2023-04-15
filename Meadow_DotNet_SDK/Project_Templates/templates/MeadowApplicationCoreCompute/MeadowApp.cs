@@ -7,25 +7,25 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MeadowApp
+namespace $safeprojectname$
 {
-	// Change F7CoreComputeV2 to F7FeatherV2 (or F7FeatherV1) for Feather boards
-	public class MeadowApp : App<F7CoreComputeV2>
-	{
-		public override Task Run()
-		{
-			Resolver.Log.Info("Run...");
+    // Change F7CoreComputeV2 to F7FeatherV2 (or F7FeatherV1) for Feather boards
+    public class MeadowApp : App<F7CoreComputeV2>
+    {
+        public override Task Run()
+        {
+            Resolver.Log.Info("Run...");
 
-			Resolver.Log.Info("Hello, Meadow Core-Compute!");
+            Resolver.Log.Info("Hello, Meadow Core-Compute!");
 
-			return base.Run();
-		}
+            return base.Run();
+        }
 
-		public override Task Initialize()
-		{
-			Resolver.Log.Info("Initialize...");
+        public override Task Initialize()
+        {
+            Resolver.Log.Info("Initialize...");
 
-			return base.Initialize();
-		}
-	}
+            return base.Initialize();
+        }
+    }
 }

@@ -18,7 +18,7 @@ type MeadowApp() =
         led.StartPulse(color, duration.Divide(2)) |> ignore
         Threading.Thread.Sleep (duration) |> ignore
         led.Stop |> ignore
-    
+
     let CycleColors (duration : TimeSpan)  = 
         do Resolver.Log.Info "Cycle colors..."
 
@@ -46,7 +46,7 @@ type MeadowApp() =
             CommonType.CommonAnode)
 
         base.Initialize()
-        
+
     override this.Run () =
         do Resolver.Log.Info "Run... (F#)"
 
