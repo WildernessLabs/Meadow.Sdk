@@ -13,13 +13,6 @@ namespace $safeprojectname$
     {
         RgbPwmLed onboardLed;
 
-        public override Task Run()
-        {
-            Resolver.Log.Info("Run...");
-
-            return CycleColors(TimeSpan.FromMilliseconds(1000));
-        }
-
         public override Task Initialize()
         {
             Resolver.Log.Info("Initialize...");
@@ -31,6 +24,13 @@ namespace $safeprojectname$
                 CommonType.CommonAnode);
 
             return base.Initialize();
+        }
+
+        public override Task Run()
+        {
+            Resolver.Log.Info("Run...");
+
+            return CycleColors(TimeSpan.FromMilliseconds(1000));
         }
 
         async Task CycleColors(TimeSpan duration)
