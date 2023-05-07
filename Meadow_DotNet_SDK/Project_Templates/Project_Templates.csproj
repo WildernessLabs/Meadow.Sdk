@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>0.9.6</PackageVersion>
-    <Version>0.9.6</Version>
+    <PackageVersion>0.9.8</PackageVersion>
+    <Version>0.9.8</Version>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>

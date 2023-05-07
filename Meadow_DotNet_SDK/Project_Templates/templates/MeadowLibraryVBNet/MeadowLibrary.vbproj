@@ -1,9 +1,8 @@
 <Project Sdk="Meadow.Sdk/1.1.0">
-
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>MeadowLibrary</AssemblyName>
+    <AssemblyName>$safeprojectname$</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Meadow.Foundation" Version="0.*" />
