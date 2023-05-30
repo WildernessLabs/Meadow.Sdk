@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace $safeprojectname$
+namespace MeadowApp
 {
     public class Class1
     {
