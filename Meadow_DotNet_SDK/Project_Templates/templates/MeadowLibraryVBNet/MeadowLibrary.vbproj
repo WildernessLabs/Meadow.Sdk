@@ -5,6 +5,6 @@
     <AssemblyName>$safeprojectname$</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="0.*" />
+    <PackageReference Include="Meadow.Foundation" Version="*" />
   </ItemGroup>
 </Project>
