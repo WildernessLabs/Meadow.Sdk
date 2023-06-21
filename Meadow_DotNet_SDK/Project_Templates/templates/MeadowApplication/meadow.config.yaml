@@ -33,23 +33,23 @@
 #         NetMask:
 #         Gateway:
 #
-#     # Which interface should be used?
+#   # Which interface should be used?
 #     DefaultInterface: WiFi
 #
-#     # Automatically attempt to get the time at startup?
-#     GetNetworkTimeAtStartup: true
+#   # Automatically attempt to get the time at startup?
+#   GetNetworkTimeAtStartup: true
 #
-#     # Time synchronization period in seconds.
-#     NtpRefreshPeriodSeconds: 600
+#   # Time synchronization period in seconds.
+#   NtpRefreshPeriodSeconds: 600
 #
-#     # Name of the NTP servers.
-#     NtpServers:
-#         - 0.pool.ntp.org
-#         - 1.pool.ntp.org
-#         - 2.pool.ntp.org
-#         - 3.pool.ntp.org
+#   # Name of the NTP servers.
+#   NtpServers:
+#       - 0.pool.ntp.org
+#       - 1.pool.ntp.org
+#       - 2.pool.ntp.org
+#       - 3.pool.ntp.org
 #
-#     # IP addresses of the DNS servers.
-#     DnsServers:
-#         - 1.1.1.1
-#         - 8.8.8.8
+#   # IP addresses of the DNS servers.
+#   DnsServers:
+#       - 1.1.1.1
+#       - 8.8.8.8
