@@ -22,4 +22,14 @@
     <None Update="sdk\Sdk.targets" PackagePath="sdk\Sdk.targets" Pack="true" />
     <None Include="..\icon.png" PackagePath="icon.png" Pack="true" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.6.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="8.0.100-1.23067.1" />
+    <PackageReference Include="Xamarin.Build.AsyncTask" Version="0.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Meadow.CLI\Meadow.CLI.Core\Meadow.CLI.Core.csproj" />
+    <ProjectReference Include="..\..\..\Meadow.CLI\Meadow.Hcom\Meadow.Hcom.csproj" />
+  </ItemGroup>
 </Project>
