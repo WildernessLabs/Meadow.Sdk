@@ -1,0 +1,35 @@
+<Project Sdk="Meadow.Sdk/1.1.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow.Foundation" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.4.0.3" />
+    <PackageReference Include="Meadow.ProjectLab" Version="1.4.0.3" />
+    <PackageReference Include="Meadow.Logging.LogProviders" Version="1.4.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Commands\" />
+    <None Remove="Hardware\" />
+    <None Remove="Assets\" />
+    <None Remove="Assets\img-wifi-fade.bmp" />
+    <None Remove="Assets\img-wifi.bmp" />
+    <None Remove="Assets\img-sync-fade.bmp" />
+    <None Remove="Assets\img-sync.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Hardware\" />
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\img-wifi-fade.bmp" />
+    <EmbeddedResource Include="Assets\img-wifi.bmp" />
+    <EmbeddedResource Include="Assets\img-sync-fade.bmp" />
+    <EmbeddedResource Include="Assets\img-sync.bmp" />
+  </ItemGroup>
+</Project>

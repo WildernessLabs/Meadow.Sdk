@@ -1,0 +1,2 @@
+﻿Deploy:
+  NoLink: [ App, SampleApp.Core ]
