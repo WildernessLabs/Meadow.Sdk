@@ -1,17 +1,14 @@
-﻿using SampleApp.Commands;
-using SampleApp.Controllers;
+﻿using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation;
 using Meadow.Foundation.Graphics;
 using Meadow.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using SampleApp.Commands;
 using SampleApp.Hardware;
 
 namespace SampleApp.Controllers
 {
-	public class MainAppController
+    public class MainAppController
 	{
         protected ISampleAppHardware Hardware { get; set; }
         protected DisplayController displayController;
