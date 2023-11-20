@@ -332,3 +332,4 @@ ASALocalRun/
 #macOS Bullshit
 **/.DS_Store
 .DS_Store
+Meadow_DotNet_SDK/Project_Templates/Meadow_ProjectLab_Template/SampleApp.MeadowApp/wifi.config.yaml
