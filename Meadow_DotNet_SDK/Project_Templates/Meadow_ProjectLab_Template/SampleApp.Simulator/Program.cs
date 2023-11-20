@@ -5,7 +5,7 @@ using Meadow.Simulation;
 using System;
 using System.Threading.Tasks;
 
-namespace MeadowApp
+namespace ProjectLabSimulator
 {
     internal class Program
     {

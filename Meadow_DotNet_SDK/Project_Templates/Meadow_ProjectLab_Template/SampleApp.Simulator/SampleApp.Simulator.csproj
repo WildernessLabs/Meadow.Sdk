@@ -1,38 +1,43 @@
-<Project Sdk="Meadow.Sdk/1.1.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <OutputType>Library</OutputType>
-    <AssemblyName>App</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>latestmajor</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>latestmajor</LangVersion>
-  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
-    <PackageReference Include="Meadow.Simulation" Version="1.4.0.3" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5" />
+    <AvaloniaXaml Remove="Models\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+    <None Remove=".gitignore" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Remove="Display\" />
+    <TrimmerRootDescriptor Include="Roots.xml" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="meadow.config.yaml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="app.config.yaml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+	  <PackageReference Include="Avalonia" Version="0.10.18" />
+	  <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
+	  <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+	  <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+	  <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+	  <PackageReference Include="Meadow.Avalonia" Version="1.4.0.3" />
+	  <PackageReference Include="Meadow.Foundation" Version="1.4.0.3" />
+	  <PackageReference Include="Meadow.Simulation" Version="1.4.0.3" />
+	  <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Display\" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\SampleApp.Core\SampleApp.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="app.config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
