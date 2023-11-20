@@ -27,4 +27,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SampleApp.Core\SampleApp.Core.csproj" />
+  </ItemGroup>
 </Project>
