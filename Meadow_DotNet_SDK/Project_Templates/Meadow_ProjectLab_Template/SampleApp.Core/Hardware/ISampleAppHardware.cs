@@ -10,8 +10,6 @@ namespace SampleApp.Hardware
 {
     public interface ISampleAppHardware
 	{
-        IMoistureSensor? MoistureSensor { get; }
-
         IGraphicsDisplay? Display { get; }
 
         RgbPwmLed? RgbLed { get; }

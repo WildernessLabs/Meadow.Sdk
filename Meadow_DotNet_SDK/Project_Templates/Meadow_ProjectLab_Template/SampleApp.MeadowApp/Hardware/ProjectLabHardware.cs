@@ -33,8 +33,6 @@ namespace SampleApp.MeadowApp.Hardware
 
         public IGraphicsDisplay? Display => projectLab.Display;
 
-        public IMoistureSensor MoistureSensor { get; set; }
-
         public ProjectLabHardware()
         {
             projectLab = ProjectLab.Create();
