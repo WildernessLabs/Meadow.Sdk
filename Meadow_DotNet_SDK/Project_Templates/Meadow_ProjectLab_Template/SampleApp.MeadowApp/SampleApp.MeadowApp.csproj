@@ -5,18 +5,12 @@
     <OutputType>Library</OutputType>
     <AssemblyName>App</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>11.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup>
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Meadow.F7" Version="*" />
     <PackageReference Include="Meadow.Foundation" Version="*" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Hardware\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="meadow.config.yaml">
@@ -28,14 +22,7 @@
     <None Include="wifi.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Meadow.ProjectLab.AppTemplate.Core\SampleApp.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Hardware\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\SampleApp.Core\SampleApp.csproj" />
     <None Update="app.build.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
