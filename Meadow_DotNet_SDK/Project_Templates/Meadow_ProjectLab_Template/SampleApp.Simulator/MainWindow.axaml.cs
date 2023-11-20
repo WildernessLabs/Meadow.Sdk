@@ -1,16 +1,16 @@
 using Avalonia.Controls;
-using Cultivar.Controllers;
-using Cultivar.Hardware;
 using Meadow;
 using Meadow.Cloud;
 using ProjectLabSimulator.Displays;
+using SampleApp.Controllers;
+using SampleApp.Simulator.Hardware;
 
 namespace ProjectLabSimulator.Views
 {
     public partial class MainWindow : Window
     {
-        private readonly GreenhouseController greenhouseController;
-        readonly SimulatedHardware greenhouseHardware;
+        private readonly MainAppController mainAppController;
+        readonly SimulatedHardware simulatedHardware;
 
         readonly int scale = 2;
 
@@ -18,14 +18,14 @@ namespace ProjectLabSimulator.Views
         {
             InitializeComponent();
 
-            greenhouseHardware = new SimulatedHardware()
+            simulatedHardware = new SimulatedHardware()
             {
                 Display = LoadDisplay()
             };
 
-            greenhouseController = new GreenhouseController(greenhouseHardware, true);
+            mainAppController = new MainAppController(simulatedHardware);
 
-            greenhouseController.Run();
+            mainAppController.Run();
 
             buttonDown.Click += ButtonDown_Click;
         }

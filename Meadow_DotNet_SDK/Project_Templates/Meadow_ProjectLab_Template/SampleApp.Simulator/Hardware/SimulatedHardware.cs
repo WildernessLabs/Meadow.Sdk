@@ -9,8 +9,9 @@ using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Peripherals.Sensors.Moisture;
 using Meadow.Peripherals.Speakers;
+using SampleApp.Hardware;
 
-namespace Cultivar.Hardware
+namespace SampleApp.Simulator.Hardware
 {
     public class SimulatedHardware : ISampleAppHardware
     {
@@ -38,7 +39,6 @@ namespace Cultivar.Hardware
         {
             TemperatureSensor = new TemperatureSensorSimulated(new Meadow.Units.Temperature(20), new Meadow.Units.Temperature(-5), new Meadow.Units.Temperature(45));
             HumiditySensor = new HumiditySensorSimulated(new Meadow.Units.RelativeHumidity(50), new Meadow.Units.RelativeHumidity(0), new Meadow.Units.RelativeHumidity(100));
-            MoistureSensor = new MoistureSensorSimulated(50, 5, 100);
 
             Resolver.Log.Info($"Simuated Success!");
         }
