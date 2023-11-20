@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Meadow.F7" Version="*" />
     <PackageReference Include="Meadow.Foundation" Version="*" />
+    <PackageReference Include="Meadow.ProjectLab" Version="1.4.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="meadow.config.yaml">
@@ -22,7 +23,6 @@
     <None Include="wifi.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <ProjectReference Include="..\SampleApp.Core\SampleApp.csproj" />
     <None Update="app.build.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

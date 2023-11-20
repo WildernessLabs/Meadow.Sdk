@@ -1,0 +1,43 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ProjectLabSimulator.ViewModels"
+	xmlns:local="clr-namespace:ProjectLabSimulator"
+    mc:Ignorable="d" 
+    x:Class="ProjectLabSimulator.Views.MainWindow"
+    Title="Cultivar Simulator" Width="640" Height="600">
+
+	<Grid x:Name="mainGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="480" />
+			<RowDefinition Height="120" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="640" />
+		</Grid.ColumnDefinitions>
+
+		<Border x:Name="displayBorder" BorderBrush="DarkGray" Grid.Row="0" Grid.Column="0" />
+
+		<Grid x:Name="buttonGrid" Grid.Row="1" Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40" />
+				<RowDefinition Height="40" />
+				<RowDefinition Height="40" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="40" />
+			</Grid.ColumnDefinitions>
+			
+			<Button x:Name="buttonLeft" Content="   " Grid.Row="1" Grid.Column="1" />
+			<Button x:Name="buttonRight" Content="   " Grid.Row="1" Grid.Column="3" />
+			<Button x:Name="buttonUp" Content="   " Grid.Row="0" Grid.Column="2" />
+			<Button x:Name="buttonDown" Content="   " Grid.Row="2" Grid.Column="2" />
+		</Grid>
+		
+	</Grid>
+</Window>
