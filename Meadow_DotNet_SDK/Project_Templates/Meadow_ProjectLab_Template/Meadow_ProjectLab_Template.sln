@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1706.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Core", "SampleApp.Core\SampleApp.Core.csproj", "{6704EF2C-8BC6-42BE-84DF-8EC26EFD94D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.MeadowApp", "SampleApp.MeadowApp\SampleApp.MeadowApp.csproj", "{46723E9C-D678-4682-B711-84374BAE3E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.MeadowApp", "SampleApp_MeadowApp\SampleApp.MeadowApp.csproj", "{46723E9C-D678-4682-B711-84374BAE3E39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Simulator", "SampleApp.Simulator\SampleApp.Simulator.csproj", "{BB55C560-4994-4A06-A7EA-E785BDBF8EEF}"
 EndProject
