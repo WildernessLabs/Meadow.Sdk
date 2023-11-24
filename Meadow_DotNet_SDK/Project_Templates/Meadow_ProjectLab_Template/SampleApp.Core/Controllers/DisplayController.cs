@@ -1,5 +1,6 @@
 ﻿using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
+using SampleApp.Models;
 
 namespace SampleApp.Controllers
 {
@@ -78,15 +79,16 @@ namespace SampleApp.Controllers
 
             screen.Controls.Add(new Label(219, 32, 12, 16)
             {
-                Text = "Soil",
+                Text = "Pressure",
                 Font = new Font12x16(),
-                TextColor = Meadow.Foundation.Color.White
+                TextColor = Meadow.Foundation.Color.White,
             });
-            screen.Controls.Add(new Label(303, 99, 12, 16)
+            screen.Controls.Add(new Label(290, 99, 12, 16)
             {
-                Text = "%",
+                Text = "Atm",
                 Font = new Font12x20(),
-                TextColor = Meadow.Foundation.Color.White
+                TextColor = Meadow.Foundation.Color.White,
+                HorizontalAlignment = HorizontalAlignment.Right,
             });
 
             TemperatureLabel = new Label(50, 70, 12, 16, ScaleFactor.X2)
@@ -130,12 +132,13 @@ namespace SampleApp.Controllers
             StatusLabel.Text = status;
         }
 
-        public void UpdateReadings(double temp, double humidity)
+        public void UpdateModel(SampleModel model)
         {
             screen.BeginUpdate();
 
-            TemperatureLabel.Text = temp.ToString("N0");
-            HumidityLabel.Text = humidity.ToString("N0");
+            TemperatureLabel.Text = model.Temperature.Celsius.ToString("N0");
+            HumidityLabel.Text = model.Humidity.Percent.ToString("N0");
+            PressureLabel.Text = model.Pressure.StandardAtmosphere.ToString("N1");
 
             screen.EndUpdate();
         }

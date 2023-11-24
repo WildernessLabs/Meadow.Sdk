@@ -19,6 +19,8 @@ namespace SampleApp.MeadowApp.Hardware
 
         public IHumiditySensor? HumiditySensor => projectLab.EnvironmentalSensor;
 
+        public IBarometricPressureSensor? PressureSensor => projectLab.EnvironmentalSensor;
+
         public IToneGenerator? Speaker => projectLab.Speaker;
 
         public RgbPwmLed? RgbLed => projectLab.RgbLed;

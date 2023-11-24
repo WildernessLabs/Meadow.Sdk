@@ -18,6 +18,8 @@ namespace SampleApp.Hardware
 
         IHumiditySensor? HumiditySensor { get; }
 
+        IBarometricPressureSensor? PressureSensor { get; }
+
         IToneGenerator? Speaker { get; }
 
         IButton? LeftButton { get; }

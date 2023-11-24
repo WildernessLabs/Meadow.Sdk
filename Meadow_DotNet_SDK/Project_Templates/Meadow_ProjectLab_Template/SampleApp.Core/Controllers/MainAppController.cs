@@ -90,7 +90,7 @@ namespace SampleApp.Controllers
 
                 Console.WriteLine($"Temperature: {SampleModel.Temperature.Celsius} | Humidity: {SampleModel.Humidity.Percent}");
 
-                displayController.UpdateReadings(SampleModel.Temperature.Celsius, SampleModel.Humidity.Percent);
+                displayController.UpdateModel(SampleModel);
 
                 try
                 {
@@ -100,6 +100,7 @@ namespace SampleApp.Controllers
                     {
                         { "TemperatureCelsius", SampleModel.Temperature.Celsius },
                         { "HumidityPercent", SampleModel.Humidity.Percent },
+                        { "PressureAtmospheres", SampleModel.Pressure.StandardAtmosphere },
                     });
                     displayController.UpdateSync(false);
                 }
@@ -148,13 +149,15 @@ namespace SampleApp.Controllers
         {
             var temperatureTask = Hardware.TemperatureSensor?.Read();
             var humidityTask = Hardware.HumiditySensor?.Read();
+            var pressureTask = Hardware.PressureSensor?.Read();
 
-            await Task.WhenAll(temperatureTask, humidityTask);
+            await Task.WhenAll(temperatureTask, humidityTask, pressureTask);
 
             var climate = new SampleModel()
             {
                 Temperature = temperatureTask?.Result ?? new Meadow.Units.Temperature(0),
                 Humidity = humidityTask?.Result ?? new Meadow.Units.RelativeHumidity(0),
+                Pressure = pressureTask?.Result ?? new Meadow.Units.Pressure(0)
             };
 
             return climate;
