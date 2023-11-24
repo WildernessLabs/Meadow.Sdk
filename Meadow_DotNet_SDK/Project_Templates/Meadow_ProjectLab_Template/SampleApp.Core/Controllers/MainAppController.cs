@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation;
 using Meadow.Foundation.Graphics;
 using Meadow.Logging;
 using SampleApp.Commands;
 using SampleApp.Hardware;
+using SampleApp.Models;
 
 namespace SampleApp.Controllers
 {
@@ -13,6 +16,8 @@ namespace SampleApp.Controllers
         protected ISampleAppHardware Hardware { get; set; }
         protected DisplayController displayController;
         protected CloudLogger cloudLogger;
+        protected bool IsRunning = false;
+        protected SampleModel SampleModel { get; set; }
 
 
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
@@ -51,6 +56,72 @@ namespace SampleApp.Controllers
 
         }
 
+        public Task Run()
+        {
+            //_ = StartUpdating(UpdateInterval);
+
+            return Task.CompletedTask;
+        }
+
+        private void SubscribeToCloudConnectionEvents()
+        {
+            displayController?.UpdateStatus(Resolver.UpdateService.State.ToString());
+
+            Resolver.UpdateService.OnStateChanged += (sender, state) =>
+            {
+                displayController?.UpdateStatus(state.ToString());
+            };
+        }
+
+        private async Task StartUpdating(TimeSpan updateInterval)
+        {
+            Console.WriteLine("ClimateMonitorAgent.StartUpdating()");
+
+            if (IsRunning)
+            {
+                return;
+            }
+            IsRunning = true;
+
+            while (IsRunning)
+            {
+                // do a one-off read of all the sensors
+                SampleModel = await ReadSensors();
+
+                Console.WriteLine($"Temperature: {SampleModel.Temperature.Celsius} | Humidity: {SampleModel.Humidity.Percent}");
+
+                displayController.UpdateReadings(SampleModel.Temperature.Celsius, SampleModel.Humidity.Percent);
+
+                try
+                {
+                    displayController.UpdateSync(true);
+                    var cl = Resolver.Services.Get<CloudLogger>();
+                    cl?.LogEvent(110, "Atmospheric reading", new Dictionary<string, object>()
+                    {
+                        { "TemperatureCelsius", SampleModel.Temperature.Celsius },
+                        { "HumidityPercent", SampleModel.Humidity.Percent },
+                    });
+                    displayController.UpdateSync(false);
+                }
+                catch (Exception ex)
+                {
+                    Resolver.Log.Info($"Err: {ex.Message}");
+                }
+
+                await Task.Delay(updateInterval);
+            }
+        }
+
+        private void StopUpdating()
+        {
+            if (!IsRunning)
+            {
+                return;
+            }
+
+            IsRunning = false;
+        }
+
         public void SetWiFiStatus(bool connected)
         {
             displayController.UpdateWifi(connected);
@@ -69,21 +140,24 @@ namespace SampleApp.Controllers
             });
         }
 
-        private void SubscribeToCloudConnectionEvents()
+        /// <summary>
+        /// Performs a one-off read of all the sensors.
+        /// </summary>
+        /// <returns></returns>
+        private async Task<SampleModel> ReadSensors()
         {
-            displayController?.UpdateStatus(Resolver.UpdateService.State.ToString());
+            var temperatureTask = Hardware.TemperatureSensor?.Read();
+            var humidityTask = Hardware.HumiditySensor?.Read();
 
-            Resolver.UpdateService.OnStateChanged += (sender, state) =>
+            await Task.WhenAll(temperatureTask, humidityTask);
+
+            var climate = new SampleModel()
             {
-                displayController?.UpdateStatus(state.ToString());
+                Temperature = temperatureTask?.Result ?? new Meadow.Units.Temperature(0),
+                Humidity = humidityTask?.Result ?? new Meadow.Units.RelativeHumidity(0),
             };
-        }
 
-        public Task Run()
-        {
-            //_ = StartUpdating(UpdateInterval);
-
-            return Task.CompletedTask;
+            return climate;
         }
     }
 }

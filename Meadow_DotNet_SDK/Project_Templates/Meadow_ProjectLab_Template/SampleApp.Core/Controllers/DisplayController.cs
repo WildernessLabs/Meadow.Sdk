@@ -18,7 +18,7 @@ namespace SampleApp.Controllers
 
         protected Label HumidityLabel { get; set; }
 
-        protected Label SoilMoistureLabel { get; set; }
+        protected Label PressureLabel { get; set; }
 
         protected Picture WiFi { get; set; }
 
@@ -105,14 +105,14 @@ namespace SampleApp.Controllers
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
             screen.Controls.Add(HumidityLabel);
-            SoilMoistureLabel = new Label(260, 70, 12, 16, ScaleFactor.X2)
+            PressureLabel = new Label(260, 70, 12, 16, ScaleFactor.X2)
             {
                 Text = "0",
                 Font = new Font12x16(),
                 TextColor = Meadow.Foundation.Color.White,
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
-            screen.Controls.Add(SoilMoistureLabel);
+            screen.Controls.Add(PressureLabel);
         }
 
         public void UpdateWifi(bool connected)
@@ -130,13 +130,12 @@ namespace SampleApp.Controllers
             StatusLabel.Text = status;
         }
 
-        public void UpdateReadings(double temp, double humidity, double moisture)
+        public void UpdateReadings(double temp, double humidity)
         {
             screen.BeginUpdate();
 
             TemperatureLabel.Text = temp.ToString("N0");
             HumidityLabel.Text = humidity.ToString("N0");
-            SoilMoistureLabel.Text = moisture.ToString("N0");
 
             screen.EndUpdate();
         }

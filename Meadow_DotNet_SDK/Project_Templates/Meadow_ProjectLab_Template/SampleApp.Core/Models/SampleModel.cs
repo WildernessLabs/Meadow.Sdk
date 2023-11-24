@@ -1,7 +1,7 @@
 ﻿using System;
 using Meadow.Units;
 
-namespace SampleApp.Core.Models
+namespace SampleApp.Models
 {
 	public class SampleModel
 	{
