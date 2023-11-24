@@ -7,10 +7,10 @@ namespace SampleApp.Controllers
 	{
         private readonly DisplayScreen screen;
 
-        private readonly Image imgWifi = Image.LoadFromResource("Cultivar.Assets.img-wifi.bmp");
-        private readonly Image imgSync = Image.LoadFromResource("Cultivar.Assets.img-sync.bmp");
-        private readonly Image imgWifiFade = Image.LoadFromResource("Cultivar.Assets.img-wifi-fade.bmp");
-        private readonly Image imgSyncFade = Image.LoadFromResource("Cultivar.Assets.img-sync-fade.bmp");
+        private readonly Image imgWifi = Image.LoadFromResource("SampleAppCore.Assets.img-wifi.bmp");
+        private readonly Image imgSync = Image.LoadFromResource("SampleAppCore.Assets.img-sync.bmp");
+        private readonly Image imgWifiFade = Image.LoadFromResource("SampleAppCore.Assets.img-wifi-fade.bmp");
+        private readonly Image imgSyncFade = Image.LoadFromResource("SampleAppCore.Assets.img-sync-fade.bmp");
 
         protected Label StatusLabel { get; set; }
 

@@ -1,2 +1,2 @@
 ﻿Deploy:
-  NoLink: [ SampleApp.MeadowApp, SampleApp.Core ]
+  NoLink: [ App, SampleApp.Core ]

@@ -26,11 +26,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SampleApp.Core\SampleApp.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="app.build.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SampleApp.Core\SampleAppCore.csproj" />
   </ItemGroup>
 </Project>

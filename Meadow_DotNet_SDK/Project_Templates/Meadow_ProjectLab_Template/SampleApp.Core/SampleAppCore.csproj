@@ -18,12 +18,14 @@
     <None Remove="Assets\img-wifi.bmp" />
     <None Remove="Assets\img-sync-fade.bmp" />
     <None Remove="Assets\img-sync.bmp" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Commands\" />
     <Folder Include="Hardware\" />
     <Folder Include="Assets\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\img-wifi-fade.bmp" />

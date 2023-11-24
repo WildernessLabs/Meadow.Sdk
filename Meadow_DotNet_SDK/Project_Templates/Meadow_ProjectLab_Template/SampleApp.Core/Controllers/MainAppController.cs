@@ -79,7 +79,7 @@ namespace SampleApp.Controllers
             };
         }
 
-            public Task Run()
+        public Task Run()
         {
             //_ = StartUpdating(UpdateInterval);
 
