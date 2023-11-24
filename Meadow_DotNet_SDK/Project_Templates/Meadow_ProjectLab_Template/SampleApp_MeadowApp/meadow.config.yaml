@@ -39,8 +39,8 @@ Network:
 #      NetMask:
 #      Gateway:
 
-  # Which interface should be used?
-  DefaultInterface: WiFi
+    # Which interface should be used?
+    DefaultInterface: WiFi
 
   # IP addresses of the DNS servers.
 #  DnsServers:

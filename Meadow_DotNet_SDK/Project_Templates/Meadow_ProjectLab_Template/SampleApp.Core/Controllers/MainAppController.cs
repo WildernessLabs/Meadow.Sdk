@@ -18,7 +18,7 @@ namespace SampleApp.Controllers
         protected CloudLogger cloudLogger;
         protected bool IsRunning = false;
         protected SampleModel SampleModel { get; set; }
-
+        protected TimeSpan UpdateInterval = TimeSpan.FromMinutes(2);
 
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
 		{
@@ -58,7 +58,7 @@ namespace SampleApp.Controllers
 
         public Task Run()
         {
-            //_ = StartUpdating(UpdateInterval);
+            _ = StartUpdating(UpdateInterval);
 
             return Task.CompletedTask;
         }
