@@ -107,7 +107,7 @@ namespace SampleApp.Controllers
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
             screen.Controls.Add(HumidityLabel);
-            PressureLabel = new Label(260, 70, 12, 16, ScaleFactor.X2)
+            PressureLabel = new Label(280, 70, 12, 16, ScaleFactor.X2)
             {
                 Text = "0",
                 Font = new Font12x16(),

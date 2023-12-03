@@ -88,7 +88,7 @@ namespace SampleApp.Controllers
                 // do a one-off read of all the sensors
                 SampleModel = await ReadSensors();
 
-                Console.WriteLine($"Temperature: {SampleModel.Temperature.Celsius} | Humidity: {SampleModel.Humidity.Percent}");
+                Resolver.Log.Info($"Temperature: {SampleModel.Temperature.Celsius:N2}°C | Humidity: {SampleModel.Humidity.Percent:N2}%");
 
                 displayController.UpdateModel(SampleModel);
 
