@@ -147,17 +147,24 @@ namespace SampleApp.Controllers
         /// <returns></returns>
         private async Task<SampleModel> ReadSensors()
         {
+            Resolver.Log.Info($"Reading sensors.");
             var temperatureTask = Hardware.TemperatureSensor?.Read();
             var humidityTask = Hardware.HumiditySensor?.Read();
             var pressureTask = Hardware.PressureSensor?.Read();
 
-            await Task.WhenAll(temperatureTask, humidityTask, pressureTask);
+            // run the tasks in serial with timeouts
+            TimeSpan timeoutDuration = TimeSpan.FromSeconds(5);
+            await Task.WhenAny(temperatureTask, Task.Delay(timeoutDuration));
+            await Task.WhenAny(humidityTask, Task.Delay(timeoutDuration));
+            await Task.WhenAny(humidityTask, Task.Delay(timeoutDuration));
+
+            Resolver.Log.Info($"Sensor reads completed.");
 
             var climate = new SampleModel()
             {
-                Temperature = temperatureTask?.Result ?? new Meadow.Units.Temperature(0),
-                Humidity = humidityTask?.Result ?? new Meadow.Units.RelativeHumidity(0),
-                Pressure = pressureTask?.Result ?? new Meadow.Units.Pressure(0)
+                Temperature = temperatureTask.IsCompletedSuccessfully ? temperatureTask?.Result : null,
+                Humidity = humidityTask.IsCompletedSuccessfully ? humidityTask?.Result : null,
+                Pressure = pressureTask.IsCompletedSuccessfully ? pressureTask?.Result : null
             };
 
             return climate;
