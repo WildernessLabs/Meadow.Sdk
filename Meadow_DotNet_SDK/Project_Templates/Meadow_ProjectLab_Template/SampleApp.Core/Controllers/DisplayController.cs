@@ -29,7 +29,10 @@ namespace SampleApp.Controllers
         {
             screen = new DisplayScreen(_display, rotation);
 
+            // background boxes
             screen.Controls.Add(new Box(0, 0, screen.Width, screen.Height) { ForeColor = Meadow.Foundation.Color.White });
+
+            // Row 2 - Orange, Blue, Green
             screen.Controls.Add(new Box(0, 27, 106, 93) { ForeColor = Meadow.Foundation.Color.FromHex("#B35E2C") });
             screen.Controls.Add(new Box(106, 27, 108, 93) { ForeColor = Meadow.Foundation.Color.FromHex("#1A80AA") });
             screen.Controls.Add(new Box(214, 27, 106, 93) { ForeColor = Meadow.Foundation.Color.FromHex("#98A645") });
@@ -136,9 +139,9 @@ namespace SampleApp.Controllers
         {
             screen.BeginUpdate();
 
-            TemperatureLabel.Text = model.Temperature.Celsius.ToString("N0");
-            HumidityLabel.Text = model.Humidity.Percent.ToString("N0");
-            PressureLabel.Text = model.Pressure.StandardAtmosphere.ToString("N1");
+            TemperatureLabel.Text = model.Temperature?.Celsius.ToString("N0") ?? "n/a";
+            HumidityLabel.Text = model.Humidity?.Percent.ToString("N0") ?? "n/a";
+            PressureLabel.Text = model.Pressure?.StandardAtmosphere.ToString("N1") ?? "n/a";
 
             screen.EndUpdate();
         }
