@@ -17,11 +17,19 @@ namespace SampleApp.Controllers
         protected DisplayController displayController;
         protected CloudLogger cloudLogger;
         protected bool IsRunning = false;
-        protected SampleModel SampleModel { get; set; }
         protected TimeSpan UpdateInterval = TimeSpan.FromMinutes(2);
+
+        public SampleModel SampleModel { get; protected set; }
+
+        public static MainAppController Current { get; protected set; }
 
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
 		{
+            // if it's already instantiated
+            if (Current is not null) { return; }
+            // set the singleton property
+            Current = this;
+
             Hardware = hardware;
 
             //==== setup our cloud logger
@@ -88,7 +96,7 @@ namespace SampleApp.Controllers
                 // do a one-off read of all the sensors
                 SampleModel = await ReadSensors();
 
-                Resolver.Log.Info($"Temperature: {SampleModel.Temperature.Celsius:N2}°C | Humidity: {SampleModel.Humidity.Percent:N2}%");
+                Resolver.Log.Info($"Temperature: {SampleModel.Temperature?.Celsius.ToString("N1") ?? "n/a"}°C | Humidity: {(SampleModel.Humidity?.Percent.ToString("N0") ?? "n/a")}%");
 
                 displayController.UpdateModel(SampleModel);
 
@@ -98,9 +106,9 @@ namespace SampleApp.Controllers
                     var cl = Resolver.Services.Get<CloudLogger>();
                     cl?.LogEvent(110, "Atmospheric reading", new Dictionary<string, object>()
                     {
-                        { "TemperatureCelsius", SampleModel.Temperature.Celsius },
-                        { "HumidityPercent", SampleModel.Humidity.Percent },
-                        { "PressureAtmospheres", SampleModel.Pressure.StandardAtmosphere },
+                        { "TemperatureCelsius", SampleModel.Temperature?.Celsius.ToString("N1") ?? "n/a" },
+                        { "HumidityPercent", SampleModel.Humidity?.Percent.ToString("N1") ?? "n/a"},
+                        { "PressureAtmospheres", SampleModel.Pressure?.StandardAtmosphere.ToString("N1") ?? "n/a" },
                     });
                     displayController.UpdateSync(false);
                 }
