@@ -13,14 +13,17 @@ namespace SampleApp.Controllers
 {
     public class MainAppController
 	{
+        // internals
         protected ISampleAppHardware Hardware { get; set; }
         protected DisplayController displayController;
         protected CloudLogger cloudLogger;
         protected bool IsRunning = false;
         protected TimeSpan UpdateInterval = TimeSpan.FromMinutes(2);
 
-        public SampleModel SampleModel { get; protected set; }
+        // public properties
+        public AtmosphericConditionsModel AtmosphericConditions { get; protected set; }
 
+        // static singleton
         public static MainAppController Current { get; protected set; }
 
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
@@ -94,11 +97,11 @@ namespace SampleApp.Controllers
             while (IsRunning)
             {
                 // do a one-off read of all the sensors
-                SampleModel = await ReadSensors();
+                AtmosphericConditions = await ReadSensors();
 
-                Resolver.Log.Info($"Temperature: {SampleModel.Temperature?.Celsius.ToString("N1") ?? "n/a"}°C | Humidity: {(SampleModel.Humidity?.Percent.ToString("N0") ?? "n/a")}%");
+                Resolver.Log.Info($"Temperature: {AtmosphericConditions.Temperature?.Celsius.ToString("N1") ?? "n/a"}°C | Humidity: {(AtmosphericConditions.Humidity?.Percent.ToString("N0") ?? "n/a")}%");
 
-                displayController.UpdateModel(SampleModel);
+                displayController.UpdateModel(AtmosphericConditions);
 
                 try
                 {
@@ -106,9 +109,9 @@ namespace SampleApp.Controllers
                     var cl = Resolver.Services.Get<CloudLogger>();
                     cl?.LogEvent(110, "Atmospheric reading", new Dictionary<string, object>()
                     {
-                        { "TemperatureCelsius", SampleModel.Temperature?.Celsius.ToString("N1") ?? "n/a" },
-                        { "HumidityPercent", SampleModel.Humidity?.Percent.ToString("N1") ?? "n/a"},
-                        { "PressureAtmospheres", SampleModel.Pressure?.StandardAtmosphere.ToString("N1") ?? "n/a" },
+                        { "TemperatureCelsius", AtmosphericConditions.Temperature?.Celsius.ToString("N1") ?? "n/a" },
+                        { "HumidityPercent", AtmosphericConditions.Humidity?.Percent.ToString("N1") ?? "n/a"},
+                        { "PressureAtmospheres", AtmosphericConditions.Pressure?.StandardAtmosphere.ToString("N1") ?? "n/a" },
                     });
                     displayController.UpdateSync(false);
                 }
@@ -153,7 +156,7 @@ namespace SampleApp.Controllers
         /// Performs a one-off read of all the sensors.
         /// </summary>
         /// <returns></returns>
-        private async Task<SampleModel> ReadSensors()
+        private async Task<AtmosphericConditionsModel> ReadSensors()
         {
             Resolver.Log.Info($"Reading sensors.");
             var temperatureTask = Hardware.TemperatureSensor?.Read();
@@ -168,7 +171,7 @@ namespace SampleApp.Controllers
 
             Resolver.Log.Info($"Sensor reads completed.");
 
-            var climate = new SampleModel()
+            var climate = new AtmosphericConditionsModel()
             {
                 Temperature = temperatureTask.IsCompletedSuccessfully ? temperatureTask?.Result : null,
                 Humidity = humidityTask.IsCompletedSuccessfully ? humidityTask?.Result : null,

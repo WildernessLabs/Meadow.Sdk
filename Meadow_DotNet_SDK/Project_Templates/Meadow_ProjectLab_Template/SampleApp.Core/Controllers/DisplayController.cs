@@ -135,7 +135,7 @@ namespace SampleApp.Controllers
             StatusLabel.Text = status;
         }
 
-        public void UpdateModel(SampleModel model)
+        public void UpdateModel(AtmosphericConditionsModel model)
         {
             screen.BeginUpdate();
 

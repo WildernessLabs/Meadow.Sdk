@@ -11,9 +11,9 @@
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.4.0.3" />
-    <PackageReference Include="Meadow.Logging.LogProviders" Version="1.4.0.3" />
+    <PackageReference Include="Meadow.Foundation" Version="1.6.0" />
+    <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.6.0" />
+    <PackageReference Include="Meadow.Logging.LogProviders" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
