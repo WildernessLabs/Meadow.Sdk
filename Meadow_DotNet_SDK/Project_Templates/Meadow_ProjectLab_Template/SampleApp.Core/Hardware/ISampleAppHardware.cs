@@ -3,13 +3,12 @@ using Meadow.Foundation.Leds;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
-using Meadow.Peripherals.Sensors.Moisture;
 using Meadow.Peripherals.Speakers;
 
 namespace SampleApp.Hardware
 {
     public interface ISampleAppHardware
-	{
+    {
         IGraphicsDisplay? Display { get; }
 
         RgbPwmLed? RgbLed { get; }

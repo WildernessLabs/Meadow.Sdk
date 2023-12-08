@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Meadow;
+﻿using Meadow;
 using Meadow.Foundation;
 using Meadow.Foundation.Graphics;
 using Meadow.Logging;
 using SampleApp.Commands;
 using SampleApp.Hardware;
 using SampleApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SampleApp.Controllers
 {
     public class MainAppController
-	{
+    {
         // internals
         protected ISampleAppHardware Hardware { get; set; }
         protected DisplayController displayController;
@@ -27,7 +27,7 @@ namespace SampleApp.Controllers
         public static MainAppController Current { get; protected set; }
 
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
-		{
+        {
             // if it's already instantiated
             if (Current is not null) { return; }
             // set the singleton property
@@ -86,7 +86,7 @@ namespace SampleApp.Controllers
 
         private async Task StartUpdating(TimeSpan updateInterval)
         {
-            Console.WriteLine("ClimateMonitorAgent.StartUpdating()");
+            Resolver.Log.Info("ClimateMonitorAgent.StartUpdating()");
 
             if (IsRunning)
             {

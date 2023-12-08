@@ -1,9 +1,6 @@
 ﻿using Meadow;
 using Meadow.Devices;
-using Meadow.Foundation;
-using Meadow.Foundation.Leds;
 using Meadow.Hardware;
-using Meadow.Peripherals.Leds;
 using SampleApp.Controllers;
 using SampleApp.MeadowApp.Hardware;
 using System;

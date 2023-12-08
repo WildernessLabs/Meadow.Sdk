@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SampleApp.Core\SampleApp.Core.csproj" />
+    <ProjectReference Include="..\SampleApp.Core\SampleAppCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.config.yaml">
