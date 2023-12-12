@@ -1,5 +1,6 @@
 ﻿using Meadow.Gateways.Bluetooth;
 using Meadow.Units;
+using SampleApp.Controllers;
 using System;
 
 namespace SampleApp.MeadowApp.Bluetooth
@@ -8,24 +9,35 @@ namespace SampleApp.MeadowApp.Bluetooth
     {
         private static readonly Lazy<BluetoothServer> instance =
             new Lazy<BluetoothServer>(() => new BluetoothServer());
-        public static BluetoothServer Instance => instance.Value;
+        public static BluetoothServer Current => instance.Value;
 
         Definition bleTreeDefinition;
         ICharacteristic TemperatureCharacteristic;
         ICharacteristic HumitidyCharacteristic;
         ICharacteristic PressureCharacteristic;
 
+        MainAppController mainAppController;
+
         public bool IsInitialized { get; private set; }
 
         private BluetoothServer() { }
 
-        public void Initialize()
+        public void Initialize(MainAppController appController)
         {
+            mainAppController = appController;
+
             bleTreeDefinition = GetDefinition();
+
+            mainAppController.ConditionsUpdated += MainAppController_ConditionsUpdated;
 
             MeadowApp.Device.BluetoothAdapter.StartBluetoothServer(bleTreeDefinition);
 
             IsInitialized = true;
+        }
+
+        private void MainAppController_ConditionsUpdated(object sender, Models.AtmosphericConditionsModel e)
+        {
+            // update your characteristic values.
         }
 
         public void SetEnvironmentalCharacteristicValue((Temperature? Temperature, RelativeHumidity? Humidity, Pressure? Pressure, Resistance? GasResistance) value)

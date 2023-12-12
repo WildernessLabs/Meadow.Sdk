@@ -13,6 +13,8 @@ namespace SampleApp.Controllers
 {
     public class MainAppController
     {
+        public event EventHandler<AtmosphericConditionsModel> ConditionsUpdated = default!;
+
         // internals
         protected ISampleAppHardware Hardware { get; set; }
         protected DisplayController displayController;
@@ -177,6 +179,7 @@ namespace SampleApp.Controllers
                 Humidity = humidityTask.IsCompletedSuccessfully ? humidityTask?.Result : null,
                 Pressure = pressureTask.IsCompletedSuccessfully ? pressureTask?.Result : null
             };
+            ConditionsUpdated?.Invoke(this, climate);
 
             return climate;
         }

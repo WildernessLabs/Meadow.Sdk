@@ -2,6 +2,7 @@
 using Meadow.Devices;
 using Meadow.Hardware;
 using SampleApp.Controllers;
+using SampleApp.MeadowApp.Bluetooth;
 using SampleApp.MeadowApp.Hardware;
 using System;
 using System.Threading;
@@ -24,6 +25,8 @@ namespace SampleApp.MeadowApp
 
             // wire up the wifi events
             WireUpWiFiStatusEvents();
+
+            BluetoothServer.Current.Initialize(mainAppController);
 
             return base.Initialize();
         }
