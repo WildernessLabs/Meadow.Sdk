@@ -14,6 +14,7 @@ namespace SampleApp.MeadowApp
     public class MeadowApp : App<F7CoreComputeV2>
     {
         MainAppController mainAppController;
+        BluetoothServer bluetoothServer;
 
         public override Task Initialize()
         {
@@ -26,7 +27,8 @@ namespace SampleApp.MeadowApp
             // wire up the wifi events
             WireUpWiFiStatusEvents();
 
-            BluetoothServer.Current.Initialize(mainAppController);
+            // start ble server
+            bluetoothServer = new BluetoothServer(mainAppController);
 
             return base.Initialize();
         }

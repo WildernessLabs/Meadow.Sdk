@@ -179,6 +179,7 @@ namespace SampleApp.Controllers
                 Humidity = humidityTask.IsCompletedSuccessfully ? humidityTask?.Result : null,
                 Pressure = pressureTask.IsCompletedSuccessfully ? pressureTask?.Result : null
             };
+
             ConditionsUpdated?.Invoke(this, climate);
 
             return climate;
