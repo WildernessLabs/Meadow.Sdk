@@ -25,16 +25,8 @@ namespace SampleApp.Controllers
         // public properties
         public AtmosphericConditionsModel AtmosphericConditions { get; protected set; }
 
-        // static singleton
-        public static MainAppController Current { get; protected set; }
-
         public MainAppController(ISampleAppHardware hardware, bool isSimulator = false)
         {
-            // if it's already instantiated
-            if (Current is not null) { return; }
-            // set the singleton property
-            Current = this;
-
             Hardware = hardware;
 
             //==== setup our cloud logger
