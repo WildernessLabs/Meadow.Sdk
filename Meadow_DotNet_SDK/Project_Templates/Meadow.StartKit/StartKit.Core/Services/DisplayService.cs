@@ -33,7 +33,14 @@ public class DisplayService
         return Task.CompletedTask;
     }
 
-    public Task UpdateMode(ThermostatMode mode)
+    public Task UpdateDisplayMode(DisplayMode mode)
+    {
+        // TODO: change what the user is editing (background red/blue?)
+
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateThermostatMode(ThermostatMode mode)
     {
         // TODO: show/hide the proper icon
 

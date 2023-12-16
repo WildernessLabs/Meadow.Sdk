@@ -1,12 +1,19 @@
 ﻿using Meadow.Foundation.Graphics;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
+using Meadow.Peripherals.Sensors.Buttons;
 
 namespace StartKit.Core.Contracts;
 
 public interface IStartKitPlatform
 {
-    // hardware
+    // basic hardware
+    IButton? GetUpButton();
+    IButton? GetDownButton();
+    IButton? GetLeftButton();
+    IButton? GetRightButton();
+
+    // complex hardware
     ITemperatureSensor? GetTemperatureSensor();
     IHumiditySensor? GetHumiditySensor();
     IGraphicsDisplay? GetDisplay();
