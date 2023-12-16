@@ -5,7 +5,8 @@ namespace StartKit.Core;
 public class MainController
 {
     private IStartKitPlatform _platform;
-    private ThermostatMode _currentMode;
+    private ThermostatMode _thermostatMode;
+    private DisplayMode _displayMode;
 
     private CloudService _cloudService;
     private ConfigurationService _configurationService;
@@ -34,10 +35,39 @@ public class MainController
         _bluetoothService = platform.GetBluetoothService();
 
         // connect events
-        _sensorService.CurrentTemperatureChangedHandler += (s, t) =>
+        _sensorService.CurrentTemperatureChanged += (s, t) =>
         {
             // update the UI
             _displayService.UpdateCurrentTemperature(t);
+        };
+
+        _inputService.HeatToIncremented += (s, t) =>
+        {
+            _configurationService.IncrementHeatTo();
+            _displayService.UpdateHeatTo(_configurationService.HeatTo);
+        };
+
+        _inputService.HeatToDecremented += (s, t) =>
+        {
+            _configurationService.DecrementHeatTo();
+            _displayService.UpdateHeatTo(_configurationService.HeatTo);
+        };
+
+        _inputService.CoolToIncremented += (s, t) =>
+        {
+            _configurationService.IncrementCoolTo();
+            _displayService.UpdateCoolTo(_configurationService.CoolTo);
+        };
+
+        _inputService.CoolToDecremented += (s, t) =>
+        {
+            _configurationService.DecrementCoolTo();
+            _displayService.UpdateCoolTo(_configurationService.CoolTo);
+        };
+
+        _inputService.DisplayModeChanged += (s, t) =>
+        {
+            _displayService.UpdateDisplayMode(t);
         };
 
         return Task.CompletedTask;
@@ -49,7 +79,7 @@ public class MainController
         {
             // get the current temperature
 
-            switch (_currentMode)
+            switch (_thermostatMode)
             {
                 case ThermostatMode.Off:
                     // are we above the "cool to"?
@@ -88,18 +118,18 @@ public class MainController
 
     private void SetSystemMode(ThermostatMode mode)
     {
-        if (mode == _currentMode) return;
+        if (mode == _thermostatMode) return;
 
         // set the output
         _outputService.SetMode(mode);
 
         // update the display
-        _displayService.UpdateMode(mode);
+        _displayService.UpdateThermostatMode(mode);
 
         // publish the transition
-        _cloudService.RecordTransition(_currentMode, mode);
+        _cloudService.RecordTransition(_thermostatMode, mode);
 
-        _currentMode = mode;
+        _thermostatMode = mode;
     }
 
 }

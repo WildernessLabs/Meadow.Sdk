@@ -5,7 +5,7 @@ namespace StartKit.Core;
 
 public class SensorService
 {
-    public event EventHandler<Temperature> CurrentTemperatureChangedHandler = default!;
+    public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
 
     private Queue<Temperature> _temperatureQueue = new();
 
@@ -42,6 +42,6 @@ public class SensorService
             _temperatureQueue.Dequeue();
         }
 
-        CurrentTemperatureChangedHandler?.Invoke(this, CurrentTemperature);
+        CurrentTemperatureChanged?.Invoke(this, CurrentTemperature);
     }
 }

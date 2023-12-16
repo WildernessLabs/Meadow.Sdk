@@ -2,6 +2,7 @@
 using Meadow.Foundation.Graphics;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
+using Meadow.Peripherals.Sensors.Buttons;
 using StartKit.Core;
 using StartKit.Core.Contracts;
 
@@ -18,6 +19,26 @@ internal class StartKitPlatform : IStartKitPlatform
     {
         _device = device;
         _projLab = Meadow.Devices.ProjectLab.Create();
+    }
+
+    public IButton? GetUpButton()
+    {
+        return _projLab.UpButton;
+    }
+
+    public IButton? GetDownButton()
+    {
+        return _projLab.DownButton;
+    }
+
+    public IButton? GetLeftButton()
+    {
+        return _projLab.LeftButton;
+    }
+
+    public IButton? GetRightButton()
+    {
+        return _projLab.RightButton;
     }
 
     public ITemperatureSensor? GetTemperatureSensor()
