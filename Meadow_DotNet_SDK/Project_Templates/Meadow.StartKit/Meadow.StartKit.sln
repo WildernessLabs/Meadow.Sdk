@@ -37,6 +37,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meadow.ProjectLab", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartKit.RasPi", "StartKit.RasPi\StartKit.RasPi.csproj", "{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Displays.WinForms", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Displays.WinForms\Driver\Displays.WinForms.csproj", "{0277F962-0FBB-476F-A011-E56AECDEA02F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Hid.Keyboard", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Hid.Keyboard\Driver\Sensors.Hid.Keyboard.csproj", "{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +127,14 @@ Global
 		{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0277F962-0FBB-476F-A011-E56AECDEA02F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0277F962-0FBB-476F-A011-E56AECDEA02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0277F962-0FBB-476F-A011-E56AECDEA02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0277F962-0FBB-476F-A011-E56AECDEA02F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +154,8 @@ Global
 		{E0B1F82C-58DB-4BE1-BDFE-0FA7166BE15D} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{59A1F3E4-3383-42F6-9259-75A0F19EBBB1} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
+		{0277F962-0FBB-476F-A011-E56AECDEA02F} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}

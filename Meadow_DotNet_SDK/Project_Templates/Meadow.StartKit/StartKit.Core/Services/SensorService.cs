@@ -17,7 +17,7 @@ public class SensorService
             var mean = _temperatureQueue.Average(t => t.Celsius);
 
             return new Temperature(
-                Math.Round(2 * mean, MidpointRounding.AwayFromZero) * 2,
+                Math.Round(2 * mean, MidpointRounding.AwayFromZero) / 2,
                 Temperature.UnitType.Celsius);
         }
     }

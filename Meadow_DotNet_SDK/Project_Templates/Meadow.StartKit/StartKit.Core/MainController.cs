@@ -45,6 +45,8 @@ public class MainController
         {
             // update the UI
             _displayService.UpdateCurrentTemperature(t);
+
+            Resolver.Log.Info($"Room temperature is now {t.Fahrenheit:0.0}F");
         };
 
         _inputService.HeatToIncremented += (s, t) =>
