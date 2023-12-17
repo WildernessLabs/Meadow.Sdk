@@ -1,4 +1,5 @@
-﻿using StartKit.Core.Contracts;
+﻿using Meadow;
+using StartKit.Core.Contracts;
 
 namespace StartKit.Core;
 
@@ -6,7 +7,6 @@ public class MainController
 {
     private IStartKitPlatform _platform;
     private ThermostatMode _thermostatMode;
-    private DisplayMode _displayMode;
 
     private CloudService _cloudService;
     private ConfigurationService _configurationService;
@@ -18,8 +18,11 @@ public class MainController
     private IOutputService _outputService;
     private IBluetoothService? _bluetoothService;
 
+    private Timer _setpointUpdatingTimer;
+
     public MainController()
     {
+        _setpointUpdatingTimer = new Timer(SetpointUpdatingTimerProc);
     }
 
     public Task Initialize(IStartKitPlatform platform)
@@ -27,8 +30,11 @@ public class MainController
         _platform = platform;
 
         // create generic services
+        _configurationService = new ConfigurationService();
+        _cloudService = new CloudService(Resolver.CommandService);
         _displayService = new DisplayService(_platform.GetDisplay());
         _sensorService = new SensorService(platform);
+        _inputService = new InputService(platform);
 
         // retrieve platform-dependent services
         _outputService = platform.GetOutputService();
@@ -45,24 +51,32 @@ public class MainController
         {
             _configurationService.IncrementHeatTo();
             _displayService.UpdateHeatTo(_configurationService.HeatTo);
+            // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
+            _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
         };
 
         _inputService.HeatToDecremented += (s, t) =>
         {
             _configurationService.DecrementHeatTo();
             _displayService.UpdateHeatTo(_configurationService.HeatTo);
+            // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
+            _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
         };
 
         _inputService.CoolToIncremented += (s, t) =>
         {
             _configurationService.IncrementCoolTo();
             _displayService.UpdateCoolTo(_configurationService.CoolTo);
+            // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
+            _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
         };
 
         _inputService.CoolToDecremented += (s, t) =>
         {
             _configurationService.DecrementCoolTo();
             _displayService.UpdateCoolTo(_configurationService.CoolTo);
+            // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
+            _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
         };
 
         _inputService.DisplayModeChanged += (s, t) =>
@@ -70,20 +84,37 @@ public class MainController
             _displayService.UpdateDisplayMode(t);
         };
 
-        _cloudService.NewSetpointsReceived += (s, t) =>
+        _cloudService.NewSetpointsReceived += (s, setpoints) =>
         {
             // you could add sanity by checking the valid range to heat and cool here
-            if (t.CoolTo != null)
+            if (setpoints.CoolTo != null)
             {
-                _configurationService.CoolTo = t.CoolTo.Value;
+                _configurationService.CoolTo = setpoints.CoolTo.Value;
             }
-            if (t.HeatTo != null)
+            if (setpoints.HeatTo != null)
             {
-                _configurationService.HeatTo = t.HeatTo.Value;
+                _configurationService.HeatTo = setpoints.HeatTo.Value;
             }
+
+            // make sure nothing is null
+            setpoints.HeatTo = _configurationService.HeatTo;
+            setpoints.CoolTo = _configurationService.CoolTo;
+
+            _ = _cloudService.RecordSetPointChange(setpoints);
         };
 
         return Task.CompletedTask;
+    }
+
+    private void SetpointUpdatingTimerProc(object o)
+    {
+        var setpoints = new SetPoints
+        {
+            HeatTo = _configurationService.HeatTo,
+            CoolTo = _configurationService.CoolTo
+        };
+
+        _ = _cloudService.RecordSetPointChange(setpoints);
     }
 
     public async Task Run()
@@ -140,7 +171,7 @@ public class MainController
         _displayService.UpdateThermostatMode(mode);
 
         // publish the transition
-        _cloudService.RecordTransition(_thermostatMode, mode);
+        _ = _cloudService.RecordTransition(_thermostatMode, mode);
 
         _thermostatMode = mode;
     }
