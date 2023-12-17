@@ -1,5 +1,5 @@
-﻿using Meadow.Devices;
-using Meadow.Foundation;
+﻿using Meadow;
+using Meadow.Devices;
 using StartKit.Core;
 
 namespace StartKit.ProjectLab;

@@ -70,6 +70,19 @@ public class MainController
             _displayService.UpdateDisplayMode(t);
         };
 
+        _cloudService.NewSetpointsReceived += (s, t) =>
+        {
+            // you could add sanity by checking the valid range to heat and cool here
+            if (t.CoolTo != null)
+            {
+                _configurationService.CoolTo = t.CoolTo.Value;
+            }
+            if (t.HeatTo != null)
+            {
+                _configurationService.HeatTo = t.HeatTo.Value;
+            }
+        };
+
         return Task.CompletedTask;
     }
 
