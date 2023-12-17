@@ -13,7 +13,6 @@ public class CloudService
     public CloudService(ICommandService commandService)
     {
         _commandService = commandService;
-
         _commandService.Subscribe<ChangeSetpointsCommand>(OnChangeSetpointsCommandReceived);
     }
 
@@ -55,10 +54,37 @@ public class CloudService
         }
     }
 
-    public Task RecordTransition(ThermostatMode previousMode, ThermostatMode newMode)
+    public async Task RecordSetPointChange(SetPoints setpoints)
     {
-        // TODO
+        var @event = new CloudEvent
+        {
+            Timestamp = DateTimeOffset.UtcNow,
+            Description = "Set point change",
+            Measurements = new()
+            {
 
-        return Task.CompletedTask;
+                { "HeatTo", setpoints!.HeatTo!.Value.Celsius },
+                { "CoolTo", setpoints!.CoolTo!.Value.Celsius }
+            }
+        };
+
+        await Resolver.MeadowCloudService.SendEvent(@event);
+    }
+
+    public async Task RecordTransition(ThermostatMode previousMode, ThermostatMode newMode)
+    {
+        var @event = new CloudEvent
+        {
+            Timestamp = DateTimeOffset.UtcNow,
+            Description = "Thermostat state change",
+            Measurements = new()
+            {
+
+                { "PreviousMode", previousMode },
+                { "NewMode", newMode }
+            }
+        };
+
+        await Resolver.MeadowCloudService.SendEvent(@event);
     }
 }
