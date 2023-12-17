@@ -5,22 +5,9 @@ namespace StartKit.Core;
 
 public class SensorService
 {
+    private Temperature _temperature;
+
     public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
-
-    private Queue<Temperature> _temperatureQueue = new();
-
-    public Temperature CurrentTemperature
-    {
-        get
-        {
-            // temperature sensor accuracy is, at best, +/- 0.5
-            var mean = _temperatureQueue.Average(t => t.Celsius);
-
-            return new Temperature(
-                Math.Round(2 * mean, MidpointRounding.AwayFromZero) / 2,
-                Temperature.UnitType.Celsius);
-        }
-    }
 
     public SensorService(IStartKitPlatform platform)
     {
@@ -31,17 +18,19 @@ public class SensorService
         }
     }
 
+    public Temperature CurrentTemperature
+    {
+        get => _temperature;
+        private set
+        {
+            if (value == CurrentTemperature) return;
+            _temperature = value;
+            CurrentTemperatureChanged?.Invoke(this, CurrentTemperature);
+        }
+    }
+
     private void OnTemperatureUpdated(object sender, Meadow.IChangeResult<Meadow.Units.Temperature> e)
     {
-        // we'll deal with larger fluctuations in the room by averaging
-        _temperatureQueue.Enqueue(e.New);
-
-        while (_temperatureQueue.Count > 5)
-        {
-            // toss out the oldest data
-            _temperatureQueue.Dequeue();
-        }
-
-        CurrentTemperatureChanged?.Invoke(this, CurrentTemperature);
+        CurrentTemperature = e.New;
     }
 }
