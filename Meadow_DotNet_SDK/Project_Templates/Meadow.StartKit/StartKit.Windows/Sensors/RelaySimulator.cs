@@ -23,7 +23,7 @@ internal class RelaySimulator : IRelay
         {
             if (value == IsOn) return;
             _state = value;
-            OnRelayChanged(this, IsOn);
+            OnRelayChanged?.Invoke(this, IsOn);
         }
     }
 
