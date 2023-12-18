@@ -12,13 +12,13 @@ public class MainController
     private ConfigurationService _configurationService;
     private DisplayService _displayService;
     private InputService _inputService;
-    private NetworkService _networkService;
+    private readonly NetworkService _networkService;
     private SensorService _sensorService;
-    private StorageService _storageService;
+    private readonly StorageService _storageService;
     private IOutputService _outputService;
     private IBluetoothService? _bluetoothService;
 
-    private Timer _setpointUpdatingTimer;
+    private readonly Timer _setpointUpdatingTimer;
 
     public MainController()
     {
@@ -84,6 +84,11 @@ public class MainController
         _inputService.DisplayModeChanged += (s, t) =>
         {
             _displayService.UpdateDisplayMode(t);
+        };
+
+        _inputService.ThermostatModeChanged += (s, t) =>
+        {
+            _displayService.UpdateThermostatMode(t);
         };
 
         _cloudService.NewSetpointsReceived += (s, setpoints) =>
