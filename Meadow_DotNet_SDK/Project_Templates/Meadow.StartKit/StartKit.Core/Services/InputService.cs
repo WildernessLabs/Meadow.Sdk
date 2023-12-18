@@ -5,8 +5,10 @@ namespace StartKit.Core;
 public class InputService
 {
     private DisplayMode _displayMode;
+    private ThermostatMode _thermostatMode;
 
     public event EventHandler<DisplayMode> DisplayModeChanged;
+    public event EventHandler<ThermostatMode> ThermostatModeChanged;
     public event EventHandler HeatToIncremented;
     public event EventHandler HeatToDecremented;
     public event EventHandler CoolToIncremented;
@@ -44,6 +46,18 @@ public class InputService
         }
     }
 
+    public ThermostatMode ThermostatMode
+    {
+        get => _thermostatMode;
+        private set
+        {
+            if (value == ThermostatMode) return;
+            _thermostatMode = value;
+
+            ThermostatModeChanged?.Invoke(this, ThermostatMode);
+        }
+    }
+
     private void OnUpButtonClicked(object sender, EventArgs e)
     {
         switch (DisplayMode)
@@ -76,7 +90,7 @@ public class InputService
         {
             DisplayMode.None => DisplayMode.EditCoolTo,
             DisplayMode.EditCoolTo => DisplayMode.EditHeatTo,
-            _ => DisplayMode
+            _ => DisplayMode.None
         };
 
         DisplayMode = newMode;
@@ -84,13 +98,13 @@ public class InputService
 
     private void OnLeftButtonClicked(object sender, EventArgs e)
     {
-        var newMode = DisplayMode switch
+        var newMode = ThermostatMode switch
         {
-            DisplayMode.EditHeatTo => DisplayMode.EditCoolTo,
-            DisplayMode.EditCoolTo => DisplayMode.None,
-            _ => DisplayMode
+            ThermostatMode.Off => ThermostatMode.Heat,
+            ThermostatMode.Heat => ThermostatMode.Cool,
+            _ => ThermostatMode.Off
         };
 
-        DisplayMode = newMode;
+        ThermostatMode = newMode;
     }
 }
