@@ -1,31 +1,66 @@
-﻿using Meadow;
-using Meadow.Foundation.Graphics;
+﻿using Meadow.Foundation.Graphics;
+using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Units;
 
 namespace StartKit.Core;
 
 public class DisplayService
 {
-    private readonly IGraphicsDisplay? _display;
-    private readonly MicroGraphics? _graphics;
+    private readonly DisplayScreen? _screen;
 
-    private Temperature _currentTemp = new Temperature(25);
-    private Temperature _targetTemp = new Temperature(25);
+    private Temperature _currentTemp;
+    private SetPoints _setpoints;
 
     private DisplayMode _displayMode = DisplayMode.None;
     private ThermostatMode _thermostatMode = ThermostatMode.Off;
 
-    public DisplayService(IGraphicsDisplay? display)
-    {
-        _display = display;
+    private NormalLayout _normalLayout;
+    private EditHeatLayout _editHeatLayout;
+    private EditCoolLayout _editCoolLayout;
 
-        if (_display != null)
+    public DisplayService(
+        IGraphicsDisplay? display,
+        Temperature currentTemp,
+        SetPoints setPoints)
+    {
+        _currentTemp = currentTemp;
+        _setpoints = setPoints;
+        if (display != null)
         {
-            _graphics = new MicroGraphics(_display)
+            var theme = new DisplayTheme
             {
-                CurrentFont = new Font12x20()
+                Font = new Font12x20()
             };
+
+            _screen = new DisplayScreen(
+                display,
+                theme: theme);
+
+            GenerateLayouts(_screen);
         }
+    }
+
+    private void GenerateLayouts(DisplayScreen screen)
+    {
+        _normalLayout = new NormalLayout(screen)
+        {
+            Visible = true,
+        };
+
+        _editHeatLayout = new EditHeatLayout(screen)
+        {
+            Visible = false
+        };
+
+        _editCoolLayout = new EditCoolLayout(screen)
+        {
+            Visible = false
+        };
+
+        screen.Controls.Add(
+            _normalLayout,
+            _editHeatLayout,
+            _editCoolLayout);
     }
 
     public Task UpdateCurrentTemperature(Temperature temperature)
@@ -38,7 +73,7 @@ public class DisplayService
 
     public Task UpdateHeatTo(Temperature temperature)
     {
-        _targetTemp = temperature;
+        _setpoints.HeatTo = temperature;
         UpdateDisplay();
 
         return Task.CompletedTask;
@@ -46,7 +81,7 @@ public class DisplayService
 
     public Task UpdateCoolTo(Temperature temperature)
     {
-        _targetTemp = temperature;
+        _setpoints.CoolTo = temperature;
         UpdateDisplay();
 
         return Task.CompletedTask;
@@ -68,15 +103,40 @@ public class DisplayService
         return Task.CompletedTask;
     }
 
-    void UpdateDisplay()
+    private void UpdateDisplay()
     {
-        if (_graphics == null)
+        if (_screen == null)
         {
             return;
         }
 
-        _graphics.Clear();
+        switch (_displayMode)
+        {
+            case DisplayMode.None:
+                // just running
+                _normalLayout.Visible = true;
+                _editCoolLayout.Visible = false;
+                _editHeatLayout.Visible = false;
+                _normalLayout.DisplayTemperature = _currentTemp;
+                _normalLayout.Mode = _thermostatMode;
+                break;
+            case DisplayMode.EditHeatTo:
+                // editing heat to setpoint
+                _normalLayout.Visible = false;
+                _editCoolLayout.Visible = false;
+                _editHeatLayout.Visible = true;
+                _editHeatLayout.SetPoint = _setpoints.HeatTo!.Value;
+                break;
+            case DisplayMode.EditCoolTo:
+                // editing cool to setpoint
+                _normalLayout.Visible = false;
+                _editCoolLayout.Visible = true;
+                _editHeatLayout.Visible = false;
+                _editCoolLayout.SetPoint = _setpoints.CoolTo!.Value;
+                break;
+        }
 
+        /*
         _graphics.DrawText(0, 0, "Hello Start Kit", Color.White);
 
         _graphics.DrawText(0, 30, $"Current: {_currentTemp.Celsius:N1}°C", Color.White);
@@ -105,5 +165,6 @@ public class DisplayService
         }
 
         _graphics.Show();
+        */
     }
 }

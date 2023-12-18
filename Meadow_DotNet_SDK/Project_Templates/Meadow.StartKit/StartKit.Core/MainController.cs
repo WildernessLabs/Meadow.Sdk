@@ -32,9 +32,18 @@ public class MainController
         // create generic services
         _configurationService = new ConfigurationService();
         _cloudService = new CloudService(Resolver.CommandService);
-        _displayService = new DisplayService(_platform.GetDisplay());
         _sensorService = new SensorService(platform);
         _inputService = new InputService(platform);
+
+        _displayService = new DisplayService(
+            _platform.GetDisplay(),
+            _sensorService.CurrentTemperature,
+            new SetPoints
+            {
+                CoolTo = _configurationService.CoolTo,
+                HeatTo = _configurationService.HeatTo
+            }
+            );
 
         // retrieve platform-dependent services
         _outputService = platform.GetOutputService();
@@ -155,7 +164,7 @@ public class MainController
                     break;
                 case ThermostatMode.Cool:
                     // are we above "cool to" by < deadband?
-                    if (_sensorService.CurrentTemperature < (_configurationService.CoolTo + _configurationService.Deadband))
+                    if (_sensorService.CurrentTemperature < (_configurationService.CoolTo - _configurationService.Deadband))
                     {
                         // turn off
                         SetSystemMode(ThermostatMode.Off);

@@ -22,6 +22,7 @@ internal class MeadowApp : App<Meadow.Windows>
         _platform = new StartKitPlatform(Device);
         var c = new MainController();
         await c.Initialize(_platform);
+        _ = c.Run();
     }
 
     public override Task Run()
