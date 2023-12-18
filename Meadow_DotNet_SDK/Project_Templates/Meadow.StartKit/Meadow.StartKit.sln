@@ -41,6 +41,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Displays.WinForms", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Hid.Keyboard", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Hid.Keyboard\Driver\Sensors.Hid.Keyboard.csproj", "{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphics.MicroGraphics", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Libraries_and_Frameworks\Graphics.MicroGraphics\Driver\Graphics.MicroGraphics.csproj", "{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphics.MicroLayout", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Libraries_and_Frameworks\Graphics.MicroLayout\Driver\Graphics.MicroLayout.csproj", "{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Displays.TftSpi", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Displays.TftSpi\Driver\Displays.TftSpi.csproj", "{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Atmospheric.Bme68x", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Atmospheric.Bme68x\Driver\Sensors.Atmospheric.Bme68x.csproj", "{748AF7DD-83E1-428D-8D18-6B34C989B16C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Light.Bh1750", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Light.Bh1750\Driver\Sensors.Light.Bh1750.csproj", "{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Motion.Bmi270", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Motion.Bmi270\Driver\Sensors.Motion.Bmi270.csproj", "{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +147,40 @@ Global
 		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +202,12 @@ Global
 		{4D4F21F6-04FC-44EF-8ED8-EC9A51D9BD70} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
 		{0277F962-0FBB-476F-A011-E56AECDEA02F} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{6920D71F-5183-49B0-ADFF-F7A73D47AC3A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{8FF4CFDA-A525-40AE-A3B1-D5F7945BBE0E} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{8FD1E0C5-BC0B-4BF2-84F7-FACC7F46260C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{3C0F4A41-E5ED-4ACE-ADAB-CA91B6415B94} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{748AF7DD-83E1-428D-8D18-6B34C989B16C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}
