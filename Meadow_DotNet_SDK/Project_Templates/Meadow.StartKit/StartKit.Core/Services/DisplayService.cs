@@ -12,6 +12,9 @@ public class DisplayService
     private Temperature _currentTemp = new Temperature(25);
     private Temperature _targetTemp = new Temperature(25);
 
+    private DisplayMode _displayMode = DisplayMode.None;
+    private ThermostatMode _thermostatMode = ThermostatMode.Off;
+
     public DisplayService(IGraphicsDisplay? display)
     {
         _display = display;
@@ -35,7 +38,6 @@ public class DisplayService
 
     public Task UpdateHeatTo(Temperature temperature)
     {
-        // TODO:
         _targetTemp = temperature;
         UpdateDisplay();
 
@@ -44,14 +46,15 @@ public class DisplayService
 
     public Task UpdateCoolTo(Temperature temperature)
     {
-        // TODO:
         _targetTemp = temperature;
+        UpdateDisplay();
+
         return Task.CompletedTask;
     }
 
     public Task UpdateDisplayMode(DisplayMode mode)
     {
-        // TODO: change what the user is editing (background red/blue?)
+        _displayMode = mode;
         UpdateDisplay();
 
         return Task.CompletedTask;
@@ -59,7 +62,7 @@ public class DisplayService
 
     public Task UpdateThermostatMode(ThermostatMode mode)
     {
-        // TODO: show/hide the proper icon
+        _thermostatMode = mode;
         UpdateDisplay();
 
         return Task.CompletedTask;
@@ -80,17 +83,25 @@ public class DisplayService
 
         _graphics.DrawText(0, 60, $"Target: {_targetTemp.Celsius:N1}°C", Color.White);
 
-        if (_currentTemp == _targetTemp)
+        _graphics.DrawText(0, 90, $"Thermostat Mode: {_thermostatMode}", Color.White);
+
+        _graphics.DrawText(0, 120, $"Display Mode: {_displayMode}", Color.White);
+
+        if (_thermostatMode == ThermostatMode.Off)
         {
-            //  _graphics.DrawText(0, 90, "Target Reached", Color.White);
+            _graphics.DrawText(0, 150, "Off", Color.LightGray);
         }
-        else if (_currentTemp < _targetTemp)
+        else if (_currentTemp == _targetTemp)
         {
-            _graphics.DrawText(0, 90, "Heating", Color.Red);
+            _graphics.DrawText(0, 150, "At Target", Color.Green);
         }
-        else
+        else if (_currentTemp < _targetTemp && _thermostatMode == ThermostatMode.Heat)
         {
-            _graphics.DrawText(0, 90, "Cooling", Color.Blue);
+            _graphics.DrawText(0, 150, "Heating", Color.Red);
+        }
+        else if (_currentTemp > _targetTemp && _thermostatMode == ThermostatMode.Cool)
+        {
+            _graphics.DrawText(0, 150, "Cooling", Color.Blue);
         }
 
         _graphics.Show();

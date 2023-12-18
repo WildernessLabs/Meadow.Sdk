@@ -15,11 +15,11 @@ namespace StartKit.Windows;
 
 internal class StartKitPlatform : IStartKitPlatform
 {
-    private Meadow.Windows _device;
-    private Keyboard _keyboard;
-    private ITemperatureSensor _temperatureSimulator;
-    private IOutputService _outputService;
-    private IGraphicsDisplay _graphicsDisplay;
+    private readonly Meadow.Windows _device;
+    private readonly Keyboard _keyboard;
+    private readonly ITemperatureSensor _temperatureSimulator;
+    private readonly IOutputService _outputService;
+    private readonly IGraphicsDisplay _graphicsDisplay;
 
     public StartKitPlatform(Meadow.Windows device)
     {
@@ -62,27 +62,27 @@ internal class StartKitPlatform : IStartKitPlatform
     {
         return new PushButton(
             _keyboard.Pins.Down.CreateDigitalInterruptPort(
-                InterruptMode.EdgeRising));
+                InterruptMode.EdgeBoth));
     }
 
     public IButton? GetLeftButton()
     {
         return new PushButton(
             _keyboard.Pins.Left.CreateDigitalInterruptPort(
-                Meadow.Hardware.InterruptMode.EdgeRising));
+                Meadow.Hardware.InterruptMode.EdgeBoth));
     }
 
     public IButton? GetRightButton()
     {
         return new PushButton(
             _keyboard.Pins.Right.CreateDigitalInterruptPort(
-                Meadow.Hardware.InterruptMode.EdgeRising));
+                Meadow.Hardware.InterruptMode.EdgeBoth));
     }
 
     public IButton? GetUpButton()
     {
         return new PushButton(
             _keyboard.Pins.Up.CreateDigitalInterruptPort(
-                Meadow.Hardware.InterruptMode.EdgeRising));
+                Meadow.Hardware.InterruptMode.EdgeBoth));
     }
 }
