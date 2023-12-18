@@ -89,8 +89,7 @@ public class InputService
         var newMode = DisplayMode switch
         {
             DisplayMode.None => DisplayMode.EditCoolTo,
-            DisplayMode.EditCoolTo => DisplayMode.EditHeatTo,
-            _ => DisplayMode.None
+            _ => DisplayMode.EditHeatTo
         };
 
         DisplayMode = newMode;
@@ -98,13 +97,12 @@ public class InputService
 
     private void OnLeftButtonClicked(object sender, EventArgs e)
     {
-        var newMode = ThermostatMode switch
+        var newMode = DisplayMode switch
         {
-            ThermostatMode.Off => ThermostatMode.Heat,
-            ThermostatMode.Heat => ThermostatMode.Cool,
-            _ => ThermostatMode.Off
+            DisplayMode.EditHeatTo => DisplayMode.EditCoolTo,
+            _ => DisplayMode.None,
         };
 
-        ThermostatMode = newMode;
+        DisplayMode = newMode;
     }
 }
