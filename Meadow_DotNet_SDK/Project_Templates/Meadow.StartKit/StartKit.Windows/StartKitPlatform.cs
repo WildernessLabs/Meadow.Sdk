@@ -3,6 +3,7 @@ using Meadow.Foundation.Displays;
 using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Sensors.Buttons;
 using Meadow.Foundation.Sensors.Hid;
+using Meadow.Foundation.Simulation;
 using Meadow.Hardware;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
@@ -25,7 +26,7 @@ internal class StartKitPlatform : IStartKitPlatform
     {
         _device = device;
         _keyboard = new Keyboard();
-        _temperatureSimulator = new TemperatureSimulator(
+        _temperatureSimulator = new SimulatedTemperatureSensor(
             new Temperature(70, Temperature.UnitType.Fahrenheit),
             _keyboard.Pins.Plus.CreateDigitalInterruptPort(InterruptMode.EdgeRising),
             _keyboard.Pins.Minus.CreateDigitalInterruptPort(InterruptMode.EdgeRising));

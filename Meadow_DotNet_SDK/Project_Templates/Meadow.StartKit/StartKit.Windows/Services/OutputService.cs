@@ -1,4 +1,5 @@
-﻿using Meadow.Peripherals.Relays;
+﻿using Meadow.Foundation.Simulation;
+using Meadow.Peripherals.Relays;
 using StartKit.Core;
 
 namespace StartKit.Windows;
@@ -10,13 +11,13 @@ internal class OutputService : IOutputService
 
     public OutputService()
     {
-        _heatRelay = new RelaySimulator("HEAT")
+        _heatRelay = new SimulatedRelay("HEAT")
         {
-            IsOn = false
+            State = RelayState.Open
         };
-        _coolRelay = new RelaySimulator("COOL")
+        _coolRelay = new SimulatedRelay("COOL")
         {
-            IsOn = false
+            State = RelayState.Open
         };
     }
 
@@ -25,20 +26,20 @@ internal class OutputService : IOutputService
         switch (mode)
         {
             case ThermostatMode.Off:
-                _heatRelay.IsOn = false;
-                _coolRelay.IsOn = false;
+                _heatRelay.IsClosed = false;
+                _coolRelay.IsClosed = false;
                 break;
             case ThermostatMode.Heat:
-                _heatRelay.IsOn = true;
-                _coolRelay.IsOn = false;
+                _heatRelay.IsClosed = true;
+                _coolRelay.IsClosed = false;
                 break;
             case ThermostatMode.Cool:
-                _heatRelay.IsOn = false;
-                _coolRelay.IsOn = true;
+                _heatRelay.IsClosed = false;
+                _coolRelay.IsClosed = true;
                 break;
         }
 
-        Console.WriteLine($"HEAT: {(_heatRelay.IsOn ? "ON" : "OFF")}  COOL: {(_coolRelay.IsOn ? "ON" : "OFF")}");
+        Console.WriteLine($"HEAT: {(_heatRelay.IsClosed ? "ON" : "OFF")}  COOL: {(_coolRelay.IsClosed ? "ON" : "OFF")}");
 
         return Task.CompletedTask;
     }
