@@ -1,4 +1,5 @@
-﻿using Meadow.Foundation.Graphics;
+﻿using Meadow;
+using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Sensors.Buttons;
 using Meadow.Foundation.Sensors.Hid;
 using Meadow.Foundation.Simulation;
@@ -9,7 +10,6 @@ using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
 using StartKit.Core;
 using StartKit.Core.Contracts;
-using Meadow;
 
 namespace StartKit.Mac;
 
@@ -20,7 +20,7 @@ internal class StartKitPlatform : IStartKitPlatform
     private readonly IOutputService _outputService;
 
     public StartKitPlatform(Meadow.Mac device)
-    { 
+    {
         _keyboard = new Keyboard();
         _outputService = new OutputService();
         _temperatureSimulator = new SimulatedTemperatureSensor(
