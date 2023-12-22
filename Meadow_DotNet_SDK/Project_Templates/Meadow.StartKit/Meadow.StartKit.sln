@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Light.Bh1750", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Motion.Bmi270", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Motion.Bmi270\Driver\Sensors.Motion.Bmi270.csproj", "{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Displays.Gtk", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Displays.Gtk\Driver\Displays.Gtk.csproj", "{BE59CED3-3884-47CD-BC74-2EECAE206A8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,10 @@ Global
 		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -208,6 +214,7 @@ Global
 		{748AF7DD-83E1-428D-8D18-6B34C989B16C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{BE59CED3-3884-47CD-BC74-2EECAE206A8A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}
