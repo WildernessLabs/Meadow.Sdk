@@ -2,7 +2,7 @@
 using Meadow.Peripherals.Relays;
 using StartKit.Core;
 
-namespace Meadow.RasPi;
+namespace StartKit.RasPi;
 
 internal class OutputService : IOutputService
 {
