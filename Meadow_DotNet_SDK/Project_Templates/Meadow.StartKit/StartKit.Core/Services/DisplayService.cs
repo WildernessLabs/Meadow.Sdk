@@ -44,17 +44,17 @@ public class DisplayService
     {
         _normalLayout = new NormalLayout(screen)
         {
-            Visible = true,
+            IsVisible = true,
         };
 
         _editHeatLayout = new EditHeatLayout(screen)
         {
-            Visible = false
+            IsVisible = false
         };
 
         _editCoolLayout = new EditCoolLayout(screen)
         {
-            Visible = false
+            IsVisible = false
         };
 
         screen.Controls.Add(
@@ -114,24 +114,24 @@ public class DisplayService
         {
             case DisplayMode.None:
                 // just running
-                _normalLayout.Visible = true;
-                _editCoolLayout.Visible = false;
-                _editHeatLayout.Visible = false;
+                _normalLayout.IsVisible = true;
+                _editCoolLayout.IsVisible = false;
+                _editHeatLayout.IsVisible = false;
                 _normalLayout.DisplayTemperature = _currentTemp;
                 _normalLayout.Mode = _thermostatMode;
                 break;
             case DisplayMode.EditHeatTo:
                 // editing heat to setpoint
-                _normalLayout.Visible = false;
-                _editCoolLayout.Visible = false;
-                _editHeatLayout.Visible = true;
+                _normalLayout.IsVisible = false;
+                _editCoolLayout.IsVisible = false;
+                _editHeatLayout.IsVisible = true;
                 _editHeatLayout.SetPoint = _setpoints.HeatTo!.Value;
                 break;
             case DisplayMode.EditCoolTo:
                 // editing cool to setpoint
-                _normalLayout.Visible = false;
-                _editCoolLayout.Visible = true;
-                _editHeatLayout.Visible = false;
+                _normalLayout.IsVisible = false;
+                _editCoolLayout.IsVisible = true;
+                _editHeatLayout.IsVisible = false;
                 _editCoolLayout.SetPoint = _setpoints.CoolTo!.Value;
                 break;
         }
