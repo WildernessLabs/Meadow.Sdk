@@ -37,5 +37,19 @@
     <Folder Include="templates\MeadowLibraryCSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryFSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
+    <Folder Include="templates\MeadowRaspberryPiCSharp\" />
+    <Folder Include="templates\MeadowWinFormsCSharp\" />
   </ItemGroup>
 </Project>
+
+<!--
+
+New templates:
+ - Raspberry Pi template? (C#), or 
+ 
+ - WinForms template (C#)
+  - Including the FT232H
+  - Winforms display with Project Lab's display resolution
+
+
+-->

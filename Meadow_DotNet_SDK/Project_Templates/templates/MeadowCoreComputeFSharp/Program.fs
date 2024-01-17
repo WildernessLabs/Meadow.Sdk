@@ -1,4 +1,4 @@
-namespace MeadowApp
+namespace $safeprojectname$
 
 open System
 open Meadow.Devices

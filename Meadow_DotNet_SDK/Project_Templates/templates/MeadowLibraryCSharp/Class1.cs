@@ -1,6 +1,6 @@
 ﻿using System;
 
-﻿namespace MeadowLibrary
+﻿namespace $safeprojectname$
 {
     public class Class1
     {

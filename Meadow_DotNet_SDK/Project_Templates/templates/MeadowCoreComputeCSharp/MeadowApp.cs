@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MeadowApp
+namespace $safeprojectname$
 {
     // Change F7CoreComputeV2 to F7FeatherV2 (or F7FeatherV1) for Feather boards
     public class MeadowApp : App<F7CoreComputeV2>

@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "identity": "WildernessLabs.Meadow.Templates.RaspberryPi.CSharp",
+  "name": "Meadow Application (Raspberry Pi)",
+  "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
+  "shortName": "MeadowRPi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication.Template",
+  "preferNameDirectory": true,
+  "symbols": {
+    "namespace": {
+      "type": "parameter",
+      "defaultValue": "MeadowApp",
+      "description": "Root namespace for the project"
+    },
+    "primaryOutputs": [
+      { "path": "MeadowApplication.csproj" }
+    ]
+  }
+}
