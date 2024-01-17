@@ -28,11 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="templates\MeadowCoreComputeCSharp\.template.config\" />
+    <Folder Include="templates\MeadowCoreComputeFSharp\.template.config\" />
+    <Folder Include="templates\MeadowCoreComputeVBNet\.template.config\" />
+    <Folder Include="templates\MeadowFeatherCSharp\.template.config\" />
+    <Folder Include="templates\MeadowFeatherFSharp\.template.config\" />
+    <Folder Include="templates\MeadowFeatherVBNet\.template.config\" />
+    <Folder Include="templates\MeadowLibraryCSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryFSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
-    <Folder Include="templates\MeadowLibraryCSharp\.template.config\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="templates\MeadowApp\Template.json Notes" />
   </ItemGroup>
 </Project>
