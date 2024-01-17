@@ -2,26 +2,24 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.1.0.0</PackageVersion>
-    <Version>1.1.0.0</Version>
+    <PackageVersion>1.8.0</PackageVersion>
+    <Version>1.8.0</Version>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <Title>Wilderness Labs Meadow Template</Title>
     <Description>Wilderness Labs Meadow Template</Description>
     <PackageTags>Wilderness Labs;Meadow Sdk;dotnet-new;templates</PackageTags>
-    
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\icon.png" Pack="true" PackagePath=""/>
+    <None Include="..\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,13 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="templates\MeadowApplication\.template.config\" />
-    <Folder Include="templates\MeadowApplicationFSharp\.template.config\" />
-    <Folder Include="templates\MeadowApplicationVBNet\.template.config\" />
-    <Folder Include="templates\MeadowLibrary\.template.config\" />
     <Folder Include="templates\MeadowLibraryFSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
-
+    <Folder Include="templates\MeadowLibraryCSharp\.template.config\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="templates\MeadowApp\Template.json Notes" />

@@ -1,9 +1,4 @@
-﻿using Meadow;
-using Meadow.Devices;
-using Meadow.Foundation;
-using Meadow.Foundation.Leds;
-using Meadow.Peripherals.Leds;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace MeadowApp
