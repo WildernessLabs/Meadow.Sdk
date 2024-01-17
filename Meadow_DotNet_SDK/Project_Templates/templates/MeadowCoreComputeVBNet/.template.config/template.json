@@ -13,6 +13,6 @@
   "sourceName": "MeadowApplication",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.csproj" }
+    { "path": "MeadowApplication.vbproj" }
   ]
 }

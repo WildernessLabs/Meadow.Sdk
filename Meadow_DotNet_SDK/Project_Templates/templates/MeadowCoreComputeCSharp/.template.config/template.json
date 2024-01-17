@@ -3,7 +3,7 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Core-Compute module)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicCcmApp",
+  "identity": "WildernessLabs.Meadow.Templates.BasicCcmApp.CSharp",
   "groupIdentity": "WildernessLabs.Meadow.BasicCcmApp",
   "shortName": "MeadowCcm",
   "tags": {

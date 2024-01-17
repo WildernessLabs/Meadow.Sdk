@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow Application",
+  "name": "Meadow Application (Feather F7)",
   "identity": "WildernessLabs.Meadow.Templates.BasicApp.VBNet",
   "groupIdentity": "WildernessLabs.Meadow.BasicApp",
   "shortName": "Meadow",

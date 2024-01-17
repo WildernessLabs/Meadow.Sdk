@@ -3,7 +3,7 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Feather F7)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicApp",
+  "identity": "WildernessLabs.Meadow.Templates.BasicApp.CSharp",
   "groupIdentity": "WildernessLabs.Meadow.BasicApp",
   "shortName": "Meadow",
   "tags": {
