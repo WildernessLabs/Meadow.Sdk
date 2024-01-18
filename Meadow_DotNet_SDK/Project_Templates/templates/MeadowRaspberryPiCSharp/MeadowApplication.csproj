@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>$safeprojectname$</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Meadow.Linux" Version="*" />
