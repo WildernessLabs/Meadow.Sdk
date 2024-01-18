@@ -1,7 +1,7 @@
 ﻿using Meadow;
 using Meadow.Pinouts;
 
-namespace $namespace$
+namespace MeadowApp
 {
     public class MeadowApp : App<Linux<RaspberryPi>>
     {

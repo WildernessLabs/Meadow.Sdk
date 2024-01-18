@@ -1,11 +1,7 @@
-namespace $safeprojectname$
+namespace MeadowApp
 
-open System
 open Meadow.Devices
 open Meadow
-open Meadow.Foundation.Leds
-open Meadow.Foundation
-open Meadow.Peripherals.Leds
 
 type MeadowApp() =
     // Change F7CoreComputeV2 to F7FeatherV2 (or F7FeatherV1) for Feather boards

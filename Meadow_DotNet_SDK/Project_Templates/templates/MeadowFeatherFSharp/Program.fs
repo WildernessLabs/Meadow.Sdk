@@ -1,10 +1,9 @@
-﻿namespace $safeprojectname$
+﻿namespace MeadowApp
 
 open System
 open Meadow.Devices
 open Meadow
 open Meadow.Foundation.Leds
-open Meadow.Foundation
 open Meadow.Peripherals.Leds
 open System.Threading.Tasks
 
@@ -13,24 +12,6 @@ type MeadowApp() =
     inherit App<F7FeatherV2>()
 
     let mutable led : RgbPwmLed = null
-
-    override this.Initialize() =
-        do Resolver.Log.Info "Initialize... (F#)"
-
-        led <- new RgbPwmLed(
-            MeadowApp.Device.Pins.OnboardLedRed,
-            MeadowApp.Device.Pins.OnboardLedGreen, 
-            MeadowApp.Device.Pins.OnboardLedBlue, 
-            CommonType.CommonAnode)
-
-        base.Initialize()
-    
-    override this.Run () : Task =
-        let runAsync = async {
-            do Resolver.Log.Info "Run... (F#)"
-            do! CycleColors(TimeSpan.FromSeconds(1.0))
-        }
-        Async.StartAsTask(runAsync) :> Task
 
     let ShowColorPulse (color : Color) (duration : TimeSpan) = async {
         do! led.StartPulse(color, TimeSpan.FromMilliseconds(500.0)) |> Async.AwaitTask
@@ -55,3 +36,21 @@ type MeadowApp() =
             do! ShowColorPulse Color.Magenta duration
             do! ShowColorPulse Color.Pink duration
     }
+
+    override this.Initialize() =
+        do Resolver.Log.Info "Initialize... (F#)"
+
+        led <- new RgbPwmLed(
+            MeadowApp.Device.Pins.OnboardLedRed,
+            MeadowApp.Device.Pins.OnboardLedGreen, 
+            MeadowApp.Device.Pins.OnboardLedBlue, 
+            CommonType.CommonAnode)
+
+        base.Initialize()
+        
+    override this.Run () : Task =
+        let runAsync = async {
+            do Resolver.Log.Info "Run... (F#)"
+            do! CycleColors(TimeSpan.FromSeconds(1.0))
+        }
+        Async.StartAsTask(runAsync) :> Task

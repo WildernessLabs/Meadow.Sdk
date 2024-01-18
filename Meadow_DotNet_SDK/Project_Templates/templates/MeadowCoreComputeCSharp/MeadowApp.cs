@@ -1,13 +1,9 @@
 ﻿using Meadow;
 using Meadow.Devices;
-using Meadow.Foundation;
-using System;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace $safeprojectname$
+namespace MeadowApp
 {
-    // Change F7CoreComputeV2 to F7FeatherV2 (or F7FeatherV1) for Feather boards
     public class MeadowApp : App<F7CoreComputeV2>
     {
         public override Task Initialize()

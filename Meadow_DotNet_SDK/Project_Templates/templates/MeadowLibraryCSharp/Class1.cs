@@ -1,6 +1,4 @@
-﻿using System;
-
-﻿namespace $safeprojectname$
+﻿﻿namespace MeadowLibrary
 {
     public class Class1
     {

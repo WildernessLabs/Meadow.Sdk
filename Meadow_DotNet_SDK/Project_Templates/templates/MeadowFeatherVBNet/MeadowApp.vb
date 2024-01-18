@@ -1,8 +1,20 @@
-﻿Public Class MeadowApp
+﻿Imports Meadow
+Imports Meadow.Devices
+Imports Meadow.Foundation.Leds
+Imports Meadow.Peripherals.Leds
+
+Public Class MeadowApp
     'Change F7FeatherV2 to F7FeatherV1 for V1.x boards'
     Inherits App(Of F7FeatherV2)
 
     Private onboardLed As RgbPwmLed
+
+    Public Overrides Async Function Run() As Task
+        Resolver.Log.Info("Run... (VB.NET)")
+
+        Await CycleColors(TimeSpan.FromMilliseconds(1000))
+
+    End Function
 
     Public Overrides Function Initialize() As Task
         Resolver.Log.Info("Initialize... (VB.NET)")
@@ -13,14 +25,7 @@
             Device.Pins.OnboardLedBlue,
             CommonType.CommonAnode)
 
-        Return MyBase.Initialize()
-    End Function
-
-    Public Overrides Async Function Run() As Task
-        Resolver.Log.Info("Run... (VB.NET)")
-
-        Await CycleColors(TimeSpan.FromMilliseconds(1000))
-
+        Return MyBase.Run()
     End Function
 
     Private Async Function CycleColors(ByVal duration As TimeSpan) As Task
