@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow Application (Project Lab)",
+  "identity": "WildernessLabs.Meadow.Templates.ProjectLabApp.CSharp",
+  "groupIdentity": "WildernessLabs.Meadow.ProjectLabApp",
+  "shortName": "MeadowPL",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowApplication.csproj" }
+  ]
+}

@@ -37,7 +37,8 @@
     <Folder Include="templates\MeadowLibraryCSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryFSharp\.template.config\" />
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
-    <Folder Include="templates\MeadowRaspberryPiCSharp\" />
+    <Folder Include="templates\MeadowProjectLabCSharp\.template.config\" />
+    <Folder Include="templates\MeadowRaspberryPiCSharp\.template.config\" />
     <Folder Include="templates\MeadowWinFormsCSharp\" />
   </ItemGroup>
 </Project>
