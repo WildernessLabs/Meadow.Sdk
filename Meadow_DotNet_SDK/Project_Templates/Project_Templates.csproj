@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.8.0</PackageVersion>
@@ -39,18 +38,6 @@
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
     <Folder Include="templates\MeadowProjectLabCSharp\.template.config\" />
     <Folder Include="templates\MeadowRaspberryPiCSharp\.template.config\" />
-    <Folder Include="templates\MeadowWinFormsCSharp\" />
+    <Folder Include="templates\MeadowWinFormsCSharp\.template.config\" />
   </ItemGroup>
 </Project>
-
-<!--
-
-New templates:
- - Raspberry Pi template? (C#), or 
- 
- - WinForms template (C#)
-  - Including the FT232H
-  - Winforms display with Project Lab's display resolution
-
-
--->
