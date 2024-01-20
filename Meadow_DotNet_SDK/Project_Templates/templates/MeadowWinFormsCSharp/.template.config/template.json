@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (WinForms)",
-  "identity": "WildernessLabs.Meadow.Templates.WinForms.CSharp",
+  "identity": "WildernessLabs.Meadow.WinForms.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.WinForms",
   "shortName": "MeadowWF",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.csproj" }
+    { "path": "MeadowApplication.Template.csproj" }
   ]
 }

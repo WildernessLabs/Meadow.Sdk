@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Project Lab)",
-  "identity": "WildernessLabs.Meadow.Templates.ProjectLabApp.CSharp",
-  "groupIdentity": "WildernessLabs.Meadow.ProjectLabApp",
+  "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
   "shortName": "MeadowPL",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.csproj" }
+    { "path": "MeadowApplication.Template.csproj" }
   ]
 }

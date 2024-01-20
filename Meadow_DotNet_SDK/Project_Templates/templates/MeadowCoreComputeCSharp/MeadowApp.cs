@@ -2,7 +2,7 @@
 using Meadow.Devices;
 using System.Threading.Tasks;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     public class MeadowApp : App<F7CoreComputeV2>
     {

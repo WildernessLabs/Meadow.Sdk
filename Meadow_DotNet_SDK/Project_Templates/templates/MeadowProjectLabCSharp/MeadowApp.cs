@@ -6,7 +6,7 @@ using Meadow.Units;
 using System;
 using System.Threading.Tasks;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     // Change F7FeatherV2 to F7FeatherV1 if using Feather V1 Meadow boards
     // Change to F7CoreComputeV2 for Project Lab V3.x

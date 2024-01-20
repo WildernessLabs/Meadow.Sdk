@@ -1,4 +1,4 @@
-﻿namespace MeadowApp
+﻿namespace MeadowApplication.Template
 
 open System
 open Meadow.Devices

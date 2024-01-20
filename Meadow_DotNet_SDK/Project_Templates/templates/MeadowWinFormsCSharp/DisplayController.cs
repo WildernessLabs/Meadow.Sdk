@@ -2,7 +2,7 @@
 using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     public class DisplayController
     {

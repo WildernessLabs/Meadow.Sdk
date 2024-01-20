@@ -1,4 +1,4 @@
-﻿namespace MeadowLibrary
+﻿namespace MeadowLibrary.Template
 
 module Say =
     let hello name = printfn "Hello %s" name

@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Core-Compute module)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicCcmApp.VBNet",
-  "groupIdentity": "WildernessLabs.Meadow.BasicCcmApp",
+  "identity": "WildernessLabs.Meadow.Ccm.VBNET.Template",
+  "groupIdentity": "WildernessLabs.Meadow.Ccm",
   "shortName": "MeadowCcm",
   "tags": {
     "language": "VB.NET",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.vbproj" }
+    { "path": "MeadowApplication.Template.vbproj" }
   ]
 }

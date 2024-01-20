@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Feather F7)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicApp.FSharp",
-  "groupIdentity": "WildernessLabs.Meadow.BasicApp",
+  "identity": "WildernessLabs.Meadow.Feather.FSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.Feather",
   "shortName": "Meadow",
   "tags": {
     "language": "F#",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.fsproj" }
+    { "path": "MeadowApplication.Template.fsproj" }
   ]
 }

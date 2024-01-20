@@ -8,8 +8,8 @@
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.ProjectLab" Version="1.8.0" />
-    <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="1.8.0" />
+    <PackageReference Include="Meadow.ProjectLab" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="*" />
   </ItemGroup>
   <ItemGroup>
     <None Update="meadow.config.yaml">

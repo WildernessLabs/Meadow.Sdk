@@ -9,7 +9,7 @@
     <None Include="meadow.config.yaml" />
     <None Include="app.config.yaml" />
     <None Include="wifi.config.yaml" />
-    <Compile Include="Program.fs" />
+    <Compile Include="MeadowApp.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Meadow.F7" Version="*" />

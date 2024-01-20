@@ -3,7 +3,7 @@ using Meadow.Foundation.Leds;
 using Meadow.Peripherals.Leds;
 using Meadow.Pinouts;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     public class MeadowApp : App<Linux<RaspberryPi>>
     {

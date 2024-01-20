@@ -5,7 +5,7 @@ using Meadow.Foundation.Leds;
 using Meadow.Peripherals.Leds;
 using System.Windows.Forms;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     public class MeadowApp : App<Meadow.Windows>
     {

@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Raspberry Pi)",
-  "identity": "WildernessLabs.Meadow.Templates.RaspberryPi.CSharp",
+  "identity": "WildernessLabs.Meadow.RaspberryPi.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
   "shortName": "MeadowRPi",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.csproj" }
+    { "path": "MeadowApplication.Template.csproj" }
   ]
 }

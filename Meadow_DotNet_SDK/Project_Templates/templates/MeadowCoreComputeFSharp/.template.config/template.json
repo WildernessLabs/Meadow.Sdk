@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Core-Compute module)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicCcmApp.FSharp",
-  "groupIdentity": "WildernessLabs.Meadow.BasicCcmApp",
+  "identity": "WildernessLabs.Meadow.Ccm.FSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.Ccm",
   "shortName": "MeadowCcm",
   "tags": {
     "language": "F#",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.fsproj" }
+    { "path": "MeadowApplication.Template.fsproj" }
   ]
 }

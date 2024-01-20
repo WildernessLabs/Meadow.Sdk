@@ -3,7 +3,7 @@ using Meadow.Foundation;
 using Meadow.Foundation.Graphics;
 using Meadow.Units;
 
-namespace MeadowApp
+namespace MeadowApplication.Template
 {
     public class DisplayController
     {
