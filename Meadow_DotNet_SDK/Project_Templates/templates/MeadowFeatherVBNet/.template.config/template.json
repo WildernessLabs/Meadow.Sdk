@@ -3,16 +3,16 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Feather F7)",
-  "identity": "WildernessLabs.Meadow.Templates.BasicApp.VBNet",
-  "groupIdentity": "WildernessLabs.Meadow.BasicApp",
+  "identity": "WildernessLabs.Meadow.Feather.VBNET.Template",
+  "groupIdentity": "WildernessLabs.Meadow.Feather",
   "shortName": "Meadow",
   "tags": {
     "language": "VB.NET",
     "type": "project"
   },
-  "sourceName": "MeadowApplication",
+  "sourceName": "MeadowApplication.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowApplication.vbproj" }
+    { "path": "MeadowApplication.Template.vbproj" }
   ]
 }
