@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow Application (Feather F7)",
+  "identity": "WildernessLabs.Meadow.Feather.VBNET.Template",
+  "groupIdentity": "WildernessLabs.Meadow.Feather",
+  "shortName": "Meadow",
+  "tags": {
+    "language": "VB.NET",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication.Template",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowApplication.Template.vbproj" }
+  ]
+}
