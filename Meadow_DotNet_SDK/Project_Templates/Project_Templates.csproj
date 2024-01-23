@@ -45,5 +45,13 @@
     <Folder Include="templates\MeadowJetsonNanoCSharp\.template.config\" />
     <Folder Include="templates\MeadowReTerminal\.template.config\" />
     <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.Core\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.F7Feather\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.Mac\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.Windows\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.RasPi\.template.config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="templates\MeadowApp\Template.json Notes" />
   </ItemGroup>
 </Project>
