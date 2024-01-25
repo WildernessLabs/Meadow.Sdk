@@ -3,9 +3,9 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Feather F7)",
-  "identity": "WildernessLabs.Meadow.Feather.CSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.Feather",
-  "shortName": "Meadow",
+  "identity": "WildernessLabs.Meadow.FeatherF7.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.FeatherF7",
+  "shortName": "FeatherF7",
   "tags": {
     "language": "C#",
     "type": "project"

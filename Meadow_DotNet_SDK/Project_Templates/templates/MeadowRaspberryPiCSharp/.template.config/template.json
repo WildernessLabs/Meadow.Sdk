@@ -5,7 +5,7 @@
   "name": "Meadow Application (Raspberry Pi)",
   "identity": "WildernessLabs.Meadow.RaspberryPi.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
-  "shortName": "MeadowRPi",
+  "shortName": "RaspberryPi",
   "tags": {
     "language": "C#",
     "type": "project"

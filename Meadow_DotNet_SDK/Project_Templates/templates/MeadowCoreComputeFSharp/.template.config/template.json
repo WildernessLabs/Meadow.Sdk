@@ -3,9 +3,9 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Application (Core-Compute module)",
-  "identity": "WildernessLabs.Meadow.Ccm.FSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.Ccm",
-  "shortName": "MeadowCcm",
+  "identity": "WildernessLabs.Meadow.CcmDevKit.FSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.CcmDevKit",
+  "shortName": "CcmDevKit",
   "tags": {
     "language": "F#",
     "type": "project"

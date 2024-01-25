@@ -5,7 +5,7 @@
   "name": "Meadow Application (Project Lab)",
   "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
-  "shortName": "MeadowPL",
+  "shortName": "ProjectLab",
   "tags": {
     "language": "C#",
     "type": "project"
