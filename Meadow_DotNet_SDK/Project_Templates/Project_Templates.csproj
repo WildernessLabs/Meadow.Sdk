@@ -39,5 +39,6 @@
     <Folder Include="templates\MeadowProjectLabCSharp\.template.config\" />
     <Folder Include="templates\MeadowRaspberryPiCSharp\.template.config\" />
     <Folder Include="templates\MeadowWinFormsCSharp\.template.config\" />
+    <Folder Include="templates\MeadowJetsonNanoCSharp\" />
   </ItemGroup>
 </Project>
