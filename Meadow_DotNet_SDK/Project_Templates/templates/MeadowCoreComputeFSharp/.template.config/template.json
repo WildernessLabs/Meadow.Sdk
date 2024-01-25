@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow Application (Core-Compute module)",
-  "identity": "WildernessLabs.Meadow.CcmDevKit.FSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.CcmDevKit",
-  "shortName": "CcmDevKit",
+  "name": "Meadow App (Core-Compute Module)",
+  "identity": "WildernessLabs.Meadow.CoreComputeModule.FSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.CoreComputeModule",
+  "shortName": "CoreComputeModule",
   "tags": {
     "language": "F#",
     "type": "project"

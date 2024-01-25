@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : App<Linux<JetsonXavierAGX>>
+    public class MeadowApp : App<Linux<JetsonNano>>
     {
         public override Task Initialize()
         {

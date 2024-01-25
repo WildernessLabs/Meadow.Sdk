@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow.Linux Application (Raspberry Pi)",
+  "name": "Meadow.Linux App (Raspberry Pi)",
   "identity": "WildernessLabs.Meadow.RaspberryPi.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
   "shortName": "RaspberryPi",
