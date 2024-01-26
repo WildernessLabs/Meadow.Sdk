@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MeadowApplication.Template
 {
-    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
     public class MeadowApp : App<F7FeatherV2>
     {
         RgbPwmLed onboardLed;

@@ -10,7 +10,7 @@ namespace MeadowApplication.Template
         {
             Resolver.Log.Info("Initialize...");
 
-            return base.Initialize();
+            return Task.CompletedTask;
         }
 
         public override Task Run()
@@ -19,7 +19,7 @@ namespace MeadowApplication.Template
 
             Resolver.Log.Info("Hello, Jetson Nano!");
 
-            return base.Run();
+            return Task.CompletedTask;
         }
 
         static async Task Main(string[] args)

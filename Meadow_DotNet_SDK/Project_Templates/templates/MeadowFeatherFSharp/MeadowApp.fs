@@ -8,17 +8,28 @@ open Meadow.Peripherals.Leds
 open System.Threading.Tasks
 
 type MeadowApp() =
-    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
     inherit App<F7FeatherV2>()
 
     let mutable led : RgbPwmLed = null
 
-    let ShowColorPulse (color : Color) (duration : TimeSpan) = async {
-        do! led.StartPulse(color, TimeSpan.FromMilliseconds(500.0)) |> Async.AwaitTask
-        do! Async.Sleep duration
-        do! led.StopAnimation() |> Async.AwaitTask
-    }
-    
+    override this.Initialize() =
+        do Resolver.Log.Info "Initialize..."
+
+        led <- new RgbPwmLed(
+            MeadowApp.Device.Pins.OnboardLedRed,
+            MeadowApp.Device.Pins.OnboardLedGreen, 
+            MeadowApp.Device.Pins.OnboardLedBlue, 
+            CommonType.CommonAnode)
+
+        return Task.CompletedTask;
+        
+    override this.Run () : Task =
+        let runAsync = async {
+            do Resolver.Log.Info "Run..."
+            do! CycleColors(TimeSpan.FromSeconds(1.0))
+        }
+        Async.StartAsTask(runAsync) :> Task
+
     let CycleColors (duration : TimeSpan) = async {
         do Resolver.Log.Info "Cycle colors..."
 
@@ -37,20 +48,8 @@ type MeadowApp() =
             do! ShowColorPulse Color.Pink duration
     }
 
-    override this.Initialize() =
-        do Resolver.Log.Info "Initialize... (F#)"
-
-        led <- new RgbPwmLed(
-            MeadowApp.Device.Pins.OnboardLedRed,
-            MeadowApp.Device.Pins.OnboardLedGreen, 
-            MeadowApp.Device.Pins.OnboardLedBlue, 
-            CommonType.CommonAnode)
-
-        base.Initialize()
-        
-    override this.Run () : Task =
-        let runAsync = async {
-            do Resolver.Log.Info "Run... (F#)"
-            do! CycleColors(TimeSpan.FromSeconds(1.0))
-        }
-        Async.StartAsTask(runAsync) :> Task
+    let ShowColorPulse (color : Color) (duration : TimeSpan) = async {
+        do! led.StartPulse(color, TimeSpan.FromMilliseconds(500.0)) |> Async.AwaitTask
+        do! Async.Sleep duration
+        do! led.StopAnimation() |> Async.AwaitTask
+    }

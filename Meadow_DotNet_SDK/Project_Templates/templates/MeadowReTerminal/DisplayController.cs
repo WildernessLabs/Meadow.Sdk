@@ -24,7 +24,8 @@ namespace MeadowApplication.Template
                 Text = "Hello World",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
-                Font = new Font12x20()
+                Font = new Font12x20(),
+                ScaleFactor = ScaleFactor.X2
             });
         }
     }
