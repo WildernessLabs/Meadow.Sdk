@@ -1,6 +1,6 @@
-﻿Imports System.Threading.Tasks
-Imports Meadow
+﻿Imports Meadow
 Imports Meadow.Devices
+Imports System.Threading.Tasks
 
 Public Class MeadowApp
     Inherits App(Of F7CoreComputeV2)

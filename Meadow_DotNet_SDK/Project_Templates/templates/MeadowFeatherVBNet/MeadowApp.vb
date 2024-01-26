@@ -1,11 +1,11 @@
-﻿Imports System.Threading.Tasks
+﻿Imports System
+Imports System.Threading.Tasks
 Imports Meadow
 Imports Meadow.Devices
 Imports Meadow.Foundation.Leds
 Imports Meadow.Peripherals.Leds
 
 Public Class MeadowApp
-    'Change F7FeatherV2 to F7FeatherV1 for V1.x boards'
     Inherits App(Of F7FeatherV2)
 
     Private onboardLed As RgbPwmLed
@@ -19,7 +19,7 @@ Public Class MeadowApp
             Device.Pins.OnboardLedBlue,
             CommonType.CommonAnode)
 
-        Return Task.CompletedTask;
+        Return Task.CompletedTask
     End Function
 
     Public Overrides Async Function Run() As Task

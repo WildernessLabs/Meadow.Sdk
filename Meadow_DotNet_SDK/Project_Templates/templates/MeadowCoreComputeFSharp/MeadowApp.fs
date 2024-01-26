@@ -1,7 +1,8 @@
 namespace MeadowApplication.Template
 
-open Meadow.Devices
 open Meadow
+open Meadow.Devices
+open System.Threading.Tasks
 
 type MeadowApp() =
     inherit App<F7CoreComputeV2>()
@@ -9,11 +10,11 @@ type MeadowApp() =
     override this.Initialize() =
         do Resolver.Log.Info "Initialize..."
 
-        base.Initialize()
+        Task.CompletedTask
         
     override this.Run () =
         do Resolver.Log.Info "Run..."
 
         do Resolver.Log.Info "Hello, Meadow Core-Compute!"
 
-        base.Run()
+        Task.CompletedTask

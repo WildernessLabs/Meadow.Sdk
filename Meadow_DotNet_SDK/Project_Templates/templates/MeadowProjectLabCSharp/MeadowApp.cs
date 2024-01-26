@@ -83,7 +83,7 @@ namespace MeadowApplication.Template
 
             Resolver.Log.Info("Initialization complete");
 
-            return base.Initialize();
+            return Task.CompletedTask;
         }
 
         public override Task Run()
@@ -115,9 +115,8 @@ namespace MeadowApplication.Template
             Resolver.Log.Info("starting blink");
             _ = projLab.RgbLed?.StartBlink(WildernessLabsColors.PearGreen, TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(2000), 0.5f);
 
-            return base.Run();
+            return Task.CompletedTask;
         }
-
 
         private void Bmi270Updated(object sender, IChangeResult<(Acceleration3D? Acceleration3D, AngularVelocity3D? AngularVelocity3D, Temperature? Temperature)> e)
         {
