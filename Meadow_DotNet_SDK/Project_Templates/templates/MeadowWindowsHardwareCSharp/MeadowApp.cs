@@ -14,7 +14,7 @@ namespace MeadowApplication.Template
 
         public override Task Initialize()
         {
-            Console.WriteLine("Initializing...");
+            Resolver.Log.Info("Initialize...");
 
             display = new WinFormsDisplay(320, 240);
             var displayController = new DisplayController(display);
@@ -31,6 +31,8 @@ namespace MeadowApplication.Template
 
         public override async Task Run()
         {
+            Resolver.Log.Info("Run...");
+
             Application.Run(display);
 
             while (true)

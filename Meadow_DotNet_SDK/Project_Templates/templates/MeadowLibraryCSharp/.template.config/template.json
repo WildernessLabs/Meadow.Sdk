@@ -5,7 +5,7 @@
   "name": "Meadow Library",
   "identity": "WildernessLabs.Meadow.Library.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.Library",
-  "shortName": "MeadowDll",
+  "shortName": "Library",
   "tags": {
     "language": "C#",
     "type": "library"

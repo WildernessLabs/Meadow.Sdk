@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow App (Project Lab)",
-  "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
-  "shortName": "ProjectLab",
+  "name": "Meadow.Windows App",
+  "identity": "WildernessLabs.Meadow.WinForms.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.WinForms",
+  "shortName": "WinForms",
   "tags": {
     "language": "C#",
     "type": "project"

@@ -1,9 +1,10 @@
-﻿, Reusing Meadow;
+﻿using Meadow;
+using Meadow.Pinouts;
 using System.Threading.Tasks;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : App<Linux<RaspberryPi>>
+    public class MeadowApp : App<Linux<JetsonNano>>
     {
         public override Task Initialize()
         {
@@ -16,7 +17,7 @@ namespace MeadowApplication.Template
         {
             Resolver.Log.Info("Run...");
 
-            Resolver.Log.Info("Hello, Raspberry Pi!");
+            Resolver.Log.Info("Hello, Jetson Nano!");
 
             return Task.CompletedTask;
         }

@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow App (Project Lab)",
-  "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
-  "shortName": "ProjectLab",
+  "name": "Meadow.Linux App (Seeed Studio reTerminal)",
+  "identity": "WildernessLabs.Meadow.reTerminal.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.reTerminal",
+  "shortName": "reTerminal",
   "tags": {
     "language": "C#",
     "type": "project"
