@@ -1,5 +1,5 @@
-﻿, Reusing Meadow;
-using System.Threading.Tasks;
+﻿using Meadow;
+using Meadow.Pinouts;
 
 namespace MeadowApplication.Template
 {

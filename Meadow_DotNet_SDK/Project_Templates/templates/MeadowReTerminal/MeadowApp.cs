@@ -2,8 +2,6 @@
 using Meadow.Foundation.Displays;
 using Meadow.Foundation.Graphics;
 using Meadow.Pinouts;
-using System.Threading.Tasks;
-using System;
 
 namespace MeadowApplication.Template
 {
