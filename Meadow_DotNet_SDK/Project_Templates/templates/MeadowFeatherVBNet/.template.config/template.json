@@ -2,10 +2,11 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow App (Feather F7)",
-  "identity": "WildernessLabs.Meadow.FeatherF7.VBNET.Template",
-  "groupIdentity": "WildernessLabs.Meadow.FeatherF7",
-  "shortName": "FeatherF7",
+  "name": "Meadow F7 Feather App",
+  "description": "A Meadow application that runs on a Meadow Feather F7 board",
+  "identity": "WildernessLabs.Meadow.F7Feather.VBNET.Template",
+  "groupIdentity": "WildernessLabs.Meadow.F7Feather",
+  "shortName": "F7Feather",
   "tags": {
     "language": "VB.NET",
     "type": "project"
