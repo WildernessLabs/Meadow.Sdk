@@ -4,16 +4,16 @@
   "classifications": [ "Meadow", "Library" ],
   "name": "Meadow Library",
   "description": "A class library for Meadow applications",
-  "identity": "WildernessLabs.Meadow.Library.FSharp.Template",
+  "identity": "WildernessLabs.Meadow.Library.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.Library",
   "shortName": "Library",
   "tags": {
-    "language": "F#",
+    "language": "C#",
     "type": "library"
   },
   "sourceName": "MeadowLibrary.Template",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "MeadowLibrary.Template.fsproj" }
+    { "path": "MeadowLibrary.Template.csproj" }
   ]
 }

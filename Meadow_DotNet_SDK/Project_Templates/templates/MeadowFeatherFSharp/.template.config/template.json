@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow F7 Feather App",
+  "description": "A Meadow application that runs on a Meadow Feather F7 board",
+  "identity": "WildernessLabs.Meadow.F7Feather.FSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.F7Feather",
+  "shortName": "F7Feather",
+  "tags": {
+    "language": "F#",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication.Template",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowApplication.Template.fsproj" }
+  ]
+}

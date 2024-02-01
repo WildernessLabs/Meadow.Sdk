@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow.Windows App",
+  "description": "A Meadow Windows app that uses Windows Forms",
+  "identity": "WildernessLabs.Meadow.WinForms.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.WinForms",
+  "shortName": "WinForms",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MeadowApplication.Template",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    { "path": "MeadowApplication.Template.csproj" }
+  ]
+}
