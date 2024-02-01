@@ -3,7 +3,7 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Project Lab App",
-  "description": "A class library for Meadow applications",
+  "description": "A Meadow application that runs on a Project Lab IoT accelerator",
   "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
   "shortName": "ProjectLab",
