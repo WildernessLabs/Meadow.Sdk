@@ -1,8 +1,8 @@
 ﻿using Meadow;
 using Meadow.Foundation.Graphics;
+using Meadow.Foundation.Sensors;
 using Meadow.Foundation.Sensors.Buttons;
 using Meadow.Foundation.Sensors.Hid;
-using Meadow.Foundation.Simulation;
 using Meadow.Hardware;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
