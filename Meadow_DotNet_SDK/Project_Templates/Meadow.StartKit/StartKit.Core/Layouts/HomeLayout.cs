@@ -5,12 +5,12 @@ using Meadow.Units;
 
 namespace StartKit.Core;
 
-internal class ThermostatLayout : AbsoluteLayout
+internal class HomeLayout : AbsoluteLayout
 {
     protected IFont MediumFont { get; }
     protected IFont LargeFont { get; }
 
-    public ThermostatLayout(DisplayScreen screen)
+    public HomeLayout(DisplayScreen screen)
         : base(screen)
     {
         LargeFont = new Font12x20();

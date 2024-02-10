@@ -5,13 +5,13 @@ namespace StartKit.Core;
 
 public class SensorService
 {
-    private Temperature _temperature;
+    private Temperature temperature;
 
     public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
 
-    public SensorService(IStartKitPlatform platform)
+    public SensorService(IStartKitHardware platform)
     {
-        if (platform.GetTemperatureSensor() is { } t)
+        if (platform.TemperatureSensor is { } t)
         {
             t.Updated += OnTemperatureUpdated;
             t.StartUpdating(TimeSpan.FromSeconds(1));
@@ -20,11 +20,11 @@ public class SensorService
 
     public Temperature CurrentTemperature
     {
-        get => _temperature;
+        get => temperature;
         private set
         {
             if (value == CurrentTemperature) return;
-            _temperature = value;
+            temperature = value;
             CurrentTemperatureChanged?.Invoke(this, CurrentTemperature);
         }
     }

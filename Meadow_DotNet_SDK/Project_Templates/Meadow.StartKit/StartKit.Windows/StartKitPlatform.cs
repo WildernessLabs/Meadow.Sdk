@@ -14,7 +14,7 @@ using StartKit.Core.Contracts;
 
 namespace StartKit.Windows;
 
-internal class StartKitPlatform : IStartKitPlatform
+internal class StartKitPlatform : IStartKitHardware
 {
     private readonly Meadow.Windows _device;
     private readonly Keyboard _keyboard;

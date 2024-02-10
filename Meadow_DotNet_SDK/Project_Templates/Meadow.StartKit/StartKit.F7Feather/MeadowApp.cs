@@ -6,11 +6,11 @@ namespace StartKit.F7Feather;
 
 public class MeadowApp : App<F7FeatherV2>
 {
-    private StartKitPlatform _platform;
+    private F7FeatherHardware _platform;
 
     public override async Task Initialize()
     {
-        _platform = new StartKitPlatform(Device);
+        _platform = new F7FeatherHardware(Device);
         var c = new MainController();
         await c.Initialize(_platform);
         _ = c.Run();

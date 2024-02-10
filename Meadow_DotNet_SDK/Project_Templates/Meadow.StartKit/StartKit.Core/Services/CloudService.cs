@@ -6,14 +6,14 @@ namespace StartKit.Core;
 
 public class CloudService
 {
-    private ICommandService _commandService;
+    private ICommandService commandService;
 
     public event EventHandler<SetPoints> NewSetpointsReceived = default!;
 
     public CloudService(ICommandService commandService)
     {
-        _commandService = commandService;
-        _commandService.Subscribe<ChangeSetpointsCommand>(OnChangeSetpointsCommandReceived);
+        this.commandService = commandService;
+        this.commandService.Subscribe<ChangeSetpointsCommand>(OnChangeSetpointsCommandReceived);
     }
 
     private void OnChangeSetpointsCommandReceived(ChangeSetpointsCommand command)

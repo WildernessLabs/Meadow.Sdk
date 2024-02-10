@@ -1,12 +1,11 @@
 ﻿using Meadow.Foundation.Displays;
-using Meadow.Pinouts;
 using StartKit.Core;
 
 namespace Meadow.RasPi;
 
-internal class MeadowApp : App<Linux<RaspberryPi>>
+internal class MeadowApp : App<RaspberryPi>
 {
-    private StartKitPlatform<RaspberryPi> _platform;
+    private StartKitPlatform<RaspberryPi> platform;
 
     public bool SupportDisplay { get; set; } = false;
 
@@ -17,15 +16,15 @@ internal class MeadowApp : App<Linux<RaspberryPi>>
 
     public override async Task Initialize()
     {
-        _platform = new StartKitPlatform<RaspberryPi>(Device, SupportDisplay);
+        platform = new StartKitPlatform<RaspberryPi>(Device, SupportDisplay);
         var c = new MainController();
-        await c.Initialize(_platform);
+        await c.Initialize(platform);
         _ = c.Run();
     }
 
     public override Task Run()
     {
-        if (_platform.GetDisplay() is GtkDisplay gtk)
+        if (platform.GetDisplay() is GtkDisplay gtk)
         {
             gtk.Run();
         }

@@ -13,7 +13,7 @@ using StartKit.Core.Contracts;
 
 namespace StartKit.Mac;
 
-internal class StartKitPlatform : IStartKitPlatform
+internal class StartKitPlatform : IStartKitHardware
 {
     private readonly Keyboard _keyboard;
     private readonly ITemperatureSensor _temperatureSimulator;

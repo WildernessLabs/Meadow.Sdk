@@ -6,16 +6,16 @@ namespace StartKit.Windows;
 
 internal class OutputService : IOutputService
 {
-    private readonly IRelay _heatRelay;
-    private readonly IRelay _coolRelay;
+    private readonly IRelay heatRelay;
+    private readonly IRelay coolRelay;
 
     public OutputService()
     {
-        _heatRelay = new SimulatedRelay("HEAT")
+        heatRelay = new SimulatedRelay("HEAT")
         {
             State = RelayState.Open
         };
-        _coolRelay = new SimulatedRelay("COOL")
+        coolRelay = new SimulatedRelay("COOL")
         {
             State = RelayState.Open
         };
@@ -26,20 +26,20 @@ internal class OutputService : IOutputService
         switch (mode)
         {
             case ThermostatMode.Off:
-                _heatRelay.IsClosed = false;
-                _coolRelay.IsClosed = false;
+                heatRelay.IsClosed = false;
+                coolRelay.IsClosed = false;
                 break;
             case ThermostatMode.Heat:
-                _heatRelay.IsClosed = true;
-                _coolRelay.IsClosed = false;
+                heatRelay.IsClosed = true;
+                coolRelay.IsClosed = false;
                 break;
             case ThermostatMode.Cool:
-                _heatRelay.IsClosed = false;
-                _coolRelay.IsClosed = true;
+                heatRelay.IsClosed = false;
+                coolRelay.IsClosed = true;
                 break;
         }
 
-        Console.WriteLine($"HEAT: {(_heatRelay.IsClosed ? "ON" : "OFF")}  COOL: {(_coolRelay.IsClosed ? "ON" : "OFF")}");
+        Console.WriteLine($"HEAT: {(heatRelay.IsClosed ? "ON" : "OFF")}  COOL: {(coolRelay.IsClosed ? "ON" : "OFF")}");
 
         return Task.CompletedTask;
     }

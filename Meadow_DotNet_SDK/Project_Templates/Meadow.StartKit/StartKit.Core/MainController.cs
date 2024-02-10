@@ -5,7 +5,7 @@ namespace StartKit.Core;
 
 public class MainController
 {
-    private IStartKitPlatform _platform;
+    private IStartKitHardware _platform;
     private ThermostatMode _thermostatMode;
 
     private CloudService _cloudService;
@@ -25,7 +25,7 @@ public class MainController
         _setpointUpdatingTimer = new Timer(SetpointUpdatingTimerProc);
     }
 
-    public Task Initialize(IStartKitPlatform platform)
+    public Task Initialize(IStartKitHardware platform)
     {
         _platform = platform;
 

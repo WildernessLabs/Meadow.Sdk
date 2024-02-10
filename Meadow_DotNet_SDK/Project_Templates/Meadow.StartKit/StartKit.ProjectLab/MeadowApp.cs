@@ -8,7 +8,7 @@ public class MeadowApp : App<F7CoreComputeV2>
 {
     public override async Task Initialize()
     {
-        var platform = new StartKitPlatform(Device);
+        var platform = new ProjectLabHardware(Device);
         var c = new MainController();
         await c.Initialize(platform);
     }
