@@ -11,7 +11,7 @@ internal class ProjectLabHardware : IStartKitHardware
 {
     private F7CoreComputeV2 device;
     private IProjectLabHardware projLab;
-    private IOutputService? outputService;
+    private IOutputController? outputService;
     private IBluetoothService? bluetoothService;
 
     public ProjectLabHardware(F7CoreComputeV2 device)
@@ -24,6 +24,6 @@ internal class ProjectLabHardware : IStartKitHardware
     public IButton? DownButton => projLab.DownButton;
     public ITemperatureSensor? TemperatureSensor => projLab.TemperatureSensor;
     public IPixelDisplay? Display => projLab.Display;
-    public IOutputService OutputService => outputService ??= new OutputService(projLab);
+    public IOutputController OutputController => outputService ??= new OutputController(projLab);
     public IBluetoothService BluetoothService => bluetoothService ??= new BluetoothService(device);
 }

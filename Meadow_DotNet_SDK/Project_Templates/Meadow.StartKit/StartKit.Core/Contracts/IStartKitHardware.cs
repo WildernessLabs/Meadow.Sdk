@@ -15,6 +15,6 @@ public interface IStartKitHardware
     IPixelDisplay? Display { get; }
 
     // platform-dependent services
-    IOutputService OutputService { get; } // required service
+    IOutputController OutputController { get; } // required service
     IBluetoothService? BluetoothService { get; } // optional service
 }

@@ -51,6 +51,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Motion.Bmi270", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Displays.Gtk", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Displays.Gtk\Driver\Displays.Gtk.csproj", "{BE59CED3-3884-47CD-BC74-2EECAE206A8A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meadow.Desktop", "..\..\..\..\Meadow.Core\source\implementations\desktop\Meadow.Desktop\Meadow.Desktop.csproj", "{8410E676-8DCE-468F-90F6-F3EA34C2101A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartKit.Desktop", "StartKit.Desktop\StartKit.Desktop.csproj", "{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +179,14 @@ Global
 		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE59CED3-3884-47CD-BC74-2EECAE206A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8410E676-8DCE-468F-90F6-F3EA34C2101A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8410E676-8DCE-468F-90F6-F3EA34C2101A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8410E676-8DCE-468F-90F6-F3EA34C2101A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8410E676-8DCE-468F-90F6-F3EA34C2101A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +213,8 @@ Global
 		{CC524307-95DF-45B5-8EF5-2A6D6F4C2B9C} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{D92B4F4C-DC4F-45BB-957F-4BCE73825CEC} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{BE59CED3-3884-47CD-BC74-2EECAE206A8A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{8410E676-8DCE-468F-90F6-F3EA34C2101A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}

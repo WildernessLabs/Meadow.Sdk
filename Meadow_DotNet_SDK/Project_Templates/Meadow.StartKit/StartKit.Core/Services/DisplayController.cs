@@ -5,18 +5,17 @@ using Meadow.Units;
 
 namespace StartKit.Core;
 
-public class DisplayService
+public class DisplayController
 {
-    private readonly DisplayScreen? _screen;
+    private readonly DisplayScreen? screen;
 
     private Temperature currentTemp;
-    private DisplayUnits displayUnits;
+    private Temperature.UnitType displayUnits;
     private HomeLayout homeLayout;
 
-    public DisplayService(
+    public DisplayController(
         IPixelDisplay? display,
-        Temperature currentTemp,
-        SetPoints setPoints)
+        Temperature.UnitType unit)
     {
         if (display != null)
         {
@@ -25,11 +24,11 @@ public class DisplayService
                 Font = new Font12x20()
             };
 
-            _screen = new DisplayScreen(
+            screen = new DisplayScreen(
                 display,
                 theme: theme);
 
-            GenerateLayouts(_screen);
+            GenerateLayouts(screen);
         }
     }
 
@@ -52,7 +51,7 @@ public class DisplayService
         return Task.CompletedTask;
     }
 
-    public Task UpdateDisplayUnits(DisplayUnits units)
+    public Task UpdateDisplayUnits(Temperature.UnitType units)
     {
         displayUnits = units;
         UpdateDisplay();
@@ -62,11 +61,11 @@ public class DisplayService
 
     private void UpdateDisplay()
     {
-        if (_screen == null)
+        if (screen == null)
         {
             return;
         }
 
-        DisplayTemperature = currentTemp;
+        //        DisplayTemperature = currentTemp;
     }
 }

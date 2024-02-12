@@ -12,7 +12,7 @@ internal class RaspberryPiHardware : IStartKitHardware
     private readonly RaspberryPi device;
     private readonly IPixelDisplay? display = null;
     private readonly ITemperatureSensor temperatureSimulator;
-    private readonly IOutputService outputService;
+    private readonly IOutputController outputService;
 
     public RaspberryPiHardware(RaspberryPi device, bool supportDisplay)
     {
@@ -26,7 +26,7 @@ internal class RaspberryPiHardware : IStartKitHardware
 
     public IBluetoothService? BluetoothService => null;
     public IPixelDisplay? Display => display;
-    public IOutputService OutputService => outputService;
+    public IOutputController OutputController => outputService;
     public ITemperatureSensor? TemperatureSensor => temperatureSimulator;
     public IButton? DownButton => null;
     public IButton? UpButton => null;

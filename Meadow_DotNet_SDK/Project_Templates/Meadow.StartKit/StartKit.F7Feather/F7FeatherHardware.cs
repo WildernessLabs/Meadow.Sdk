@@ -15,7 +15,7 @@ internal class F7FeatherHardware : IStartKitHardware
 {
     private readonly F7FeatherBase device;
     private readonly ITemperatureSensor temperatureSensor;
-    private readonly IOutputService outputService;
+    private readonly IOutputController outputService;
 
     public F7FeatherHardware(F7FeatherBase device)
     {
@@ -23,7 +23,7 @@ internal class F7FeatherHardware : IStartKitHardware
         temperatureSensor = new SimulatedTemperatureSensor(
             22.Celsius(), 20.Celsius(), 24.Celsius());
 
-        outputService = new OutputService(
+        outputService = new OutputController(
             new RgbLed(
                 this.device.Pins.OnboardLedRed.CreateDigitalOutputPort(),
                 this.device.Pins.OnboardLedGreen.CreateDigitalOutputPort(),
@@ -33,7 +33,7 @@ internal class F7FeatherHardware : IStartKitHardware
     }
 
     public IBluetoothService? BluetoothService => null;
-    public IOutputService OutputService => outputService;
+    public IOutputController OutputController => outputService;
     public IPixelDisplay? Display => null;
     public ITemperatureSensor? TemperatureSensor => temperatureSensor;
     public IButton? DownButton => null;

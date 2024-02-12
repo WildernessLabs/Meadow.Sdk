@@ -1,12 +1,11 @@
 ﻿using Meadow;
-using StartKit.Core;
 using System.Windows.Forms;
 
 namespace StartKit.Windows;
 
-internal class MeadowApp : App<Meadow.Windows>
+internal class MeadowApp : App<Desktop>
 {
-    private StartKitPlatform _platform;
+    private DesktopHardware _platform;
 
     private static void Main(string[] args)
     {
