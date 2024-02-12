@@ -2,7 +2,7 @@
 using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Units;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class DisplayService

@@ -1,35 +1,30 @@
-﻿using Meadow;
-using Meadow.Devices;
+﻿using Meadow.Foundation.Displays;
 using Meadow.Foundation.Graphics;
-using Meadow.Foundation.Leds;
-using Meadow.Foundation.Sensors.Atmospheric;
+using Meadow.Hardware;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
-using StartKit.Core;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.F7Feather
-{
+namespace $safeprojectname$.RasPi {
 
-    internal class StartKitPlatform : IStartKitPlatform
+    internal class $safeprojectname$Platform<T> : I$safeprojectname$Platform
+        where T : IPinDefinitions, new()
     {
-        private readonly F7FeatherBase _device;
+        private readonly Meadow.Linux<T> _device;
         private readonly IGraphicsDisplay? _graphicsDisplay = null;
-        private readonly ITemperatureSensor _temperatureSensor;
+        private readonly ITemperatureSensor _temperatureSimulator;
         private readonly IOutputService _outputService;
 
-        public StartKitPlatform(F7FeatherBase device)
+        public $safeprojectname$Platform(Meadow.Linux<T> device, bool supportDisplay)
         {
             _device = device;
-            _temperatureSensor = new Bme688(device.CreateI2cBus());
-            _outputService = new OutputService(
-                new RgbLed(
-                    _device.Pins.OnboardLedRed.CreateDigitalOutputPort(),
-                    _device.Pins.OnboardLedGreen.CreateDigitalOutputPort(),
-                    _device.Pins.OnboardLedBlue.CreateDigitalOutputPort()
-                    )
-                );
+
+            if (supportDisplay)
+            { // only if we have a display attached
+                _graphicsDisplay = new GtkDisplay(ColorMode.Format16bppRgb565);
+            }
         }
 
         public IBluetoothService? GetBluetoothService()
@@ -39,7 +34,7 @@ namespace StartKit.F7Feather
 
         public IGraphicsDisplay? GetDisplay()
         {
-            return null;
+            return _graphicsDisplay;
         }
 
         public IHumiditySensor? GetHumiditySensor()
@@ -54,7 +49,7 @@ namespace StartKit.F7Feather
 
         public ITemperatureSensor? GetTemperatureSensor()
         {
-            return _temperatureSensor;
+            return _temperatureSimulator;
         }
 
         public IButton? GetDownButton()

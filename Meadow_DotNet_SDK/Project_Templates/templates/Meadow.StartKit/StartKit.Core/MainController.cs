@@ -1,14 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Meadow;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class MainController
     {
-        private IStartKitPlatform _platform;
+        private I$safeprojectname$Platform _platform;
         private ThermostatMode _thermostatMode;
 
         private CloudService _cloudService;
@@ -28,7 +28,7 @@ namespace StartKit.Core
             _setpointUpdatingTimer = new Timer(SetpointUpdatingTimerProc);
         }
 
-        public Task Initialize(IStartKitPlatform platform)
+        public Task Initialize(I$safeprojectname$Platform platform)
         {
             _platform = platform;
 

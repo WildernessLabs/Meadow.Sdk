@@ -1,18 +1,18 @@
 ﻿using System.Threading.Tasks;
 using Meadow;
 using Meadow.Devices;
-using StartKit.Core;
+using $safeprojectname$.Core;
 
-namespace StartKit.F7Feather
+namespace $safeprojectname$.F7Feather
 {
 
     public class MeadowApp : App<F7FeatherV2>
     {
-        private StartKitPlatform _platform;
+        private $safeprojectname$Platform _platform;
 
         public override async Task Initialize()
         {
-            _platform = new StartKitPlatform(Device);
+            _platform = new $safeprojectname$Platform(Device);
             var c = new MainController();
             await c.Initialize(_platform);
             _ = c.Run();

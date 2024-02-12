@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Meadow.Peripherals.Leds;
-using StartKit.Core;
+using $safeprojectname$.Core;
 
-namespace StartKit.F7Feather
+namespace $safeprojectname$.F7Feather
 {
 
     internal class OutputService : IOutputService

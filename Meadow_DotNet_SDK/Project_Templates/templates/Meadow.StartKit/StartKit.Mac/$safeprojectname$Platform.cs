@@ -8,19 +8,19 @@ using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
-using StartKit.Core;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.Mac
+namespace $safeprojectname$.Mac
 {
 
-    internal class StartKitPlatform : IStartKitPlatform
+    internal class $safeprojectname$Platform : I$safeprojectname$Platform
     {
         private readonly Keyboard _keyboard;
         private readonly ITemperatureSensor _temperatureSimulator;
         private readonly IOutputService _outputService;
 
-        public StartKitPlatform(Meadow.Mac device)
+        public $safeprojectname$Platform(Meadow.Mac device)
         {
             _keyboard = new Keyboard();
             _outputService = new OutputService();

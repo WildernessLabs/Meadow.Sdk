@@ -1,7 +1,7 @@
 ﻿using System;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class InputService
@@ -16,7 +16,7 @@ namespace StartKit.Core
         public event EventHandler CoolToIncremented;
         public event EventHandler CoolToDecremented;
 
-        public InputService(IStartKitPlatform platform)
+        public InputService(I$safeprojectname$Platform platform)
         {
             if (platform.GetRightButton() is { } rb)
             {

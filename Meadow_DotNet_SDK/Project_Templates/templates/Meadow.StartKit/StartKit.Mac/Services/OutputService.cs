@@ -1,8 +1,8 @@
 ﻿using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
-using StartKit.Core;
+using $safeprojectname$.Core;
 
-namespace StartKit.Mac
+namespace $safeprojectname$.Mac
 {
 
     internal class OutputService : IOutputService

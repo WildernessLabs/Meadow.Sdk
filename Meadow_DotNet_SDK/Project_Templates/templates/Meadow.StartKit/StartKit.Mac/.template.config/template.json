@@ -10,10 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Meadow.StartKit.Mac",
-  "preferNameDirectory": true,
-  "symbols": {
-    "parameterName": "safeprojectname",
-    "replaces": "MeadowSKMac"
-  }
+  "sourceName": "$safeprojectname$",
+  "preferNameDirectory": true
 }

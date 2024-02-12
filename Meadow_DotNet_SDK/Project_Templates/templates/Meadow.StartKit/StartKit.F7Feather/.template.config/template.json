@@ -10,10 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Meadow.StartKit.F7Feather",
-  "preferNameDirectory": true,
-  "symbols": {
-    "parameterName": "safeprojectname",
-    "replaces": "MeadowSKF7"
-  }
+  "sourceName": "$safeprojectname$",
+  "preferNameDirectory": true
 }

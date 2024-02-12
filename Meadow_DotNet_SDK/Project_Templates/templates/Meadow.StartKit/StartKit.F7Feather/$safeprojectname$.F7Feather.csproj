@@ -14,7 +14,7 @@
       <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StartKit.Core\StartKit.Core.csproj" />
+    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="meadow.config.yaml">

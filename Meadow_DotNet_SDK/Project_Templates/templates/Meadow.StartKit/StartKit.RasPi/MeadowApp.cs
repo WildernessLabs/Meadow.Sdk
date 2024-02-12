@@ -1,12 +1,12 @@
 ﻿using Meadow.Foundation.Displays;
 using Meadow.Pinouts;
-using StartKit.Core;
+using $safeprojectname$.Core;
 
 namespace Meadow.RasPi;
 
 internal class MeadowApp : App<Linux<RaspberryPi>>
 {
-    private StartKitPlatform<RaspberryPi> _platform;
+    private $safeprojectname$Platform<RaspberryPi> _platform;
 
     public bool SupportDisplay { get; set; } = false;
 
@@ -17,7 +17,7 @@ internal class MeadowApp : App<Linux<RaspberryPi>>
 
     public override async Task Initialize()
     {
-        _platform = new StartKitPlatform<RaspberryPi>(Device, SupportDisplay);
+        _platform = new $safeprojectname$Platform<RaspberryPi>(Device, SupportDisplay);
         var c = new MainController();
         await c.Initialize(_platform);
         _ = c.Run();

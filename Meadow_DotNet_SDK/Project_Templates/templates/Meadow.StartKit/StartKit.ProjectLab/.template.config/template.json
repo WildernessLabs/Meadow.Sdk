@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow StartKit (RasPi)",
-  "identity": "WildernessLabs.Meadow.StartKit.RPi",
-  "groupIdentity": "WildernessLabs.Meadow.SKRPi",
-  "shortName": "MeadowSKRPi",
+  "name": "Meadow StartKit (Project Lab)",
+  "identity": "WildernessLabs.Meadow.StartKit.ProjectLab",
+  "groupIdentity": "WildernessLabs.Meadow.SKPL",
+  "shortName": "MeadowSKPL",
   "tags": {
     "language": "C#",
     "type": "project"

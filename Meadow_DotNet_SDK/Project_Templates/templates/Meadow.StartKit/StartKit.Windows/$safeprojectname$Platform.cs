@@ -9,13 +9,13 @@ using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
-using StartKit.Core;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.Windows
+namespace $safeprojectname$.Windows
 {
 
-    internal class StartKitPlatform : IStartKitPlatform
+    internal class $safeprojectname$Platform : I$safeprojectname$Platform
     {
         private readonly Meadow.Windows _device;
         private readonly Keyboard _keyboard;
@@ -23,7 +23,7 @@ namespace StartKit.Windows
         private readonly IOutputService _outputService;
         private readonly IGraphicsDisplay _graphicsDisplay;
 
-        public StartKitPlatform(Meadow.Windows device)
+        public $safeprojectname$Platform(Meadow.Windows device)
         {
             _device = device;
             _keyboard = new Keyboard();

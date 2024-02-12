@@ -1,6 +1,6 @@
 ﻿using Meadow.Units;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class ConfigurationService

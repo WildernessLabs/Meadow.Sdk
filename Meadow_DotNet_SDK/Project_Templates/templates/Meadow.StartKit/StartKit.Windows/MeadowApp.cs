@@ -1,13 +1,13 @@
 ﻿using Meadow;
-using StartKit.Core;
+using $safeprojectname$.Core;
 using System.Windows.Forms;
 
-namespace StartKit.Windows
+namespace $safeprojectname$.Windows
 {
 
     internal class MeadowApp : App<Meadow.Windows>
     {
-        private StartKitPlatform _platform;
+        private $safeprojectname$Platform _platform;
 
         private static void Main(string[] args)
         {
@@ -20,7 +20,7 @@ namespace StartKit.Windows
 
         public override async Task Initialize()
         {
-            _platform = new StartKitPlatform(Device);
+            _platform = new $safeprojectname$Platform(Device);
             var c = new MainController();
             await c.Initialize(_platform);
             _ = c.Run();

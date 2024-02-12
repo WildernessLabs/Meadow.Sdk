@@ -3,10 +3,10 @@ using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 
-namespace StartKit.Core.Contracts
+namespace $safeprojectname$.Core.Contracts
 {
 
-    public interface IStartKitPlatform
+    public interface I$safeprojectname$Platform
     {
         // basic hardware
         IButton? GetUpButton();

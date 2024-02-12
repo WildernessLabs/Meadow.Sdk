@@ -1,7 +1,7 @@
 ﻿using Meadow.Units;
 using System.Text;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class SetPoints

@@ -1,4 +1,4 @@
-﻿namespace StartKit.Core
+﻿namespace $safeprojectname$.Core
 {
     public enum DisplayUnits
     {

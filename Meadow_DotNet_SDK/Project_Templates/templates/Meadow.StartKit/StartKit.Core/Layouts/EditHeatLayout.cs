@@ -1,7 +1,7 @@
 ﻿using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Units;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     internal class EditHeatLayout : ThermostatLayout

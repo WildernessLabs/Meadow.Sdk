@@ -2,7 +2,7 @@
 using Meadow.Cloud;
 using Meadow.Units;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class CloudService

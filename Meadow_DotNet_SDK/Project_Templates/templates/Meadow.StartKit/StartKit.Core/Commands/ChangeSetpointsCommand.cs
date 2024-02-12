@@ -1,6 +1,6 @@
 ﻿using Meadow.Cloud;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
     public class ChangeSetpointsCommand : IMeadowCommand
     {

@@ -1,7 +1,7 @@
 ﻿using Meadow.Units;
-using StartKit.Core.Contracts;
+using $safeprojectname$.Core.Contracts;
 
-namespace StartKit.Core
+namespace $safeprojectname$.Core
 {
 
     public class SensorService
@@ -10,7 +10,7 @@ namespace StartKit.Core
 
         public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
 
-        public SensorService(IStartKitPlatform platform)
+        public SensorService(I$safeprojectname$Platform platform)
         {
             if (platform.GetTemperatureSensor() is { } t)
             {

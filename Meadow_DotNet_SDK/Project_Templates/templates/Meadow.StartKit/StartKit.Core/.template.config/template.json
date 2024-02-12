@@ -10,10 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Meadow.StartKit.Core",
-  "preferNameDirectory": true,
-  "symbols": {
-    "parameterName": "safeprojectname",
-    "replaces": "MeadowSKC"
-  }
+  "sourceName": "$safeprojectname$",
+  "preferNameDirectory": true
 }

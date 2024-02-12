@@ -1,13 +1,13 @@
 ﻿using Meadow;
-using StartKit.Core;
+using $safeprojectname$.Core;
 using System;
 
-namespace StartKit.Mac
+namespace $safeprojectname$.Mac
 {
 
     internal class MeadowApp : App<Meadow.Mac>
     {
-        private StartKitPlatform _platform;
+        private $safeprojectname$Platform _platform;
 
         private static void Main(string[] args)
         {
@@ -16,7 +16,7 @@ namespace StartKit.Mac
 
         public override async Task Initialize()
         {
-            _platform = new StartKitPlatform(Device);
+            _platform = new $safeprojectname$Platform(Device);
             var c = new MainController();
             await c.Initialize(_platform);
             _ = c.Run();

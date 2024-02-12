@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow StartKit (Win)",
+  "name": "Meadow StartKit (Windows)",
   "identity": "WildernessLabs.Meadow.StartKit.Win",
   "groupIdentity": "WildernessLabs.Meadow.SKWin",
   "shortName": "MeadowSKWin",
@@ -10,10 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Meadow.StartKit.Win",
-  "preferNameDirectory": true,
-  "symbols": {
-    "parameterName": "safeprojectname",
-    "replaces": "MeadowSKWin"
-  }
+  "sourceName": "$safeprojectname$",
+  "preferNameDirectory": true
 }
