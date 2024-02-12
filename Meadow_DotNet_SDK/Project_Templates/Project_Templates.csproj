@@ -52,7 +52,4 @@
     <Folder Include="templates\Meadow.StartKit\StartKit.RasPi\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.ProjectLab\.template.config\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="templates\MeadowApp\Template.json Notes" />
-  </ItemGroup>
 </Project>
