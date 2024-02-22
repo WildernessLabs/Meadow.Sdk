@@ -15,5 +15,25 @@
   "preferNameDirectory": true,
   "primaryOutputs": [
     { "path": "MeadowApplication.Template.csproj" }
-  ]
+  ],
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "enableQuotelessLiterals": true,
+      "choices": [
+        {
+          "choice": "net8.0",
+          "description": "Target net8.0"
+        },
+        {
+          "choice": "net8.0-windows",
+          "description": "Target net8.0-windows"
+        }
+      ],
+      "replaces": "net8.0;net8.0-windows",
+      "defaultValue": "net8.0;net8.0-windows"
+    }
+  }
 }
