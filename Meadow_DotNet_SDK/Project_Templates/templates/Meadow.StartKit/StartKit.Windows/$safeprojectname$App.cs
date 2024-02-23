@@ -1,11 +1,11 @@
-﻿using Meadow;
+﻿using System.Threading.Tasks;
+using Meadow;
 using $safeprojectname$.Core;
 using System.Windows.Forms;
 
 namespace $safeprojectname$.Windows
 {
-
-    internal class MeadowApp : App<Meadow.Windows>
+    internal class $safeprojectname$App : App<Windows>
     {
         private $safeprojectname$Platform _platform;
 

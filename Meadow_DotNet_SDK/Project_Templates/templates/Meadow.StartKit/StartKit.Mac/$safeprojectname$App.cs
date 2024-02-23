@@ -1,11 +1,11 @@
-﻿using Meadow;
+﻿using System.Threading.Tasks;
+using Meadow;
 using $safeprojectname$.Core;
 using System;
 
 namespace $safeprojectname$.Mac
 {
-
-    internal class MeadowApp : App<Meadow.Mac>
+    internal class $safeprojectname$App : App<Mac>
     {
         private $safeprojectname$Platform _platform;
 

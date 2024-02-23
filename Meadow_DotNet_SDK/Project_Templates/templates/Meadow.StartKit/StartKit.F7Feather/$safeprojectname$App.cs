@@ -5,8 +5,7 @@ using $safeprojectname$.Core;
 
 namespace $safeprojectname$.F7Feather
 {
-
-    public class MeadowApp : App<F7FeatherV2>
+    public class $safeprojectname$App : App<F7FeatherV2>
     {
         private $safeprojectname$Platform _platform;
 
