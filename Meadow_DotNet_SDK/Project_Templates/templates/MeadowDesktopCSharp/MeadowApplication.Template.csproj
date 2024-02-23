@@ -7,7 +7,6 @@
 
     <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
         <UseWindowsForms>true</UseWindowsForms>
-        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

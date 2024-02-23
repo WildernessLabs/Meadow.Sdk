@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.9.0</PackageVersion>
-    <Version>1.9.0</Version>
+    <PackageVersion>1.8.0.1</PackageVersion>
+    <Version>1.8.0.1</Version>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
