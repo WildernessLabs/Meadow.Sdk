@@ -37,7 +37,7 @@ jobs:
         sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           5.0.x
@@ -92,7 +92,7 @@ jobs:
         submodules: true
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           5.0.x
