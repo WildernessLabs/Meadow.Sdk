@@ -53,7 +53,7 @@ jobs:
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/Meadow.SDK.csproj /t:Rebuild /p:Configuration=Release
 
     - name: Upload Nuget Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Meadow.SDK.nuget
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/bin/Release/*.nupkg'
@@ -62,7 +62,7 @@ jobs:
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/Project_Templates.csproj /t:Rebuild /p:Configuration=Release
 
     - name: Upload Nuget Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Project_Templates.nuget
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/bin/Release/*.nupkg'
