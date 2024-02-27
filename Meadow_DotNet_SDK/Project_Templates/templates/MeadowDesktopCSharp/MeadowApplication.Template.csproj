@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="Meadow.Desktop" Version="*" />
+        <PackageReference Include="Meadow.Foundation" Version="*" />
         <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
     </ItemGroup>
 </Project>

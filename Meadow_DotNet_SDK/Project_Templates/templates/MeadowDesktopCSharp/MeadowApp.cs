@@ -1,5 +1,6 @@
 ﻿using Meadow;
 using Meadow.Foundation.Displays;
+using System;
 using System.Threading.Tasks;
 
 namespace MeadowApplication.Template;
@@ -30,9 +31,11 @@ public class MeadowApp : App<Desktop>
 
     private void ExecutePlatformDisplayRunner()
     {
-#if WINDOWS
-        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
-#endif
+        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        {
+            System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+        }
+
         if (Device.Display is GtkDisplay gtk)
         {
             gtk.Run();

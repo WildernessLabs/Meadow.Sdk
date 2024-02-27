@@ -2,7 +2,6 @@
 using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Foundation.Graphics;
 using Meadow.Peripherals.Displays;
-using System.Reflection.Emit;
 
 namespace MeadowApplication.Template;
 
