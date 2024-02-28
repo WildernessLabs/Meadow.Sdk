@@ -7,15 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
-        <UseWindowsForms>true</UseWindowsForms>
-        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
-    </PropertyGroup>
+    <UseWindowsForms>true</UseWindowsForms>
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
-      <PackageReference Include="Meadow.F7" Version="*" />
-      <PackageReference Include="Meadow.Foundation" Version="*" />
-      <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
-      <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
-      <PackageReference Include="Meadow.Desktop" Version="*" />
+    <PackageReference Include="Meadow.Foundation" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
+    <PackageReference Include="Meadow.Desktop" Version="*" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />

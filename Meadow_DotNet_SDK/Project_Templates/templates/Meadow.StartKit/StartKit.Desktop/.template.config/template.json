@@ -31,21 +31,5 @@
       "replaces": "net8.0;net8.0-windows",
       "defaultValue": "net8.0;net8.0-windows"
     }
-  },
-  "sources": [
-    {
-      "modifiers": [
-        {
-          "condition": "Framework == net8.0-windows",
-          "exclude": true,
-          "sourceName": "MeadowApp.cs"
-        },
-        {
-          "condition": "Framework == net8.0",
-          "exclude": true,
-          "sourceName": "MeadowApp.Windows.cs"
-        }
-      ]
-    }
-  ]
+  }
 }

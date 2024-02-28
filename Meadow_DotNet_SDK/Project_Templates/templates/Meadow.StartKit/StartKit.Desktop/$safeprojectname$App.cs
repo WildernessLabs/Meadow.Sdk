@@ -11,14 +11,13 @@ namespace $safeprojectname$.Desktop
 
         private static void Main(string[] args)
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                System.Windows.Forms.Application.EnableVisualStyles();
-                System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-                ApplicationConfiguration.Initialize();
-            }
+#if (Framework == net8.0-windows)
+	        System.Windows.Forms.Application.EnableVisualStyles();
+	        System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+	        ApplicationConfiguration.Initialize();
+#endif
 
-            MeadowOS.Start(args);
+	        MeadowOS.Start(args);
         }
 
         public override async Task Initialize()
@@ -31,14 +30,13 @@ namespace $safeprojectname$.Desktop
 
         public override Task Run()
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);]
-            }
+#if (Framework == net8.0-windows)
+	        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+#endif
 
-            Application.Run(_platform.GetDisplay() as Form);
+	        Application.Run(_platform.GetDisplay() as Form);
 
-            return base.Run();
+	        return base.Run();
         }
     }
 }
