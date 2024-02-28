@@ -31,10 +31,9 @@ public class MeadowApp : App<Desktop>
 
     private void ExecutePlatformDisplayRunner()
     {
-        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-        {
-            System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
-        }
+#if (Framework == net8.0-windows)
+        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+#endif
 
         if (Device.Display is GtkDisplay gtk)
         {
