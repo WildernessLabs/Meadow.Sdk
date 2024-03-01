@@ -1,5 +1,6 @@
 ﻿using Meadow.Devices;
 using Meadow.Foundation.Graphics;
+using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
@@ -51,7 +52,7 @@ namespace $safeprojectname$.ProjectLab {
             return _projLab.EnvironmentalSensor;
         }
 
-        public IGraphicsDisplay? GetDisplay()
+        public IPixelDisplay? GetDisplay()
         {
             return _projLab.Display;
         }

@@ -3,6 +3,7 @@ using Meadow.Devices;
 using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Leds;
 using Meadow.Foundation.Sensors.Atmospheric;
+using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
@@ -15,7 +16,7 @@ namespace $safeprojectname$.F7Feather
     internal class $safeprojectname$Platform : I$safeprojectname$Platform
     {
         private readonly F7FeatherBase _device;
-        private readonly IGraphicsDisplay? _graphicsDisplay = null;
+        private readonly IPixelDisplay? _graphicsDisplay = null;
         private readonly ITemperatureSensor _temperatureSensor;
         private readonly IOutputService _outputService;
 
@@ -37,7 +38,7 @@ namespace $safeprojectname$.F7Feather
             return null;
         }
 
-        public IGraphicsDisplay? GetDisplay()
+        public IPixelDisplay? GetDisplay()
         {
             return null;
         }

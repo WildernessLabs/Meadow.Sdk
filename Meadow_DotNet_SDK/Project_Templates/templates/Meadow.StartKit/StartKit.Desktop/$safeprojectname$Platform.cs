@@ -5,6 +5,7 @@ using Meadow.Foundation.Sensors;
 using Meadow.Foundation.Sensors.Buttons;
 using Meadow.Foundation.Sensors.Hid;
 using Meadow.Hardware;
+using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
@@ -40,7 +41,7 @@ namespace $safeprojectname$.Windows
             return null;
         }
 
-        public IGraphicsDisplay? GetDisplay()
+        public IPixelDisplay? GetDisplay()
         {
             return _graphicsDisplay;
         }

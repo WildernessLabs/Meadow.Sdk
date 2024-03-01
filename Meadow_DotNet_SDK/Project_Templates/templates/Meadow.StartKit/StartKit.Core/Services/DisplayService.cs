@@ -1,5 +1,6 @@
 ﻿using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
+using Meadow.Peripherals.Displays;
 using Meadow.Units;
 
 namespace $safeprojectname$.Core
@@ -20,7 +21,7 @@ namespace $safeprojectname$.Core
         private EditCoolLayout _editCoolLayout;
 
         public DisplayService(
-            IGraphicsDisplay? display,
+            IPixelDisplay? display,
             Temperature currentTemp,
             SetPoints setPoints)
         {

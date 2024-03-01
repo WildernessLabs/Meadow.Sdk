@@ -1,6 +1,7 @@
 ﻿using Meadow.Foundation.Displays;
 using Meadow.Foundation.Graphics;
 using Meadow.Hardware;
+using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
@@ -13,7 +14,7 @@ namespace $safeprojectname$.RasPi {
         where T : IPinDefinitions, new()
     {
         private readonly Meadow.Linux<T> _device;
-        private readonly IGraphicsDisplay? _graphicsDisplay = null;
+        private readonly IPixelDisplay? _graphicsDisplay = null;
         private readonly ITemperatureSensor _temperatureSimulator;
         private readonly IOutputService _outputService;
 
@@ -32,7 +33,7 @@ namespace $safeprojectname$.RasPi {
             return null;
         }
 
-        public IGraphicsDisplay? GetDisplay()
+        public IPixelDisplay? GetDisplay()
         {
             return _graphicsDisplay;
         }

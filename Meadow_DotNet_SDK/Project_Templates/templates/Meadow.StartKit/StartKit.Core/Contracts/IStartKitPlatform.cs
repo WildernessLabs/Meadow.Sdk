@@ -1,4 +1,5 @@
 ﻿using Meadow.Foundation.Graphics;
+using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
@@ -17,7 +18,7 @@ namespace $safeprojectname$.Core.Contracts
         // complex hardware
         ITemperatureSensor? GetTemperatureSensor();
         IHumiditySensor? GetHumiditySensor();
-        IGraphicsDisplay? GetDisplay();
+        IPixelDisplay? GetDisplay();
 
         // platform-dependent services
         IOutputService GetOutputService(); // required service
