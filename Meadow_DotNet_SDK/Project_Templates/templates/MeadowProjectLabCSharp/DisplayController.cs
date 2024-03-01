@@ -1,4 +1,10 @@
-﻿namespace MeadowApplication.Template
+﻿using Meadow;
+using Meadow.Foundation;
+using Meadow.Foundation.Graphics;
+using Meadow.Peripherals.Displays;
+using Meadow.Units;
+
+namespace MeadowApplication.Template
 {
     public class DisplayController
     {

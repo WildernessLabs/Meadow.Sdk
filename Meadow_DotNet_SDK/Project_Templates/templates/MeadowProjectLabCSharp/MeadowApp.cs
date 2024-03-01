@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Meadow;
+using Meadow.Devices;
+using Meadow.Foundation;
+using Meadow.Foundation.Audio;
+using Meadow.Hardware;
+using Meadow.Units;
+using System;
 using System.Threading.Tasks;
 
 namespace MeadowApplication.Template
