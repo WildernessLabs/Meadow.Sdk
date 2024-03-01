@@ -4,6 +4,6 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetFramework>net472</TargetFramework>
     <Author>Wilderness Labs</Author>
-    <Copyright>2019-2023</Copyright>
+    <Copyright>2019-2024</Copyright>
   </PropertyGroup>
 </Project>
