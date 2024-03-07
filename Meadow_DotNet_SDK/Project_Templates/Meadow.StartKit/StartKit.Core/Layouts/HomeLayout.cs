@@ -19,6 +19,6 @@ internal class HomeLayout : AbsoluteLayout
         this.BackgroundColor = Color.FromRgb(50, 50, 50);
     }
 
-    public DisplayUnits Units { get; set; }
+    public Temperature.UnitType Units { get; set; }
     public virtual Temperature DisplayTemperature { get; set; }
 }

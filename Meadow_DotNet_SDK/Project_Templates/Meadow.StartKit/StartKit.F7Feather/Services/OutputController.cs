@@ -14,7 +14,15 @@ internal class OutputController : IOutputController
 
     public Task SetState(bool state)
     {
-        Led.SetColor(state ? RgbLedColors.Red : RgbLedColors.Black);
+        if (state)
+        {
+            Led.SetColor(RgbLedColors.Red);
+        }
+        else
+        {
+            Led.IsOn = false;
+        }
+
         return Task.CompletedTask;
     }
 }

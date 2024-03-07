@@ -5,7 +5,8 @@ namespace Meadow.RasPi;
 
 internal class MeadowApp : App<RaspberryPi>
 {
-    private StartKitPlatform<RaspberryPi> platform;
+    private RaspberryPiHardware hardware;
+    private MainController mainController;
 
     public bool SupportDisplay { get; set; } = false;
 
@@ -14,21 +15,21 @@ internal class MeadowApp : App<RaspberryPi>
         MeadowOS.Start(args);
     }
 
-    public override async Task Initialize()
+    public override Task Initialize()
     {
-        platform = new StartKitPlatform<RaspberryPi>(Device, SupportDisplay);
-        var c = new MainController();
-        await c.Initialize(platform);
-        _ = c.Run();
+        hardware = new RaspberryPiHardware(Device, SupportDisplay);
+        mainController = new MainController();
+        return mainController.Initialize(hardware);
     }
 
     public override Task Run()
     {
-        if (platform.GetDisplay() is GtkDisplay gtk)
+        if (hardware.Display is GtkDisplay gtk)
         {
+            _ = mainController.Run();
             gtk.Run();
         }
 
-        return base.Run();
+        return mainController.Run();
     }
 }

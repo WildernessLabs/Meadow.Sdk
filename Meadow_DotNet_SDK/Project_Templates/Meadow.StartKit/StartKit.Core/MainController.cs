@@ -15,14 +15,11 @@ public class MainController
     private SensorService sensorService;
     private readonly StorageService storageService;
 
-    private readonly Timer _setpointUpdatingTimer;
-
     private IOutputController? OutputController => hardware.OutputController;
     private IBluetoothService? BluetoothService => hardware.BluetoothService;
 
     public MainController()
     {
-        _setpointUpdatingTimer = new Timer(SetpointUpdatingTimerProc);
     }
 
     public Task Initialize(IStartKitHardware platform)
@@ -37,33 +34,21 @@ public class MainController
 
         displayController = new DisplayController(
             hardware.Display,
-            sensorService.CurrentTemperature,
-            new SetPoints
-            {
-                CoolTo = configurationService.CoolTo,
-                HeatTo = configurationService.HeatTo
-            }
-            );
+            configurationService.Units);
 
         // connect events
         sensorService.CurrentTemperatureChanged += (s, t) =>
         {
             // update the UI
             displayController.UpdateCurrentTemperature(t);
-
-            Resolver.Log.Info($"Room temperature is now {t.Fahrenheit:0.0}F");
         };
 
         return Task.CompletedTask;
     }
 
-    private void SetpointUpdatingTimerProc(object o)
-    {
-        _ = cloudService.RecordSetPointChange(setpoints);
-    }
-
     public async Task Run()
     {
+        /*
         while (true)
         {
             // get the current temperature
@@ -71,5 +56,6 @@ public class MainController
 
             await Task.Delay(configurationService.StateCheckPeriod);
         }
+        */
     }
 }

@@ -1,33 +1,50 @@
 ﻿using Meadow;
-using System.Windows.Forms;
+using Meadow.Foundation.Displays;
+using StartKit.Core;
 
 namespace StartKit.Windows;
 
-internal class MeadowApp : App<Desktop>
+public static class Program
 {
-    private DesktopHardware _platform;
-
     private static void Main(string[] args)
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
+#if WINDOWS
         ApplicationConfiguration.Initialize();
-
+#endif
         MeadowOS.Start(args);
     }
+}
 
-    public override async Task Initialize()
+internal class MeadowApp : App<Desktop>
+{
+    private MainController mainController;
+
+    public override Task Initialize()
     {
-        _platform = new StartKitPlatform(Device);
-        var c = new MainController();
-        await c.Initialize(_platform);
-        _ = c.Run();
+        var hardware = new DesktopHardware(Device);
+        mainController = new MainController();
+        return mainController.Initialize(hardware);
     }
 
     public override Task Run()
     {
-        Application.Run(_platform.GetDisplay() as Form);
+        // this must be spawned in a worker because the UI needs the main thread
+        _ = mainController.Run();
+
+        ExecutePlatformDisplayRunner();
 
         return base.Run();
     }
+    private void ExecutePlatformDisplayRunner()
+    {
+#if WINDOWS
+        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+#else
+        if (Device.Display is GtkDisplay gtk)
+        {
+            gtk.Run();
+        }
+#endif
+    }
+
 }

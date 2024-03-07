@@ -1,8 +1,10 @@
-﻿namespace StartKit.Core;
+﻿using Meadow.Units;
+
+namespace StartKit.Core;
 
 public class ConfigurationService
 {
-    public DisplayUnits Units { get; set; }
+    public Temperature.UnitType Units { get; set; }
 
     public ConfigurationService()
     {
