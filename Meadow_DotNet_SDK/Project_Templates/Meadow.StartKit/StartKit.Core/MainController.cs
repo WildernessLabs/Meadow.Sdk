@@ -12,13 +12,14 @@ public class MainController
     private ConfigurationController configurationController;
     private DisplayController displayController;
     private InputController inputController;
-    private readonly NetworkController networkController;
     private SensorController sensorController;
 
-    private IOutputController? OutputController => hardware.OutputController;
-    private IBluetoothService? BluetoothService => hardware.BluetoothService;
+    private IOutputController OutputController => hardware.OutputController;
+    private INetworkController NetworkController => hardware.NetworkController;
 
     private Temperature.UnitType units;
+    private Temperature currentTemperature;
+    private Temperature thresholdTemperature;
 
     public MainController()
     {
@@ -28,6 +29,8 @@ public class MainController
     {
         this.hardware = hardware;
 
+        this.thresholdTemperature = 68.Fahrenheit();
+
         // create generic services
         configurationController = new ConfigurationController();
         cloudController = new CloudController(Resolver.CommandService);
@@ -35,31 +38,56 @@ public class MainController
         inputController = new InputController(hardware);
 
         units = configurationController.Units;
+        thresholdTemperature = configurationController.ThresholdTemp;
 
         displayController = new DisplayController(
             this.hardware.Display,
             units);
 
         // connect events
-        sensorController.CurrentTemperatureChanged += (s, t) =>
-        {
-            // update the UI
-            displayController.UpdateCurrentTemperature(t);
-        };
-        cloudController.UnitsChangeRequested += (s, u) =>
-        {
-            displayController.UpdateDisplayUnits(u);
-        };
-
+        sensorController.CurrentTemperatureChanged += OnCurrentTemperatureChanged;
+        cloudController.UnitsChangeRequested += OnUnitsChangeChangeRequested;
+        cloudController.ThresholdTemperatureChangeRequested += OnThresholdTemperatureChangeRequested;
         inputController.UnitDownRequested += OnUnitDownRequested;
         inputController.UnitUpRequested += OnUnitUpRequested;
+        NetworkController.NetworkStatusChanged += OnNetworkStatusChanged;
+
+        NetworkController.Connect();
 
         return Task.CompletedTask;
     }
 
-    private void CloudController_UnitsChangeRequested(object sender, Temperature.UnitType e)
+    private void OnNetworkStatusChanged(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Resolver.Log.Info($"Network state changed to {NetworkController.IsConnected}");
+        displayController.SetNetworkStatus(NetworkController.IsConnected);
+    }
+
+    private void CheckTemperaturesAndSetOutput()
+    {
+        OutputController?.SetState(currentTemperature < thresholdTemperature);
+    }
+
+    private void OnCurrentTemperatureChanged(object sender, Temperature temperature)
+    {
+        currentTemperature = temperature;
+
+        CheckTemperaturesAndSetOutput();
+
+        // update the UI
+        displayController.UpdateCurrentTemperature(currentTemperature);
+    }
+
+    private void OnUnitsChangeChangeRequested(object sender, Temperature.UnitType units)
+    {
+        displayController.UpdateDisplayUnits(units);
+    }
+
+    private void OnThresholdTemperatureChangeRequested(object sender, Temperature e)
+    {
+        thresholdTemperature = e;
+        configurationController.ThresholdTemp = e;
+        configurationController.Save();
     }
 
     private void OnUnitDownRequested(object sender, EventArgs e)
@@ -73,6 +101,7 @@ public class MainController
 
         displayController.UpdateDisplayUnits(units);
         configurationController.Units = units;
+        configurationController.Save();
     }
 
     private void OnUnitUpRequested(object sender, EventArgs e)
@@ -86,18 +115,16 @@ public class MainController
 
         displayController.UpdateDisplayUnits(units);
         configurationController.Units = units;
+        configurationController.Save();
     }
 
     public async Task Run()
     {
-        /*
         while (true)
         {
-            // get the current temperature
+            // add any app logic here
 
-
-            await Task.Delay(configurationService.StateCheckPeriod);
+            await Task.Delay(5000);
         }
-        */
     }
 }

@@ -1,4 +1,5 @@
-﻿using Meadow.Foundation.Relays;
+﻿using Meadow;
+using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
 using StartKit.Core;
 
@@ -18,7 +19,14 @@ internal class OutputController : IOutputController
 
     public Task SetState(bool state)
     {
-        Relay.State = state ? RelayState.Closed : RelayState.Open;
+        var requestedState = state ? RelayState.Closed : RelayState.Open;
+
+        if (Relay.State != requestedState)
+        {
+            Relay.State = requestedState;
+            Resolver.Log.Info($"RELAY IS NOW: {Relay.State}");
+        }
+
         return Task.CompletedTask;
     }
 }

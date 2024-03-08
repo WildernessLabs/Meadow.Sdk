@@ -6,12 +6,12 @@ namespace StartKit.Core;
 JSON for copy/paste into Meadow.Cloud
 ChangeThreshold
 {
-    "tempC": "26.2"
+    "tempC": 26.2
 }
 
 ChangeThreshold
 {
-    "tempF": "68.5"
+    "tempF": 68.5
 }
 */
 

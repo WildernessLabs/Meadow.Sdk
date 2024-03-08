@@ -24,10 +24,11 @@ internal class RaspberryPiHardware : IStartKitHardware
         }
     }
 
-    public IBluetoothService? BluetoothService => null;
     public IPixelDisplay? Display => display;
     public IOutputController OutputController => outputService;
     public ITemperatureSensor? TemperatureSensor => temperatureSimulator;
     public IButton? RightButton => null;
     public IButton? LeftButton => null;
+    public INetworkController NetworkController { get; }
+
 }

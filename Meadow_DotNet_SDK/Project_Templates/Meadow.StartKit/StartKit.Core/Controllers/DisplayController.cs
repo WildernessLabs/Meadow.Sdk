@@ -12,8 +12,13 @@ public class DisplayController
 
     private Label displayTempLabel;
 
+    private Picture networkIcon;
+    private Image connectedImage;
+    private Image disconnectedImage;
+
     private Temperature displayTemp;
     private Temperature.UnitType displayUnits;
+    private bool isNetworkConnected = false;
 
     public DisplayController(
         IPixelDisplay? display,
@@ -47,23 +52,30 @@ public class DisplayController
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        screen.Controls.Add(displayTempLabel);
+        connectedImage = Image.LoadFromResource("StartKit.Core.Assets.net-connected.bmp");
+        disconnectedImage = Image.LoadFromResource("StartKit.Core.Assets.net-disconnected.bmp");
+
+        networkIcon = new Picture(screen.Width - disconnectedImage.Width, 0, disconnectedImage.Width, disconnectedImage.Height, disconnectedImage);
+
+        screen.Controls.Add(displayTempLabel, networkIcon);
     }
 
-    public Task UpdateCurrentTemperature(Temperature temperature)
+    public void SetNetworkStatus(bool isConnected)
+    {
+        isNetworkConnected = isConnected;
+        UpdateDisplay();
+    }
+
+    public void UpdateCurrentTemperature(Temperature temperature)
     {
         displayTemp = temperature;
         UpdateDisplay();
-
-        return Task.CompletedTask;
     }
 
-    public Task UpdateDisplayUnits(Temperature.UnitType units)
+    public void UpdateDisplayUnits(Temperature.UnitType units)
     {
         displayUnits = units;
         UpdateDisplay();
-
-        return Task.CompletedTask;
     }
 
     private void UpdateDisplay()
@@ -79,7 +91,10 @@ public class DisplayController
 
         if (screen != null)
         {
+            screen.BeginUpdate();
             displayTempLabel.Text = text;
+            networkIcon.Image = isNetworkConnected ? connectedImage : disconnectedImage;
+            screen.EndUpdate();
         }
         else
         {

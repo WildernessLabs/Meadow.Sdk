@@ -8,8 +8,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\net-connected.bmp" />
+    <None Remove="Assets\net-connected.png" />
+    <None Remove="Assets\net-disconnected.bmp" />
+    <None Remove="Assets\net-disconnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\net-connected.bmp" />
+    <EmbeddedResource Include="Assets\net-disconnected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Core\Meadow.Foundation.Core.csproj" />
     <ProjectReference Include="..\..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Libraries_and_Frameworks\Graphics.MicroLayout\Driver\Graphics.MicroLayout.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Libraries_and_Frameworks\Serialization.MicroJson\Driver\MicroJson.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meadow.Desktop", "..\..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartKit.Desktop", "StartKit.Desktop\StartKit.Desktop.csproj", "{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroJson", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Libraries_and_Frameworks\Serialization.MicroJson\Driver\MicroJson.csproj", "{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -215,6 +221,7 @@ Global
 		{BE59CED3-3884-47CD-BC74-2EECAE206A8A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{8410E676-8DCE-468F-90F6-F3EA34C2101A} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
+		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}

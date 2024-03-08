@@ -16,18 +16,22 @@ internal class DesktopHardware : IStartKitHardware
 {
     private readonly Desktop device;
     private readonly Keyboard keyboard;
-    private readonly ITemperatureSensor temperatureSimulator;
-    private readonly IOutputController outputController;
-    private readonly PushButton downButton;
-    private readonly PushButton upButton;
-    private readonly IPixelDisplay display;
+
+    public IOutputController OutputController { get; }
+    public INetworkController? NetworkController { get; }
+    public IPixelDisplay? Display => device.Display;
+    public ITemperatureSensor? TemperatureSensor { get; }
+    public IButton? RightButton { get; }
+    public IButton? LeftButton { get; }
 
     public DesktopHardware(Desktop device)
     {
         this.device = device;
-        keyboard = new Keyboard();
 
-        temperatureSimulator = new SimulatedTemperatureSensor(
+        keyboard = new Keyboard();
+        NetworkController = new NetworkController(keyboard);
+
+        TemperatureSensor = new SimulatedTemperatureSensor(
             new Temperature(70, Temperature.UnitType.Fahrenheit),
             keyboard.Pins.Up.CreateDigitalInterruptPort(InterruptMode.EdgeRising),
             keyboard.Pins.Down.CreateDigitalInterruptPort(InterruptMode.EdgeRising));
@@ -35,13 +39,6 @@ internal class DesktopHardware : IStartKitHardware
         LeftButton = new PushButton(keyboard.Pins.Left.CreateDigitalInterruptPort(InterruptMode.EdgeFalling));
         RightButton = new PushButton(keyboard.Pins.Right.CreateDigitalInterruptPort(InterruptMode.EdgeFalling));
 
-        outputController = new OutputController();
+        OutputController = new OutputController();
     }
-
-    public IBluetoothService? BluetoothService => null;
-    public IPixelDisplay? Display => device.Display;
-    public IOutputController OutputController => outputController;
-    public ITemperatureSensor? TemperatureSensor => temperatureSimulator;
-    public IButton? RightButton { get; }
-    public IButton? LeftButton { get; }
 }
