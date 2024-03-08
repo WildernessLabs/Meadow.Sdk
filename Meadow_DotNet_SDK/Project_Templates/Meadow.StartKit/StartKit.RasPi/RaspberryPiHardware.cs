@@ -28,6 +28,6 @@ internal class RaspberryPiHardware : IStartKitHardware
     public IPixelDisplay? Display => display;
     public IOutputController OutputController => outputService;
     public ITemperatureSensor? TemperatureSensor => temperatureSimulator;
-    public IButton? DownButton => null;
-    public IButton? UpButton => null;
+    public IButton? RightButton => null;
+    public IButton? LeftButton => null;
 }

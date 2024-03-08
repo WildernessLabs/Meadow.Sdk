@@ -7,8 +7,8 @@ namespace StartKit.Core.Contracts;
 public interface IStartKitHardware
 {
     // basic hardware
-    IButton? UpButton { get; }
-    IButton? DownButton { get; }
+    IButton? LeftButton { get; }
+    IButton? RightButton { get; }
 
     // complex hardware
     ITemperatureSensor? TemperatureSensor { get; }

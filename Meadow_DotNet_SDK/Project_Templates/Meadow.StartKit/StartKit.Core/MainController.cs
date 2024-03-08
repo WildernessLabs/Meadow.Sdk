@@ -1,4 +1,5 @@
 ﻿using Meadow;
+using Meadow.Units;
 using StartKit.Core.Contracts;
 
 namespace StartKit.Core;
@@ -7,43 +8,84 @@ public class MainController
 {
     private IStartKitHardware hardware;
 
-    private CloudService cloudService;
-    private ConfigurationService configurationService;
+    private CloudController cloudController;
+    private ConfigurationController configurationController;
     private DisplayController displayController;
-    private InputService inputService;
-    private readonly NetworkService networkService;
-    private SensorService sensorService;
-    private readonly StorageService storageService;
+    private InputController inputController;
+    private readonly NetworkController networkController;
+    private SensorController sensorController;
 
     private IOutputController? OutputController => hardware.OutputController;
     private IBluetoothService? BluetoothService => hardware.BluetoothService;
+
+    private Temperature.UnitType units;
 
     public MainController()
     {
     }
 
-    public Task Initialize(IStartKitHardware platform)
+    public Task Initialize(IStartKitHardware hardware)
     {
-        hardware = platform;
+        this.hardware = hardware;
 
         // create generic services
-        configurationService = new ConfigurationService();
-        cloudService = new CloudService(Resolver.CommandService);
-        sensorService = new SensorService(platform);
-        inputService = new InputService(platform);
+        configurationController = new ConfigurationController();
+        cloudController = new CloudController(Resolver.CommandService);
+        sensorController = new SensorController(hardware);
+        inputController = new InputController(hardware);
+
+        units = configurationController.Units;
 
         displayController = new DisplayController(
-            hardware.Display,
-            configurationService.Units);
+            this.hardware.Display,
+            units);
 
         // connect events
-        sensorService.CurrentTemperatureChanged += (s, t) =>
+        sensorController.CurrentTemperatureChanged += (s, t) =>
         {
             // update the UI
             displayController.UpdateCurrentTemperature(t);
         };
+        cloudController.UnitsChangeRequested += (s, u) =>
+        {
+            displayController.UpdateDisplayUnits(u);
+        };
+
+        inputController.UnitDownRequested += OnUnitDownRequested;
+        inputController.UnitUpRequested += OnUnitUpRequested;
 
         return Task.CompletedTask;
+    }
+
+    private void CloudController_UnitsChangeRequested(object sender, Temperature.UnitType e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnUnitDownRequested(object sender, EventArgs e)
+    {
+        units = units switch
+        {
+            Temperature.UnitType.Celsius => Temperature.UnitType.Kelvin,
+            Temperature.UnitType.Fahrenheit => Temperature.UnitType.Celsius,
+            _ => Temperature.UnitType.Fahrenheit,
+        };
+
+        displayController.UpdateDisplayUnits(units);
+        configurationController.Units = units;
+    }
+
+    private void OnUnitUpRequested(object sender, EventArgs e)
+    {
+        units = units switch
+        {
+            Temperature.UnitType.Celsius => Temperature.UnitType.Fahrenheit,
+            Temperature.UnitType.Fahrenheit => Temperature.UnitType.Kelvin,
+            _ => Temperature.UnitType.Celsius,
+        };
+
+        displayController.UpdateDisplayUnits(units);
+        configurationController.Units = units;
     }
 
     public async Task Run()

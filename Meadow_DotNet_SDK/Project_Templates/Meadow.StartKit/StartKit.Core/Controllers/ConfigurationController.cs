@@ -2,11 +2,11 @@
 
 namespace StartKit.Core;
 
-public class ConfigurationService
+public class ConfigurationController
 {
     public Temperature.UnitType Units { get; set; }
 
-    public ConfigurationService()
+    public ConfigurationController()
     {
         // load/save state
     }

@@ -3,13 +3,13 @@ using StartKit.Core.Contracts;
 
 namespace StartKit.Core;
 
-public class SensorService
+public class SensorController
 {
     private Temperature temperature;
 
     public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
 
-    public SensorService(IStartKitHardware platform)
+    public SensorController(IStartKitHardware platform)
     {
         if (platform.TemperatureSensor is { } t)
         {

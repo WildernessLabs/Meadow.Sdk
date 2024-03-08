@@ -1,19 +1,9 @@
 ﻿using Meadow;
 using Meadow.Foundation.Displays;
+using Meadow.Logging;
 using StartKit.Core;
 
 namespace StartKit.Windows;
-
-public static class Program
-{
-    private static void Main(string[] args)
-    {
-#if WINDOWS
-        ApplicationConfiguration.Initialize();
-#endif
-        MeadowOS.Start(args);
-    }
-}
 
 internal class MeadowApp : App<Desktop>
 {
@@ -21,6 +11,9 @@ internal class MeadowApp : App<Desktop>
 
     public override Task Initialize()
     {
+        // output log messages to the VS debug window
+        Resolver.Log.AddProvider(new DebugLogProvider());
+
         var hardware = new DesktopHardware(Device);
         mainController = new MainController();
         return mainController.Initialize(hardware);

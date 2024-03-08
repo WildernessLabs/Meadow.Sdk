@@ -14,4 +14,10 @@
     <ProjectReference Include="..\StartKit.Core\StartKit.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="app.config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

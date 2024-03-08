@@ -36,6 +36,6 @@ internal class F7FeatherHardware : IStartKitHardware
     public IOutputController OutputController => outputService;
     public IPixelDisplay? Display => null;
     public ITemperatureSensor? TemperatureSensor => temperatureSensor;
-    public IButton? DownButton => null;
-    public IButton? UpButton => null;
+    public IButton? RightButton => null;
+    public IButton? LeftButton => null;
 }

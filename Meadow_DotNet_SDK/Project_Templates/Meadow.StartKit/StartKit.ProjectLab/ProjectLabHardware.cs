@@ -20,8 +20,8 @@ internal class ProjectLabHardware : IStartKitHardware
         projLab = Meadow.Devices.ProjectLab.Create();
     }
 
-    public IButton? UpButton => projLab.UpButton;
-    public IButton? DownButton => projLab.DownButton;
+    public IButton? LeftButton => projLab.LeftButton;
+    public IButton? RightButton => projLab.DownButton;
     public ITemperatureSensor? TemperatureSensor => projLab.TemperatureSensor;
     public IPixelDisplay? Display => projLab.Display;
     public IOutputController OutputController => outputService ??= new OutputController(projLab);

@@ -26,25 +26,22 @@ internal class DesktopHardware : IStartKitHardware
     {
         this.device = device;
         keyboard = new Keyboard();
+
         temperatureSimulator = new SimulatedTemperatureSensor(
             new Temperature(70, Temperature.UnitType.Fahrenheit),
-            keyboard.Pins.Plus.CreateDigitalInterruptPort(InterruptMode.EdgeRising),
-            keyboard.Pins.Minus.CreateDigitalInterruptPort(InterruptMode.EdgeRising));
+            keyboard.Pins.Up.CreateDigitalInterruptPort(InterruptMode.EdgeRising),
+            keyboard.Pins.Down.CreateDigitalInterruptPort(InterruptMode.EdgeRising));
+
+        LeftButton = new PushButton(keyboard.Pins.Left.CreateDigitalInterruptPort(InterruptMode.EdgeFalling));
+        RightButton = new PushButton(keyboard.Pins.Right.CreateDigitalInterruptPort(InterruptMode.EdgeFalling));
+
         outputController = new OutputController();
-
-        downButton = new PushButton(
-            keyboard.Pins.Down.CreateDigitalInterruptPort(
-                InterruptMode.EdgeBoth));
-        upButton = new PushButton(
-            keyboard.Pins.Up.CreateDigitalInterruptPort(
-                InterruptMode.EdgeBoth));
-
     }
 
     public IBluetoothService? BluetoothService => null;
     public IPixelDisplay? Display => device.Display;
     public IOutputController OutputController => outputController;
     public ITemperatureSensor? TemperatureSensor => temperatureSimulator;
-    public IButton? DownButton => downButton;
-    public IButton? UpButton => upButton;
+    public IButton? RightButton { get; }
+    public IButton? LeftButton { get; }
 }
