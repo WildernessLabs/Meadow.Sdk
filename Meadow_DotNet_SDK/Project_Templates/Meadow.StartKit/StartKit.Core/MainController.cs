@@ -42,6 +42,7 @@ public class MainController
 
         displayController = new DisplayController(
             this.hardware.Display,
+            this.hardware.DisplayRotation,
             units);
 
         // connect events

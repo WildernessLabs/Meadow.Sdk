@@ -2,9 +2,9 @@
 using Meadow.Devices;
 using StartKit.Core;
 
-namespace StartKit.ProjectLab;
+namespace StartKit.F7;
 
-public class MeadowApp : App<F7CoreComputeV2>
+public class ProjectLabApp : App<F7CoreComputeV2>
 {
     private MainController mainController;
 

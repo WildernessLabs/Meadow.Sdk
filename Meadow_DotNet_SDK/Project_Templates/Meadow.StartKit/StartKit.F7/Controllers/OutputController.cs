@@ -1,7 +1,7 @@
 ﻿using Meadow.Peripherals.Leds;
 using StartKit.Core;
 
-namespace StartKit.F7Feather;
+namespace StartKit.F7;
 
 internal class OutputController : IOutputController
 {

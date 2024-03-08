@@ -22,6 +22,7 @@ public class DisplayController
 
     public DisplayController(
         IPixelDisplay? display,
+        RotationType displayRotation,
         Temperature.UnitType unit)
     {
         if (display != null)
@@ -35,6 +36,7 @@ public class DisplayController
 
             screen = new DisplayScreen(
                 display,
+                rotation: displayRotation,
                 theme: theme);
 
             GenerateLayout(screen);

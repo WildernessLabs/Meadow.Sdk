@@ -5,24 +5,25 @@ using Meadow.Peripherals.Sensors.Buttons;
 using StartKit.Core;
 using StartKit.Core.Contracts;
 
-namespace StartKit.ProjectLab;
+namespace StartKit.F7;
 
 internal class ProjectLabHardware : IStartKitHardware
 {
-    private F7CoreComputeV2 device;
-    private IProjectLabHardware projLab;
-    private IOutputController? outputService;
+    private readonly IProjectLabHardware projLab;
+
+    public RotationType DisplayRotation => RotationType._270Degrees;
+    public IOutputController OutputController { get; }
+    public IButton? LeftButton => projLab.LeftButton;
+    public IButton? RightButton => projLab.RightButton;
+    public ITemperatureSensor? TemperatureSensor => projLab.TemperatureSensor;
+    public IPixelDisplay? Display => projLab.Display;
+    public INetworkController NetworkController { get; }
 
     public ProjectLabHardware(F7CoreComputeV2 device)
     {
-        this.device = device;
-        projLab = Meadow.Devices.ProjectLab.Create();
-    }
+        projLab = ProjectLab.Create();
 
-    public IButton? LeftButton => projLab.LeftButton;
-    public IButton? RightButton => projLab.DownButton;
-    public ITemperatureSensor? TemperatureSensor => projLab.TemperatureSensor;
-    public IPixelDisplay? Display => projLab.Display;
-    public IOutputController OutputController => outputService ??= new OutputController(projLab);
-    public INetworkController NetworkController { get; }
+        OutputController = new OutputController(projLab.RgbLed);
+        NetworkController = new NetworkController(device);
+    }
 }

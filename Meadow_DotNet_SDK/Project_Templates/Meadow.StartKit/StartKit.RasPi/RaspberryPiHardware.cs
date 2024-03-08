@@ -24,6 +24,7 @@ internal class RaspberryPiHardware : IStartKitHardware
         }
     }
 
+    public RotationType DisplayRotation => RotationType.Default;
     public IPixelDisplay? Display => display;
     public IOutputController OutputController => outputService;
     public ITemperatureSensor? TemperatureSensor => temperatureSimulator;

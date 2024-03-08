@@ -2,9 +2,9 @@
 using Meadow.Devices;
 using StartKit.Core;
 
-namespace StartKit.F7Feather;
+namespace StartKit.F7;
 
-public class MeadowApp : App<F7FeatherV2>
+public class F7FeatherApp : App<F7FeatherV2>
 {
     private MainController mainController;
 

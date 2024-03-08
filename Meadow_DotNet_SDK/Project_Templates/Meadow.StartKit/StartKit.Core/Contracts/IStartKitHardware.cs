@@ -13,6 +13,7 @@ public interface IStartKitHardware
     // complex hardware
     ITemperatureSensor? TemperatureSensor { get; }
     IPixelDisplay? Display { get; }
+    RotationType DisplayRotation { get; }
 
     // platform-dependent services
     IOutputController OutputController { get; }
