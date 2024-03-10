@@ -55,6 +55,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroJson", "..\..\..\..\Me
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartKit.F7", "StartKit.F7\StartKit.F7.csproj", "{ADA45704-E330-4CAB-A830-4738CC5C9BA7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meadow.Logging", "..\..\..\..\Meadow.Logging\Source\Meadow.Logging\lib\Meadow.Logging.csproj", "{E0184AF0-CFC1-411F-BE91-1693D3289558}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensors.Hid.Xpt2046", "..\..\..\..\Meadow.Foundation\Source\Meadow.Foundation.Peripherals\Sensors.Hid.Xpt2046\Driver\Sensors.Hid.Xpt2046.csproj", "{668B8DFF-47D5-426C-A67B-CC2901F34A11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,6 +189,16 @@ Global
 		{ADA45704-E330-4CAB-A830-4738CC5C9BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADA45704-E330-4CAB-A830-4738CC5C9BA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADA45704-E330-4CAB-A830-4738CC5C9BA7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E0184AF0-CFC1-411F-BE91-1693D3289558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0184AF0-CFC1-411F-BE91-1693D3289558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0184AF0-CFC1-411F-BE91-1693D3289558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0184AF0-CFC1-411F-BE91-1693D3289558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +227,8 @@ Global
 		{D2FF8785-0BEF-41E8-9FEE-3B78BB7B4FED} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
 		{EDDA772C-9D6B-41CF-9FD2-7B054A382AA3} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 		{ADA45704-E330-4CAB-A830-4738CC5C9BA7} = {FC8C2A99-C0A4-4A4E-A3B7-3BFE9F59443D}
+		{E0184AF0-CFC1-411F-BE91-1693D3289558} = {CB825FD9-5236-4598-9554-E00DF20F7446}
+		{668B8DFF-47D5-426C-A67B-CC2901F34A11} = {CB825FD9-5236-4598-9554-E00DF20F7446}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73207F6E-462F-4239-9133-89E12E562DAB}
