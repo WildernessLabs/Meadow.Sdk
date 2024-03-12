@@ -1,9 +1,8 @@
 ﻿using Meadow;
-using Meadow.Pinouts;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : App<Linux<RaspberryPi>>
+    public class MeadowApp : LinuxApp<RaspberryPi>
     {
         public override Task Initialize()
         {

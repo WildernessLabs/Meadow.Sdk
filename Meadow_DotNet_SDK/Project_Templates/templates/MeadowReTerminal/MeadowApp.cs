@@ -1,11 +1,10 @@
 ﻿using Meadow;
 using Meadow.Foundation.Displays;
-using Meadow.Foundation.Graphics;
-using Meadow.Pinouts;
+using Meadow.Peripherals.Displays;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : App<Linux<RaspberryPi>>
+    public class MeadowApp : LinuxApp<RaspberryPi>
     {
         GtkDisplay? _display;
 

@@ -1,10 +1,8 @@
 ﻿using Meadow;
-using Meadow.Pinouts;
-using System.Threading.Tasks;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : App<Linux<JetsonNano>>
+    public class MeadowApp : LinuxApp<JetsonNano>
     {
         public override Task Initialize()
         {
