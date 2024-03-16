@@ -7,16 +7,18 @@ namespace $safeprojectname$.ProjectLab
 {
     public class $safeprojectname$App : App<F7CoreComputeV2>
     {
-        public override async Task Initialize()
+        private MainController mainController;
+
+        public override Task Initialize()
         {
-            var platform = new $safeprojectname$Platform(Device);
-            var c = new MainController();
-            await c.Initialize(platform);
+            var hardware = new $safeprojectname$Hardware(Device);
+            mainController = new MainController();
+            return mainController.Initialize(hardware);
         }
 
         public override Task Run()
         {
-            return base.Run();
+            return mainController.Run();
         }
     }
 }

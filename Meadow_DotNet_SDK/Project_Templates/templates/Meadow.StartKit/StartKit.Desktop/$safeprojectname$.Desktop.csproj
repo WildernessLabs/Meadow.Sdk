@@ -1,21 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>
     <LangVersion>10</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
     <UseWindowsForms>true</UseWindowsForms>
     <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
     <PackageReference Include="Meadow.Desktop" Version="*" />
+    <PackageReference Include="Meadow.Foundation" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
   </ItemGroup>

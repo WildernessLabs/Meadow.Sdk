@@ -6,33 +6,29 @@ using $safeprojectname$.Core;
 
 namespace $safeprojectname$.RasPi
 {
-    internal class $safeprojectname$App : App<Linux<RaspberryPi>>
+    internal class $safeprojectname$App : App<RaspberryPi>
     {
-        private $safeprojectname$Platform<RaspberryPi> _platform;
+        private $safeprojectname$Hardware hardware;
+        private MainController mainController;
 
         public bool SupportDisplay { get; set; } = false;
 
-        private static void Main(string[] args)
+        public override Task Initialize()
         {
-            MeadowOS.Start(args);
-        }
-
-        public override async Task Initialize()
-        {
-            _platform = new $safeprojectname$Platform<RaspberryPi>(Device, SupportDisplay);
-            var c = new MainController();
-            await c.Initialize(_platform);
-            _ = c.Run();
+            hardware = new $safeprojectname$Hardware(Device, SupportDisplay);
+            mainController = new MainController();
+            return mainController.Initialize(hardware);
         }
 
         public override Task Run()
         {
-            if (_platform.GetDisplay() is GtkDisplay gtk)
+            if (hardware.Display is GtkDisplay gtk)
             {
+                _ = mainController.Run();
                 gtk.Run();
             }
 
-            return base.Run();
+            return mainController.Run();
         }
     }
 }

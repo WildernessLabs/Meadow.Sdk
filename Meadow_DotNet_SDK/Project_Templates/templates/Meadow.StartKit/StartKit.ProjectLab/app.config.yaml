@@ -9,13 +9,6 @@ Lifecycle:
   #AppFailureRestartDelaySeconds: 15
 
 # # Adjust the level of logging detail.
-#Logging:
-#  LogLevel:
-#    Default: Trace
-
-MeadowCloud:
-  Hostname: https://www.meadowcloud.co
-  DataHostname: https://collector.meadowcloud.dev
-Update:
-  Enabled: true
-  UpdateServer: mqtt.meadowcloud.co
+Logging:
+  LogLevel:
+    Default: Trace

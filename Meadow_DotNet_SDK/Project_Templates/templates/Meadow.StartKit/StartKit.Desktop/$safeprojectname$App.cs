@@ -1,42 +1,44 @@
-using System;
-using System.Threading.Tasks;
 using Meadow;
+using Meadow.Foundation.Displays;
+using Meadow.Logging;
 using $safeprojectname$.Core;
 
-namespace $safeprojectname$.Desktop
+namespace $safeprojectname$.DT
 {
-    internal class $safeprojectname$App : App<Meadow.Desktop>
+    internal class $safeprojectname$App : App<Desktop>
     {
-        private $safeprojectname$Platform _platform;
+        private MainController mainController;
 
-        private static void Main(string[] args)
+        public override Task Initialize()
         {
-#if (Framework == net8.0-windows)
-	        System.Windows.Forms.Application.EnableVisualStyles();
-	        System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-	        ApplicationConfiguration.Initialize();
-#endif
+            // output log messages to the VS debug window
+            Resolver.Log.AddProvider(new DebugLogProvider());
 
-	        MeadowOS.Start(args);
-        }
-
-        public override async Task Initialize()
-        {
-            _platform = new $safeprojectname$Platform(Device);
-            var c = new MainController();
-            await c.Initialize(_platform);
-            _ = c.Run();
+            var hardware = new $safeprojectname$Hardware(Device);
+            mainController = new MainController();
+            return mainController.Initialize(hardware);
         }
 
         public override Task Run()
         {
+            // this must be spawned in a worker because the UI needs the main thread
+            _ = mainController.Run();
+
+            ExecutePlatformDisplayRunner();
+
+            return base.Run();
+        }
+
+        private void ExecutePlatformDisplayRunner()
+        {
 #if (Framework == net8.0-windows)
-	        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+            System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+#else
+            if (Device.Display is GtkDisplay gtk)
+            {
+                gtk.Run();
+            }
 #endif
-
-	        Application.Run(_platform.GetDisplay() as Form);
-
-	        return base.Run();
         }
     }
 }

@@ -8,6 +8,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\net-connected.bmp" />
+    <EmbeddedResource Include="Assets\net-disconnected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Meadow.Foundation" Version="*" />
     <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
   </ItemGroup>

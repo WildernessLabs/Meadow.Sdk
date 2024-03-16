@@ -15,6 +15,7 @@
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -48,9 +49,7 @@
     <Folder Include="templates\Meadow.StartKit\StartKit.Core\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.Desktop\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.F7Feather\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.Mac\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.RasPi\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.ProjectLab\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.Windows\.template.config\" />
   </ItemGroup>
 </Project>

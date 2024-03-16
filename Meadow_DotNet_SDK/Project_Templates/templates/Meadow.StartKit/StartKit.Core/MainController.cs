@@ -1,199 +1,132 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Meadow;
+﻿using Meadow;
+using Meadow.Units;
 using $safeprojectname$.Core.Contracts;
 
 namespace $safeprojectname$.Core
 {
-
     public class MainController
     {
-        private I$safeprojectname$Platform _platform;
-        private ThermostatMode _thermostatMode;
+        private I$safeprojectname$Hardware hardware;
 
-        private CloudService _cloudService;
-        private ConfigurationService _configurationService;
-        private DisplayService _displayService;
-        private InputService _inputService;
-        private readonly NetworkService _networkService;
-        private SensorService _sensorService;
-        private readonly StorageService _storageService;
-        private IOutputService _outputService;
-        private IBluetoothService? _bluetoothService;
+        private CloudController cloudController;
+        private ConfigurationController configurationController;
+        private DisplayController displayController;
+        private InputController inputController;
+        private SensorController sensorController;
 
-        private readonly Timer _setpointUpdatingTimer;
+        private IOutputController OutputController => hardware.OutputController;
+        private INetworkController NetworkController => hardware.NetworkController;
+
+        private Temperature.UnitType units;
+        private Temperature currentTemperature;
+        private Temperature thresholdTemperature;
 
         public MainController()
         {
-            _setpointUpdatingTimer = new Timer(SetpointUpdatingTimerProc);
         }
 
-        public Task Initialize(I$safeprojectname$Platform platform)
+        public Task Initialize(I$safeprojectname$Hardware hardware)
         {
-            _platform = platform;
+            this.hardware = hardware;
+
+            this.thresholdTemperature = 68.Fahrenheit();
 
             // create generic services
-            _configurationService = new ConfigurationService();
-            _cloudService = new CloudService(Resolver.CommandService);
-            _sensorService = new SensorService(platform);
-            _inputService = new InputService(platform);
+            configurationController = new ConfigurationController();
+            cloudController = new CloudController(Resolver.CommandService);
+            sensorController = new SensorController(hardware);
+            inputController = new InputController(hardware);
 
-            _displayService = new DisplayService(
-                _platform.GetDisplay(),
-                _sensorService.CurrentTemperature,
-                new SetPoints
-                {
-                    CoolTo = _configurationService.CoolTo,
-                    HeatTo = _configurationService.HeatTo
-                }
-                );
+            units = configurationController.Units;
+            thresholdTemperature = configurationController.ThresholdTemp;
 
-            // retrieve platform-dependent services
-            _outputService = platform.GetOutputService();
-            _bluetoothService = platform.GetBluetoothService();
+            displayController = new DisplayController(
+                this.hardware.Display,
+                this.hardware.DisplayRotation,
+                units);
 
             // connect events
-            _sensorService.CurrentTemperatureChanged += (s, t) =>
-            {
-                // update the UI
-                _displayService.UpdateCurrentTemperature(t);
+            sensorController.CurrentTemperatureChanged += OnCurrentTemperatureChanged;
+            cloudController.UnitsChangeRequested += OnUnitsChangeChangeRequested;
+            cloudController.ThresholdTemperatureChangeRequested += OnThresholdTemperatureChangeRequested;
+            inputController.UnitDownRequested += OnUnitDownRequested;
+            inputController.UnitUpRequested += OnUnitUpRequested;
+            NetworkController.NetworkStatusChanged += OnNetworkStatusChanged;
 
-                Resolver.Log.Info($"Room temperature is now {t.Fahrenheit:0.0}F");
-            };
-
-            _inputService.HeatToIncremented += (s, t) =>
-            {
-                _configurationService.IncrementHeatTo();
-                _displayService.UpdateHeatTo(_configurationService.HeatTo);
-                // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
-                _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
-            };
-
-            _inputService.HeatToDecremented += (s, t) =>
-            {
-                _configurationService.DecrementHeatTo();
-                _displayService.UpdateHeatTo(_configurationService.HeatTo);
-                // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
-                _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
-            };
-
-            _inputService.CoolToIncremented += (s, t) =>
-            {
-                _configurationService.IncrementCoolTo();
-                _displayService.UpdateCoolTo(_configurationService.CoolTo);
-                // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
-                _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
-            };
-
-            _inputService.CoolToDecremented += (s, t) =>
-            {
-                _configurationService.DecrementCoolTo();
-                _displayService.UpdateCoolTo(_configurationService.CoolTo);
-                // send the change to the cloud after 5 seconds to rpevent sending a message for ever increment
-                _setpointUpdatingTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(-1));
-            };
-
-            _inputService.DisplayModeChanged += (s, t) =>
-            {
-                _displayService.UpdateDisplayMode(t);
-            };
-
-            _inputService.ThermostatModeChanged += (s, t) =>
-            {
-                _displayService.UpdateThermostatMode(t);
-            };
-
-            _cloudService.NewSetpointsReceived += (s, setpoints) =>
-            {
-                // you could add sanity by checking the valid range to heat and cool here
-                if (setpoints.CoolTo != null)
-                {
-                    _configurationService.CoolTo = setpoints.CoolTo.Value;
-                }
-                if (setpoints.HeatTo != null)
-                {
-                    _configurationService.HeatTo = setpoints.HeatTo.Value;
-                }
-
-                // make sure nothing is null
-                setpoints.HeatTo = _configurationService.HeatTo;
-                setpoints.CoolTo = _configurationService.CoolTo;
-
-                _ = _cloudService.RecordSetPointChange(setpoints);
-            };
+            NetworkController.Connect();
 
             return Task.CompletedTask;
         }
 
-        private void SetpointUpdatingTimerProc(object o)
+        private void OnNetworkStatusChanged(object sender, EventArgs e)
         {
-            var setpoints = new SetPoints
+            Resolver.Log.Info($"Network state changed to {NetworkController.IsConnected}");
+            displayController.SetNetworkStatus(NetworkController.IsConnected);
+        }
+
+        private void CheckTemperaturesAndSetOutput()
+        {
+            OutputController?.SetState(currentTemperature < thresholdTemperature);
+        }
+
+        private void OnCurrentTemperatureChanged(object sender, Temperature temperature)
+        {
+            currentTemperature = temperature;
+
+            CheckTemperaturesAndSetOutput();
+
+            // update the UI
+            displayController.UpdateCurrentTemperature(currentTemperature);
+        }
+
+        private void OnUnitsChangeChangeRequested(object sender, Temperature.UnitType units)
+        {
+            displayController.UpdateDisplayUnits(units);
+        }
+
+        private void OnThresholdTemperatureChangeRequested(object sender, Temperature e)
+        {
+            thresholdTemperature = e;
+            configurationController.ThresholdTemp = e;
+            configurationController.Save();
+        }
+
+        private void OnUnitDownRequested(object sender, EventArgs e)
+        {
+            units = units switch
             {
-                HeatTo = _configurationService.HeatTo,
-                CoolTo = _configurationService.CoolTo
+                Temperature.UnitType.Celsius => Temperature.UnitType.Kelvin,
+                Temperature.UnitType.Fahrenheit => Temperature.UnitType.Celsius,
+                _ => Temperature.UnitType.Fahrenheit,
             };
 
-            _ = _cloudService.RecordSetPointChange(setpoints);
+            displayController.UpdateDisplayUnits(units);
+            configurationController.Units = units;
+            configurationController.Save();
+        }
+
+        private void OnUnitUpRequested(object sender, EventArgs e)
+        {
+            units = units switch
+            {
+                Temperature.UnitType.Celsius => Temperature.UnitType.Fahrenheit,
+                Temperature.UnitType.Fahrenheit => Temperature.UnitType.Kelvin,
+                _ => Temperature.UnitType.Celsius,
+            };
+
+            displayController.UpdateDisplayUnits(units);
+            configurationController.Units = units;
+            configurationController.Save();
         }
 
         public async Task Run()
         {
             while (true)
             {
-                // get the current temperature
+                // add any app logic here
 
-                switch (_thermostatMode)
-                {
-                    case ThermostatMode.Off:
-                        // are we above the "cool to"?
-                        if (_sensorService.CurrentTemperature > _configurationService.CoolTo)
-                        {
-                            SetSystemMode(ThermostatMode.Cool);
-                        }
-                        // are we below "heat to"?
-                        else if (_sensorService.CurrentTemperature < _configurationService.HeatTo)
-                        {
-                            SetSystemMode(ThermostatMode.Heat);
-                        }
-
-                        break;
-                    case ThermostatMode.Heat:
-                        // are we above "heat to" by > deadband?
-                        if (_sensorService.CurrentTemperature > (_configurationService.HeatTo + _configurationService.Deadband))
-                        {
-                            // turn off
-                            SetSystemMode(ThermostatMode.Off);
-                        }
-                        break;
-                    case ThermostatMode.Cool:
-                        // are we above "cool to" by < deadband?
-                        if (_sensorService.CurrentTemperature < (_configurationService.CoolTo - _configurationService.Deadband))
-                        {
-                            // turn off
-                            SetSystemMode(ThermostatMode.Off);
-                        }
-                        break;
-                }
-
-                await Task.Delay(_configurationService.StateCheckPeriod);
+                await Task.Delay(5000);
             }
         }
-
-        private void SetSystemMode(ThermostatMode mode)
-        {
-            if (mode == _thermostatMode) return;
-
-            // set the output
-            _outputService.SetMode(mode);
-
-            // update the display
-            _displayService.UpdateThermostatMode(mode);
-
-            // publish the transition
-            _ = _cloudService.RecordTransition(_thermostatMode, mode);
-
-            _thermostatMode = mode;
-        }
-
     }
 }
