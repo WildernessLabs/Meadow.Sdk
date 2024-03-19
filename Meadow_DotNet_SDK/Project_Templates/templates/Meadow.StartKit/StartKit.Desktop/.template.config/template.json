@@ -28,8 +28,8 @@
           "description": "Target net8.0-windows"
         }
       ],
-      "replaces": "net8.0",
-      "defaultValue": "net8.0"
+      "replaces": "DotNetTargetFramework",
+      "defaultValue": "net8.0-windows"
     }
   }
 }
