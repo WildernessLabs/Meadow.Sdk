@@ -13,7 +13,6 @@ namespace $safeprojectname$.DT
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();
-
 #endif
             MeadowOS.Start(args);
         }
