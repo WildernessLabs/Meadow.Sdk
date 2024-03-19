@@ -32,11 +32,13 @@ namespace $safeprojectname$.DT
         private void ExecutePlatformDisplayRunner()
         {
 #if (Framework == net8.0-windows)
-            System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
+            if (Device.Display is System.Windows.Forms.Form display) {
+                System.Windows.Forms.Application.Run(display);
+            }
 #else
-            if (Device.Display is GtkDisplay gtk)
+            if (Device.Display is GtkDisplay display)
             {
-                gtk.Run();
+                display.Run();
             }
 #endif
         }
