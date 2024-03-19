@@ -33,11 +33,11 @@ public class MeadowApp : App<Desktop>
     {
 #if (Framework == net8.0-windows)
         System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
-#endif
-
+#else
         if (Device.Display is GtkDisplay gtk)
         {
             gtk.Run();
         }
+#endif
     }
 }

@@ -32,8 +32,23 @@
           "description": "Target net8.0-windows"
         }
       ],
-      "replaces": "net8.0",
-      "defaultValue": "net8.0"
+      "defaultValue": "net8.0-windows"
     }
-  }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "Framework == 'net8.0'",
+          "exclude": [ "**/MeadowApplication.Template.Windows.csproj" ],
+          "rename": "MeadowApplication.Template.csproj"
+        },
+        {
+          "condition": "Framework == 'net8.0-windows'",
+          "exclude": [ "**/MeadowApplication.Template.Generic.csproj" ],
+          "rename": "MeadowApplication.Template.csproj"
+        }
+      ]
+    }
+  ]
 }
