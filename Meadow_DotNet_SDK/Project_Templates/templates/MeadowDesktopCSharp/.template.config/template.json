@@ -17,7 +17,7 @@
     { "path": "MeadowApplication.Template.csproj" }
   ],
   "symbols": {
-    "Framework": {
+    "framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
       "datatype": "choice",
@@ -32,21 +32,8 @@
           "description": "Target net8.0-windows"
         }
       ],
+      "replaces": "DotNetTargetFramework",
       "defaultValue": "net8.0-windows"
     }
-  },
-  "sources": [
-    {
-      "modifiers": [
-        {
-          "condition": "Framework == 'net8.0'",
-          "exclude": [ "**/$safeprojectname$.Desktop.Windows.csproj" ]
-        },
-        {
-          "condition": "Framework == 'net8.0-windows'",
-          "exclude": [ "**/$safeprojectname$.Desktop.Generic.csproj" ]
-        }
-      ]
-    }
-  ]
+  }
 }
