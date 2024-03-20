@@ -4,8 +4,8 @@
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow StartKit (Project Lab)",
   "identity": "WildernessLabs.Meadow.StartKit.ProjectLab",
-  "groupIdentity": "WildernessLabs.Meadow.SKPL",
-  "shortName": "MeadowSKPL",
+  "groupIdentity": "WildernessLabs.Meadow.SKProjLab",
+  "shortName": "MeadowSKProjLab",
   "tags": {
     "language": "C#",
     "type": "project"

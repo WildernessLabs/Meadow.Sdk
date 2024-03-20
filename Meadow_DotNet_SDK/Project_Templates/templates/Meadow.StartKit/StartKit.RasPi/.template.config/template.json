@@ -3,9 +3,9 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow StartKit (RasPi)",
-  "identity": "WildernessLabs.Meadow.StartKit.RPi",
-  "groupIdentity": "WildernessLabs.Meadow.SKRPi",
-  "shortName": "MeadowSKRPi",
+  "identity": "WildernessLabs.Meadow.StartKit.RasPi",
+  "groupIdentity": "WildernessLabs.Meadow.SKRasPi",
+  "shortName": "MeadowSKRasPi",
   "tags": {
     "language": "C#",
     "type": "project"

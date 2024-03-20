@@ -4,8 +4,8 @@
   "classifications": [ "Meadow", "Library" ],
   "name": "Meadow StartKit (Core)",
   "identity": "WildernessLabs.Meadow.StartKit.Core",
-  "groupIdentity": "WildernessLabs.Meadow.SKC",
-  "shortName": "MeadowSKC",
+  "groupIdentity": "WildernessLabs.Meadow.SKCore",
+  "shortName": "MeadowSKCore",
   "tags": {
     "language": "C#",
     "type": "project"
