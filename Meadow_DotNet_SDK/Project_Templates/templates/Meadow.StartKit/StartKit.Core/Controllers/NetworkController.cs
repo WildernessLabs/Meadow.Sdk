@@ -1,4 +1,7 @@
-﻿namespace $safeprojectname$.Core
+﻿using System;
+using System.Threading.Tasks;
+
+namespace $safeprojectname$.Core
 {
     public class NetworkController
     {

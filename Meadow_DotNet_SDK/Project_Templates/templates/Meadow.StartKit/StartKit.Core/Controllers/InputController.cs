@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using $safeprojectname$.Core.Contracts;
 
 namespace $safeprojectname$.Core

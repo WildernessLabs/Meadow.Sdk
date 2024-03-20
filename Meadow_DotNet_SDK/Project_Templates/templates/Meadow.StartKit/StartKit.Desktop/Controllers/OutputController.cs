@@ -1,4 +1,6 @@
-﻿using Meadow;
+﻿using System;
+using System.Threading.Tasks;
+using Meadow;
 using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
 using $safeprojectname$.Core;

@@ -1,4 +1,6 @@
-﻿using Meadow.Units;
+﻿using System;
+using System.Threading.Tasks;
+using Meadow.Units;
 using $safeprojectname$.Core.Contracts;
 
 namespace $safeprojectname$.Core

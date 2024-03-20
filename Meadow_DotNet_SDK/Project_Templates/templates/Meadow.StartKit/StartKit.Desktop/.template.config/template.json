@@ -13,7 +13,7 @@
   "sourceName": "$safeprojectname$",
   "preferNameDirectory": true,
   "symbols": {
-    "Framework": {
+    "framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
       "datatype": "choice",

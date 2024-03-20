@@ -1,4 +1,6 @@
-﻿using Meadow.Devices;
+﻿using System;
+using System.Threading.Tasks;
+using Meadow.Devices;
 using Meadow.Hardware;
 using $safeprojectname$.Core;
 

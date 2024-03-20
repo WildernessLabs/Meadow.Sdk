@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Logging;
@@ -9,7 +11,7 @@ namespace $safeprojectname$.DT
     {
         private static void Main(string[] args)
         {
-#if (Framework == net8.0-windows)
+#if (framework == net8.0-windows)
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();

@@ -1,13 +1,13 @@
-﻿using Meadow;
-using Meadow.Foundation.Displays;
-using Meadow.Foundation.Graphics;
+﻿
+using System;
+using System.Threading.Tasks;
+using Meadow;
 using Meadow.Foundation.Sensors;
 using Meadow.Foundation.Sensors.Buttons;
 using Meadow.Foundation.Sensors.Hid;
 using Meadow.Hardware;
 using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
-using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
 using $safeprojectname$.Core;

@@ -1,4 +1,6 @@
-﻿using Meadow;
+﻿using System;
+using System.Threading.Tasks;
+using Meadow;
 using Meadow.Foundation.Sensors.Hid;
 using Meadow.Hardware;
 using $safeprojectname$.Core;
