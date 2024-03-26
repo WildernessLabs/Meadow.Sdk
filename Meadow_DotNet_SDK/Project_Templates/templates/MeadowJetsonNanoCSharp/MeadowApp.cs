@@ -2,7 +2,7 @@
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : LinuxApp<JetsonNano>
+    public class MeadowApp : App<JetsonNano>
     {
         public override Task Initialize()
         {
