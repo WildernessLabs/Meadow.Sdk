@@ -4,7 +4,7 @@ using Meadow.Devices;
 using Meadow.Hardware;
 using $safeprojectname$.Core;
 
-namespace $safeprojectname$.ProjectLab
+namespace $safeprojectname$.F7
 {
     internal class NetworkController : INetworkController
     {

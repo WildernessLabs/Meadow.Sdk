@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow StartKit (Project Lab)",
-  "identity": "WildernessLabs.Meadow.StartKit.ProjectLab",
-  "groupIdentity": "WildernessLabs.Meadow.SKProjLab",
-  "shortName": "MeadowSKProjLab",
+  "name": "Meadow StartKit (F7)",
+  "identity": "WildernessLabs.Meadow.StartKit.F7",
+  "groupIdentity": "WildernessLabs.Meadow.SKF7",
+  "shortName": "MeadowSKF7",
   "tags": {
     "language": "C#",
     "type": "project"

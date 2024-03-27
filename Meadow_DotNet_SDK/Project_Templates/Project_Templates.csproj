@@ -48,8 +48,7 @@
     <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.Core\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.Desktop\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.F7Feather\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\StartKit.F7\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\StartKit.RasPi\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.ProjectLab\.template.config\" />
   </ItemGroup>
 </Project>

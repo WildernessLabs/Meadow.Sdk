@@ -11,9 +11,9 @@ using Meadow.Units;
 using $safeprojectname$.Core;
 using $safeprojectname$.Core.Contracts;
 
-namespace $safeprojectname$.ProjectLab
+namespace $safeprojectname$.F7
 {
-    internal class $safeprojectname$Hardware : I$safeprojectname$Hardware
+    internal class $safeprojectname$ProjectLabHardware : I$safeprojectname$Hardware
     {
         private readonly IProjectLabHardware projLab;
 
@@ -25,9 +25,9 @@ namespace $safeprojectname$.ProjectLab
         public IPixelDisplay? Display => projLab.Display;
         public INetworkController NetworkController { get; }
 
-        public $safeprojectname$Hardware(F7CoreComputeV2 device)
+        public $safeprojectname$ProjectLabHardware(F7CoreComputeV2 device)
         {
-            projLab = Meadow.Devices.ProjectLab.Create();
+            projLab = ProjectLab.Create();
 
             OutputController = new OutputController(projLab.RgbLed);
             NetworkController = new NetworkController(device);

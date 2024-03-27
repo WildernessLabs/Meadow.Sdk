@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Meadow.Peripherals.Leds;
 using $safeprojectname$.Core;
 
-namespace $safeprojectname$.F7Feather
+namespace $safeprojectname$.F7
 {
     internal class OutputController : IOutputController
     {

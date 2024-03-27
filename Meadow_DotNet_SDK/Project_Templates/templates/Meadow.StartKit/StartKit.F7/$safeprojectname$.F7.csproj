@@ -8,9 +8,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.ProjectLab" Version="*" />
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
+      <PackageReference Include="Meadow.F7" Version="*" />
+      <PackageReference Include="Meadow.Foundation" Version="*" />
+      <PackageReference Include="Meadow.Foundation.Sensors.Atmospheric.Bme68x" Version="*" />
+      <PackageReference Include="Meadow.ProjectLab" Version="*" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />

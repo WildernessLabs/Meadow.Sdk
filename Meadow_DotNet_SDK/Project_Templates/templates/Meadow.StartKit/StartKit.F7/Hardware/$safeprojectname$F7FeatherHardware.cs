@@ -11,9 +11,9 @@ using Meadow.Units;
 using $safeprojectname$.Core;
 using $safeprojectname$.Core.Contracts;
 
-namespace $safeprojectname$.F7Feather
+namespace $safeprojectname$.F7
 {
-    internal class $safeprojectname$Hardware : I$safeprojectname$Hardware
+    internal class $safeprojectname$F7FeatherHardware : I$safeprojectname$Hardware
     {
         private readonly ITemperatureSensor temperatureSensor;
 
@@ -25,7 +25,7 @@ namespace $safeprojectname$.F7Feather
         public IPixelDisplay? Display => null;
         public INetworkController NetworkController { get; }
 
-        public $safeprojectname$Hardware(F7FeatherBase device)
+        public $safeprojectname$F7FeatherHardware(F7FeatherBase device)
         {
             temperatureSensor = new SimulatedTemperatureSensor(
                 22.Celsius(), 20.Celsius(), 24.Celsius());
