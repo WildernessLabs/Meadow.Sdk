@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
-  "classifications": [ "Meadow", "Console" ],
+  "classifications": [ "Meadow", "App" ],
   "name": "Meadow StartKit (F7)",
   "identity": "WildernessLabs.Meadow.StartKit.F7",
   "groupIdentity": "WildernessLabs.Meadow.SKF7",

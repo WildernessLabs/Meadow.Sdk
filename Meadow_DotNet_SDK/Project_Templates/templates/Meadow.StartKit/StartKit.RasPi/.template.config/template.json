@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
-  "classifications": [ "Meadow", "Console" ],
+  "classifications": [ "Meadow", "App" ],
   "name": "Meadow StartKit (RasPi)",
   "identity": "WildernessLabs.Meadow.StartKit.RasPi",
   "groupIdentity": "WildernessLabs.Meadow.SKRasPi",
