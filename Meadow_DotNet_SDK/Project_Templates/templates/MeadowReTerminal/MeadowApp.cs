@@ -4,7 +4,7 @@ using Meadow.Peripherals.Displays;
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : LinuxApp<RaspberryPi>
+    public class MeadowApp : App<RaspberryPi>
     {
         GtkDisplay? _display;
 
