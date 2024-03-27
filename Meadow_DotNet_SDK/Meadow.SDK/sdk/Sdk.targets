@@ -10,4 +10,42 @@
 
   <!-- by default, we need these standard MSBuild targets -->
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+
+  <PropertyGroup>
+    <MeadowLinkDependsOnTargets>Build;</MeadowLinkDependsOnTargets>
+  </PropertyGroup>
+
+  <Target Name="MeadowLink" DependsOnTargets="$(MeadowLinkDependsOnTargets)">
+    <ItemGroup>
+      <_MeadowLinkRootAssemblyNames Include="@(IntermediateAssembly)" />
+      <_MeadowLinkRootAssemblyNames Include="%(ReferencePath.Identity)" Condition="%(ReferencePath.AssemblyName) == 'mscorlib'" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <MeadowLinkOutputPath Condition=" '$(MeadowLinkOutputPath)' == '' ">$(OutputPath)\postlink</MeadowLinkOutputPath>
+    </PropertyGroup>
+
+    <ILLink
+      AssemblyPaths="@(ReferencePath)"
+      ReferenceAssemblyPaths="@(ReferencePath)"
+      RootAssemblyNames="@(_MeadowLinkRootAssemblyNames)"
+      RootDescriptorFiles="@(LinkerRootDescriptors)"
+      OutputDirectory="$(MeadowLinkOutputPath)" />
+
+      <!-- TODO: copy other files (configs, etc) -->
+
+  </Target>
+
+  <PropertyGroup>
+    <MeadowDeployDependsOnTargets>MeadowLink;</MeadowDeployDependsOnTargets>
+  </PropertyGroup>
+
+  <Target Name="MeadowDeploy" DependsOnTargets="$(MeadowDeployDependsOnTargets)">
+
+    <MeadowDeployTask
+      OutputPath="$(OutputPath)"
+      MeadowDeviceSerial="$(MeadowDeviceSerial)"
+      DebugPort="$(MeadowDebugPort)" />
+
+  </Target>
 </Project>

@@ -2,4 +2,12 @@
   <!-- anything in here will get imported into a new Meadow project at the top of the file -->
   <!-- by default, we need these standard MSBuild props -->
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+
+  <PropertyGroup>
+		<MeadowTasksAssembly>Meadow.SDK.dll</MeadowTasksAssembly>
+	</PropertyGroup>
+	
+	<UsingTask
+		AssemblyFile="$(MeadowTasksAssembly)"
+		TaskName="Meadow.SDK.MeadowDeployTask" />
 </Project>
