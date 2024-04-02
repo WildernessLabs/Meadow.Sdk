@@ -12,6 +12,6 @@
       <PackageReference Include="Meadow.Linux" Version="*" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
+    <ProjectReference Include="..\StartKit.Core\___safeprojectname___.Core.csproj" />
   </ItemGroup>
 </Project>

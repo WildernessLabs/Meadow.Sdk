@@ -6,9 +6,9 @@ using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 
-namespace $safeprojectname$.Core.Contracts
+namespace ___safeprojectname___.Core.Contracts
 {
-    public interface I$safeprojectname$Hardware
+    public interface I___safeprojectname___Hardware
     {
         // basic hardware
         IButton? LeftButton { get; }

@@ -14,9 +14,6 @@
       <PackageReference Include="Meadow.ProjectLab" Version="*" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="meadow.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -26,5 +23,8 @@
     <None Update="wifi.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StartKit.Core\___safeprojectname___.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class InputController
     {
         public event EventHandler? UnitDownRequested;
         public event EventHandler? UnitUpRequested;
 
-        public InputController(I$safeprojectname$Hardware platform)
+        public InputController(I___safeprojectname___Hardware platform)
         {
             if (platform.LeftButton is { } ub)
             {

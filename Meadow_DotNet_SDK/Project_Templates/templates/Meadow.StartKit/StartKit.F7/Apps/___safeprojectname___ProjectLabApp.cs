@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using Meadow;
 using Meadow.Devices;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.F7
+namespace ___safeprojectname___.F7
 {
-    public class $safeprojectname$F7FeatherApp : App<F7FeatherV2>
+    public class ___safeprojectname___ProjectLabApp : App<F7CoreComputeV2>
     {
         private MainController mainController;
 
         public override Task Initialize()
         {
-            var hardware = new $safeprojectname$F7FeatherHardware(Device);
+            var hardware = new ___safeprojectname___ProjectLabHardware(Device);
             mainController = new MainController();
             return mainController.Initialize(hardware);
         }

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Sensors.Hid;
 using Meadow.Hardware;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.DT
+namespace ___safeprojectname___.DT
 {
     internal class NetworkController : INetworkController
     {

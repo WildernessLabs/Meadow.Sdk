@@ -10,12 +10,12 @@ using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
-using $safeprojectname$.Core;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.DT
+namespace ___safeprojectname___.DT
 {
-    internal class $safeprojectname$Hardware : I$safeprojectname$Hardware
+    internal class ___safeprojectname___Hardware : I___safeprojectname___Hardware
     {
         private readonly Desktop device;
         private readonly Keyboard keyboard;
@@ -28,7 +28,7 @@ namespace $safeprojectname$.DT
         public IButton? RightButton { get; }
         public IButton? LeftButton { get; }
 
-        public $safeprojectname$Hardware(Desktop device)
+        public ___safeprojectname___Hardware(Desktop device)
         {
             this.device = device;
 

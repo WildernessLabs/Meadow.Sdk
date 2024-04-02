@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Logging;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.DT
+namespace ___safeprojectname___.DT
 {
-    internal class $safeprojectname$App : App<Desktop>
+    internal class ___safeprojectname___App : App<Desktop>
     {
         private MainController mainController;
 
@@ -16,7 +16,7 @@ namespace $safeprojectname$.DT
             // output log messages to the VS debug window
             Resolver.Log.AddProvider(new DebugLogProvider());
 
-            var hardware = new $safeprojectname$Hardware(Device);
+            var hardware = new ___safeprojectname___Hardware(Device);
             mainController = new MainController();
             return mainController.Initialize(hardware);
         }
@@ -33,16 +33,16 @@ namespace $safeprojectname$.DT
 
         private void ExecutePlatformDisplayRunner()
         {
-#if (framework == net8.0-windows)
+/* TODO Uncomment before mergoing to develop #if (framework == net8.0-windows)
             if (Device.Display is System.Windows.Forms.Form display) {
                 System.Windows.Forms.Application.Run(display);
             }
-#else
+// TODO #else
             if (Device.Display is GtkDisplay display)
             {
                 display.Run();
             }
-#endif
+// TODO #endif
         }
     }
 }

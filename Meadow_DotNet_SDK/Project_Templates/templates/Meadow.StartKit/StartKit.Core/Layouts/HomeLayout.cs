@@ -3,7 +3,7 @@ using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Units;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     internal class HomeLayout : AbsoluteLayout
     {

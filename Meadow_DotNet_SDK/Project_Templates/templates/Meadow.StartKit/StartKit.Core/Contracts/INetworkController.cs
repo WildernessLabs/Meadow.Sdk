@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public interface INetworkController
     {

@@ -4,7 +4,7 @@ using Meadow;
 using Meadow.Cloud;
 using Meadow.Units;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class CloudController
     {

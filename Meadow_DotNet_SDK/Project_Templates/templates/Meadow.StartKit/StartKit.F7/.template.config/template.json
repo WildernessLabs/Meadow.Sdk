@@ -10,6 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "$safeprojectname$",
+  "sourceName": "___safeprojectname___",
   "preferNameDirectory": true
 }

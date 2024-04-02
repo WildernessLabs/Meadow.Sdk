@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Meadow.Units;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class AppConfigSettings
     {

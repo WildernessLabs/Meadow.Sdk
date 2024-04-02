@@ -3,20 +3,20 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Pinouts;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.RasPi
+namespace ___safeprojectname___.RasPi
 {
-    internal class $safeprojectname$App : App<RaspberryPi>
+    internal class ___safeprojectname___App : App<RaspberryPi>
     {
-        private $safeprojectname$Hardware hardware;
+        private ___safeprojectname___Hardware hardware;
         private MainController mainController;
 
         public bool SupportDisplay { get; set; } = false;
 
         public override Task Initialize()
         {
-            hardware = new $safeprojectname$Hardware(Device, SupportDisplay);
+            hardware = new ___safeprojectname___Hardware(Device, SupportDisplay);
             mainController = new MainController();
             return mainController.Initialize(hardware);
         }

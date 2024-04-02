@@ -8,12 +8,12 @@ using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Buttons;
 using Meadow.Units;
-using $safeprojectname$.Core;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.F7
+namespace ___safeprojectname___.F7
 {
-    internal class $safeprojectname$ProjectLabHardware : I$safeprojectname$Hardware
+    internal class ___safeprojectname___ProjectLabHardware : I___safeprojectname___Hardware
     {
         private readonly IProjectLabHardware projLab;
 
@@ -25,7 +25,7 @@ namespace $safeprojectname$.F7
         public IPixelDisplay? Display => projLab.Display;
         public INetworkController NetworkController { get; }
 
-        public $safeprojectname$ProjectLabHardware(F7CoreComputeV2 device)
+        public ___safeprojectname___ProjectLabHardware(F7CoreComputeV2 device)
         {
             projLab = ProjectLab.Create();
 

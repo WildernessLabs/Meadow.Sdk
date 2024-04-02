@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.DT
+namespace ___safeprojectname___.DT
 {
     internal class OutputController : IOutputController
     {

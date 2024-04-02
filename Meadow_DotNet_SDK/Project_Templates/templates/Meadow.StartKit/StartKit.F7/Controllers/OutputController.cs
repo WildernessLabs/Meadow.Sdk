@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Meadow.Peripherals.Leds;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.F7
+namespace ___safeprojectname___.F7
 {
     internal class OutputController : IOutputController
     {

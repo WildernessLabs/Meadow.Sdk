@@ -6,7 +6,7 @@ using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Peripherals.Displays;
 using Meadow.Units;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class DisplayController
     {
@@ -56,8 +56,8 @@ namespace $safeprojectname$.Core
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-            connectedImage = Image.LoadFromResource("$safeprojectname$.Core.Assets.net-connected.bmp");
-            disconnectedImage = Image.LoadFromResource("$safeprojectname$.Core.Assets.net-disconnected.bmp");
+            connectedImage = Image.LoadFromResource("___safeprojectname___.Core.Assets.net-connected.bmp");
+            disconnectedImage = Image.LoadFromResource("___safeprojectname___.Core.Assets.net-disconnected.bmp");
 
             networkIcon = new Picture(screen.Width - disconnectedImage.Width, 0, disconnectedImage.Width, disconnectedImage.Height, disconnectedImage);
 

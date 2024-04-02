@@ -1,6 +1,6 @@
 ﻿using Meadow.Cloud;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     /*
     JSON for copy/paste into Meadow.Cloud

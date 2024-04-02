@@ -5,12 +5,12 @@ using Meadow.Foundation.Displays;
 using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Buttons;
-using $safeprojectname$.Core;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.RasPi
+namespace ___safeprojectname___.RasPi
 {
-    internal class $safeprojectname$Hardware : I$safeprojectname$Hardware
+    internal class ___safeprojectname___Hardware : I___safeprojectname___Hardware
     {
         private readonly RaspberryPi device;
         private readonly IPixelDisplay? display = null;
@@ -26,7 +26,7 @@ namespace $safeprojectname$.RasPi
         public INetworkController NetworkController { get; }
 
 
-        public $safeprojectname$Hardware(RaspberryPi device, bool supportDisplay)
+        public ___safeprojectname___Hardware(RaspberryPi device, bool supportDisplay)
         {
             this.device = device;
 

@@ -3,19 +3,19 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Logging;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.DT
+namespace ___safeprojectname___.DT
 {
     public static class Program
     {
         private static void Main(string[] args)
         {
-#if (framework == net8.0-windows)
+/* TODO Uncomment before mergoing to develop #if (framework == net8.0-windows)
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();
-#endif
+#endif */
             MeadowOS.Start(args);
         }
     }

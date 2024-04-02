@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.RasPi
+namespace ___safeprojectname___.RasPi
 {
     internal class OutputController : IOutputController
     {

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Logging;
-using $safeprojectname$.Core;
+using ___safeprojectname___.Core;
 
-namespace $safeprojectname$.RasPi
+namespace ___safeprojectname___.RasPi
 {
     public static class Program
     {

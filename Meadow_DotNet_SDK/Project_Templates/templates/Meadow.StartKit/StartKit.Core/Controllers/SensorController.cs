@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Meadow.Units;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class SensorController
     {
@@ -11,7 +11,7 @@ namespace $safeprojectname$.Core
 
         public event EventHandler<Temperature> CurrentTemperatureChanged = default!;
 
-        public SensorController(I$safeprojectname$Hardware platform)
+        public SensorController(I___safeprojectname___Hardware platform)
         {
             if (platform.TemperatureSensor is { } t)
             {

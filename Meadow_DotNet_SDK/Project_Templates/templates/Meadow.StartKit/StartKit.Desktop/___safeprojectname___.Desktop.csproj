@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>DotNetTargetFramework</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
@@ -19,6 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
+    <ProjectReference Include="..\StartKit.Core\___safeprojectname___.Core.csproj" />
   </ItemGroup>
 </Project>

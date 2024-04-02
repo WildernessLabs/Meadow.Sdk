@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using Meadow;
 using Meadow.Units;
-using $safeprojectname$.Core.Contracts;
+using ___safeprojectname___.Core.Contracts;
 
-namespace $safeprojectname$.Core
+namespace ___safeprojectname___.Core
 {
     public class MainController
     {
-        private I$safeprojectname$Hardware hardware;
+        private I___safeprojectname___Hardware hardware;
 
         private CloudController cloudController;
         private ConfigurationController configurationController;
@@ -27,7 +27,7 @@ namespace $safeprojectname$.Core
         {
         }
 
-        public Task Initialize(I$safeprojectname$Hardware hardware)
+        public Task Initialize(I___safeprojectname___Hardware hardware)
         {
             this.hardware = hardware;
 
