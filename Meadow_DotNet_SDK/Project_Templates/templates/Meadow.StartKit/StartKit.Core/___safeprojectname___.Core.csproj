@@ -13,5 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Meadow.Foundation" Version="*" />
     <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
+    <PackageReference Include="Meadow.Foundation.Serialization.MicroJson" Version="*" />
   </ItemGroup>
 </Project>

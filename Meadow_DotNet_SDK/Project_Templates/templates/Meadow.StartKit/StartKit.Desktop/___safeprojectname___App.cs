@@ -37,7 +37,7 @@ namespace ___safeprojectname___.DT
             if (Device.Display is System.Windows.Forms.Form display) {
                 System.Windows.Forms.Application.Run(display);
             }
-// TODO #else
+#else */
             if (Device.Display is GtkDisplay display)
             {
                 display.Run();

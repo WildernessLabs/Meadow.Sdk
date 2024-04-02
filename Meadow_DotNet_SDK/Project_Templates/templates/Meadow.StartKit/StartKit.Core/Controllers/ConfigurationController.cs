@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Meadow.Foundation.Serialization;
 using Meadow.Units;
 
 namespace ___safeprojectname___.Core
