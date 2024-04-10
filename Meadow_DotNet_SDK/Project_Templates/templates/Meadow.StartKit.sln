@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.RasPi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.Desktop", "Meadow.StartKit\StartKit.Desktop\___safeprojectname___.Desktop.csproj", "{2068562E-CBCE-4AB6-B05F-683DA70C70A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.Core", "Meadow.StartKit\StartKit.Core\___safeprojectname___.Core.csproj", "{97A526FC-5B04-4372-B19B-15DD5E6B0A38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.Core", "Meadow.StartKit\___safeprojectname___.Core\___safeprojectname___.Core.csproj", "{97A526FC-5B04-4372-B19B-15DD5E6B0A38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

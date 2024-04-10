@@ -25,6 +25,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StartKit.Core\___safeprojectname___.Core.csproj" />
+    <ProjectReference Include="..\___safeprojectname___.Core\___safeprojectname___.Core.csproj" />
   </ItemGroup>
 </Project>
