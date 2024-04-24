@@ -1,14 +1,13 @@
 ﻿namespace MeadowApplication.Template
 
 open System
-open Meadow.Devices
 open Meadow
+open Meadow.Devices
 open Meadow.Foundation.Leds
 open Meadow.Peripherals.Leds
 open System.Threading.Tasks
 
 type MeadowApp() =
-    // Change F7FeatherV2 to F7FeatherV1 for V1.x boards
     inherit App<F7FeatherV2>()
 
     let mutable led : RgbPwmLed = null
@@ -18,7 +17,7 @@ type MeadowApp() =
         do! Async.Sleep duration
         do! led.StopAnimation() |> Async.AwaitTask
     }
-    
+
     let CycleColors (duration : TimeSpan) = async {
         do Resolver.Log.Info "Cycle colors..."
 
@@ -38,7 +37,7 @@ type MeadowApp() =
     }
 
     override this.Initialize() =
-        do Resolver.Log.Info "Initialize... (F#)"
+        do Resolver.Log.Info "Initialize..."
 
         led <- new RgbPwmLed(
             MeadowApp.Device.Pins.OnboardLedRed,
@@ -46,11 +45,11 @@ type MeadowApp() =
             MeadowApp.Device.Pins.OnboardLedBlue, 
             CommonType.CommonAnode)
 
-        base.Initialize()
-        
+        Task.CompletedTask;
+
     override this.Run () : Task =
         let runAsync = async {
-            do Resolver.Log.Info "Run... (F#)"
+            do Resolver.Log.Info "Run..."
             do! CycleColors(TimeSpan.FromSeconds(1.0))
         }
         Async.StartAsTask(runAsync) :> Task

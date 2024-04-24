@@ -3,9 +3,10 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Library" ],
   "name": "Meadow Library",
+  "description": "A class library for Meadow applications",
   "identity": "WildernessLabs.Meadow.Library.VBNET.Template",
   "groupIdentity": "WildernessLabs.Meadow.Library",
-  "shortName": "MeadowDll",
+  "shortName": "Library",
   "tags": {
     "language": "VB.NET",
     "type": "library"

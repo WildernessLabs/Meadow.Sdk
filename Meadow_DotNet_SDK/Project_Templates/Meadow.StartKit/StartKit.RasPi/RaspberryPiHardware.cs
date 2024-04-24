@@ -1,5 +1,4 @@
-﻿using Meadow.Foundation.Displays;
-using Meadow.Peripherals.Displays;
+﻿using Meadow.Peripherals.Displays;
 using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Buttons;
 using StartKit.Core;
@@ -17,11 +16,6 @@ internal class RaspberryPiHardware : IStartKitHardware
     public RaspberryPiHardware(RaspberryPi device, bool supportDisplay)
     {
         this.device = device;
-
-        if (supportDisplay)
-        { // only if we have a display attached
-            display = new GtkDisplay(ColorMode.Format16bppRgb565);
-        }
     }
 
     public RotationType DisplayRotation => RotationType.Default;

@@ -1,5 +1,4 @@
-﻿using Meadow.Foundation.Displays;
-using StartKit.Core;
+﻿using StartKit.Core;
 
 namespace Meadow.RasPi;
 
@@ -24,12 +23,6 @@ internal class MeadowApp : App<RaspberryPi>
 
     public override Task Run()
     {
-        if (hardware.Display is GtkDisplay gtk)
-        {
-            _ = mainController.Run();
-            gtk.Run();
-        }
-
         return mainController.Run();
     }
 }

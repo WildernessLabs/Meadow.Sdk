@@ -28,16 +28,12 @@ internal class MeadowApp : App<Desktop>
 
         return base.Run();
     }
+
     private void ExecutePlatformDisplayRunner()
     {
-#if WINDOWS
-        System.Windows.Forms.Application.Run(Device.Display as System.Windows.Forms.Form);
-#else
-        if (Device.Display is GtkDisplay gtk)
+        if (Device.Display is SilkDisplay silkDisplay)
         {
-            gtk.Run();
+            silkDisplay.Run();
         }
-#endif
     }
-
 }
