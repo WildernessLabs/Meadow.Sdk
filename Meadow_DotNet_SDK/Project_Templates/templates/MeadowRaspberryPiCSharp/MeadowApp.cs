@@ -2,7 +2,7 @@
 
 namespace MeadowApplication.Template
 {
-    public class MeadowApp : LinuxApp<RaspberryPi>
+    public class MeadowApp : App<RaspberryPi>
     {
         public override Task Initialize()
         {

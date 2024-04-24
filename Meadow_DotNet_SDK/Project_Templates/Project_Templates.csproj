@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.0.0.0</PackageVersion>
-    <Version>2.0.0.0</Version>
+    <PackageVersion>1.10.0</PackageVersion>
+    <Version>1.10.0</Version>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
@@ -15,7 +15,6 @@
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
-    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -46,10 +45,5 @@
     <Folder Include="templates\MeadowJetsonNanoCSharp\.template.config\" />
     <Folder Include="templates\MeadowReTerminal\.template.config\" />
     <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.Core\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.Desktop\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.F7Feather\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.RasPi\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\StartKit.ProjectLab\.template.config\" />
   </ItemGroup>
 </Project>
