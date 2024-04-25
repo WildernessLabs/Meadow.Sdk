@@ -1,0 +1,35 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "Console" ],
+  "name": "Meadow StartKit (Desktop)",
+  "identity": "WildernessLabs.Meadow.StartKit.Desktop",
+  "groupIdentity": "WildernessLabs.Meadow.SKDesktop",
+  "shortName": "MeadowSKDesktop",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "$safeprojectname$",
+  "preferNameDirectory": true,
+  "symbols": {
+    "framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "enableQuotelessLiterals": true,
+      "choices": [
+        {
+          "choice": "net8.0",
+          "description": "Target net8.0"
+        },
+        {
+          "choice": "net8.0-windows",
+          "description": "Target net8.0-windows"
+        }
+      ],
+      "replaces": "DotNetTargetFramework",
+      "defaultValue": "net8.0-windows"
+    }
+  }
+}
