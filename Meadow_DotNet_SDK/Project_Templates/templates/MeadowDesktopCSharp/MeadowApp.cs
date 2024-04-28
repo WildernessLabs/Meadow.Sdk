@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Meadow;
+﻿using Meadow;
 using Meadow.Foundation.Displays;
+using System.Threading.Tasks;
 
 namespace MeadowApplication.Template;
 
@@ -16,6 +15,7 @@ public class MeadowApp : App<Desktop>
         Resolver.Log.Info($" Model: {Device.Information.Model}");
         Resolver.Log.Info($" Processor: {Device.Information.ProcessorType}");
 
+        Device.Display.Resize(320, 240, 2);
         var displayController = new DisplayController(Device.Display!);
 
         return base.Initialize();
@@ -31,16 +31,11 @@ public class MeadowApp : App<Desktop>
 
     private void ExecutePlatformDisplayRunner()
     {
-#if (framework == net8.0-windows)
-        if (Device.Display is System.Windows.Forms.Form display)
+        if (Device.Display is SilkDisplay sd)
         {
-            System.Windows.Forms.Application.Run(display);
+            sd.Run();
         }
-#else
-        if (Device.Display is GtkDisplay display)
-        {
-            display.Run();
-        }
-#endif
+        MeadowOS.TerminateRun();
+        System.Environment.Exit(0);
     }
 }
