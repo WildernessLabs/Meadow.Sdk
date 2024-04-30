@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Meadow.Sdk/1.1.0">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Class1.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Class1.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Meadow.Foundation" Version="*" />
+    </ItemGroup>
 </Project>
