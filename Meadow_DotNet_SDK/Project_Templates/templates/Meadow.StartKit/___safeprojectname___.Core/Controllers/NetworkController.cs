@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ___safeprojectname___.Core
+namespace ___safeprojectname___.Core;
+
+public class NetworkController
 {
-    public class NetworkController
+    public NetworkController()
     {
-        public NetworkController()
-        {
-        }
     }
 }

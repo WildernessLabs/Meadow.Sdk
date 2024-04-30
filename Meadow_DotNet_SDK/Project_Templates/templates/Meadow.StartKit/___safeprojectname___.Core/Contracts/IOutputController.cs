@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ___safeprojectname___.Core
+namespace ___safeprojectname___.Core;
+
+public interface IOutputController
 {
-    public interface IOutputController
-    {
-        Task SetState(bool state);
-    }
+    Task SetState(bool state);
 }

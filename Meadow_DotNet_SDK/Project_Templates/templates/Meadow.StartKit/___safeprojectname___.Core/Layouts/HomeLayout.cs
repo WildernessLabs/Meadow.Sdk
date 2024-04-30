@@ -3,23 +3,22 @@ using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Units;
 
-namespace ___safeprojectname___.Core
+namespace ___safeprojectname___.Core;
+
+internal class HomeLayout : AbsoluteLayout
 {
-    internal class HomeLayout : AbsoluteLayout
+    protected IFont MediumFont { get; }
+    protected IFont LargeFont { get; }
+
+    public HomeLayout(DisplayScreen screen)
+        : base(screen)
     {
-        protected IFont MediumFont { get; }
-        protected IFont LargeFont { get; }
+        LargeFont = new Font12x20();
+        MediumFont = new Font8x16();
 
-        public HomeLayout(DisplayScreen screen)
-            : base(screen)
-        {
-            LargeFont = new Font12x20();
-            MediumFont = new Font8x16();
-
-            this.BackgroundColor = Color.FromRgb(50, 50, 50);
-        }
-
-        public Temperature.UnitType Units { get; set; }
-        public virtual Temperature DisplayTemperature { get; set; }
+        this.BackgroundColor = Color.FromRgb(50, 50, 50);
     }
+
+    public Temperature.UnitType Units { get; set; }
+    public virtual Temperature DisplayTemperature { get; set; }
 }

@@ -5,13 +5,12 @@ using Meadow.Foundation.Displays;
 using Meadow.Logging;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.DT
+namespace ___safeprojectname___.DT;
+
+public static class Program
 {
-    public static class Program
+    private static void Main(string[] args)
     {
-        private static void Main(string[] args)
-        {
-            MeadowOS.Start(args);
-        }
+        MeadowOS.Start(args);
     }
 }

@@ -5,31 +5,30 @@ using Meadow.Foundation.Displays;
 using Meadow.Pinouts;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.RasPi
+namespace ___safeprojectname___.RasPi;
+
+internal class ___safeprojectname___App : App<RaspberryPi>
 {
-    internal class ___safeprojectname___App : App<RaspberryPi>
+    private ___safeprojectname___Hardware hardware;
+    private MainController mainController;
+
+    public bool SupportDisplay { get; set; } = false;
+
+    public override Task Initialize()
     {
-        private ___safeprojectname___Hardware hardware;
-        private MainController mainController;
+        hardware = new ___safeprojectname___Hardware(Device, SupportDisplay);
+        mainController = new MainController();
+        return mainController.Initialize(hardware);
+    }
 
-        public bool SupportDisplay { get; set; } = false;
-
-        public override Task Initialize()
+    public override Task Run()
+    {
+        if (hardware.Display is GtkDisplay gtk)
         {
-            hardware = new ___safeprojectname___Hardware(Device, SupportDisplay);
-            mainController = new MainController();
-            return mainController.Initialize(hardware);
+            _ = mainController.Run();
+            gtk.Run();
         }
 
-        public override Task Run()
-        {
-            if (hardware.Display is GtkDisplay gtk)
-            {
-                _ = mainController.Run();
-                gtk.Run();
-            }
-
-            return mainController.Run();
-        }
+        return mainController.Run();
     }
 }

@@ -3,29 +3,28 @@ using System.Threading.Tasks;
 using Meadow.Peripherals.Leds;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.F7
+namespace ___safeprojectname___.F7;
+
+internal class OutputController : IOutputController
 {
-    internal class OutputController : IOutputController
+    private IRgbLed Led { get; }
+
+    public OutputController(IRgbLed led)
     {
-        private IRgbLed Led { get; }
+        Led = led;
+    }
 
-        public OutputController(IRgbLed led)
+    public Task SetState(bool state)
+    {
+        if (state)
         {
-            Led = led;
+            Led.SetColor(RgbLedColors.Red);
+        }
+        else
+        {
+            Led.IsOn = false;
         }
 
-        public Task SetState(bool state)
-        {
-            if (state)
-            {
-                Led.SetColor(RgbLedColors.Red);
-            }
-            else
-            {
-                Led.IsOn = false;
-            }
-
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

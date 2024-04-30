@@ -4,47 +4,46 @@ using Meadow.Devices;
 using Meadow.Hardware;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.F7
+namespace ___safeprojectname___.F7;
+
+internal class NetworkController : INetworkController
 {
-    internal class NetworkController : INetworkController
+    public event EventHandler NetworkStatusChanged;
+
+    private bool isNetworkConnected;
+
+    public NetworkController(F7MicroBase device)
     {
-        public event EventHandler NetworkStatusChanged;
+        var wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
 
-        private bool isNetworkConnected;
+        IsConnected = wifi.IsConnected;
+        wifi.NetworkConnected += OnNetworkConnected;
+        wifi.NetworkDisconnected += OnNetworkDisconnected;
+    }
 
-        public NetworkController(F7MicroBase device)
+    private void OnNetworkDisconnected(INetworkAdapter sender, NetworkDisconnectionEventArgs args)
+    {
+        IsConnected = false;
+    }
+
+    private void OnNetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
+    {
+        IsConnected = true;
+    }
+
+    public bool IsConnected
+    {
+        get => isNetworkConnected;
+        set
         {
-            var wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
-
-            IsConnected = wifi.IsConnected;
-            wifi.NetworkConnected += OnNetworkConnected;
-            wifi.NetworkDisconnected += OnNetworkDisconnected;
+            if (value == IsConnected) return;
+            isNetworkConnected = value;
+            NetworkStatusChanged?.Invoke(this, EventArgs.Empty);
         }
+    }
 
-        private void OnNetworkDisconnected(INetworkAdapter sender, NetworkDisconnectionEventArgs args)
-        {
-            IsConnected = false;
-        }
-
-        private void OnNetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
-        {
-            IsConnected = true;
-        }
-
-        public bool IsConnected
-        {
-            get => isNetworkConnected;
-            set
-            {
-                if (value == IsConnected) return;
-                isNetworkConnected = value;
-                NetworkStatusChanged?.Invoke(this, EventArgs.Empty);
-            }
-        }
-
-        public Task Connect()
-        {
-            throw new NotImplementedException();
-        }
+    public Task Connect()
+    {
+        throw new NotImplementedException();
     }
 }

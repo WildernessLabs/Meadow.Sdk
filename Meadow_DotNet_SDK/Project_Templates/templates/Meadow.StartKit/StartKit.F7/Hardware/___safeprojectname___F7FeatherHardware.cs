@@ -11,34 +11,33 @@ using Meadow.Units;
 using ___safeprojectname___.Core;
 using ___safeprojectname___.Core.Contracts;
 
-namespace ___safeprojectname___.F7
+namespace ___safeprojectname___.F7;
+
+internal class ___safeprojectname___F7FeatherHardware : I___safeprojectname___Hardware
 {
-    internal class ___safeprojectname___F7FeatherHardware : I___safeprojectname___Hardware
+    private readonly ITemperatureSensor temperatureSensor;
+
+    public RotationType DisplayRotation => RotationType.Default;
+    public ITemperatureSensor? TemperatureSensor => temperatureSensor;
+    public IOutputController OutputController { get; }
+    public IButton? RightButton => null;
+    public IButton? LeftButton => null;
+    public IPixelDisplay? Display => null;
+    public INetworkController NetworkController { get; }
+
+    public ___safeprojectname___F7FeatherHardware(F7FeatherBase device)
     {
-        private readonly ITemperatureSensor temperatureSensor;
+        temperatureSensor = new SimulatedTemperatureSensor(
+            22.Celsius(), 20.Celsius(), 24.Celsius());
 
-        public RotationType DisplayRotation => RotationType.Default;
-        public ITemperatureSensor? TemperatureSensor => temperatureSensor;
-        public IOutputController OutputController { get; }
-        public IButton? RightButton => null;
-        public IButton? LeftButton => null;
-        public IPixelDisplay? Display => null;
-        public INetworkController NetworkController { get; }
+        OutputController = new OutputController(
+            new RgbLed(
+                device.Pins.OnboardLedRed.CreateDigitalOutputPort(),
+                device.Pins.OnboardLedGreen.CreateDigitalOutputPort(),
+                device.Pins.OnboardLedBlue.CreateDigitalOutputPort()
+                )
+            );
 
-        public ___safeprojectname___F7FeatherHardware(F7FeatherBase device)
-        {
-            temperatureSensor = new SimulatedTemperatureSensor(
-                22.Celsius(), 20.Celsius(), 24.Celsius());
-
-            OutputController = new OutputController(
-                new RgbLed(
-                    device.Pins.OnboardLedRed.CreateDigitalOutputPort(),
-                    device.Pins.OnboardLedGreen.CreateDigitalOutputPort(),
-                    device.Pins.OnboardLedBlue.CreateDigitalOutputPort()
-                    )
-                );
-
-            NetworkController = new NetworkController(device);
-        }
+        NetworkController = new NetworkController(device);
     }
 }

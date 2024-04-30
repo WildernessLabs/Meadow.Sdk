@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ___safeprojectname___.Core
-{
-    public interface INetworkController
-    {
-        event EventHandler NetworkStatusChanged;
+namespace ___safeprojectname___.Core;
 
-        Task Connect();
-        bool IsConnected { get; }
-    }
+public interface INetworkController
+{
+    event EventHandler NetworkStatusChanged;
+
+    Task Connect();
+    bool IsConnected { get; }
 }

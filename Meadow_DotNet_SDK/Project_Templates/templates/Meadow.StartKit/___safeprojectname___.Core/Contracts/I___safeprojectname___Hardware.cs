@@ -6,21 +6,20 @@ using Meadow.Peripherals.Sensors;
 using Meadow.Peripherals.Sensors.Atmospheric;
 using Meadow.Peripherals.Sensors.Buttons;
 
-namespace ___safeprojectname___.Core.Contracts
+namespace ___safeprojectname___.Core.Contracts;
+
+public interface I___safeprojectname___Hardware
 {
-    public interface I___safeprojectname___Hardware
-    {
-        // basic hardware
-        IButton? LeftButton { get; }
-        IButton? RightButton { get; }
+    // basic hardware
+    IButton? LeftButton { get; }
+    IButton? RightButton { get; }
 
-        // complex hardware
-        ITemperatureSensor? TemperatureSensor { get; }
-        IPixelDisplay? Display { get; }
-        RotationType DisplayRotation { get; }
+    // complex hardware
+    ITemperatureSensor? TemperatureSensor { get; }
+    IPixelDisplay? Display { get; }
+    RotationType DisplayRotation { get; }
 
-        // platform-dependent services
-        IOutputController OutputController { get; }
-        INetworkController NetworkController { get; }
-    }
+    // platform-dependent services
+    IOutputController OutputController { get; }
+    INetworkController NetworkController { get; }
 }

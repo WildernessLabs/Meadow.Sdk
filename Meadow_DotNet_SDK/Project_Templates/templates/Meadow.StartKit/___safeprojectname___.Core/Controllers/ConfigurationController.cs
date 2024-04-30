@@ -4,56 +4,55 @@ using System.Threading.Tasks;
 using Meadow.Foundation.Serialization;
 using Meadow.Units;
 
-namespace ___safeprojectname___.Core
+namespace ___safeprojectname___.Core;
+
+public class AppConfigSettings
 {
-    public class AppConfigSettings
+    public Temperature.UnitType Units { get; set; }
+    public double ThresholdC { get; set; }
+}
+
+public class ConfigurationController
+{
+    private const string SettingsFileName = "settings.json";
+
+    public Temperature.UnitType Units { get; set; }
+    public Temperature ThresholdTemp { get; set; }
+
+    public ConfigurationController()
     {
-        public Temperature.UnitType Units { get; set; }
-        public double ThresholdC { get; set; }
+        Units = Temperature.UnitType.Celsius;
+        ThresholdTemp = 22.5.Celsius();
+
+        Load();
     }
 
-    public class ConfigurationController
+    public void Load()
     {
-        private const string SettingsFileName = "settings.json";
-
-        public Temperature.UnitType Units { get; set; }
-        public Temperature ThresholdTemp { get; set; }
-
-        public ConfigurationController()
+        if (File.Exists(SettingsFileName))
         {
-            Units = Temperature.UnitType.Celsius;
-            ThresholdTemp = 22.5.Celsius();
-
-            Load();
+            var json = File.ReadAllText(SettingsFileName);
+            var s = MicroJson.Deserialize<AppConfigSettings>(json);
+            Units = s.Units;
+            ThresholdTemp = s.ThresholdC.Celsius();
         }
+    }
 
-        public void Load()
+    public Task Save()
+    {
+        return Task.Run(() =>
         {
+            var cfg = new AppConfigSettings
+            {
+                Units = Units,
+                ThresholdC = ThresholdTemp.Celsius
+            };
+            var json = MicroJson.Serialize(cfg);
             if (File.Exists(SettingsFileName))
             {
-                var json = File.ReadAllText(SettingsFileName);
-                var s = MicroJson.Deserialize<AppConfigSettings>(json);
-                Units = s.Units;
-                ThresholdTemp = s.ThresholdC.Celsius();
+                File.Delete(SettingsFileName);
             }
-        }
-
-        public Task Save()
-        {
-            return Task.Run(() =>
-            {
-                var cfg = new AppConfigSettings
-                {
-                    Units = Units,
-                    ThresholdC = ThresholdTemp.Celsius
-                };
-                var json = MicroJson.Serialize(cfg);
-                if (File.Exists(SettingsFileName))
-                {
-                    File.Delete(SettingsFileName);
-                }
-                File.WriteAllText(SettingsFileName, json);
-            });
-        }
+            File.WriteAllText(SettingsFileName, json);
+        });
     }
 }
