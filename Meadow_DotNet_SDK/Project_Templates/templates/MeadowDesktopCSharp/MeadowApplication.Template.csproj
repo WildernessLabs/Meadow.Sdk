@@ -1,14 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>DotNetTargetFramework</TargetFramework>
         <OutputType>Exe</OutputType>
-        <LangVersion>10</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
-        <UseWindowsForms>true</UseWindowsForms>
-        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+        <LangVersion>10.0</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,6 +1,5 @@
-﻿namespace MeadowLibrary.Template
+﻿namespace MeadowLibrary.Template;
+
+public class Class1
 {
-    public class Class1
-    {
-    }
 }

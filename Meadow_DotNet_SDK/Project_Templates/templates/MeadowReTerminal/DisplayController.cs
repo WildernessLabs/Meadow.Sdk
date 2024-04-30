@@ -3,31 +3,30 @@ using Meadow.Foundation.Graphics;
 using Meadow.Foundation.Graphics.MicroLayout;
 using Meadow.Peripherals.Displays;
 
-namespace MeadowApplication.Template
+namespace MeadowApplication.Template;
+
+public class DisplayController
 {
-    public class DisplayController
+    private DisplayScreen displayScreen;
+
+    public DisplayController(IPixelDisplay display)
     {
-        private DisplayScreen displayScreen;
-
-        public DisplayController(IPixelDisplay display)
+        displayScreen = new DisplayScreen(display)
         {
-            displayScreen = new DisplayScreen(display)
-            {
-                BackgroundColor = Color.FromHex("14607F")
-            };
+            BackgroundColor = Color.FromHex("14607F")
+        };
 
-            displayScreen.Controls.Add(new Label(
-                left: 0,
-                top: 0,
-                width: displayScreen.Width,
-                height: displayScreen.Height)
-            {
-                Text = "Hello World",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Font = new Font12x20(),
-                ScaleFactor = ScaleFactor.X2
-            });
-        }
+        displayScreen.Controls.Add(new Label(
+            left: 0,
+            top: 0,
+            width: displayScreen.Width,
+            height: displayScreen.Height)
+        {
+            Text = "Hello World",
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            Font = new Font12x20(),
+            ScaleFactor = ScaleFactor.X2
+        });
     }
 }
