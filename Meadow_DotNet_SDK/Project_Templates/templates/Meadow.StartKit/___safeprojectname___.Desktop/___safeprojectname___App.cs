@@ -33,15 +33,9 @@ internal class ___safeprojectname___App : App<Desktop>
 
     private void ExecutePlatformDisplayRunner()
     {
-/* TODO Uncomment before mergoing to develop #if (framework == net8.0-windows)
-        if (Device.Display is System.Windows.Forms.Form display) {
-            System.Windows.Forms.Application.Run(display);
-        }
-#else */
-        if (Device.Display is GtkDisplay display)
+        if (Device.Display is SilkDisplay silkDisplay)
         {
-            display.Run();
+            silkDisplay.Run();
         }
-// TODO #endif
     }
 }
