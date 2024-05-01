@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using Meadow;
 using Meadow.Foundation.Graphics;
@@ -56,8 +57,14 @@ public class DisplayController
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        connectedImage = Image.LoadFromResource("___safeprojectname___.Core.Assets.net-connected.bmp");
-        disconnectedImage = Image.LoadFromResource("___safeprojectname___.Core.Assets.net-disconnected.bmp");
+        // Get the current assembly
+        Assembly currentAssembly = Assembly.GetExecutingAssembly();
+
+        // Get the name of the assembly
+        string assemblyName = currentAssembly.GetName().Name;
+
+        connectedImage = Image.LoadFromResource($"{assemblyName}.Assets.net-connected.bmp");
+        disconnectedImage = Image.LoadFromResource($"{assemblyName}.Assets.net-disconnected.bmp");
 
         networkIcon = new Picture(screen.Width - disconnectedImage.Width, 0, disconnectedImage.Width, disconnectedImage.Height, disconnectedImage);
 
