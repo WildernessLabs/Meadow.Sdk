@@ -6,7 +6,7 @@
   "description": "Create a new Meadow application that runs on a Core-Compute Module",
   "identity": "WildernessLabs.Meadow.CoreComputeModule.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.CoreComputeModule",
-  "shortName": "CoreComputeModule",
+  "shortName": "MeadowCoreComputeModule",
   "tags": {
     "language": "C#",
     "type": "project"

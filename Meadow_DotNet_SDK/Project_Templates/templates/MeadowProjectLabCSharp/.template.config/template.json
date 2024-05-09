@@ -6,7 +6,7 @@
   "description": "A Meadow application that runs on a Project Lab IoT accelerator",
   "identity": "WildernessLabs.Meadow.ProjectLab.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.ProjectLab",
-  "shortName": "ProjectLab",
+  "shortName": "MeadowProjectLab",
   "tags": {
     "language": "C#",
     "type": "project"
