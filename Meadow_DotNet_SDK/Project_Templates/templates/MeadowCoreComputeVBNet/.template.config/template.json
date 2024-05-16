@@ -6,7 +6,7 @@
   "description": "A Meadow application that runs on a Core-Compute Module",
   "identity": "WildernessLabs.Meadow.CoreComputeModule.VBNET.Template",
   "groupIdentity": "WildernessLabs.Meadow.CoreComputeModule",
-  "shortName": "CoreComputeModule",
+  "shortName": "meadow-ccm-vbnet",
   "tags": {
     "language": "VB.NET",
     "type": "project"
