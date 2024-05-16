@@ -36,7 +36,7 @@ Open Visual Studio 2022, click on File -> New -> Project, in the _Create a new P
 Alternatively, you can create a Meadow project via console using the _Short Name_ values on the list. For example:
 
 ```console
-C:\Users\john>dotnet new F7Feather --name Blinky
+C:\Users\john>dotnet new meadow-feather --name Blinky
 The template "Meadow F7 Feather App" was created successfully. 
 ```
 
