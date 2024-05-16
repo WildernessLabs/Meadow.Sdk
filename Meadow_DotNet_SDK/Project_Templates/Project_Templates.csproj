@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <Version>1.11.4</Version>
+    <Version>1.11.0.3-beta</Version>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
