@@ -6,7 +6,7 @@
   "description": "A Meadow application that runs on a Meadow Feather F7 board",
   "identity": "WildernessLabs.Meadow.F7Feather.VBNET.Template",
   "groupIdentity": "WildernessLabs.Meadow.F7Feather",
-  "shortName": "F7Feather",
+  "shortName": "meadow-feather",
   "tags": {
     "language": "VB.NET",
     "type": "project"

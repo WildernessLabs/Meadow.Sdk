@@ -6,7 +6,7 @@
   "description": "A Meadow.Desktop app that runs on Windows, macOS and Linux.",
   "identity": "WildernessLabs.Meadow.Desktop.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.Desktop",
-  "shortName": "MeadowDesktop",
+  "shortName": "meadow-desktop",
   "tags": {
     "language": "C#",
     "type": "project"

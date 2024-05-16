@@ -3,10 +3,10 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow Core-Compute App",
-  "description": "Create a new Meadow application that runs on a Core-Compute Module",
+  "description": "A Meadow application that runs on a Core-Compute Module",
   "identity": "WildernessLabs.Meadow.CoreComputeModule.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.CoreComputeModule",
-  "shortName": "CoreComputeModule",
+  "shortName": "meadow-ccm",
   "tags": {
     "language": "C#",
     "type": "project"

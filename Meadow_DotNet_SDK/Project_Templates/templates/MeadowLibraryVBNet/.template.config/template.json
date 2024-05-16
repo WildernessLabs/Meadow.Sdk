@@ -6,7 +6,7 @@
   "description": "A class library for Meadow applications",
   "identity": "WildernessLabs.Meadow.Library.VBNET.Template",
   "groupIdentity": "WildernessLabs.Meadow.Library",
-  "shortName": "Library",
+  "shortName": "meadow-library",
   "tags": {
     "language": "VB.NET",
     "type": "library"
