@@ -6,7 +6,7 @@
   "description": "A Meadow application that runs on a Core-Compute Module",
   "identity": "WildernessLabs.Meadow.CoreComputeModule.FSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.CoreComputeModule",
-  "shortName": "meadow-ccm-fsharp",
+  "shortName": "meadow-ccm",
   "tags": {
     "language": "F#",
     "type": "project"

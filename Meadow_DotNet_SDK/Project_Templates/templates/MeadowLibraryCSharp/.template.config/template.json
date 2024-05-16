@@ -6,7 +6,7 @@
   "description": "A class library for Meadow applications",
   "identity": "WildernessLabs.Meadow.Library.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.Library",
-  "shortName": "meadow-library-csharp",
+  "shortName": "meadow-library",
   "tags": {
     "language": "C#",
     "type": "library"
