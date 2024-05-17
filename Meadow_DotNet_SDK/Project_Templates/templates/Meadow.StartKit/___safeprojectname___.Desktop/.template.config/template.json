@@ -5,7 +5,7 @@
   "name": "Meadow StartKit (Desktop)",
   "identity": "WildernessLabs.Meadow.StartKit.Desktop",
   "groupIdentity": "WildernessLabs.Meadow.SKDesktop",
-  "shortName": "MeadowSKDesktop",
+  "shortName": "meadow-startkit-desktop",
   "tags": {
     "language": "C#",
     "type": "project"

@@ -5,7 +5,7 @@
   "name": "Meadow StartKit (RasPi)",
   "identity": "WildernessLabs.Meadow.StartKit.RasPi",
   "groupIdentity": "WildernessLabs.Meadow.SKRasPi",
-  "shortName": "MeadowSKRasPi",
+  "shortName": "meadow-startkit-raspi",
   "tags": {
     "language": "C#",
     "type": "project"

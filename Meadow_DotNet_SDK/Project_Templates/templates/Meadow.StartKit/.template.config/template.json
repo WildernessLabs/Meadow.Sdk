@@ -5,7 +5,7 @@
   "name": "Meadow StartKit (All)",
   "identity": "WildernessLabs.Meadow.StartKit",
   "groupIdentity": "WildernessLabs.Meadow.StartKit",
-  "shortName": "MeadowStartKit",
+  "shortName": "meadow-startkit-all",
   "tags": {
     "language": "C#",
     "type": "project"

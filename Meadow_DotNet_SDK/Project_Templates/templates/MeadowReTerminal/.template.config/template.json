@@ -6,7 +6,7 @@
   "description": "A Meadow Linux application that runs on Seeed Studio reTerminal",
   "identity": "WildernessLabs.Meadow.reTerminal.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.reTerminal",
-  "shortName": "MeadowreTerminal",
+  "shortName": "meadow-reterminal",
   "tags": {
     "language": "C#",
     "type": "project"

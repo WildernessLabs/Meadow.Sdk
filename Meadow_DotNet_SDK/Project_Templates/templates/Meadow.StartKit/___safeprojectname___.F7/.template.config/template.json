@@ -5,7 +5,7 @@
   "name": "Meadow StartKit (F7)",
   "identity": "WildernessLabs.Meadow.StartKit.F7",
   "groupIdentity": "WildernessLabs.Meadow.SKF7",
-  "shortName": "MeadowSKF7",
+  "shortName": "meadow-startkit-f7",
   "tags": {
     "language": "C#",
     "type": "project"
