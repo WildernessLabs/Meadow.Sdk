@@ -13,38 +13,29 @@ internal class NetworkController : INetworkController
 
     public event EventHandler? NetworkStatusChanged;
 
-    private bool isConnected;
-
     public NetworkController(F7MicroBase device)
     {
         wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
 
-        IsConnected = wifi.IsConnected;
         wifi.NetworkConnected += OnNetworkConnected;
         wifi.NetworkDisconnected += OnNetworkDisconnected;
     }
 
     private void OnNetworkDisconnected(INetworkAdapter sender, NetworkDisconnectionEventArgs args)
     {
-        IsConnected = false;
+        // Handle logic when disconnected.
     }
 
     private void OnNetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
     {
-        IsConnected = true;
+        // Handle logic when connected.
     }
 
     private IWiFiNetworkAdapter? wifi;
 
     public bool IsConnected
     {
-        get => isConnected;
-        set
-        {
-            if (value == IsConnected) return;
-            isConnected = value;
-            NetworkStatusChanged?.Invoke(this, EventArgs.Empty);
-        }
+        get => wifi.IsConnected;
     }
 
     public async Task Connect()
