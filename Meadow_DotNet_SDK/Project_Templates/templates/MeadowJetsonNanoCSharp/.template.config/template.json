@@ -6,7 +6,7 @@
   "description": "A Meadow Linux application that runs on a Jetson Nano",
   "identity": "WildernessLabs.Meadow.JetsonNano.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.JetsonNano",
-  "shortName": "JetsonNano",
+  "shortName": "meadow-jetson-nano",
   "tags": {
     "language": "C#",
     "type": "project"
