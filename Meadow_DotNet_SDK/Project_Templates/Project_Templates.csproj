@@ -48,10 +48,6 @@
     <Folder Include="templates\MeadowJetsonNanoCSharp\.template.config\" />
     <Folder Include="templates\MeadowReTerminal\.template.config\" />
     <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.Core\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.Desktop\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.F7\.template.config\" />
-    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.RPi\.template.config\" />
     <Folder Include="templates\Meadow.StartKit\.template.config\" />
   </ItemGroup>
 </Project>

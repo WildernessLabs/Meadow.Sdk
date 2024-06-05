@@ -11,5 +11,16 @@
     "type": "project"
   },
   "sourceName": "___safeprojectname___",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+    {
+      "path": "___safeprojectname___.sln"
+    }
+  ],
+  "sources": [
+    {
+      "source": "./",
+      "target": "./"
+    }
+  ]
 }
