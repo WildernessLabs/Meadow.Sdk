@@ -19,9 +19,3 @@ MeadowCloud:
 
     # Enable Over-the-air Updates
 #    EnableUpdates: false
-
-    # Enable Health Metrics
-#    EnableHealthMetrics: false
-
-    # How often to send metrics to Meadow.Cloud
-#    HealthMetricsIntervalMinutes: 60
