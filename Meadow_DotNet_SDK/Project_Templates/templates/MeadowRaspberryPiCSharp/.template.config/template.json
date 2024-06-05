@@ -3,7 +3,7 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow.Linux Raspberry Pi App",
-  "description": "A Meadow.Linux application that runs on a Raspberry",
+  "description": "A Meadow.Linux application that runs on a Raspberry Pi",
   "identity": "WildernessLabs.Meadow.RPi.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.RPi",
   "shortName": "meadow-rpi",
