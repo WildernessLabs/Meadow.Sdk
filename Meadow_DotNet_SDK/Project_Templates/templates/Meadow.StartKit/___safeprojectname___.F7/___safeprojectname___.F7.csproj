@@ -7,11 +7,13 @@
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <ItemGroup>
       <PackageReference Include="Meadow.F7" Version="*" />
       <PackageReference Include="Meadow.Foundation" Version="*" />
       <PackageReference Include="Meadow.ProjectLab" Version="*" />
   </ItemGroup>
+
   <ItemGroup>
     <None Update="meadow.config.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -23,6 +25,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\___safeprojectname___.Core\___safeprojectname___.Core.csproj" />
   </ItemGroup>
