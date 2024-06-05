@@ -6,7 +6,7 @@
   "description": "A Meadow Linux application that runs on a Raspberry",
   "identity": "WildernessLabs.Meadow.RaspberryPi.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
-  "shortName": "meadow-raspberry-pi",
+  "shortName": "meadow-rpi",
   "tags": {
     "language": "C#",
     "type": "project"
