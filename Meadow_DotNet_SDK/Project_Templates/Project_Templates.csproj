@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <Version>1.12.0</Version>
+    <PackageVersion>2.0.0.0</PackageVersion>
+    <Version>2.0.0.0</Version>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
@@ -16,6 +17,7 @@
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -47,5 +49,10 @@
     <Folder Include="templates\MeadowJetsonNanoCSharp\.template.config\" />
     <Folder Include="templates\MeadowReTerminal\.template.config\" />
     <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.Core\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.Desktop\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.F7\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\___safeprojectname___.RasPi\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\.template.config\" />
   </ItemGroup>
 </Project>

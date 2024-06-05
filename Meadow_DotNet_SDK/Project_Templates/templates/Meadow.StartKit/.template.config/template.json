@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "App" ],
+  "name": "Meadow StartKit (All)",
+  "identity": "WildernessLabs.Meadow.StartKit",
+  "groupIdentity": "WildernessLabs.Meadow.StartKit",
+  "shortName": "meadow-startkit-all",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "___safeprojectname___",
+  "preferNameDirectory": true
+}

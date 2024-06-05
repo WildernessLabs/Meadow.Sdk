@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow.Desktop App",
+  "name": "Meadow Desktop App",
   "description": "A Meadow.Desktop app that runs on Windows, macOS and Linux.",
   "identity": "WildernessLabs.Meadow.Desktop.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.Desktop",

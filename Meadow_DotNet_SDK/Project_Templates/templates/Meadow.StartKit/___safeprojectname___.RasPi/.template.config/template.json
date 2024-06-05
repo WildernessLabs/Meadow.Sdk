@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Wilderness Labs",
+  "classifications": [ "Meadow", "App" ],
+  "name": "Meadow StartKit (RasPi)",
+  "identity": "WildernessLabs.Meadow.StartKit.RasPi",
+  "groupIdentity": "WildernessLabs.Meadow.SKRasPi",
+  "shortName": "meadow-startkit-raspi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "___safeprojectname___",
+  "preferNameDirectory": true
+}
