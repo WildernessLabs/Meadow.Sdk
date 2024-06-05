@@ -3,7 +3,7 @@
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
   "name": "Meadow.Linux Jetson Nano App",
-  "description": "A Meadow Linux application that runs on a Jetson Nano",
+  "description": "A Meadow.Linux application that runs on a Jetson Nano",
   "identity": "WildernessLabs.Meadow.JetsonNano.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.JetsonNano",
   "shortName": "meadow-jetson-nano",
