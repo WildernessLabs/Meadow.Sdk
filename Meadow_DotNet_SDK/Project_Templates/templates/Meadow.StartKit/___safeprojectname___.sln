@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.F7", "___safeprojectname___.F7\___safeprojectname___.F7.csproj", "{9F7D3C5D-1F20-4771-BD7E-2C0578B6AD70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.RasPi", "___safeprojectname___.RasPi\___safeprojectname___.RasPi.csproj", "{8F0CD535-7753-4A42-B194-B835E50C9A5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.RPi", "___safeprojectname___.RPi\___safeprojectname___.RPi.csproj", "{8F0CD535-7753-4A42-B194-B835E50C9A5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "___safeprojectname___.Desktop", "___safeprojectname___.Desktop\___safeprojectname___.Desktop.csproj", "{2068562E-CBCE-4AB6-B05F-683DA70C70A0}"
 EndProject

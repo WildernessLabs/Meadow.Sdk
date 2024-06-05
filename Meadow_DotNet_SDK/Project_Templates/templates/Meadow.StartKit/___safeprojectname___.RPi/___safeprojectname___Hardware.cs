@@ -8,7 +8,7 @@ using Meadow.Peripherals.Sensors.Buttons;
 using ___safeprojectname___.Core;
 using ___safeprojectname___.Core.Contracts;
 
-namespace ___safeprojectname___.RasPi;
+namespace ___safeprojectname___.RPi;
 
 internal class ___safeprojectname___Hardware : I___safeprojectname___Hardware
 {

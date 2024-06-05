@@ -5,7 +5,7 @@ using Meadow.Foundation.Displays;
 using Meadow.Logging;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.RasPi;
+namespace ___safeprojectname___.RPi;
 
 public static class Program
 {

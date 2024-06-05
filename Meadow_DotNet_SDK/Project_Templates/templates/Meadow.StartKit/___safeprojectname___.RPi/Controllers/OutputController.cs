@@ -4,7 +4,7 @@ using Meadow.Foundation.Relays;
 using Meadow.Peripherals.Relays;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.RasPi;
+namespace ___safeprojectname___.RPi;
 
 internal class OutputController : IOutputController
 {
