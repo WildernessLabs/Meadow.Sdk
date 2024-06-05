@@ -5,7 +5,7 @@ using Meadow.Foundation.Displays;
 using Meadow.Pinouts;
 using ___safeprojectname___.Core;
 
-namespace ___safeprojectname___.RasPi;
+namespace ___safeprojectname___.RPi;
 
 internal class ___safeprojectname___App : App<RaspberryPi>
 {
