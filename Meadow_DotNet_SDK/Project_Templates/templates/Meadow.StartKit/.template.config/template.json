@@ -5,7 +5,7 @@
   "description": "A Multi-platform Solution that targets Meadow.Desktop, Raspberry Pi and Meadow F7 devices",
   "identity": "WildernessLabs.Meadow.StartKit",
   "groupIdentity": "WildernessLabs.Meadow.StartKit",
-  "shortName": "meadow-startkit-all",
+  "shortName": "meadow-startkit",
   "tags": {
     "language": "C#",
     "type": "project"
@@ -15,12 +15,6 @@
   "primaryOutputs": [
     {
       "path": "___safeprojectname___.sln"
-    }
-  ],
-  "sources": [
-    {
-      "source": "./",
-      "target": "./"
     }
   ]
 }
