@@ -16,6 +16,3 @@ MeadowCloud:
 
     # Enable Logging, Events, Command + Control
 #    Enabled: false
-
-    # Enable Over-the-air Updates
-#    EnableUpdates: false

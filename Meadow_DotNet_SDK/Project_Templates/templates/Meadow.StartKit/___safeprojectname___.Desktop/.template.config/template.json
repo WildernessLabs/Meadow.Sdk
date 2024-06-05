@@ -1,8 +1,8 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Wilderness Labs",
-  "classifications": [ "Meadow", "App" ],
-  "name": "Meadow StartKit (Desktop)",
+  "classifications": [ "Meadow", "App", "StartKit" ],
+  "name": "Meadow Desktop App (StartKit)",
+  "description": "A Meadow.Desktop app that runs on Windows, macOS and Linux",
   "identity": "WildernessLabs.Meadow.StartKit.Desktop",
   "groupIdentity": "WildernessLabs.Meadow.SKDesktop",
   "shortName": "meadow-startkit-desktop",

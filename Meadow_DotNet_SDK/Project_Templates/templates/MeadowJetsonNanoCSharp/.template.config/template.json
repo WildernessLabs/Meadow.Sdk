@@ -1,8 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/template",
-  "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow.Linux Jetson Nano App",
+  "name": "Meadow Jetson Nano App",
   "description": "A Meadow.Linux application that runs on a Jetson Nano",
   "identity": "WildernessLabs.Meadow.JetsonNano.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.JetsonNano",
