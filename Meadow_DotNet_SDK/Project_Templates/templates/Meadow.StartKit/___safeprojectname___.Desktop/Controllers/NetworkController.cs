@@ -11,7 +11,7 @@ internal class NetworkController : INetworkController
 {
     private bool isConnected;
 
-    public event EventHandler NetworkStatusChanged;
+    public event EventHandler? NetworkStatusChanged;
 
     public NetworkController(Keyboard? keyboard)
     {

@@ -8,13 +8,16 @@ namespace ___safeprojectname___.F7;
 
 internal class NetworkController : INetworkController
 {
-    public event EventHandler NetworkStatusChanged;
+    private const string WIFI_NAME = "[SOME_NAME]";
+    private const string WIFI_PASSWORD = "[SOME_SECRET]";
 
-    private bool isNetworkConnected;
+    public event EventHandler? NetworkStatusChanged;
+
+    private bool isConnected;
 
     public NetworkController(F7MicroBase device)
     {
-        var wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
+        wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
 
         IsConnected = wifi.IsConnected;
         wifi.NetworkConnected += OnNetworkConnected;
@@ -31,19 +34,21 @@ internal class NetworkController : INetworkController
         IsConnected = true;
     }
 
+    private IWiFiNetworkAdapter? wifi;
+
     public bool IsConnected
     {
-        get => isNetworkConnected;
+        get => isConnected;
         set
         {
             if (value == IsConnected) return;
-            isNetworkConnected = value;
+            isConnected = value;
             NetworkStatusChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
-    public Task Connect()
+    public async Task Connect()
     {
-        throw new NotImplementedException();
+        await wifi.Connect(WIFI_NAME, WIFI_PASSWORD, TimeSpan.FromSeconds(45));
     }
 }
