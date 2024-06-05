@@ -2,9 +2,9 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Wilderness Labs",
   "classifications": [ "Meadow", "App" ],
-  "name": "Meadow StartKit (RasPi)",
-  "identity": "WildernessLabs.Meadow.StartKit.RasPi",
-  "groupIdentity": "WildernessLabs.Meadow.SKRasPi",
+  "name": "Meadow StartKit (Raspberry Pi)",
+  "identity": "WildernessLabs.Meadow.StartKit.RPi",
+  "groupIdentity": "WildernessLabs.Meadow.SKRPi",
   "shortName": "meadow-startkit-rpi",
   "tags": {
     "language": "C#",
