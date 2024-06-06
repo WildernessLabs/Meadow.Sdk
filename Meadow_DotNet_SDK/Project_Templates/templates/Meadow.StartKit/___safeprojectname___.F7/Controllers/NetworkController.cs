@@ -8,42 +8,38 @@ namespace ___safeprojectname___.F7;
 
 internal class NetworkController : INetworkController
 {
-    public event EventHandler NetworkStatusChanged;
+    private const string WIFI_NAME = "[SOME_NAME]";
+    private const string WIFI_PASSWORD = "[SOME_SECRET]";
 
-    private bool isNetworkConnected;
+    public event EventHandler? NetworkStatusChanged;
 
     public NetworkController(F7MicroBase device)
     {
-        var wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
+        wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
 
-        IsConnected = wifi.IsConnected;
         wifi.NetworkConnected += OnNetworkConnected;
         wifi.NetworkDisconnected += OnNetworkDisconnected;
     }
 
     private void OnNetworkDisconnected(INetworkAdapter sender, NetworkDisconnectionEventArgs args)
     {
-        IsConnected = false;
+        // Handle logic when disconnected.
     }
 
     private void OnNetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
     {
-        IsConnected = true;
+        // Handle logic when connected.
     }
+
+    private IWiFiNetworkAdapter? wifi;
 
     public bool IsConnected
     {
-        get => isNetworkConnected;
-        set
-        {
-            if (value == IsConnected) return;
-            isNetworkConnected = value;
-            NetworkStatusChanged?.Invoke(this, EventArgs.Empty);
-        }
+        get => wifi.IsConnected;
     }
 
-    public Task Connect()
+    public async Task Connect()
     {
-        throw new NotImplementedException();
+        await wifi.Connect(WIFI_NAME, WIFI_PASSWORD, TimeSpan.FromSeconds(45));
     }
 }
