@@ -1,24 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <LangVersion>10</LangVersion>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <LangVersion>10</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
-    <UseWindowsForms>true</UseWindowsForms>
-    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
-  </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Meadow.Desktop" Version="*" />
+        <PackageReference Include="Meadow.Foundation" Version="*" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
+        <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Meadow.Desktop" Version="*" />
-    <PackageReference Include="Meadow.Foundation" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
-    <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\___safeprojectname___.Core\___safeprojectname___.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\___safeprojectname___.Core\___safeprojectname___.Core.csproj" />
+    </ItemGroup>
 </Project>
