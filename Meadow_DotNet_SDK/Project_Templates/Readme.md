@@ -17,16 +17,17 @@ You can install Meadow project templates with the command:
 Once installed, it will list all the project templates included:
 
 ```console
-Template Name                  Short Name           Language        Tags
------------------------------  -------------------  --------------  --------------
-Meadow Core-Compute App        meadow-ccm           [C#],F#,VB.NET  Meadow/Console
-Meadow F7 Feather App          meadow-feather       [C#],F#,VB.NET  Meadow/Console
-Meadow Library                 meadow-library       [C#],F#,VB.NET  Meadow/Library
-Meadow Project Lab App         meadow-project-lab   [C#]            Meadow/Console
-Meadow.Desktop App             meadow-desktop       [C#]            Meadow/Console
-Meadow.Linux Jetson Nano App   meadow-jetson-nano   [C#]            Meadow/Console
-Meadow.Linux Raspberry Pi App  meadow-raspberry-pi  [C#]            Meadow/Console
-Meadow.Linux reTerminal App    meadow-reterminal    [C#]            Meadow/Console
+Template Name            Short Name          Language        Tags
+-----------------------  ------------------  --------------  -------------------
+Meadow Core-Compute App  meadow-ccm          [C#],F#,VB.NET  Meadow/Console
+Meadow Desktop App       meadow-desktop      [C#]            Meadow/Console
+Meadow F7 Feather App    meadow-feather      [C#],F#,VB.NET  Meadow/Console
+Meadow Jetson Nano App   meadow-jetson-nano  [C#]            Meadow/Console
+Meadow Library           meadow-library      [C#],F#,VB.NET  Meadow/Library
+Meadow Project Lab App   meadow-project-lab  [C#]            Meadow/Console
+Meadow Raspberry Pi App  meadow-rpi          [C#]            Meadow/Console
+Meadow reTerminal App    meadow-reterminal   [C#]            Meadow/Console
+Meadow StartKit App      meadow-startkit     [C#]            Meadow/App/StartKit
 ```
 
 ## Usage
