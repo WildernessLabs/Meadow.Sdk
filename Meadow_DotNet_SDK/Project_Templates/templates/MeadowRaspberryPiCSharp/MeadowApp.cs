@@ -1,4 +1,5 @@
 ﻿using Meadow;
+using System.Threading.Tasks;
 
 namespace MeadowApplication.Template;
 
@@ -18,10 +19,5 @@ public class MeadowApp : App<RaspberryPi>
         Resolver.Log.Info("Hello, Raspberry Pi!");
 
         return Task.CompletedTask;
-    }
-
-    static async Task Main(string[] args)
-    {
-        await MeadowOS.Start(args);
     }
 }

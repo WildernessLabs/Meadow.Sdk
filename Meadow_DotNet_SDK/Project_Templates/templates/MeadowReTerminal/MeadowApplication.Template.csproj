@@ -10,4 +10,9 @@
         <PackageReference Include="Meadow.Foundation.Displays.Gtk" Version="*" />
         <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
     </ItemGroup>
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 </Project>

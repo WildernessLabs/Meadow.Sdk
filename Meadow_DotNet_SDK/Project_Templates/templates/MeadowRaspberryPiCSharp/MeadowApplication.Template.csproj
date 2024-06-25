@@ -8,4 +8,9 @@
         <PackageReference Include="Meadow.Linux" Version="*" />
         <PackageReference Include="Meadow.Foundation" Version="*" />
     </ItemGroup>
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 </Project>

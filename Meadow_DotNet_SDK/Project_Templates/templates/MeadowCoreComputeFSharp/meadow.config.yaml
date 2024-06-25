@@ -12,7 +12,7 @@ Device:
 #    SdStorageSupported: true
 
 # Control how the ESP coprocessor will start and operate.
-Coprocessor:
+#Coprocessor:
 
     # Should the ESP32 automatically attempt to connect to an access point at startup?
     # If set to true, wifi.yaml credentials must be stored in the device.
@@ -25,7 +25,7 @@ Coprocessor:
 #    MaximumRetryCount: 7
 
 # Network configuration.
-Network:
+#Network:
 
     # Network Interface (Default value is WiFi with DHCP)
 #    Interfaces:
