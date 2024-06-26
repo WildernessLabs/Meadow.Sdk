@@ -7,7 +7,7 @@ using ___safeprojectname___.Core;
 
 namespace ___safeprojectname___.RPi;
 
-internal class ___safeprojectname___App : App<RaspberryPi>
+internal class MeadowApp : App<RaspberryPi>
 {
     private ___safeprojectname___Hardware hardware;
     private MainController mainController;
