@@ -13,6 +13,8 @@ internal class NetworkController : INetworkController
 
     public event EventHandler? NetworkStatusChanged;
 
+    private IWiFiNetworkAdapter? wifi;
+
     public NetworkController(F7MicroBase device)
     {
         wifi = device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
@@ -30,8 +32,6 @@ internal class NetworkController : INetworkController
     {
         // Handle logic when connected.
     }
-
-    private IWiFiNetworkAdapter? wifi;
 
     public bool IsConnected
     {
