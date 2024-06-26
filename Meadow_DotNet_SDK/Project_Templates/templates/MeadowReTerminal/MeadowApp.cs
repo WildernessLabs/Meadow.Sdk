@@ -25,6 +25,6 @@ public class MeadowApp : App<RaspberryPi>
 
         Resolver.Log.Info("Hello, reTerminal!");
 
-        _display.Run();
+        _display?.Run();
     }
 }
