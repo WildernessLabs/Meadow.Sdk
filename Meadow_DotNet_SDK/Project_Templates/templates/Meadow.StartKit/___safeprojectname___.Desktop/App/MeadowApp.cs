@@ -7,7 +7,7 @@ using ___safeprojectname___.Core;
 
 namespace ___safeprojectname___.DT;
 
-internal class ___safeprojectname___App : App<Desktop>
+internal class MeadowApp : App<Desktop>
 {
     private MainController mainController;
 
