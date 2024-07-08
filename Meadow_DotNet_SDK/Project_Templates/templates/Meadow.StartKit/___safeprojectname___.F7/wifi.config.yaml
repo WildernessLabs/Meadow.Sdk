@@ -3,7 +3,7 @@
 # http://developer.wildernesslabs.co/Meadow/Meadow.OS/Configuration/WiFi_Configuration/
 
 # WiFi network credentials
-Credentials:
+#Credentials:
 
     # WiFi SSID
 #    Ssid: YourSSID

@@ -12,7 +12,7 @@ Logging:
         Default: Information
 
 # Meadow.Cloud configuration.
-MeadowCloud:
+#MeadowCloud:
 
     # Enable Logging, Events, Command + Control
 #    Enabled: false

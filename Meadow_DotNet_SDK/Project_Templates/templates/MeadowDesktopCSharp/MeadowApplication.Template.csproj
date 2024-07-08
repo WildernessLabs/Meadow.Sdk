@@ -5,10 +5,14 @@
         <Nullable>enable</Nullable>
         <LangVersion>10.0</LangVersion>
     </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="Meadow.Desktop" Version="*" />
         <PackageReference Include="Meadow.Foundation" Version="*" />
         <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 </Project>

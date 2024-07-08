@@ -5,13 +5,16 @@
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="Meadow.Foundation" Version="*" />
         <PackageReference Include="Meadow.Foundation.Displays.Gtk" Version="*" />
         <PackageReference Include="Meadow.Linux" Version="*" />
     </ItemGroup>
-
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\___safeprojectname___.Core\___safeprojectname___.Core.csproj" />
     </ItemGroup>

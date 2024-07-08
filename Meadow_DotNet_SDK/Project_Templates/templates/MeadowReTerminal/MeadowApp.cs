@@ -1,6 +1,7 @@
 ﻿using Meadow;
 using Meadow.Foundation.Displays;
 using Meadow.Peripherals.Displays;
+using System.Threading.Tasks;
 
 namespace MeadowApplication.Template;
 
@@ -24,11 +25,6 @@ public class MeadowApp : App<RaspberryPi>
 
         Resolver.Log.Info("Hello, reTerminal!");
 
-        _display.Run();
-    }
-
-    public static async Task Main(string[] args)
-    {
-        await MeadowOS.Start(args);
+        _display?.Run();
     }
 }

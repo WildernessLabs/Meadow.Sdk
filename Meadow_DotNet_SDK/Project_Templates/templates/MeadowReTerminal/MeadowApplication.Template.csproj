@@ -3,11 +3,17 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Meadow.Linux" Version="*" />
         <PackageReference Include="Meadow.Foundation" Version="*" />
         <PackageReference Include="Meadow.Foundation.Displays.Gtk" Version="*" />
         <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 </Project>
