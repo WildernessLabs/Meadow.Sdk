@@ -8,8 +8,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.ProjectLab" Version="*" />
-        <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="*" />
+        <PackageReference Include="Meadow.ProjectLab" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.12.8" />
     </ItemGroup>
     <ItemGroup>
         <None Update="meadow.config.yaml">

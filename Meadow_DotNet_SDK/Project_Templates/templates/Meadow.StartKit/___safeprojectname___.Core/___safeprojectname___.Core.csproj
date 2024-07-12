@@ -10,8 +10,8 @@
         <EmbeddedResource Include="Assets\net-disconnected.bmp" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.Foundation" Version="*" />
-        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="*" />
-        <PackageReference Include="Meadow.Foundation.Serialization.MicroJson" Version="*" />
+        <PackageReference Include="Meadow.Foundation" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation.Serialization.MicroJson" Version="1.12.8" />
     </ItemGroup>
 </Project>

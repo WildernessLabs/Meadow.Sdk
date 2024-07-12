@@ -6,9 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.Foundation" Version="*" />
-        <PackageReference Include="Meadow.Foundation.Displays.Gtk" Version="*" />
-        <PackageReference Include="Meadow.Linux" Version="*" />
+        <PackageReference Include="Meadow.Foundation" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation.Displays.Gtk" Version="1.12.8" />
+        <PackageReference Include="Meadow.Linux" Version="1.12.8" />
     </ItemGroup>
     <ItemGroup>
         <None Include="app.config.yaml">

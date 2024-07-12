@@ -7,6 +7,6 @@
         <Compile Include="Class1.fs" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.Foundation" Version="*" />
+        <PackageReference Include="Meadow.Foundation" Version="1.12.8" />
     </ItemGroup>
 </Project>
