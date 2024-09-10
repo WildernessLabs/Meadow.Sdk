@@ -30,11 +30,11 @@ jobs:
         path: Meadow.CLI
         ref: develop
 
-    - name: Set default Xcode 13.0
-      run: |
-        XCODE_ROOT=/Applications/Xcode_13.0.0.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
+    #- name: Set default Xcode 13.0
+    #  run: |
+    #    XCODE_ROOT=/Applications/Xcode_13.0.0.app
+    #    echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+    #    sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
       uses: actions/setup-dotnet@v4
