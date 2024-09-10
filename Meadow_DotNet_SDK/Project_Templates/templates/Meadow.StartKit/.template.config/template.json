@@ -10,11 +10,11 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "___safeprojectname___",
+  "sourceName": "___SafeProjectName___",
   "preferNameDirectory": true,
   "primaryOutputs": [
     {
-      "path": "___safeprojectname___.sln"
+      "path": "___SafeProjectName___.sln"
     }
   ]
 }

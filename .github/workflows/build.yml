@@ -9,7 +9,7 @@ on:
 jobs:
   mac_build:
     name: Build Meadow.Sdk and Project Templates for VS for Mac Extension
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
     - name: Checkout Meadow.Sdk side-by-side
@@ -30,11 +30,11 @@ jobs:
         path: Meadow.CLI
         ref: develop
 
-    - name: Set default Xcode 13.0
-      run: |
-        XCODE_ROOT=/Applications/Xcode_13.0.0.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
+    #- name: Set default Xcode 13.0
+    #  run: |
+    #    XCODE_ROOT=/Applications/Xcode_13.0.0.app
+    #    echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+    #    sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
       uses: actions/setup-dotnet@v4
