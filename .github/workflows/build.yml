@@ -9,7 +9,7 @@ on:
 jobs:
   mac_build:
     name: Build Meadow.Sdk and Project Templates for VS for Mac Extension
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
     - name: Checkout Meadow.Sdk side-by-side
