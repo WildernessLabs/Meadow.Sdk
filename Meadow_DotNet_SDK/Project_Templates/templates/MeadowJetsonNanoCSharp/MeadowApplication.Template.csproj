@@ -5,8 +5,8 @@
         <LangVersion>10.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.Linux" Version="1.12.8" />
-        <PackageReference Include="Meadow.Foundation" Version="1.12.8" />
+        <PackageReference Include="Meadow.Linux" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation" Version="2.*" />
     </ItemGroup>
     <ItemGroup>
         <None Include="app.config.yaml">

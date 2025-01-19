@@ -8,15 +8,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.ProjectLab" Version="1.12.8" />
-        <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="1.12.8" />
-        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="1.12.8" />
+        <PackageReference Include="Meadow.ProjectLab" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Audio.MicroAudio" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="2.*" />
     </ItemGroup>
     <ItemGroup>
         <None Update="meadow.config.yaml">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="app.build.yaml">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="wifi.config.yaml">

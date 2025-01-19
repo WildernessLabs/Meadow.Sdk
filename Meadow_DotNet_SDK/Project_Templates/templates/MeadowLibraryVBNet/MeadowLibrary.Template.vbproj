@@ -4,6 +4,6 @@
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Meadow.Foundation" Version="1.12.8" />
+        <PackageReference Include="Meadow.Foundation" Version="2.*" />
     </ItemGroup>
 </Project>
