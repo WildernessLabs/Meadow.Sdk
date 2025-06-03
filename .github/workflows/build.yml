@@ -9,42 +9,42 @@ on:
 jobs:
   mac_build:
     name: Build Meadow.Sdk and Project Templates for VS for Mac Extension
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
     - name: Checkout Meadow.Sdk side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: Meadow.Sdk
 
     - name: Checkout Mac Extension side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: WildernessLabs/VS_Mac_Meadow_Extension
         path: vs-mac
 
     - name: Checkout Meadow.CLI side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: WildernessLabs/Meadow.CLI
         path: Meadow.CLI
         ref: develop
 
-    - name: Set default Xcode 13.0
-      run: |
-        XCODE_ROOT=/Applications/Xcode_13.0.0.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
+    #- name: Set default Xcode 13.0
+    #  run: |
+    #    XCODE_ROOT=/Applications/Xcode_13.0.0.app
+    #    echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+    #    sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           5.0.x
           6.0.x
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v2
 
     - name: Restore dependencies
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Meadow_SDK.sln /t:Restore
@@ -53,7 +53,7 @@ jobs:
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/Meadow.SDK.csproj /t:Rebuild /p:Configuration=Release
 
     - name: Upload Nuget Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Meadow.SDK.nuget
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Meadow.SDK/bin/Release/*.nupkg'
@@ -62,7 +62,7 @@ jobs:
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/Project_Templates.csproj /t:Rebuild /p:Configuration=Release
 
     - name: Upload Nuget Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Project_Templates.nuget
         path: 'Meadow.Sdk/Meadow_DotNet_SDK/Project_Templates/bin/Release/*.nupkg'
@@ -73,36 +73,36 @@ jobs:
 
     steps:
     - name: Checkout Meadow.Sdk side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: Meadow.Sdk
 
     - name: Checkout Meadow.CLI side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: WildernessLabs/Meadow.CLI
         path: Meadow.CLI
         ref: develop
 
     - name: Checkout VSCode Extension side-by-side
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: WildernessLabs/VSCode_Meadow_Extension
         path: vs-code
         submodules: true
 
     - name: Setup .NET Core SDK 5.0.x & 6.0.x
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           5.0.x
           6.0.x
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v2
 
     - name: Add MSBuild to Path
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Restore dependencies
       run: msbuild Meadow.Sdk/Meadow_DotNet_SDK/Meadow_SDK.sln /t:Restore

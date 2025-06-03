@@ -1,12 +1,11 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow.Linux reTerminal App",
-  "description": "A Meadow Linux application that runs on Seeed Studio reTerminal",
+  "name": "Meadow reTerminal App",
+  "description": "A Meadow.Linux application that runs on Seeed Studio reTerminal",
   "identity": "WildernessLabs.Meadow.reTerminal.CSharp.Template",
   "groupIdentity": "WildernessLabs.Meadow.reTerminal",
-  "shortName": "reTerminal",
+  "shortName": "meadow-reterminal",
   "tags": {
     "language": "C#",
     "type": "project"

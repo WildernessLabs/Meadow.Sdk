@@ -1,12 +1,11 @@
 ﻿{
   "$schema": "http://json.schemastore.org/template",
-  "author": "Wilderness Labs",
   "classifications": [ "Meadow", "Console" ],
-  "name": "Meadow.Linux Raspberry Pi App",
-  "description": "A Meadow Linux application that runs on a Raspberry",
-  "identity": "WildernessLabs.Meadow.RaspberryPi.CSharp.Template",
-  "groupIdentity": "WildernessLabs.Meadow.RaspberryPi",
-  "shortName": "RaspberryPi",
+  "name": "Meadow Raspberry Pi App",
+  "description": "A Meadow.Linux application that runs on a Raspberry Pi",
+  "identity": "WildernessLabs.Meadow.RPi.CSharp.Template",
+  "groupIdentity": "WildernessLabs.Meadow.RPi",
+  "shortName": "meadow-rpi",
   "tags": {
     "language": "C#",
     "type": "project"

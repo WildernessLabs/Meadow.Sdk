@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.8.0.1</PackageVersion>
-    <Version>1.8.0.1</Version>
+    <Version>2.0.1</Version>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageId>WildernessLabs.Meadow.Template</PackageId>
     <PackageProjectUrl>http://developer.wildernesslabs.co/Meadow/Meadow.Foundation/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
@@ -15,9 +16,15 @@
     <Authors>Wilderness Labs</Authors>
     <Company>Wilderness Labs</Company>
     <Product>Meadow</Product>
+    <Configurations>Release;Debug</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include=".\Readme.md" Pack="true" PackagePath="" />
     <None Include="..\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
@@ -38,8 +45,9 @@
     <Folder Include="templates\MeadowLibraryVBNet\.template.config\" />
     <Folder Include="templates\MeadowProjectLabCSharp\.template.config\" />
     <Folder Include="templates\MeadowRaspberryPiCSharp\.template.config\" />
-    <Folder Include="templates\MeadowJetsonNanoCSharp\" />
-    <Folder Include="templates\MeadowWindowsHardwareCSharp\" />
-    <Folder Include="templates\MeadowReTerminal\" />
+    <Folder Include="templates\MeadowJetsonNanoCSharp\.template.config\" />
+    <Folder Include="templates\MeadowReTerminal\.template.config\" />
+    <Folder Include="templates\MeadowDesktopCSharp\.template.config\" />
+    <Folder Include="templates\Meadow.StartKit\.template.config\" />
   </ItemGroup>
 </Project>

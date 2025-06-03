@@ -1,36 +1,30 @@
 ﻿using Meadow;
 using Meadow.Foundation.Displays;
-using Meadow.Foundation.Graphics;
-using Meadow.Pinouts;
+using Meadow.Peripherals.Displays;
+using System.Threading.Tasks;
 
-namespace MeadowApplication.Template
+namespace MeadowApplication.Template;
+
+public class MeadowApp : App<RaspberryPi>
 {
-    public class MeadowApp : App<Linux<RaspberryPi>>
+    GtkDisplay? _display;
+
+    public override Task Initialize()
     {
-        GtkDisplay? _display;
+        Resolver.Log.Info("Initialize...");
 
-        public override Task Initialize()
-        {
-            Resolver.Log.Info("Initialize...");
+        _display = new GtkDisplay(320, 240, ColorMode.Format16bppRgb565);
+        var displayController = new DisplayController(_display);
 
-            _display = new GtkDisplay(320, 240, ColorMode.Format16bppRgb565);
-            var displayController = new DisplayController(_display);
+        return Task.CompletedTask;
+    }
 
-            return Task.CompletedTask;
-        }
+    public override async Task Run()
+    {
+        Resolver.Log.Info("Run...");
 
-        public override async Task Run()
-        {
-            Resolver.Log.Info("Run...");
+        Resolver.Log.Info("Hello, reTerminal!");
 
-            Resolver.Log.Info("Hello, reTerminal!");
-
-            _display.Run();
-        }
-
-        public static async Task Main(string[] args)
-        {
-            await MeadowOS.Start(args);
-        }
+        _display?.Run();
     }
 }

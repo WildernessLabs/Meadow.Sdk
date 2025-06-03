@@ -1,0 +1,17 @@
+﻿<Project Sdk="Meadow.Sdk/1.1.0">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <OutputType>Library</OutputType>
+        <LangVersion>10</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Assets\net-connected.bmp" />
+        <EmbeddedResource Include="Assets\net-disconnected.bmp" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Meadow.Foundation" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Serialization.MicroJson" Version="2.*" />
+    </ItemGroup>
+</Project>

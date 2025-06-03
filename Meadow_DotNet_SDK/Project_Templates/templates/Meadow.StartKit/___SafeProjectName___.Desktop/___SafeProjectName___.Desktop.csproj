@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <LangVersion>10</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Meadow.Desktop" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Graphics.MicroLayout" Version="2.*" />
+        <PackageReference Include="Meadow.Foundation.Sensors.Hid.Keyboard" Version="2.*" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="app.config.yaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\___SafeProjectName___.Core\___SafeProjectName___.Core.csproj" />
+    </ItemGroup>
+</Project>
